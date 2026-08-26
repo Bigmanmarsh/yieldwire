@@ -338,6 +338,16 @@ async function runAll() {
       const t = await liveLatestTs();
       const age = t ? Date.now() - Date.parse(t) : 0;
       const rem = PACE_MS - age;
+      // TEMP diag: publish exactly what the runner computes before each sleep
+      try {
+        writeJson("pacing-diag.json", {
+          at: new Date().toISOString(), cycle: i,
+          liveTs: t, ageMs: Number.isFinite(age) ? age : `NaN(t=${typeof t}:${t})`,
+          remMs: Number.isFinite(rem) ? rem : "NaN",
+          onDiskTs: readJson("latest.json", null)?.ts || null,
+          paceMs: PACE_MS,
+        });
+      } catch {}
       if (rem > 15000) {
         log(`pacing: last committed run ${Math.round(age / 1000)}s ago — sleeping ${Math.round(rem / 1000)}s before cycle ${i + 1}`);
         await sleep(rem);
