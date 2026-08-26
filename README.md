@@ -50,7 +50,7 @@ DeFiLlama /yields ──► normalize + integrity ──► 4 deterministic trig
 | LLM one-liner + claim-checker (optional) | `src/llm.js` |
 | Telegram templates | `src/telegram.js` |
 | Cron + public-history commit | `.github/workflows/agent.yml` |
-| Site + receipts | `public/` |
+| Site + receipts | repo root (`index.html` + `receipt.html`) |
 | Public record | `data/` (committed every run) |
 
 Zero runtime dependencies. Node 20. $0/month.
