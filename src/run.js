@@ -13,6 +13,7 @@
 //     public history, timestamped by GitHub.
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchPools, ENDPOINT, FIELDS_USED } from "./data.js";
@@ -49,7 +50,17 @@ async function main() {
 
   // 2 ── Fetch (a failure here = failed run, by design)
   const raw = await fetchPools();
-  const { pools, rejected, integrity } = normalize(raw);
+  const { pools, rejected, rejectedNamed, integrity } = normalize(raw);
+  // The only rows the engine can read: Base + stablecoin, slimmed to the
+  // fields it uses. Committed (70 KB) on event runs → every event is
+  // reproducible from its own committed inputs via `node src/run.js --replay <sha>`.
+  const rawSlice = raw
+    .filter((p) => p.chain === THRESHOLDS.chain && p.stablecoin === true)
+    .map((p) => ({
+      pool: p.pool, chain: p.chain, project: p.project, symbol: p.symbol, stablecoin: p.stablecoin,
+      tvlUsd: p.tvlUsd ?? null, apy: p.apy ?? null, apyBase: p.apyBase ?? null,
+      apyReward: p.apyReward ?? null, apyPct1D: p.apyPct1D ?? null, underlyingTokens: p.underlyingTokens ?? null,
+    }));
   const top = [...pools].sort((a, b) => b.apy - a.apy);
   const leaderNow = leader(pools);
 
@@ -76,8 +87,12 @@ async function main() {
     ev.thresholds = THRESHOLDS;
   }
   if (events.length) {
+    const rawFile = `raw-base-stable-${now.toISOString().replace(/[:.]/g, "-").slice(0, 19)}.json`;
+    writeJson(rawFile, rawSlice);
+    for (const ev of events) ev.rawFile = rawFile;
     eventsFile.events = [...events.map(({ thresholds, ...rest }) => rest), ...eventsFile.events].slice(0, 500);
     log(`events: ${events.map((e) => `${e.id} ${e.type} ${e.pool.symbol}`).join(" · ")}`);
+    log(`raw slice committed for replay: data/${rawFile} (${(JSON.stringify(rawSlice).length / 1024).toFixed(0)} KB)`);
   } else {
     log("events: none (no threshold crossed since last run)");
   }
@@ -133,6 +148,7 @@ async function main() {
     thresholds: THRESHOLDS,
     pools: poolsOut, // full monitored set, sorted by APY desc (site board uses top 10)
     rejected,
+    rejectedNamed, // rejection receipts: names + reasons (capped at 100, outliers first)
     integrity,
     leader: leaderNow,
     llm: { mode: process.env.GEMINI_API_KEY ? "on" : "keyless", ...state.llm },
@@ -190,6 +206,61 @@ async function main() {
   writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm, crosscheckCache: state.crosscheckCache, xrefStats: state.xrefStats });
 
   log(`run done · ${pools.length} pools · ${events.length} events · history committed by next workflow step`);
+}
+
+// ── Replay mode ──────────────────────────────────────────────────────────────
+// `node src/run.js --replay <run-sha>` — recompute a past run's events from
+// that run's own committed inputs (previous snapshot + committed raw slice).
+// READ-ONLY: no fetch, no writes, no Telegram. If every committed event
+// recomputes, the pipeline is deterministically reproducible — that is the
+// 30-second judge path.
+function replay(sha) {
+  const rlog = (l) => console.log(`[YIELDWIRE:replay] ${l}`);
+  const show = (rev, path) => {
+    const r = spawnSync("git", ["show", `${rev}:${path}`], { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    return r.status === 0 ? r.stdout : null;
+  };
+  const curLatest = show(sha, "data/latest.json");
+  if (!curLatest) { rlog(`✗ no data/latest.json at ${sha} — is this a run commit?`); process.exit(2); }
+  const cur = JSON.parse(curLatest);
+  const ts = cur.ts;
+  const tree = spawnSync("git", ["ls-tree", "--name-only", sha, "data/"], { cwd: root, encoding: "utf8" });
+  const rawPath = (tree.stdout || "").split("\n").map((s) => s.trim()).filter((f) => f.startsWith("data/raw-base-stable-")).pop();
+  if (!rawPath) { rlog(`no raw slice committed at ${sha} (predates replay history) — replay unavailable for this run`); process.exit(3); }
+  const raw = JSON.parse(show(sha, rawPath));
+
+  let prev = null, window24h = {}, state = { seq: 0, cooldowns: {}, lastDigestDate: null, llm: { attempts: 0, rejected: 0 } };
+  const parent = spawnSync("git", ["rev-parse", `${sha}^`], { cwd: root, encoding: "utf8" });
+  if (parent.status === 0 && parent.stdout.trim()) {
+    const pl = show(parent.stdout.trim(), "data/latest.json"); if (pl) prev = JSON.parse(pl);
+    const pw = show(parent.stdout.trim(), "data/window24h.json"); if (pw) window24h = JSON.parse(pw);
+    const ps = show(parent.stdout.trim(), "data/state.json"); if (ps) state = JSON.parse(ps);
+  }
+
+  // Same code path as a live run — this is the point.
+  const { pools, rejected, integrity } = normalize(raw);
+  const computed = detectEvents(prev, { pools }, window24h, state, Date.parse(ts));
+  const evFile = JSON.parse(show(sha, "data/events.json"));
+  const committed = (evFile.events || []).filter((e) => e.ts === ts);
+
+  rlog(`run ${ts} · ${raw.length} raw rows (Base·stablecoin slice) · committed ${committed.length} event(s)`);
+  rlog(`recomputed: ${computed.events.length} event(s) · rejected ${rejected.stale} stale / ${rejected.outlier} outlier / ${rejected.dead} dead / ${rejected.belowFloor} below-floor · source integrity ${integrity.pass}/${integrity.checked}`);
+  const key = (e) => `${e.type}:${e.pool?.id ?? e.pool?.symbol}:${e.before?.apy ?? e.before?.tvl}`;
+  let ok = true;
+  for (const ce of committed) {
+    if (computed.events.some((e) => key(e) === key(ce))) rlog(`✓ REPRODUCED ${ce.id} ${ce.type} ${ce.pool.symbol} — ${ce.factLine}`);
+    else { ok = false; rlog(`✗ NOT REPRODUCED ${ce.id} ${ce.type} ${ce.pool.symbol} — engine now produces: ${computed.events.map(key).join(" | ") || "(none)"}`); }
+  }
+  if (!committed.length && !computed.events.length) rlog("quiet run — no events committed, none recomputed ✓");
+  rlog(ok ? "RESULT: every committed event reproduced exactly. The pipeline is deterministic." : "RESULT: MISMATCH — do not trust this run until investigated.");
+  process.exit(ok ? 0 : 1);
+}
+
+const REPLAY_AT = process.argv.indexOf("--replay");
+if (REPLAY_AT !== -1) {
+  const sha = process.argv[REPLAY_AT + 1];
+  if (!sha) { log("usage: node src/run.js --replay <run-sha>"); process.exit(2); }
+  replay(sha);
 }
 
 main().catch((err) => {

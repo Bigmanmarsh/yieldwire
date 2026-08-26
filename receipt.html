@@ -141,6 +141,7 @@ function render(e) {
       <div class="row"><span class="k">Fetched at</span><span class="v">${esc(e.source?.fetchedAt ?? e.ts)}</span></div>
       <div class="row"><span class="k">Computation</span><span class="v">Plain arithmetic on the snapshot at this timestamp, vs the previous snapshot. No model involved.</span></div>
       ${e.crosscheckEntry?.blockNumber ? `<div class="row"><span class="k">On-chain cross-check</span><span class="v">pool reserves read at block ${e.crosscheckEntry.blockNumber} → ${e.crosscheckEntry.onchainTvl != null ? usd(e.crosscheckEntry.onchainTvl) + " (Δ " + e.crosscheckEntry.devPct + "% vs DeFiLlama)" : "reserves logged"} · <a href="https://basescan.org/block/${e.crosscheckEntry.blockNumber}" target="_blank">basescan block ↗</a></span></div>` : ""}
+      ${e.rawFile ? `<div class="row"><span class="k">Replay (30s, $0)</span><span class="v src">raw input slice committed: <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/${esc(e.rawFile)}" target="_blank">${esc(e.rawFile)} ↗</a><br><span class="mono">node src/run.js --replay &lt;this-run-sha&gt;</span> — read-only, no keys, no wallet</span></div>` : ""}
       <p class="note">This event was committed to the public git history at its timestamp. The <a href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank">GitHub Actions run log</a> is an independent record; re-running the engine on the snapshot at this timestamp reproduces this event exactly.</p>
     </div>
 

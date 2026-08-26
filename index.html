@@ -128,6 +128,30 @@
   .flagbox p{color:var(--dim);font-size:13px;margin-top:8px;font-family:var(--mono);line-height:1.7}
   .flagbox p b{color:var(--text)}
   .flagbox a{color:var(--amber)}
+  /* reproduce card */
+  .repro{max-width:760px}
+  .repro-p{color:var(--dim);font-size:14px;margin-bottom:16px;line-height:1.7}
+  .repro-p .mono{color:var(--text);font-size:12.5px}
+  pre.term{
+    background:#0a0e14;border:1px solid var(--line2);border-radius:12px;padding:20px 22px;
+    font-family:var(--mono);font-size:13px;line-height:2.05;color:var(--text);overflow-x:auto;
+  }
+  pre.term .cmt{color:var(--faint)}
+  .repro-note{color:var(--faint);font-size:12.5px;margin-top:14px;font-family:var(--mono);line-height:1.7}
+  /* named rejections */
+  details.rej{margin-top:14px;max-width:760px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:12px 16px}
+  details.rej summary{cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.04em}
+  details.rej summary:hover{color:var(--text)}
+  .rejl{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+  .rejl .r{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:12px}
+  .rejl .why{flex:none;font-weight:700;font-size:10.5px;letter-spacing:.08em;padding:1px 8px;border-radius:5px}
+  .why.OUT{color:var(--red);background:rgba(255,92,108,.1);border:1px solid rgba(255,92,108,.3)}
+  .why.STA{color:var(--amber);background:rgba(255,197,61,.08);border:1px solid rgba(255,197,61,.3)}
+  .why.DEA{color:var(--red);background:rgba(255,92,108,.1);border:1px solid rgba(255,92,108,.3)}
+  .why.BLF{color:var(--faint);background:rgba(139,153,172,.08);border:1px solid var(--line2)}
+  .rejl .sym{color:var(--text);font-weight:600}
+  .rejl .prj{color:var(--faint)}
+  .rejl .det{color:var(--dim)}
   @media(max-width:760px){.col-spark,.col-br{display:none}}
 
   /* ── feed ─ */
@@ -191,7 +215,7 @@
   <a class="brand" href="#" style="color:var(--text);text-decoration:none">YIELD<span>WIRE</span></a>
   <span id="status">connecting…</span>
   <nav class="navlinks">
-    <a href="#board">Board</a><a href="#crosscheck">Cross-check</a><a href="#feed">Feed</a><a href="#how">How it works</a>
+    <a href="#board">Board</a><a href="#crosscheck">Cross-check</a><a href="#feed">Feed</a><a href="#how">How it works</a><a href="#reproduce">Reproduce</a>
     <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a><a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a>
   </nav>
 </div></div>
@@ -231,6 +255,7 @@
       </table>
     </div>
     <p id="boardNote"></p>
+    <details class="rej" id="rejNamed"><summary>rejection receipts — the pools this run refused, and why</summary><div class="rejl" id="rejList"></div></details>
   </section>
 
   <section id="crosscheck" class="hidden">
@@ -266,6 +291,22 @@
       <div class="big">THE LLM DID NOT CALCULATE THIS RESULT.</div>
       <p id="llmLine">Summary line status: …</p>
       <p>Every figure on this site is arithmetic on the snapshot at its timestamp. Each run's snapshot, events and state are <b>committed to a public git history</b>, with the GitHub Actions run log as an independent timestamp — re-run the engine on any snapshot and it reproduces the event exactly.</p>
+    </div>
+  </section>
+
+  <section id="reproduce">
+    <div class="sechead"><h2>Reproduce any event — 30 seconds, $0</h2><span class="secnote">one command · no keys · no wallet</span></div>
+    <div class="repro">
+      <p class="repro-p">Every run that emits an event also commits <span class="mono">data/raw-base-stable-*.json</span> — the exact rows of the source fetch the engine consumed (Base · stablecoin only, the only rows it can read). Replay mode recomputes that run from its own committed inputs, through the same code path as the live agent:</p>
+      <pre class="term"><span class="cmt"># 1 · clone the public record</span>
+git clone https://github.com/Bigmanmarsh/yieldwire &amp;&amp; cd yieldwire
+
+<span class="cmt"># 2 · replay any event run (run sha is in the Actions log / commit history)</span>
+node src/run.js --replay &lt;run-sha&gt;
+
+<span class="cmt"># 3 · the engine prints ✓ REPRODUCED for every event it recomputes —</span>
+<span class="cmt">#    or ✗ NOT REPRODUCED, which you can see too</span></pre>
+      <p class="repro-note">Replay mode is strictly read-only: no fetch, no writes, no messages. If a historical event cannot be reproduced, the command says so — that is the point.</p>
     </div>
   </section>
 
@@ -457,6 +498,20 @@ function render(latest, eventsFile) {
     </div>` : "";
     $("xcMeta").textContent = "Method: getReserves() read directly from the pool contract (read-only, no wallet, $0) via public Base RPC; TVL = reserves × token price (CoinGecko; hard $-pegged tokens valued at $1 by definition). v1 on-chain coverage: aerodrome-v1 (vAMM/sAMM). Other products are labeled awaiting — never silently skipped.";
     $("boardNote").textContent += ` · on-chain cross-check: ${s.verified ?? 0}/${s.attempted ?? 0} supported top pools at block ${xc.blockNumber}`;
+  }
+
+  // named rejection receipts (the pools this run refused, with reasons)
+  const rn = latest.rejectedNamed;
+  if (rn && rn.length) {
+    const cls = { OUTLIER: "OUT", STALE: "STA", DEAD: "DEA", "BELOW FLOOR": "BLF" };
+    $("rejList").innerHTML = rn.slice(0, 12).map(r =>
+      `<div class="r"><span class="why ${cls[r.reason] || "BLF"}">${esc(r.reason)}</span><span class="sym">${esc(r.symbol)}</span><span class="prj">${esc(r.project)}</span><span class="det">— ${esc(r.detail)}</span></div>`
+    ).join("") + (rn.length > 12 ? `<div class="r"><span class="det">…and ${rn.length - 12} more in <a href="${RAW}latest.json" target="_blank">data/latest.json</a></span></div>` : "");
+    $("rejNamed").setAttribute("data-count", rn.length);
+    const sm = $("rejNamed").querySelector("summary");
+    sm.textContent = `rejection receipts — ${rn.length} pools refused this run, named with reasons`;
+  } else {
+    $("rejNamed").style.display = "none";
   }
 
   // feed

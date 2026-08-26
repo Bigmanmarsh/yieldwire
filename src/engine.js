@@ -30,14 +30,15 @@ const round2 = (n) => Math.round(n * 100) / 100;
 export function normalize(raw, T = THRESHOLDS) {
   const pools = [];
   const rejected = { stale: 0, outlier: 0, dead: 0, belowFloor: 0 };
+  const rejectedNamed = []; // names + reasons — rejection receipts, not just counts
 
   for (const p of raw) {
     if (p.chain !== T.chain) continue;
     if (p.stablecoin !== true) continue;
-    if (!p.tvlUsd || p.tvlUsd <= 0) { rejected.dead++; continue; }
-    if (p.tvlUsd < T.tvlFloor) { rejected.belowFloor++; continue; }
-    if (typeof p.apy !== "number" || Number.isNaN(p.apy) || p.apy < 0) { rejected.stale++; continue; }
-    if (p.apy > T.apyOutlierPct) { rejected.outlier++; continue; }
+    if (!p.tvlUsd || p.tvlUsd <= 0) { rejected.dead++; rejectedNamed.push({ symbol: p.symbol, project: p.project, reason: "DEAD", detail: `tvlUsd ${p.tvlUsd ?? "missing"} (≤ 0 or absent)`, tvl: p.tvlUsd ?? 0 }); continue; }
+    if (p.tvlUsd < T.tvlFloor) { rejected.belowFloor++; rejectedNamed.push({ symbol: p.symbol, project: p.project, reason: "BELOW FLOOR", detail: `TVL $${Math.round(p.tvlUsd).toLocaleString("en-US")} < $${T.tvlFloor.toLocaleString("en-US")}`, tvl: p.tvlUsd }); continue; }
+    if (typeof p.apy !== "number" || Number.isNaN(p.apy) || p.apy < 0) { rejected.stale++; rejectedNamed.push({ symbol: p.symbol, project: p.project, reason: "STALE", detail: `apy ${p.apy ?? "missing"} (not a non-negative number)`, tvl: p.tvlUsd }); continue; }
+    if (p.apy > T.apyOutlierPct) { rejected.outlier++; rejectedNamed.push({ symbol: p.symbol, project: p.project, reason: "OUTLIER", detail: `APY ${p.apy.toFixed(1)}% > ${T.apyOutlierPct}% ceiling (incentive farm, not yield)`, tvl: p.tvlUsd }); continue; }
 
     pools.push({
       id: p.pool,
@@ -63,7 +64,15 @@ export function normalize(raw, T = THRESHOLDS) {
     }
   }
 
-  return { pools, rejected, integrity: { pass: integrityPass, checked: integrityChecked } };
+  // Cap the named list (below-floor dominates in volume); keep the interesting
+  // classes first: outliers > stale > dead, then a sample of below-floor.
+  const order = { OUTLIER: 0, STALE: 1, DEAD: 2, "BELOW FLOOR": 3 };
+  const named = rejectedNamed
+    .sort((a, b) => (order[a.reason] - order[b.reason]) || (b.tvl ?? 0) - (a.tvl ?? 0))
+    .slice(0, 100)
+    .map(({ symbol, project, reason, detail }) => ({ symbol, project, reason, detail }));
+
+  return { pools, rejected, rejectedNamed: named, integrity: { pass: integrityPass, checked: integrityChecked } };
 }
 
 // ── Leader ───────────────────────────────────────────────────────────────────
