@@ -29,6 +29,7 @@ import { crossReference } from "./xref.js";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(root, "data");
 const SITE_BASE = (process.env.SITE_BASE || "https://bigmanmarsh.github.io/yieldwire").replace(/\/$/, "");
+const SITE_BASE_GH = "https://raw.githubusercontent.com/Bigmanmarsh/yieldwire/main";
 
 const readJson = (name, fallback) => {
   try { return JSON.parse(readFileSync(join(DATA, name), "utf8")); } catch { return fallback; }
@@ -41,6 +42,43 @@ async function main() {
   const now = new Date();
   const nowMs = now.getTime();
   log(`run start · ${now.toISOString()}`);
+
+  // ── Chain pacing (autonomy without depending on the GitHub scheduler) ──
+  // The workflow also fires on push — including the bot's own data commits —
+  // so the run chain is self-sustaining: each commit triggers the next run.
+  // To keep the published ~5-minute cadence (and dedupe fast re-triggers):
+  //   · if the last committed run is < 4 min old → skip (write nothing)
+  //   · otherwise sleep until ~5 min have elapsed, then re-verify nobody
+  //     else committed while we slept (schedule/manual runs dedupe too)
+  const PACE_MS = Number(process.env.YW_PACE_MS) || 5 * 60 * 1000;
+  const GUARD_MS = Number(process.env.YW_GUARD_MS) || 4 * 60 * 1000;
+  const liveLatestTs = async () => {
+    const onDisk = readJson("latest.json", null);
+    let ts = onDisk?.ts || null;
+    try {
+      const r = await fetch(process.env.YW_LIVE_URL || `${SITE_BASE_GH}/data/latest.json`, { signal: AbortSignal.timeout(10000) });
+      if (r.ok) { const j = await r.json(); if (j?.ts) ts = j.ts; }
+    } catch { /* offline → fall back to the checked-out copy */ }
+    return ts;
+  };
+  const prevTs = await liveLatestTs();
+  if (prevTs) {
+    const ageMs = nowMs - Date.parse(prevTs);
+    if (ageMs < GUARD_MS) {
+      log(`chain guard: last run ${Math.round(ageMs / 1000)}s ago (< ${GUARD_MS / 60000} min) — skipping, writing nothing`);
+      return;
+    }
+    const waitMs = PACE_MS - ageMs;
+    if (waitMs > 10000) {
+      log(`chain pacing: last run ${Math.round(ageMs / 1000)}s ago — sleeping ${Math.round(waitMs / 1000)}s to hold the ~5-minute cadence`);
+      await new Promise((r) => setTimeout(r, waitMs));
+      const ts2 = await liveLatestTs();
+      if (ts2 && Date.parse(ts2) > Date.parse(prevTs) + 60000) {
+        log(`chain dedupe: another run committed while pacing (${ts2}) — skipping, writing nothing`);
+        return;
+      }
+    }
+  }
 
   // 1 ── Load public history
   const prev = readJson("latest.json", null);
