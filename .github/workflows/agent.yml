@@ -34,6 +34,15 @@ jobs:
         run: |
           git config user.name "yieldwire[bot]"
           git config user.email "yieldwire-agent@users.noreply.github.com"
+          echo "── before ── HEAD=$(git rev-parse HEAD)"
           git add data
-          git diff --cached --quiet || git commit -m "agent run #${GITHUB_RUN_NUMBER} · $(date -u +%H:%M:%S)Z"
-          git push
+          if git diff --cached --quiet; then
+            echo "no data changes this run — nothing to commit"
+          else
+            git commit -m "agent run #${GITHUB_RUN_NUMBER} · $(date -u +%H:%M:%S)Z"
+            echo "committed $(git rev-parse HEAD)"
+          fi
+          # explicit refspec: checkout@v4 leaves HEAD detached, where a bare
+          # `git push` is refused by modern git
+          git push origin HEAD:main
+          echo "── after ── origin/main now at: $(git ls-remote origin refs/heads/main | cut -c1-7)"
