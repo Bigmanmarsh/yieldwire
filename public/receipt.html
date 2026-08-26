@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event receipt · YieldWire</title>
+<link href="fonts-inline.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07090d; --panel:#0d1117; --line:#1b2432; --line2:#243244;
+    --text:#e9eef5; --dim:#8b99ac; --faint:#5b6a7e;
+    --green:#3ddc84; --green-dim:#1d5c3c;
+    --disp:"Space Grotesk",-apple-system,"Segoe UI",Roboto,sans-serif;
+    --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);font:15px/1.6 var(--body);padding:56px 20px;
+    background-image:radial-gradient(900px 300px at 50% -80px, rgba(61,220,132,.06), transparent 60%);
+  }
+  .doc{max-width:660px;margin:0 auto}
+  /* letterhead */
+  .head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--text);padding-bottom:14px}
+  .head .b{font-family:var(--disp);font-weight:700;letter-spacing:.16em;font-size:17px}
+  .head .b span{color:var(--green)}
+  .head .kind{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--faint)}
+  .serial{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--dim);padding:12px 0 22px}
+  /* perforation */
+  .perf{height:14px;background:
+    radial-gradient(circle at 7px 0, var(--bg) 4px, transparent 4.5px) repeat-x;
+    background-size:14px 14px;margin-bottom:26px;
+  }
+  h1{font-family:var(--disp);font-size:27px;line-height:1.2;letter-spacing:-.01em}
+  h1{display:flex;align-items:center;gap:14px}
+  .coin{width:30px;height:30px;border-radius:50%;flex:none;background:var(--panel);border:1px solid var(--line)}
+  .coin.mono{display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700}
+  h1 .proj{color:var(--faint);font-size:19px}
+  .sub{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin:8px 0 30px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:16px}
+  .card h2{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin-bottom:16px}
+  .row{display:flex;justify-content:space-between;gap:18px;padding:8px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px}
+  .row:last-child{border-bottom:none}
+  .row .k{color:var(--faint)}
+  .row .v{text-align:right;word-break:break-word}
+  .v .big{font-size:15px;font-weight:600}
+  .up{color:var(--green)} .down{color:#ff5c6c}
+  .note{color:var(--dim);font-size:13px;margin-top:12px}
+  .seal{
+    border:1px solid var(--green-dim);background:linear-gradient(180deg,rgba(61,220,132,.05),transparent);
+    border-radius:12px;padding:24px;margin:26px 0 16px;text-align:center;
+  }
+  .seal .mark{font-family:var(--mono);font-size:30px;color:var(--green);line-height:1}
+  .seal .big{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green);letter-spacing:.03em;margin-top:12px}
+  .seal p{color:var(--dim);font-size:13px;margin-top:10px;max-width:480px;margin-left:auto;margin-right:auto}
+  .src{font-size:12px;color:var(--faint);word-break:break-all}
+  a{color:#5aa9ff}
+  #missing{max-width:660px;margin:0 auto;color:var(--dim);font-family:var(--mono);font-size:14px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="doc hidden" id="main"></div>
+<div id="missing" class="hidden">RECEIPT NOT FOUND — events are capped at 500 in the public log, and the log is only as old as the agent. <a href="./">← back to the wire</a></div>
+
+<script>
+const REPO = "Bigmanmarsh/yieldwire";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const usd = (n) => n >= 1e6 ? `$${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n/1e3).toFixed(1)}K` : `$${Math.round(n)}`;
+const TYPENAMES = { LEADER_CHANGE:"LEADER CHANGE", APY_JUMP:"APY JUMP", APY_COLLAPSE:"APY COLLAPSE", TVL_SHIFT:"TVL SHIFT" };
+
+const COIN_HUES = [152, 205, 262, 330, 42, 220, 100];
+function coinMark(sym) {
+  const t = String(sym).split("-")[0];
+  const init = (t.length > 4 ? t.slice(0, 3) : t).toUpperCase();
+  let h = 0; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997;
+  const hue = COIN_HUES[h % COIN_HUES.length];
+  return `<span class="coin mono" style="color:hsl(${hue},70%,66%);border-color:hsl(${hue},45%,32%)">${init}</span>`;
+}
+function coinImg(sym, logo) {
+  if (logo) return `<img class="coin" src="${logo}" alt="${esc(sym)}">`;
+  return coinMark(sym);
+}
+document.addEventListener("error", (ev) => {
+  const t = ev.target;
+  if (t && t.tagName === "IMG" && t.classList.contains("coin")) {
+    const m = document.createElement("span");
+    m.className = "coin mono";
+    m.style.color = "var(--dim)";
+    m.textContent = (t.alt || "?").split("-")[0].slice(0, 3).toUpperCase();
+    t.replaceWith(m);
+  }
+}, true);
+
+const id = new URLSearchParams(location.search).get("id");
+
+function showMissing(){ $("missing").classList.remove("hidden"); }
+
+function render(e) {
+  const p = e.pool;
+  const d = e.delta;
+  const dCls = d > 0 ? "up" : "down";
+  let deltaV;
+  if (e.type === "LEADER_CHANGE") deltaV = `${e.before.symbol} ${e.before.apy.toFixed(2)}% → <span class="v"><span class="big ${dCls}">${p.symbol} ${p.apy.toFixed(2)}%</span></span>`;
+  else if (e.type === "TVL_SHIFT") deltaV = `${usd(e.before.tvl)} → <span class="big ${dCls}">${usd(p.tvl)} (${d>0?"+":""}${d}%)</span>`;
+  else deltaV = `${e.before.apy.toFixed(2)}% → <span class="big ${dCls}">${p.apy.toFixed(2)}% (${d>0?"+":""}${d}pp)</span>`;
+
+  const rows = [
+    ["Pool", `${esc(p.symbol)} · ${esc(p.project)}`],
+    ["Pool ID (DeFiLlama)", esc(p.id)],
+    ["Signal", deltaV],
+    ["TVL at event", usd(p.tvl)],
+    p.apyBase != null || p.apyReward != null ? ["APY components (base / reward)", `${p.apyBase != null ? p.apyBase.toFixed(2)+"%" : "—"} / ${p.apyReward != null ? p.apyReward.toFixed(2)+"%" : "—"}`] : null,
+    ["Trigger (published threshold)", esc(e.trigger)],
+  ].filter(Boolean);
+
+  $("main").innerHTML = `
+    <div class="head"><div class="b">YIELD<span>WIRE</span></div><div class="kind">EVENT RECEIPT</div></div>
+    <div class="serial"><span>${esc(e.id)}</span><span>BASE · CHAIN 8453</span><span>${esc(e.ts)}</span></div>
+    <div class="perf"></div>
+
+    <h1>${coinImg(p.symbol, p.logo)}${TYPENAMES[e.type]} — ${esc(p.symbol)} <span class="proj">(${esc(p.project)})</span></h1>
+    <div class="sub">${esc(e.id)} · ${esc(e.ts)} · emitted by the deterministic engine</div>
+
+    <div class="card">
+      <h2>The number</h2>
+      ${rows.map(([k,v]) => `<div class="row"><span class="k">${k}</span><span class="v">${v}</span></div>`).join("")}
+    </div>
+
+    <div class="card">
+      <h2>Source &amp; reproducibility</h2>
+      <div class="row"><span class="k">Data source</span><span class="v">DeFiLlama yields endpoint — free, keyless, public</span></div>
+      <div class="row"><span class="k">Fields used</span><span class="v src">${(e.source?.fields || []).map(esc).join(" · ")}</span></div>
+      <div class="row"><span class="k">Fetched at</span><span class="v">${esc(e.source?.fetchedAt ?? e.ts)}</span></div>
+      <div class="row"><span class="k">Computation</span><span class="v">Plain arithmetic on the snapshot at this timestamp, vs the previous snapshot. No model involved.</span></div>
+      <p class="note">This event was committed to the public git history at its timestamp. The <a href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank">GitHub Actions run log</a> is an independent record; re-running the engine on the snapshot at this timestamp reproduces this event exactly.</p>
+    </div>
+
+    ${e.summary ? `<div class="card">
+      <h2>One-line summary (optional layer)</h2>
+      <p style="font-family:var(--mono);font-size:13.5px">${e.summary.text ? esc(e.summary.text) : "(no summary generated — deterministic template used)"}</p>
+      <p class="note">Provenance: ${esc(e.summary.source)}</p>
+    </div>` : ""}
+
+    <div class="seal">
+      <div class="mark">✓</div>
+      <div class="big">THE LLM DID NOT CALCULATE THIS RESULT.</div>
+      <p>When a model is configured it may write the one-line summary above — and only that line. Any number not present in the source facts gets the sentence rejected by the claim-checker. Every figure in this receipt is arithmetic performed by the deterministic engine.</p>
+    </div>
+
+    <p class="note"><a href="./">← back to the wire</a></p>`;
+  $("main").classList.remove("hidden");
+}
+
+const demo = window.__YIELDWIRE_DEMO__?.receipt;
+if (demo) { render(demo); }
+else {
+  fetch(`https://raw.githubusercontent.com/${REPO}/main/data/events.json`)
+    .then(r => r.json())
+    .then((f) => {
+      const e = (f.events || []).find((x) => x.id === id);
+      if (!e) { showMissing(); return; }
+      render(e);
+    })
+    .catch(showMissing);
+}
+</script>
+</body>
+</html>

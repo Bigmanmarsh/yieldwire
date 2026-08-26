@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YieldWire — the wire for Base yield</title>
+<meta name="description" content="YieldWire watches every stablecoin pool on Base every 5 minutes. The moment the best opportunity changes, it messages you — with the math attached. No custody. No trades. Receipts on everything.">
+<link href="fonts-inline.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07090d; --panel:#0d1117; --panel2:#111722; --line:#1b2432; --line2:#243244;
+    --text:#e9eef5; --dim:#8b99ac; --faint:#5b6a7e;
+    --green:#3ddc84; --green-dim:#1d5c3c; --red:#ff5c6c; --amber:#ffc53d; --blue:#5aa9ff;
+    --disp:"Space Grotesk",-apple-system,"Segoe UI",Roboto,sans-serif;
+    --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);font:15px/1.6 var(--body);
+    background-image:radial-gradient(1200px 400px at 50% -100px, rgba(61,220,132,.07), transparent 60%);
+  }
+  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  .mono{font-family:var(--mono)}
+
+  /* ── status bar ── */
+  #statusbar{
+    position:sticky;top:0;z-index:20;background:rgba(7,9,13,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  #statusbar .wrap{display:flex;align-items:center;gap:18px;height:52px}
+  .brand{font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.14em}
+  .brand span{color:var(--green)}
+  #status{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:11.5px;color:var(--dim);flex:1;flex-wrap:wrap}
+  .live{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-weight:600}
+  .live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  .live.stale{color:var(--red)} .live.stale .dot{background:var(--red);animation:none}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,220,132,.45)}70%{box-shadow:0 0 0 7px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+  .navlinks{display:flex;gap:14px;font-size:12.5px;color:var(--dim)}
+  .navlinks a{color:var(--dim)} .navlinks a:hover{color:var(--text)}
+
+  /* ── ticker ─ */
+  #ticker{border-bottom:1px solid var(--line);background:rgba(13,17,23,.5);overflow:hidden;white-space:nowrap}
+  #ticker .track{display:inline-block;padding:7px 0;animation:scroll 45s linear infinite;font-family:var(--mono);font-size:12px;color:var(--dim)}
+  #ticker:hover .track{animation-play-state:paused}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .tk{margin:0 14px} .tk b{color:var(--text);font-weight:500} .tk .up{color:var(--green)} .tk .down{color:var(--red)}
+
+  /* ── hero ── */
+  .hero{padding:72px 0 44px}
+  .hero h1{font-family:var(--disp);font-size:clamp(38px,6vw,58px);line-height:1.06;letter-spacing:-.025em;font-weight:700}
+  .hero h1 .wire{color:var(--green)}
+  .hero p.sub{color:var(--dim);font-size:17.5px;max-width:620px;margin-top:18px}
+  .hero p.sub b{color:var(--text);font-weight:600}
+  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:1px solid var(--line2);border-radius:9px;font-size:14px;font-weight:600;transition:background .15s,border-color .15s}
+  .btn:hover{text-decoration:none;background:var(--panel2)}
+  .btn.primary{background:var(--green);border-color:var(--green);color:#04150c}
+  .btn.primary:hover{background:#54e294}
+  #lastEvent{
+    margin-top:34px;display:flex;gap:14px;align-items:baseline;max-width:640px;
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--green);
+    border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:13px;
+  }
+  #lastEvent .lab{color:var(--faint);font-size:10.5px;letter-spacing:.12em;flex:none}
+  #lastEvent .msg b{color:var(--text)} #lastEvent .msg .d{color:var(--dim);margin-left:8px}
+  #err{display:none;margin-top:26px;background:#221114;border:1px solid #4a2430;color:#ffb3bd;border-radius:10px;padding:16px 18px;font-family:var(--mono);font-size:13px;max-width:640px}
+  #previewBadge{display:none;position:fixed;bottom:14px;right:14px;z-index:30;background:#2a2410;border:1px solid #574a1e;color:var(--amber);font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:7px}
+
+  /* ── strip ── */
+  .strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:8px 0 8px}
+  .cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
+  .cell:after{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--green),transparent 70%);opacity:.5}
+  .cell b{display:block;font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.02em}
+  .cell span{font-size:11.5px;color:var(--dim);letter-spacing:.02em}
+  @media(max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.cell b{font-size:21px}}
+
+  /* ── sections ── */
+  section{padding:52px 0;border-top:1px solid var(--line);scroll-margin-top:64px}
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+  h2{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-weight:600}
+  .secnote{font-size:12.5px;color:var(--faint);font-family:var(--mono)}
+
+  /* ── board ── */
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;background:var(--panel)}
+  .tblwrap.bare{border:none;background:transparent;border-radius:0}
+  table{width:100%;border-collapse:collapse}
+  table.board{min-width:700px;border-collapse:separate;border-spacing:0 10px}
+  thead th{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;
+    text-align:right;padding:14px 18px;border-bottom:1px solid var(--line2);background:rgba(17,23,34,.6);
+  }
+  table.board thead th{background:none;border-bottom:none;padding:4px 18px 12px}
+  thead th:first-child,thead th:nth-child(2){text-align:left}
+  tbody td{padding:15px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px;text-align:right;vertical-align:middle}
+  td.nowrap{white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(61,220,132,.04)}
+  /* board rows = individual cards, separated by real gaps */
+  table.board tbody td{background:var(--panel2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  table.board tbody tr td:first-child{border-left:1px solid var(--line);border-radius:10px 0 0 10px}
+  table.board tbody tr td:last-child{border-radius:0 10px 10px 0}
+  table.board tbody tr:last-child td{border-bottom:1px solid var(--line)}
+  table.board tbody tr:hover td{background:#151f2d}
+  td.pool{text-align:left}
+  td.pool b{font-family:var(--body);font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+  td.pool .proj{display:block;color:var(--faint);font-size:11px;margin-top:3px;font-family:var(--mono)}
+  td.pool .rank{color:var(--faint);font-size:12px}
+  .coin{width:24px;height:24px;border-radius:50%;flex:none;background:var(--panel);border:1px solid var(--line)}
+  .coin.mono{display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:700}
+  td.pool .pcell{display:inline-flex;align-items:center;gap:10px;min-width:0}
+  .ev .ic .coin{width:20px;height:20px;border:none;background:none}
+  .ev .ic .coin.mono{font-size:8px}
+  td.spark{padding-top:17px}
+  .num{font-weight:500}
+  .chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600}
+  .chip.up{color:var(--green);background:rgba(61,220,132,.1)}
+  .chip.down{color:var(--red);background:rgba(255,92,108,.1)}
+  .chip.flat{color:var(--dim);background:rgba(139,153,172,.08)}
+  .brc{color:var(--faint);font-size:11.5px}
+  #boardNote{color:var(--faint);font-size:12px;margin-top:12px;font-family:var(--mono)}
+  @media(max-width:760px){.col-spark,.col-br{display:none}}
+
+  /* ── feed ─ */
+  .ev{display:flex;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .ev:last-child{border-bottom:none}
+  .ev .ic{font-size:17px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--line);border-radius:9px}
+  .ev .body{flex:1;min-width:0}
+  .ev .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ev .top b{font-size:15px;font-weight:600}
+  .ev .top .proj{color:var(--faint);font-size:12px;font-family:var(--mono)}
+  .ev .top .type{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim);border:1px solid var(--line2);padding:2px 8px;border-radius:5px}
+  .ev .det{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:5px}
+  .ev .det .up{color:var(--green)} .ev .det .down{color:var(--red)}
+  .ev .meta{text-align:right;flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+  .ev .meta .t{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .ev .meta a{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);padding:3px 10px;border-radius:6px;color:var(--blue)}
+  .ev .meta a:hover{background:var(--panel2);text-decoration:none}
+  @media(max-width:600px){.ev{flex-wrap:wrap}.ev .meta{width:100%;flex-direction:row;justify-content:space-between;align-items:center}}
+  @media(max-width:700px){.navlinks{display:none}}
+  @media(max-width:480px){.brand{font-size:14px}.status-opt{display:none}#statusbar .wrap{height:auto;min-height:52px;padding-top:6px;padding-bottom:6px}}
+
+
+  /* ── pipeline ── */
+  .pipe{display:flex;flex-direction:column;max-width:640px}
+  .step{display:flex;gap:18px;padding:16px 0;position:relative}
+  .step .n{
+    font-family:var(--mono);font-size:12px;font-weight:700;color:var(--green);flex:none;
+    width:30px;height:30px;border:1px solid var(--green-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;
+    background:rgba(61,220,132,.06);position:relative;z-index:1;
+  }
+  .step:not(:last-child):before{content:"";position:absolute;left:15px;top:46px;bottom:-6px;width:1px;background:var(--line2)}
+  .step .txt b{font-family:var(--mono);font-size:13px;letter-spacing:.08em}
+  .step .txt p{color:var(--dim);font-size:13.5px;margin-top:3px;max-width:520px}
+  .callout{
+    margin-top:30px;max-width:640px;border:1px solid var(--green-dim);background:linear-gradient(180deg,rgba(61,220,132,.05),transparent);
+    border-radius:12px;padding:22px;
+  }
+  .callout .big{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green);letter-spacing:.02em}
+  .callout p{color:var(--dim);font-size:13.5px;margin-top:9px}
+  .callout p b{color:var(--text)}
+
+  /* ── records ── */
+  .badges{display:flex;gap:10px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:12px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;color:var(--dim);display:inline-block}
+  .badge:hover{background:var(--panel2);color:var(--text);text-decoration:none}
+  .recintro{color:var(--dim);margin-bottom:16px;max-width:640px}
+  .roadmap{color:var(--dim);max-width:680px}
+  .roadmap b{color:var(--text)}
+  .detchips{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .dchip{font-family:var(--mono);font-size:12px;padding:8px 14px;border-radius:8px;border:1px solid var(--line2);color:var(--dim)}
+  .dchip.shipped{border-color:var(--green-dim);color:var(--green);background:rgba(61,220,132,.05)}
+
+  footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+  footer .fmeta{font-family:var(--mono);color:var(--dim);margin-bottom:10px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<div id="statusbar"><div class="wrap">
+  <a class="brand" href="#" style="color:var(--text);text-decoration:none">YIELD<span>WIRE</span></a>
+  <span id="status">connecting…</span>
+  <nav class="navlinks">
+    <a href="#board">Board</a><a href="#feed">Feed</a><a href="#how">How it works</a>
+    <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a><a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a>
+  </nav>
+</div></div>
+
+<div id="ticker" class="hidden"><div class="track" id="tickerTrack"></div></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>You don't monitor yield.<br><span class="wire">The wire does.</span></h1>
+    <p class="sub">YieldWire watches <b id="poolCount">—</b> stablecoin pools on Base every 5 minutes. The moment the board changes — leader swap, APY jump, collapse, TVL shift — it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b></p>
+    <div class="cta">
+      <a class="btn primary" href="https://t.me/yieldwire_base_bot" target="_blank">▶&nbsp; Open the wire on Telegram</a>
+      <a class="btn" href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">View source &amp; public record</a>
+    </div>
+    <div id="lastEvent" class="hidden"></div>
+    <div id="err"></div>
+  </div>
+
+  <div class="strip">
+    <div class="cell"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
+    <div class="cell"><b id="sEvents">–</b><span>EVENTS · LAST 24H</span></div>
+    <div class="cell"><b id="sLeaders">–</b><span>LEADER CHANGES</span></div>
+    <div class="cell"><b id="sCollapses">–</b><span>APY COLLAPSES</span></div>
+    <div class="cell"><b id="sRejected">–</b><span>POOLS REJECTED</span></div>
+  </div>
+
+  <section id="board">
+    <div class="sechead"><h2>Live board — top stablecoin pools on Base by APY</h2><span class="secnote" id="boardTs"></span></div>
+    <div class="tblwrap bare">
+      <table class="board">
+        <thead><tr>
+          <th style="width:34px">#</th><th style="min-width:190px">Pool</th><th class="col-spark">APY · 24H</th>
+          <th>APY</th><th class="col-br">Base / Reward</th><th>TVL</th><th>Δ 24H</th>
+        </tr></thead>
+        <tbody id="boardBody"><tr><td colspan="7" style="text-align:center;color:var(--faint);padding:26px">loading…</td></tr></tbody>
+      </table>
+    </div>
+    <p id="boardNote"></p>
+  </section>
+
+  <section id="feed">
+    <div class="sechead"><h2>The wire — latest events</h2><span class="secnote">every event links to its receipt</span></div>
+    <div id="feedList"><p style="color:var(--faint);padding:10px 0">loading…</p></div>
+  </section>
+
+  <section id="how">
+    <div class="sechead"><h2>How a number is made</h2><span class="secnote">deterministic end to end</span></div>
+    <div class="pipe">
+      <div class="step"><div class="n">1</div><div class="txt"><b>FETCH</b><p>DeFiLlama <span class="mono">/yields</span> — every 5 minutes, on GitHub Actions. One free, keyless, public source. Its name is on every receipt.</p></div></div>
+      <div class="step"><div class="n">2</div><div class="txt"><b>NORMALIZE</b><p>Base · stablecoin · TVL ≥ $500K. Stale, outlier (APY &gt; 500%) and dead pools are rejected — and the rejection count is published, not hidden.</p></div></div>
+      <div class="step"><div class="n">3</div><div class="txt"><b>SOURCE INTEGRITY</b><p>Wherever all three APY components exist, <span class="mono">apy = apyBase + apyReward</span> must hold (±0.5pp). The pass rate is shown under the board.</p></div></div>
+      <div class="step"><div class="n">4</div><div class="txt"><b>DETECT</b><p>Four published thresholds, plain arithmetic, 12h per-pool cooldown. No model is involved in this step — or any step that produces a number.</p></div></div>
+      <div class="step"><div class="n">5</div><div class="txt"><b>DELIVER</b><p>Telegram alert + public receipt. The LLM (optional) writes exactly one summary sentence; any number it invents gets the sentence rejected by the claim-checker. Rejections are counted and published.</p></div></div>
+    </div>
+    <div class="callout">
+      <div class="big">THE LLM DID NOT CALCULATE THIS RESULT.</div>
+      <p id="llmLine">Summary line status: …</p>
+      <p>Every figure on this site is arithmetic on the snapshot at its timestamp. Each run's snapshot, events and state are <b>committed to a public git history</b>, with the GitHub Actions run log as an independent timestamp — re-run the engine on any snapshot and it reproduces the event exactly.</p>
+    </div>
+  </section>
+
+  <section id="thresholds">
+    <div class="sechead"><h2>Published thresholds — audit us against these</h2></div>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Trigger</th><th style="text-align:right">Condition</th></tr></thead>
+        <tbody>
+          <tr><td class="pool"><b>🔀 LEADER_CHANGE</b></td><td style="text-align:right">Highest-APY stablecoin pool (TVL ≥ $1.0M) changed</td></tr>
+          <tr><td class="pool"><b>📈 APY_JUMP</b></td><td style="text-align:right">APY rose ≥ 2.0pp between consecutive scans</td></tr>
+          <tr><td class="pool"><b>📉 APY_COLLAPSE</b></td><td style="text-align:right">APY fell ≥ 2.0pp between consecutive scans</td></tr>
+          <tr><td class="pool"><b>🌊 TVL_SHIFT</b></td><td style="text-align:right">TVL moved ≥ 25% vs ~24h ago</td></tr>
+          <tr><td class="pool"><b>MONITORING FLOOR</b></td><td style="text-align:right">Stablecoin pools on Base with TVL ≥ $500,000</td></tr>
+          <tr><td class="pool"><b>DATA REJECTION</b></td><td style="text-align:right">APY &gt; 500% (incentive farms) · missing APY (stale) · TVL ≤ 0 (dead)</td></tr>
+          <tr><td class="pool"><b>COOLDOWN</b></td><td style="text-align:right">Same pool + trigger cannot re-fire within 12h</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="record">
+    <div class="sechead"><h2>Public record</h2></div>
+    <p class="recintro">Nothing here is private. The append-only history, the raw snapshots, and every workflow run are public — the same data you're looking at, verifiable by anyone:</p>
+    <div class="badges">
+      <a class="badge" href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank"> GitHub Actions run log</a>
+      <a class="badge" href="https://raw.githubusercontent.com/Bigmanmarsh/yieldwire/main/data/events.json" target="_blank">events.json</a>
+      <a class="badge" href="https://raw.githubusercontent.com/Bigmanmarsh/yieldwire/main/data/latest.json" target="_blank">latest.json</a>
+      <a class="badge" href="https://github.com/Bigmanmarsh/yieldwire/tree/main/src" target="_blank">source code</a>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="sechead"><h2>Roadmap</h2></div>
+    <p class="roadmap">YieldWire is a detector pipeline: <b>fetch → normalize → detect → receipt → deliver</b>. One detector, done perfectly, first. The next two plug into the same architecture.</p>
+    <div class="dchips">
+      <span class="dchip shipped">✓ 1 · YIELD REGIME — shipped</span>
+      <span class="dchip">2 · WALLET FLOW — next</span>
+      <span class="dchip">3 · LIQUIDITY MIGRATION — next</span>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fmeta" id="footerMeta">YIELDWIRE v0.1</p>
+    <p>Data: DeFiLlama yields endpoint · No wallet · No custody · No trades · Not financial advice.<br>
+    Built for the <a href="https://orionagents.org/hackathon" target="_blank">Orion Agents Builder Hackathon</a> · <a href="https://x.com/YieldWire" target="_blank">@YieldWire</a> · <a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a> · <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a></p>
+  </footer>
+
+</div>
+
+<div id="previewBadge">UI PREVIEW · V5 · DEMO DATA</div>
+
+<script>
+const REPO = "Bigmanmarsh/yieldwire";
+const RAW = `https://raw.githubusercontent.com/${REPO}/main/data/`;
+const DAY = 86400000;
+const $ = (id) => document.getElementById(id);
+const usd = (n) => n >= 1e6 ? `$${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n/1e3).toFixed(1)}K` : `$${Math.round(n)}`;
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ICONS = { LEADER_CHANGE:"🔀", APY_JUMP:"📈", APY_COLLAPSE:"📉", TVL_SHIFT:"🌊" };
+const TYPENAMES = { LEADER_CHANGE:"LEADER CHANGE", APY_JUMP:"APY JUMP", APY_COLLAPSE:"APY COLLAPSE", TVL_SHIFT:"TVL SHIFT" };
+
+const COIN_HUES = [152, 205, 262, 330, 42, 220, 100];
+function coinMark(sym) {
+  const t = String(sym).split("-")[0];
+  const init = (t.length > 4 ? t.slice(0, 3) : t).toUpperCase();
+  let h = 0; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997;
+  const hue = COIN_HUES[h % COIN_HUES.length];
+  return `<span class="coin mono" style="color:hsl(${hue},70%,66%);border-color:hsl(${hue},45%,32%)">${init}</span>`;
+}
+function coinImg(sym, logo) {
+  if (logo) return `<img class="coin" src="${logo}" alt="${esc(sym)}" loading="lazy">`;
+  return coinMark(sym);
+}
+document.addEventListener("error", (ev) => {
+  const t = ev.target;
+  if (t && t.tagName === "IMG" && t.classList.contains("coin")) {
+    const m = document.createElement("span");
+    m.className = "coin mono";
+    m.style.color = "var(--dim)";
+    m.textContent = (t.alt || "?").split("-")[0].slice(0, 3).toUpperCase();
+    t.replaceWith(m);
+  }
+}, true);
+
+function spark(hist, w=92, h=26) {
+  if (!hist || hist.length < 2) return `<svg width="${w}" height="${h}"><circle cx="${w/2}" cy="${h/2}" r="2.5" fill="var(--faint)"/></svg>`;
+  const min = Math.min(...hist), max = Math.max(...hist), span = (max - min) || 1;
+  const pts = hist.map((v,i) => `${(i/(hist.length-1)*w).toFixed(1)},${(h-2.5 - (v-min)/span*(h-5)).toFixed(1)}`).join(" ");
+  const up = hist[hist.length-1] >= hist[0];
+  return `<svg width="${w}" height="${h}"><polyline points="${pts}" fill="none" stroke="${up ? 'var(--green)' : 'var(--red)'}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+
+function render(latest, eventsFile) {
+  const now = Date.now();
+  const ageMs = Math.max(0, now - Date.parse(latest.ts));
+  const stale = ageMs > 10 * 60 * 1000;
+  const ageStr = stale ? (ageMs > DAY ? (ageMs/DAY).toFixed(1) + "d" : Math.round(ageMs/60000) + "m") : Math.round(ageMs/1000) + "s";
+
+  $("status").innerHTML =
+    `<span class="live ${stale ? "stale" : ""}"><span class="dot"></span>${stale ? "STALE" : "LIVE"}</span>` +
+    `<span>LAST RUN ${ageStr.toUpperCase()} AGO</span>` +
+    `<span class="status-opt">${latest.pools.length} POOLS</span>` +
+    `<span class="status-opt">${eventsFile.events.length} EVENTS LOGGED</span>`;
+
+  // ticker
+  const tk = latest.pools.slice(0, 30).map(p => {
+    const d = p.apyPct1D;
+    const arrow = d == null ? "" : d > 0.05 ? '<span class="up">▲</span>' : d < -0.05 ? '<span class="down">▼</span>' : "·";
+    return `<span class="tk"><b>${esc(p.symbol)}</b> ${p.apy.toFixed(2)}% ${arrow}</span>`;
+  }).join('<span style="color:var(--line2)">◆</span>');
+  $("tickerTrack").innerHTML = tk + '<span style="color:var(--line2)">◆</span>' + tk + '<span style="color:var(--line2)">◆</span>';
+  $("ticker").classList.remove("hidden");
+
+  // hero
+  $("poolCount").textContent = latest.pools.length;
+  const last = eventsFile.events[0];
+  if (last) {
+    const p = last.pool;
+    const detail =
+      last.type === "LEADER_CHANGE" ? `${last.before.symbol} → <b>${esc(p.symbol)}</b>` :
+      last.type === "TVL_SHIFT" ? `${usd(last.before.tvl)} → <b>${usd(p.tvl)}</b>` :
+      `${last.before.apy.toFixed(2)}% → <b>${p.apy.toFixed(2)}%</b>`;
+    const agoMin = Math.max(1, Math.round((now - Date.parse(last.ts)) / 60000));
+    const agoStr = agoMin < 60 ? agoMin + "m" : agoMin < 1440 ? Math.round(agoMin / 60) + "h" : Math.round(agoMin / 1440) + "d";
+    $("lastEvent").innerHTML =
+      `<span class="lab">LAST EVENT</span><span class="msg">${ICONS[last.type] || "•"} <b>${TYPENAMES[last.type]}</b> · ${esc(p.symbol)} <span class="d">${detail} · ${agoStr} ago · <a href="receipt.html?id=${esc(last.id)}">receipt</a></span></span>`;
+    $("lastEvent").classList.remove("hidden");
+  }
+
+  // strip
+  const last24 = eventsFile.events.filter(e => now - Date.parse(e.ts) < DAY);
+  $("sPools").textContent = latest.pools.length;
+  $("sEvents").textContent = last24.length;
+  $("sLeaders").textContent = last24.filter(e => e.type === "LEADER_CHANGE").length;
+  $("sCollapses").textContent = last24.filter(e => e.type === "APY_COLLAPSE").length;
+  $("sRejected").textContent = latest.rejected.stale + latest.rejected.outlier + latest.rejected.dead;
+
+  // board
+  $("boardTs").textContent = "snapshot " + latest.ts.replace("T"," ").slice(0,16) + " UTC";
+  $("boardBody").innerHTML = latest.pools.slice(0, 10).map((p, i) => {
+    const d = p.apyPct1D;
+    const cls = d == null ? "flat" : d > 0.05 ? "up" : d < -0.05 ? "down" : "flat";
+    return `<tr>
+      <td class="pool nowrap"><span class="rank">${i+1}</span></td>
+      <td class="pool"><span class="pcell">${coinImg(p.symbol, p.logo)}<span class="ptxt"><b>${esc(p.symbol)}</b><span class="proj">${esc(p.project)}</span></span></span></td>
+      <td class="col-spark spark">${spark(p.hist?.apy)}</td>
+      <td class="nowrap num">${p.apy.toFixed(2)}%</td>
+      <td class="col-br nowrap brc">${p.apyBase != null ? p.apyBase.toFixed(2) : "—"} / ${p.apyReward != null ? p.apyReward.toFixed(2) : "—"}</td>
+      <td class="nowrap">${usd(p.tvl)}</td>
+      <td class="nowrap"><span class="chip ${cls}">${d == null ? "—" : (d > 0 ? "+" : "") + d.toFixed(1)}</span></td>
+    </tr>`;
+  }).join("") || '<tr><td colspan="7" style="text-align:center;color:var(--faint);padding:26px">no pools above floor this run</td></tr>';
+  $("boardNote").textContent =
+    `source integrity ${latest.integrity.pass}/${latest.integrity.checked} pools passed apy = apyBase + apyReward · data: DeFiLlama /yields · sparklines: last 24h of 5-min snapshots`;
+
+  // feed
+  const feed = eventsFile.events.slice(0, 20).map(e => {
+    const t = new Date(e.ts);
+    const when = t.toISOString().slice(5,10).replace("-"," ") + " " + t.toISOString().slice(11,16) + " UTC";
+    const p = e.pool;
+    const d = e.delta;
+    let detail;
+    if (e.type === "LEADER_CHANGE") detail = `${esc(e.before.symbol)} <span class="down">${e.before.apy.toFixed(2)}%</span> → <b>${esc(p.symbol)}</b> <span class="${d>=0?'up':'down'}">${p.apy.toFixed(2)}%</span> · TVL ${usd(p.tvl)}`;
+    else if (e.type === "TVL_SHIFT") detail = `${usd(e.before.tvl)} → <b>${usd(p.tvl)}</b> <span class="${d>0?'up':'down'}">(${d>0?'+':''}${d}%)</span> vs ~24h · APY ${p.apy.toFixed(2)}%`;
+    else detail = `${e.before.apy.toFixed(2)}% → <b>${p.apy.toFixed(2)}%</b> <span class="${d>0?'up':'down'}">(${d>0?'+':''}${d}pp)</span> · TVL ${usd(p.tvl)}`;
+    return `<div class="ev">
+      <span class="ic">${coinImg(e.pool.symbol, e.pool.logo)}</span>
+      <span class="body">
+        <span class="top"><b>${esc(p.symbol)}</b><span class="proj">${esc(p.project)}</span><span class="type">${TYPENAMES[e.type]}</span></span>
+        <span class="det">${detail}</span>
+      </span>
+      <span class="meta"><span class="t">${esc(when)}</span><a href="receipt.html?id=${esc(e.id)}">RECEIPT ↗</a></span>
+    </div>`;
+  }).join("");
+  $("feedList").innerHTML = feed || '<p style="color:var(--faint);padding:10px 0">No events yet — the wire is quiet. Events appear the moment a published threshold is crossed.</p>';
+
+  // llm line
+  const L = latest.llm || {};
+  $("llmLine").innerHTML = L.mode === "keyless"
+    ? `Running <b>KEYLESS</b>: no model configured. Messages are pure deterministic templates — every number was computed by the engine.`
+    : `LLM summaries <b>ON</b>: ${L.attempts ?? 0} attempted, <b>${L.rejected ?? 0} rejected</b> by the claim-checker for containing a number not in the source facts.`;
+
+  const daysRunning = Math.max(1, Math.round(ageMs / DAY));
+  $("footerMeta").textContent = `YIELDWIRE v0.1 · ${daysRunning} day${daysRunning>1?"s":""} of public history · last run ${latest.ts.replace("T"," ").slice(0,16)} UTC · $0/month`;
+}
+
+async function boot() {
+  const demo = window.__YIELDWIRE_DEMO__;
+  if (demo) { render(demo.latest, demo.eventsFile); $("previewBadge").style.display = "block"; return; }
+  let latest, eventsFile;
+  try {
+    const [l, e] = await Promise.all([
+      fetch(RAW + "latest.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }),
+      fetch(RAW + "events.json").then(r => r.ok ? r.json() : { events: [] }),
+    ]);
+    latest = l; eventsFile = e;
+  } catch (err) {
+    const el = $("err");
+    el.style.display = "block";
+    el.textContent = "Live data not reachable yet — the agent commits its public history to this repository on every run. If this persists, the agent is down, and this page says so rather than showing stale numbers as live. (error: " + err.message + ")";
+    $("status").innerHTML = '<span class="live stale"><span class="dot"></span>AWAITING FIRST RUN</span>';
+    return;
+  }
+  render(latest, eventsFile);
+  setTimeout(boot, 30000);
+}
+boot();
+</script>
+</body>
+</html>
