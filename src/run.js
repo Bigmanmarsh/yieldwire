@@ -60,6 +60,12 @@ const liveLatestTs = async () => {
   return ts;
 };
 
+// When this job last pushed a data commit (ms epoch). The ONLY pacing signal
+// the loop trusts: pure local arithmetic. Remote reads (HTTP or git) on
+// Actions runners proved unreliable (raw cache frozen at checkout; and the
+// loop's own pushes race any external view), so cadence is held locally.
+let lastSelfCommitMs = 0;
+
 // Self-commit inside Actions (per-cycle append-only history). The workflow's
 // own commit step remains as a safety net (no-op once the loop has committed).
 function gitCommitData(cycleNo) {
@@ -79,6 +85,7 @@ function gitCommitData(cycleNo) {
     p = g(["push", "origin", "HEAD:main"]);
   }
   if (p.status !== 0) { log("self-push FAILED (will retry next cycle): " + (p.stderr || p.stdout).slice(0, 200)); return null; }
+  lastSelfCommitMs = Date.now();
   log(`self-commit: pushed ${sha.slice(0, 7)} (cycle ${cycleNo})`);
   return sha;
 }
@@ -325,6 +332,9 @@ if (REPLAY_AT !== -1) {
 
 // ── Runner: one cycle locally; a paced ~5-min loop inside Actions ────────────
 async function runAll() {
+  // Seed the pacing clock from the checked-out snapshot (last job's commit).
+  const bootTs = readJson("latest.json", null)?.ts;
+  if (bootTs && Number.isFinite(Date.parse(bootTs))) lastSelfCommitMs = Date.parse(bootTs);
   for (let i = 1; i <= LOOP_ITERS; i++) {
     try {
       await runCycle(i);
@@ -335,21 +345,10 @@ async function runAll() {
       log(`cycle ${i} FAILED (loop continues, retry in ~5 min): ${err.message}`);
     }
     if (i < LOOP_ITERS) {
-      const t = await liveLatestTs();
-      const age = t ? Date.now() - Date.parse(t) : 0;
+      const age = lastSelfCommitMs ? Date.now() - lastSelfCommitMs : 0;
       const rem = PACE_MS - age;
-      // TEMP diag: publish exactly what the runner computes before each sleep
-      try {
-        writeJson("pacing-diag.json", {
-          at: new Date().toISOString(), cycle: i,
-          liveTs: t, ageMs: Number.isFinite(age) ? age : `NaN(t=${typeof t}:${t})`,
-          remMs: Number.isFinite(rem) ? rem : "NaN",
-          onDiskTs: readJson("latest.json", null)?.ts || null,
-          paceMs: PACE_MS,
-        });
-      } catch {}
       if (rem > 15000) {
-        log(`pacing: last committed run ${Math.round(age / 1000)}s ago — sleeping ${Math.round(rem / 1000)}s before cycle ${i + 1}`);
+        log(`pacing: last self-commit ${Math.round(age / 1000)}s ago — sleeping ${Math.round(rem / 1000)}s before cycle ${i + 1}`);
         await sleep(rem);
       }
     }
