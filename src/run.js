@@ -37,46 +37,65 @@ const readJson = (name, fallback) => {
 const writeJson = (name, obj) => writeFileSync(join(DATA, name), JSON.stringify(obj, null, 2));
 
 const log = (line) => console.log(`[YIELDWIRE] ${line}`);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function main() {
+// ── Cadence / dedupe (shared by the in-Actions loop and single runs) ─────────
+// Inside GitHub Actions this file runs as a LONG-LIVED LOOP (up to 70 cycles):
+// one full agent cycle, self-commit, sleep, repeat — holding the published
+// ~5-minute cadence from a single trigger. GitHub does not let a workflow's
+// own token re-trigger the workflow, and the scheduler on this account is
+// unreliable, so the loop IS the autonomy. Locally (no GITHUB_ACTIONS) it
+// runs exactly one cycle and never touches git.
+const IS_ACTIONS = !!process.env.GITHUB_ACTIONS;
+const PACE_MS = Number(process.env.YW_PACE_MS) || 5 * 60 * 1000;
+const GUARD_MS = Number(process.env.YW_GUARD_MS) || 4 * 60 * 1000;
+const LOOP_ITERS = IS_ACTIONS ? (Number(process.env.YW_LOOP_ITERS) || 70) : 1;
+const liveLatestTs = async () => {
+  const onDisk = readJson("latest.json", null);
+  let ts = onDisk?.ts || null;
+  try {
+    const r = await fetch(process.env.YW_LIVE_URL || `${SITE_BASE_GH}/data/latest.json`, { signal: AbortSignal.timeout(10000) });
+    if (r.ok) { const j = await r.json(); if (j?.ts) ts = j.ts; }
+  } catch { /* offline → fall back to the checked-out copy */ }
+  return ts;
+};
+
+// Self-commit inside Actions (per-cycle append-only history). The workflow's
+// own commit step remains as a safety net (no-op once the loop has committed).
+function gitCommitData(cycleNo) {
+  const g = (args) => spawnSync("git", args, { cwd: root, encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
+  g(["config", "user.name", "yieldwire[bot]"]);
+  g(["config", "user.email", "yieldwire-agent@users.noreply.github.com"]);
+  g(["add", "data"]);
+  if (g(["diff", "--cached", "--quiet"]).status === 0) { log("self-commit: no data changes this cycle"); return null; }
+  const ts = new Date().toISOString().slice(11, 19);
+  const c = g(["commit", "-m", `agent run #${process.env.GITHUB_RUN_NUMBER || "?"} · ${ts}Z · cycle ${cycleNo}`]);
+  if (c.status !== 0) { log("self-commit FAILED: " + (c.stderr || c.stdout).slice(0, 200)); return null; }
+  const sha = g(["rev-parse", "HEAD"]).stdout.trim();
+  let p = g(["push", "origin", "HEAD:main"]);
+  if (p.status !== 0) {
+    // another writer (human push) raced us — rebase and retry once
+    g(["pull", "--rebase", "origin", "main"]);
+    p = g(["push", "origin", "HEAD:main"]);
+  }
+  if (p.status !== 0) { log("self-push FAILED (will retry next cycle): " + (p.stderr || p.stdout).slice(0, 200)); return null; }
+  log(`self-commit: pushed ${sha.slice(0, 7)} (cycle ${cycleNo})`);
+  return sha;
+}
+
+async function runCycle(cycleNo) {
   const now = new Date();
   const nowMs = now.getTime();
-  log(`run start · ${now.toISOString()}`);
+  log(`cycle ${cycleNo}${LOOP_ITERS > 1 ? "/" + LOOP_ITERS : ""} start · ${now.toISOString()}`);
 
-  // ── Chain pacing (autonomy without depending on the GitHub scheduler) ──
-  // The workflow also fires on push — including the bot's own data commits —
-  // so the run chain is self-sustaining: each commit triggers the next run.
-  // To keep the published ~5-minute cadence (and dedupe fast re-triggers):
-  //   · if the last committed run is < 4 min old → skip (write nothing)
-  //   · otherwise sleep until ~5 min have elapsed, then re-verify nobody
-  //     else committed while we slept (schedule/manual runs dedupe too)
-  const PACE_MS = Number(process.env.YW_PACE_MS) || 5 * 60 * 1000;
-  const GUARD_MS = Number(process.env.YW_GUARD_MS) || 4 * 60 * 1000;
-  const liveLatestTs = async () => {
-    const onDisk = readJson("latest.json", null);
-    let ts = onDisk?.ts || null;
-    try {
-      const r = await fetch(process.env.YW_LIVE_URL || `${SITE_BASE_GH}/data/latest.json`, { signal: AbortSignal.timeout(10000) });
-      if (r.ok) { const j = await r.json(); if (j?.ts) ts = j.ts; }
-    } catch { /* offline → fall back to the checked-out copy */ }
-    return ts;
-  };
+  // Dedupe guard: if another cycle (this loop or a fresh trigger) committed
+  // less than 4 min ago, do no work this cycle — the loop paces onward.
   const prevTs = await liveLatestTs();
   if (prevTs) {
     const ageMs = nowMs - Date.parse(prevTs);
     if (ageMs < GUARD_MS) {
-      log(`chain guard: last run ${Math.round(ageMs / 1000)}s ago (< ${GUARD_MS / 60000} min) — skipping, writing nothing`);
-      return;
-    }
-    const waitMs = PACE_MS - ageMs;
-    if (waitMs > 10000) {
-      log(`chain pacing: last run ${Math.round(ageMs / 1000)}s ago — sleeping ${Math.round(waitMs / 1000)}s to hold the ~5-minute cadence`);
-      await new Promise((r) => setTimeout(r, waitMs));
-      const ts2 = await liveLatestTs();
-      if (ts2 && Date.parse(ts2) > Date.parse(prevTs) + 60000) {
-        log(`chain dedupe: another run committed while pacing (${ts2}) — skipping, writing nothing`);
-        return;
-      }
+      log(`dedupe guard: last committed run ${Math.round(ageMs / 1000)}s ago (< ${Math.round(GUARD_MS / 60000)} min) — skipping work this cycle`);
+      return false;
     }
   }
 
@@ -243,7 +262,10 @@ async function main() {
   }
   writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm, crosscheckCache: state.crosscheckCache, xrefStats: state.xrefStats });
 
-  log(`run done · ${pools.length} pools · ${events.length} events · history committed by next workflow step`);
+  // In Actions: commit this cycle's history ourselves (append-only, per cycle).
+  if (IS_ACTIONS) gitCommitData(cycleNo);
+  log(`cycle ${cycleNo} done · ${pools.length} pools · ${events.length} event(s)`);
+  return true;
 }
 
 // ── Replay mode ──────────────────────────────────────────────────────────────
@@ -301,7 +323,31 @@ if (REPLAY_AT !== -1) {
   replay(sha);
 }
 
-main().catch((err) => {
+// ── Runner: one cycle locally; a paced ~5-min loop inside Actions ────────────
+async function runAll() {
+  for (let i = 1; i <= LOOP_ITERS; i++) {
+    try {
+      await runCycle(i);
+    } catch (err) {
+      // A failed cycle must not kill the loop (public repo, free minutes):
+      // log loudly and retry next cycle (~5 min). Persistent source failure
+      // shows up as a STALE badge on the site — honest, by design.
+      log(`cycle ${i} FAILED (loop continues, retry in ~5 min): ${err.message}`);
+    }
+    if (i < LOOP_ITERS) {
+      const t = await liveLatestTs();
+      const age = t ? Date.now() - Date.parse(t) : 0;
+      const rem = PACE_MS - age;
+      if (rem > 15000) {
+        log(`pacing: last committed run ${Math.round(age / 1000)}s ago — sleeping ${Math.round(rem / 1000)}s before cycle ${i + 1}`);
+        await sleep(rem);
+      }
+    }
+  }
+  if (LOOP_ITERS > 1) log(`loop complete after ${LOOP_ITERS} cycles — job ends; next trigger starts the next ~6h of coverage`);
+}
+
+runAll().catch((err) => {
   log(`RUN FAILED · ${err.message}`);
   process.exit(1);
 });
