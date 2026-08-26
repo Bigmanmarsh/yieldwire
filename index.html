@@ -121,6 +121,13 @@
   .chip.flat{color:var(--dim);background:rgba(139,153,172,.08)}
   .brc{color:var(--faint);font-size:11.5px}
   #boardNote{color:var(--faint);font-size:12px;margin-top:12px;font-family:var(--mono)}
+  /* cross-check section */
+  .xcmeta{color:var(--faint);font-size:12px;margin-top:12px;font-family:var(--mono);max-width:760px;line-height:1.7}
+  .flagbox{margin-top:16px;border:1px solid #574a1e;background:linear-gradient(180deg,rgba(255,197,61,.07),transparent);border-radius:12px;padding:18px 20px}
+  .flagbox .t{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--amber);letter-spacing:.04em}
+  .flagbox p{color:var(--dim);font-size:13px;margin-top:8px;font-family:var(--mono);line-height:1.7}
+  .flagbox p b{color:var(--text)}
+  .flagbox a{color:var(--amber)}
   @media(max-width:760px){.col-spark,.col-br{display:none}}
 
   /* ── feed ─ */
@@ -184,7 +191,7 @@
   <a class="brand" href="#" style="color:var(--text);text-decoration:none">YIELD<span>WIRE</span></a>
   <span id="status">connecting…</span>
   <nav class="navlinks">
-    <a href="#board">Board</a><a href="#feed">Feed</a><a href="#how">How it works</a>
+    <a href="#board">Board</a><a href="#crosscheck">Cross-check</a><a href="#feed">Feed</a><a href="#how">How it works</a>
     <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a><a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a>
   </nav>
 </div></div>
@@ -224,6 +231,21 @@
       </table>
     </div>
     <p id="boardNote"></p>
+  </section>
+
+  <section id="crosscheck" class="hidden">
+    <div class="sechead"><h2>On-chain cross-check — the wire reads the contracts</h2><span class="secnote" id="xcNote"></span></div>
+    <div class="tblwrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left">Top pool</th><th>On-chain TVL</th><th>DeFiLlama</th><th>Δ</th>
+          <th style="text-align:left">Peg flags</th><th>Block</th>
+        </tr></thead>
+        <tbody id="xcBody"></tbody>
+      </table>
+    </div>
+    <div id="xcFlags"></div>
+    <p class="xcmeta" id="xcMeta"></p>
   </section>
 
   <section id="feed">
@@ -399,6 +421,43 @@ function render(latest, eventsFile) {
   }).join("") || '<tr><td colspan="7" style="text-align:center;color:var(--faint);padding:26px">no pools above floor this run</td></tr>';
   $("boardNote").textContent =
     `source integrity ${latest.integrity.pass}/${latest.integrity.checked} pools passed apy = apyBase + apyReward · data: DeFiLlama /yields · sparklines: last 24h of 5-min snapshots`;
+
+  // on-chain cross-check (top pools vs pool contracts)
+  const xc = latest.crosscheck;
+  if (xc && xc.pools && xc.pools.length) {
+    $("crosscheck").classList.remove("hidden");
+    const s = xc.summary || {};
+    $("xcNote").textContent = `block ${xc.blockNumber || "?"} · ${s.verified ?? 0}/${s.attempted ?? 0} supported top pools verified · read-only`;
+    const tok = (n, sy) => `${n >= 1e6 ? (n/1e6).toFixed(2) + "M" : n >= 1e3 ? (n/1e3).toFixed(1) + "K" : Math.round(n)} ${esc(sy)}`;
+    $("xcBody").innerHTML = xc.pools.map((x) => {
+      if (x.status === "verified") {
+        const devCls = x.devPct <= 5 ? "up" : x.devPct <= 15 ? "flat" : "down";
+        const ks = Object.keys(x.prices || {});
+        const res = ks.length === 2 ? `<span class="brc"> &nbsp;reserves ${tok(x.reserve0, ks[0])} + ${tok(x.reserve1, ks[1])}</span>` : "";
+        const flags = (x.pegFlags || []).map(f => `⚠ <b>${esc(f.symbol)}</b> $${f.price.toFixed(4)} (${f.offPegPct > 0 ? "+" : ""}${f.offPegPct}% vs ${f.peg})`).join(" &nbsp;·&nbsp; ") || "—";
+        return `<tr>
+          <td class="pool"><b>${esc(x.symbol)}</b><span class="proj">${esc(x.project)}</span></td>
+          <td>${usd(x.onchainTvl)}${res}</td>
+          <td>${usd(x.dfdTvl)}</td>
+          <td><span class="chip ${devCls}">${x.devPct}%</span></td>
+          <td style="text-align:left;font-size:12px;color:${(x.pegFlags || []).length ? "var(--amber)" : "var(--faint)"}">${flags}</td>
+          <td class="nowrap"><a href="${xc.verifyAt}" target="_blank">…${String(xc.blockNumber).slice(-5)}</a></td>
+        </tr>`;
+      }
+      return `<tr>
+        <td class="pool"><b>${esc(x.symbol)}</b><span class="proj">${esc(x.project)}</span></td>
+        <td>—</td><td>${usd(x.dfdTvl || 0)}</td><td>—</td>
+        <td style="text-align:left;color:var(--faint);font-size:12px">awaiting on-chain coverage</td><td>—</td>
+      </tr>`;
+    }).join("");
+    const allFlags = xc.pools.flatMap((x) => (x.pegFlags || []).map((f) => ({ ...f, pool: x.symbol })));
+    $("xcFlags").innerHTML = allFlags.length ? `<div class="flagbox">
+      <div class="t">⚠ PEG DEVIATION — a “stable” token is trading away from its peg</div>
+      <p>${allFlags.map(f => `<b>${esc(f.pool)}</b>: ${esc(f.symbol)} at <b>$${f.price.toFixed(4)}</b> — ${Math.abs(f.offPegPct).toFixed(1)}% ${f.offPegPct < 0 ? "below" : "above"} its ${f.peg} peg. An APY quoted on this token is not ${f.peg === "€1" ? "EUR" : "USD"} yield at face value.`).join(" ")} A stablecoin label is a claim, not a fact — this is the check that exists to test that claim, read straight from the pool contract plus an independent price index.</p>
+    </div>` : "";
+    $("xcMeta").textContent = "Method: getReserves() read directly from the pool contract (read-only, no wallet, $0) via public Base RPC; TVL = reserves × token price (CoinGecko; hard $-pegged tokens valued at $1 by definition). v1 on-chain coverage: aerodrome-v1 (vAMM/sAMM). Other products are labeled awaiting — never silently skipped.";
+    $("boardNote").textContent += ` · on-chain cross-check: ${s.verified ?? 0}/${s.attempted ?? 0} supported top pools at block ${xc.blockNumber}`;
+  }
 
   // feed
   const feed = eventsFile.events.slice(0, 20).map(e => {

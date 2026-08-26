@@ -54,6 +54,11 @@
   .seal .big{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green);letter-spacing:.03em;margin-top:12px}
   .seal p{color:var(--dim);font-size:13px;margin-top:10px;max-width:480px;margin-left:auto;margin-right:auto}
   .src{font-size:12px;color:var(--faint);word-break:break-all}
+  .vd{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+  .vd.ok{color:var(--green);background:rgba(61,220,132,.1);border:1px solid var(--green-dim)}
+  .vd.warn{color:#ffc53d;background:rgba(255,197,61,.08);border:1px solid #574a1e}
+  .vd.na{color:var(--faint);background:rgba(139,153,172,.08);border:1px solid var(--line2)}
+  .cld{display:block;color:var(--dim);font-size:12px;line-height:1.6;margin-top:4px}
   a{color:#5aa9ff}
   #missing{max-width:660px;margin:0 auto;color:var(--dim);font-family:var(--mono);font-size:14px}
   .hidden{display:none}
@@ -135,8 +140,19 @@ function render(e) {
       <div class="row"><span class="k">Fields used</span><span class="v src">${(e.source?.fields || []).map(esc).join(" · ")}</span></div>
       <div class="row"><span class="k">Fetched at</span><span class="v">${esc(e.source?.fetchedAt ?? e.ts)}</span></div>
       <div class="row"><span class="k">Computation</span><span class="v">Plain arithmetic on the snapshot at this timestamp, vs the previous snapshot. No model involved.</span></div>
+      ${e.crosscheckEntry?.blockNumber ? `<div class="row"><span class="k">On-chain cross-check</span><span class="v">pool reserves read at block ${e.crosscheckEntry.blockNumber} → ${e.crosscheckEntry.onchainTvl != null ? usd(e.crosscheckEntry.onchainTvl) + " (Δ " + e.crosscheckEntry.devPct + "% vs DeFiLlama)" : "reserves logged"} · <a href="https://basescan.org/block/${e.crosscheckEntry.blockNumber}" target="_blank">basescan block ↗</a></span></div>` : ""}
       <p class="note">This event was committed to the public git history at its timestamp. The <a href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank">GitHub Actions run log</a> is an independent record; re-running the engine on the snapshot at this timestamp reproduces this event exactly.</p>
     </div>
+
+    ${e.crossRef ? `<div class="card">
+      <h2>Claim cross-reference — independent sources</h2>
+      ${e.crossRef.claims.map(c => {
+        const cls = /^(CORROBORATED|INDEPENDENT-SOURCE-MATCH)$/.test(c.verdict) ? "ok" : c.verdict === "UNVERIFIED" ? "na" : "warn";
+        return `<div class="row"><span class="k">${esc(c.id)}<br><span style="color:var(--dim)">${esc(c.claim)}</span></span><span class="v"><span class="vd ${cls}">${esc(c.verdict)}</span><span class="cld">${esc(c.detail)}${c.link ? ` · <a href="${esc(c.link)}" target="_blank">source ↗</a>` : ""}</span></span></div>`;
+      }).join("")}
+      ${e.crossRef.sources?.length ? `<p class="note">Independent sources consulted: ${e.crossRef.sources.map(s => `<a href="${esc(s.url)}" target="_blank">${esc(s.name)}</a>`).join(" · ")}</p>` : ""}
+      <p class="note">Verification is deterministic — no model writes or checks these verdicts. A claim that cannot be checked this run is labeled UNVERIFIED, never dropped.</p>
+    </div>` : ""}
 
     ${e.summary ? `<div class="card">
       <h2>One-line summary (optional layer)</h2>

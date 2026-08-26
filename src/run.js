@@ -22,6 +22,8 @@ import {
 } from "./engine.js";
 import { summarize } from "./llm.js";
 import { send, alertMessage, digestMessage } from "./telegram.js";
+import { crosscheckPools } from "./crosscheck.js";
+import { crossReference } from "./xref.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(root, "data");
@@ -80,6 +82,40 @@ async function main() {
     log("events: none (no threshold crossed since last run)");
   }
 
+  // 4.5 ── On-chain cross-check: read reserves straight from pool contracts
+  // (decorative + data-quality; read-only, $0, can never fail the run)
+  let crosscheck = { pools: [], summary: { attempted: 0, verified: 0, pegFlags: 0, skipped: 0 }, note: "unavailable this run" };
+  try {
+    crosscheck = await crosscheckPools(top.slice(0, 10), state.crosscheckCache || {});
+    state.crosscheckCache = crosscheck.cache;
+    delete crosscheck.cache;
+  } catch (e) {
+    log("crosscheck failed (non-fatal): " + e.message);
+  }
+  const xcByPool = new Map(crosscheck.pools.map((x) => [x.poolId, x]));
+
+  // 4.6 ── Claim cross-reference for each event (independent sources; no LLM)
+  let priceMap = {};
+  try { priceMap = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "coin-prices.json"), "utf8")); } catch {}
+  for (const ev of events) {
+    const xcEntry = xcByPool.get(ev.pool?.id) || null;
+    ev.crosscheckEntry = xcEntry ? { ...xcEntry, blockNumber: crosscheck.blockNumber, blockTs: crosscheck.blockTs } : null;
+    ev.crossRef = await crossReference(ev, pools, priceMap).catch((e) => {
+      log("xref failed for " + (ev.id || "?") + " (non-fatal): " + e.message);
+      return { claims: [{ id: "ALL", claim: "all claims", verdict: "UNVERIFIED", detail: "cross-reference failed this run: " + e.message.slice(0, 60), via: null, link: null }], sources: [], checkedAt: ev.ts };
+    });
+  }
+  const xrefStats = state.xrefStats || { events: 0, corroborated: 0, deviations: 0, unverified: 0 };
+  for (const ev of events) {
+    xrefStats.events += 1;
+    for (const c of ev.crossRef.claims) {
+      if (c.verdict === "CORROBORATED" || c.verdict === "INDEPENDENT-SOURCE-MATCH") xrefStats.corroborated += 1;
+      else if (c.verdict === "PEG DEVIATION" || c.verdict === "DEVIATION") xrefStats.deviations += 1;
+      else if (c.verdict === "UNVERIFIED") xrefStats.unverified += 1;
+    }
+  }
+  state.xrefStats = xrefStats;
+
   // 5 ── Persist public history
   const nextWindow = updateWindow24h(window24h, pools, nowMs);
   const today = now.toISOString().slice(0, 10);
@@ -100,6 +136,8 @@ async function main() {
     integrity,
     leader: leaderNow,
     llm: { mode: process.env.GEMINI_API_KEY ? "on" : "keyless", ...state.llm },
+    crosscheck,
+    xrefStats,
   });
   writeJson("events.json", eventsFile);
   writeJson("window24h.json", nextWindow);
@@ -149,7 +187,7 @@ async function main() {
     }
     state.lastDigestDate = today;
   }
-  writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm });
+  writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm, crosscheckCache: state.crosscheckCache, xrefStats: state.xrefStats });
 
   log(`run done · ${pools.length} pools · ${events.length} events · history committed by next workflow step`);
 }

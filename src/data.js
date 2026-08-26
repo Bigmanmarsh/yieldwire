@@ -24,6 +24,7 @@ export const FIELDS_USED = [
   "symbol",
   "stablecoin",
   "tvlUsd",
+  "underlyingTokens",
   "apy",
   "apyBase",
   "apyReward",

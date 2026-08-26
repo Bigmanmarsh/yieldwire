@@ -48,6 +48,7 @@ export function normalize(raw, T = THRESHOLDS) {
       apyBase: typeof p.apyBase === "number" ? p.apyBase : null,
       apyReward: typeof p.apyReward === "number" ? p.apyReward : null,
       apyPct1D: typeof p.apyPct1D === "number" ? p.apyPct1D : null,
+      underlyingTokens: p.underlyingTokens ?? null, // on-chain cross-check input (published, documented)
     });
   }
 
