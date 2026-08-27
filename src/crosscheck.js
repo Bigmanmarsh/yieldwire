@@ -103,7 +103,7 @@ export async function crosscheckPools(pools, cache = {}) {
     lastFactories: cache.lastFactories || 0,
   };
 
-  let blockNumber = null, blockTs = null;
+  let blockNumber = null, blockHex = null, blockTs = null;
   try {
     let bn;
     for (const url of RPCS) {
@@ -114,7 +114,8 @@ export async function crosscheckPools(pools, cache = {}) {
       } catch { await sleep(200); }
     }
     if (bn) {
-      blockNumber = BigInt(bn).toString();
+      blockNumber = BigInt(bn).toString(); // decimal, for display + BaseScan links
+    blockHex = bn; // hex, for eth_call (RPCs require hex block numbers)
       const r = await fetch(RPCS[0], { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_getBlockByNumber", params: [bn, false] }), signal: AbortSignal.timeout(12000) }).catch(() => null);
       const j = r ? await r.json().catch(() => null) : null;
       blockTs = j?.result?.timestamp ? new Date(Number(j.result.timestamp) * 1000).toISOString() : null;
@@ -130,7 +131,7 @@ export async function crosscheckPools(pools, cache = {}) {
     // ── factory list (cached 24h)
     if (!cacheOut.factories || Date.now() - cacheOut.lastFactories > 86400000) {
       try {
-        const raw = await ethCall(FACTORY_REGISTRY, SEL.pfList, blockNumber);
+        const raw = await ethCall(FACTORY_REGISTRY, SEL.pfList, blockHex);
         const words = raw.slice(2).match(/.{64}/g);
         const n = Number(BigInt("0x" + words[1]));
         const fs = [];
@@ -190,7 +191,7 @@ export async function crosscheckPools(pools, cache = {}) {
           for (const f of cacheOut.factories) {
             for (const [a, b] of [[t0, t1], [t1, t0]]) {
               try {
-                const w = await ethCall(f, SEL.getPoolStable + pad32(a) + pad32(b) + "1".padStart(64, "0"), blockNumber);
+                const w = await ethCall(f, SEL.getPoolStable + pad32(a) + pad32(b) + "1".padStart(64, "0"), blockHex);
                 const a2 = "0x" + w.slice(-40);
                 if (!isZeroAddr(a2) && a2 !== "0x" + "0".repeat(40)) { poolAddr = a2; break; }
               } catch { /* try next */ }
@@ -200,7 +201,7 @@ export async function crosscheckPools(pools, cache = {}) {
             if (!poolAddr) {
               for (const fee of FEES_TO_TRY) {
                 try {
-                  const w = await ethCall(f, SEL.getPoolFee + pad32(t0) + pad32(t1) + fee.toString(16).padStart(64, "0"), blockNumber);
+                  const w = await ethCall(f, SEL.getPoolFee + pad32(t0) + pad32(t1) + fee.toString(16).padStart(64, "0"), blockHex);
                   const a2 = "0x" + w.slice(-40);
                   if (!isZeroAddr(a2) && a2 !== "0x" + "0".repeat(40)) { poolAddr = a2; break; }
                 } catch { /* try next */ }
@@ -216,7 +217,7 @@ export async function crosscheckPools(pools, cache = {}) {
         entry.basescan = `https://basescan.org/address/${poolAddr}`;
 
         // reserves
-        const res = await ethCall(poolAddr, SEL.getReserves, blockNumber);
+        const res = await ethCall(poolAddr, SEL.getReserves, blockHex);
         const words = res.slice(2).match(/.{64}/g);
         const r0 = Number(BigInt("0x" + words[0]));
         const r1 = Number(BigInt("0x" + words[1]));
@@ -225,7 +226,7 @@ export async function crosscheckPools(pools, cache = {}) {
         // decimals (cached per token address)
         const dec = async (addr) => {
           if (cacheOut.decimals[addr]) return cacheOut.decimals[addr];
-          const d = Number(BigInt("0x" + (await ethCall(addr, SEL.decimals, blockNumber)).slice(-40)));
+          const d = Number(BigInt("0x" + (await ethCall(addr, SEL.decimals, blockHex)).slice(-40)));
           cacheOut.decimals[addr] = d;
           await sleep(PACE_MS);
           return d;
