@@ -2,6 +2,57 @@
   "events": [
     {
       "type": "TVL_SHIFT",
+      "poolId": "14170877-8941-4c7d-b12c-06517c70f1e7",
+      "pool": {
+        "id": "14170877-8941-4c7d-b12c-06517c70f1e7",
+        "project": "morpho-blue",
+        "symbol": "ETHENAUSDC",
+        "tvl": 30671219,
+        "apy": 4.18749,
+        "apyBase": 4.18749,
+        "apyReward": 0,
+        "apyPct1D": 0.11499,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 45675526,
+        "ts": 1787792198371
+      },
+      "after": {
+        "tvl": 30671219
+      },
+      "delta": -32.85,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0010",
+      "ts": "2026-08-27T08:23:24.305Z",
+      "factLine": "ETHENAUSDC (morpho-blue) on Base: TVL moved from $45.7M to $30.7M (-32.85% vs ~24h ago). APY is 4.18749%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-27T08:23:24.305Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-27T08-23-24.json"
+    },
+    {
+      "type": "TVL_SHIFT",
       "poolId": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
       "pool": {
         "id": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
