@@ -1,13 +1,14 @@
 {
-  "seq": 8,
+  "seq": 9,
   "cooldowns": {
     "APY_COLLAPSE:fbce5857-69c4-4142-938b-62bdc9444967": 1787794029160,
     "APY_JUMP:fbce5857-69c4-4142-938b-62bdc9444967": 1787797501334,
-    "APY_JUMP:062ba2ef-c132-4989-8e67-0ea2ebd37888": 1787801135755
+    "APY_JUMP:062ba2ef-c132-4989-8e67-0ea2ebd37888": 1787801135755,
+    "TVL_SHIFT:7e0661bf-8cf3-45e6-9424-31916d4c7b84": 1787815669012
   },
   "lastDigestDate": null,
   "llm": {
-    "attempts": 8,
+    "attempts": 9,
     "rejected": 0
   },
   "crosscheckCache": {
@@ -30,10 +31,10 @@
     "lastFactories": 1787782209496
   },
   "xrefStats": {
-    "events": 8,
+    "events": 9,
     "corroborated": 8,
     "deviations": 0,
-    "unverified": 12
+    "unverified": 13
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
@@ -47,6 +48,7 @@
     "FXUSD": "https://coin-images.coingecko.com/coins/images/36202/large/fxUSD.jpg?1710833113",
     "EUSD": "https://coin-images.coingecko.com/coins/images/28445/large/0xa0d69e286b938e21cbf7e51d71f6a4c8918f482f.png?1696527441",
     "SUSDAI": "https://coin-images.coingecko.com/coins/images/55861/large/sUSDai_Token_Full_Glyph.png?1755229072",
-    "YOUSD": "https://coin-images.coingecko.com/coins/images/55386/large/yoUSD.png?1745708461"
+    "YOUSD": "https://coin-images.coingecko.com/coins/images/55386/large/yoUSD.png?1745708461",
+    "SYRUPUSDC": "https://coin-images.coingecko.com/coins/images/54658/large/syrupUSDC.png?1761824955"
   }
 }
