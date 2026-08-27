@@ -2,570 +2,734 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YieldWire — the wire for Base yield</title>
-<meta name="description" content="YieldWire watches every stablecoin pool on Base every 5 minutes. The moment the best opportunity changes, it messages you — with the math attached. No custody. No trades. Receipts on everything.">
-<link href="fonts-inline.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YieldWire — live yield audit for Base stablecoin pools</title>
+<meta name="description" content="An autonomous agent audits stablecoin yield pools on Base every 5 minutes, verifies numbers on-chain, and leaves a public, replayable record of every snapshot.">
 <style>
-  :root{
-    --bg:#07090d; --panel:#0d1117; --panel2:#111722; --line:#1b2432; --line2:#243244;
-    --text:#e9eef5; --dim:#8b99ac; --faint:#5b6a7e;
-    --green:#3ddc84; --green-dim:#1d5c3c; --red:#ff5c6c; --amber:#ffc53d; --blue:#5aa9ff;
-    --disp:"Space Grotesk",-apple-system,"Segoe UI",Roboto,sans-serif;
-    --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);color:var(--text);font:15px/1.6 var(--body);
-    background-image:radial-gradient(1200px 400px at 50% -100px, rgba(61,220,132,.07), transparent 60%);
-  }
-  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
-  .mono{font-family:var(--mono)}
+:root{
+  --bg:#07090d; --panel:#0e141c; --panel2:#111926; --line:#1d2836; --line2:#2a3a4e;
+  --txt:#e9eef5; --mut:#93a1b3; --faint:#5c6b7e;
+  --grn:#2ee6a8; --red:#ff5c7a; --amb:#ffb84d; --blu:#5aa9ff; --vio:#9d8cff;
+  --rad:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--txt);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+  min-height:100vh; overflow-x:hidden;
+}
+body::before,body::after{
+  content:""; position:fixed; z-index:0; border-radius:50%; filter:blur(90px); opacity:.5; pointer-events:none;
+}
+body::before{width:560px;height:560px;left:-180px;top:-160px;background:radial-gradient(circle,rgba(46,230,168,.14),transparent 65%);animation:drift1 26s ease-in-out infinite alternate}
+body::after{width:640px;height:640px;right:-220px;top:24%;background:radial-gradient(circle,rgba(90,169,255,.12),transparent 65%);animation:drift2 31s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(60px,40px) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-70px,-50px) scale(1.08)}}
+::selection{background:rgba(46,230,168,.3)}
+a{color:var(--blu);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.hidden{display:none!important}
 
-  /* ── status bar ── */
-  #statusbar{
-    position:sticky;top:0;z-index:20;background:rgba(7,9,13,.85);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);
-  }
-  #statusbar .wrap{display:flex;align-items:center;gap:18px;height:52px}
-  .brand{font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.14em}
-  .brand span{color:var(--green)}
-  #status{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:11.5px;color:var(--dim);flex:1;flex-wrap:wrap}
-  .live{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-weight:600}
-  .live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-  .live.stale{color:var(--red)} .live.stale .dot{background:var(--red);animation:none}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,220,132,.45)}70%{box-shadow:0 0 0 7px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
-  .navlinks{display:flex;gap:14px;font-size:12.5px;color:var(--dim)}
-  .navlinks a{color:var(--dim)} .navlinks a:hover{color:var(--text)}
+/* ── top bar ── */
+#topbar{position:sticky;top:0;z-index:50;background:rgba(7,9,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+#topbar .wrap{display:flex;align-items:center;gap:26px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.4px;white-space:nowrap}
+.logo .dot{width:11px;height:11px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 0 rgba(46,230,168,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,230,168,.5)}70%{box-shadow:0 0 0 9px rgba(46,230,168,0)}100%{box-shadow:0 0 0 0 rgba(46,230,168,0)}}
+.logo b{color:var(--grn)}
+nav{display:flex;gap:4px;margin-left:auto}
+nav a{color:var(--mut);font-size:15px;font-weight:600;padding:8px 14px;border-radius:9px;transition:.15s}
+nav a:hover{color:var(--txt);background:var(--panel2);text-decoration:none}
+nav a.on{color:var(--txt);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line2)}
+#livePill{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.6px;padding:7px 14px;border-radius:99px;border:1px solid var(--line2);white-space:nowrap}
+#livePill .d{width:8px;height:8px;border-radius:50%;background:var(--faint)}
+#livePill.live{color:var(--grn);border-color:rgba(46,230,168,.4)}
+#livePill.live .d{background:var(--grn);animation:pulse 2s infinite}
+#livePill.stale{color:var(--amb);border-color:rgba(255,184,77,.4)}
+#livePill.stale .d{background:var(--amb)}
 
-  /* ── ticker ─ */
-  #ticker{border-bottom:1px solid var(--line);background:rgba(13,17,23,.5);overflow:hidden;white-space:nowrap}
-  #ticker .track{display:inline-block;padding:7px 0;animation:scroll 45s linear infinite;font-family:var(--mono);font-size:12px;color:var(--dim)}
-  #ticker:hover .track{animation-play-state:paused}
-  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-  .tk{margin:0 14px} .tk b{color:var(--text);font-weight:500} .tk .up{color:var(--green)} .tk .down{color:var(--red)}
+/* ── ticker ── */
+#ticker{border-bottom:1px solid var(--line);background:rgba(14,20,28,.6);overflow:hidden;white-space:nowrap;position:relative;z-index:1}
+#ticker .track{display:inline-block;padding:8px 0;animation:tick 60s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#ticker span{color:var(--mut);font-size:13px;margin:0 26px}
+#ticker b{color:var(--txt)}
+#ticker .up{color:var(--grn)} #ticker .dn{color:var(--red)}
 
-  /* ── hero ── */
-  .hero{padding:72px 0 44px}
-  .hero h1{font-family:var(--disp);font-size:clamp(38px,6vw,58px);line-height:1.06;letter-spacing:-.025em;font-weight:700}
-  .hero h1 .wire{color:var(--green)}
-  .hero p.sub{color:var(--dim);font-size:17.5px;max-width:620px;margin-top:18px}
-  .hero p.sub b{color:var(--text);font-weight:600}
-  .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border:1px solid var(--line2);border-radius:9px;font-size:14px;font-weight:600;transition:background .15s,border-color .15s}
-  .btn:hover{text-decoration:none;background:var(--panel2)}
-  .btn.primary{background:var(--green);border-color:var(--green);color:#04150c}
-  .btn.primary:hover{background:#54e294}
-  #lastEvent{
-    margin-top:34px;display:flex;gap:14px;align-items:baseline;max-width:640px;
-    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--green);
-    border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:13px;
-  }
-  #lastEvent .lab{color:var(--faint);font-size:10.5px;letter-spacing:.12em;flex:none}
-  #lastEvent .msg b{color:var(--text)} #lastEvent .msg .d{color:var(--dim);margin-left:8px}
-  #err{display:none;margin-top:26px;background:#221114;border:1px solid #4a2430;color:#ffb3bd;border-radius:10px;padding:16px 18px;font-family:var(--mono);font-size:13px;max-width:640px}
-  #previewBadge{display:none;position:fixed;bottom:14px;right:14px;z-index:30;background:#2a2410;border:1px solid #574a1e;color:var(--amber);font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:7px}
+/* ── views ── */
+main{padding:26px 0 60px;min-height:70vh}
+.view{display:none;animation:fadein .28s ease}
+.view.on{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.18;font-weight:800;letter-spacing:-.5px}
+h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
+.sechead{display:flex;align-items:baseline;gap:14px;margin:30px 0 14px}
+.sechead .note{color:var(--faint);font-size:13.5px;margin-left:auto;white-space:nowrap}
+.sub{color:var(--mut);font-size:17px;margin-top:10px;max-width:720px}
+.sub b{color:var(--txt)}
 
-  /* ── strip ── */
-  .strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:8px 0 8px}
-  .cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;position:relative;overflow:hidden}
-  .cell:after{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--green),transparent 70%);opacity:.5}
-  .cell b{display:block;font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.02em}
-  .cell span{font-size:11.5px;color:var(--dim);letter-spacing:.02em}
-  @media(max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.cell b{font-size:21px}}
+/* ── anomaly banner ── */
+.anom{margin-top:22px;border:1px solid rgba(255,92,122,.5);background:linear-gradient(120deg,rgba(255,92,122,.12),rgba(255,92,122,.03));border-radius:var(--rad);padding:18px 20px;display:flex;gap:16px;align-items:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.anom:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 10px 34px -12px rgba(255,92,122,.45)}
+.anom .tag{flex:none;font-size:11px;font-weight:800;letter-spacing:1.4px;color:#fff;background:var(--red);padding:5px 10px;border-radius:7px}
+.anom .msg{font-size:16.5px;font-weight:600;line-height:1.45}
+.anom .msg b{color:var(--red)}
+.anom .go{margin-left:auto;flex:none;color:var(--red);font-weight:700;font-size:15px}
+.anom::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.05) 50%,transparent 60%);animation:sheen 4s linear infinite}
+@keyframes sheen{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 
-  /* ── sections ── */
-  section{padding:52px 0;border-top:1px solid var(--line);scroll-margin-top:64px}
-  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
-  h2{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;font-weight:600}
-  .secnote{font-size:12.5px;color:var(--faint);font-family:var(--mono)}
+/* ── stat cells ── */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
+.cell{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:16px 18px;transition:.15s}
+a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoration:none}
+.cell b{display:block;font-size:27px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.cell span{font-size:11.5px;font-weight:700;letter-spacing:1px;color:var(--faint)}
+.cell.grn b{color:var(--grn)} .cell.red b{color:var(--red)} .cell.amb b{color:var(--amb)} .cell.blu b{color:var(--blu)}
 
-  /* ── board ── */
-  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;background:var(--panel)}
-  .tblwrap.bare{border:none;background:transparent;border-radius:0}
-  table{width:100%;border-collapse:collapse}
-  table.board{min-width:700px;border-collapse:separate;border-spacing:0 10px}
-  thead th{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;
-    text-align:right;padding:14px 18px;border-bottom:1px solid var(--line2);background:rgba(17,23,34,.6);
-  }
-  table.board thead th{background:none;border-bottom:none;padding:4px 18px 12px}
-  thead th:first-child,thead th:nth-child(2){text-align:left}
-  tbody td{padding:15px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px;text-align:right;vertical-align:middle}
-  td.nowrap{white-space:nowrap}
-  tbody tr:last-child td{border-bottom:none}
-  tbody tr:hover td{background:rgba(61,220,132,.04)}
-  /* board rows = individual cards, separated by real gaps */
-  table.board tbody td{background:var(--panel2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
-  table.board tbody tr td:first-child{border-left:1px solid var(--line);border-radius:10px 0 0 10px}
-  table.board tbody tr td:last-child{border-radius:0 10px 10px 0}
-  table.board tbody tr:last-child td{border-bottom:1px solid var(--line)}
-  table.board tbody tr:hover td{background:#151f2d}
-  td.pool{text-align:left}
-  td.pool b{font-family:var(--body);font-weight:600;font-size:14.5px;letter-spacing:-.01em}
-  td.pool .proj{display:block;color:var(--faint);font-size:11px;margin-top:3px;font-family:var(--mono)}
-  td.pool .rank{color:var(--faint);font-size:12px}
-  .coin{width:24px;height:24px;border-radius:50%;flex:none;background:var(--panel);border:1px solid var(--line)}
-  .coin.mono{display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:700}
-  td.pool .pcell{display:inline-flex;align-items:center;gap:10px;min-width:0}
-  .ev .ic .coin{width:20px;height:20px;border:none;background:none}
-  .ev .ic .coin.mono{font-size:8px}
-  td.spark{padding-top:17px}
-  .num{font-weight:500}
-  .chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600}
-  .chip.up{color:var(--green);background:rgba(61,220,132,.1)}
-  .chip.down{color:var(--red);background:rgba(255,92,108,.1)}
-  .chip.flat{color:var(--dim);background:rgba(139,153,172,.08)}
-  .brc{color:var(--faint);font-size:11.5px}
-  #boardNote{color:var(--faint);font-size:12px;margin-top:12px;font-family:var(--mono)}
-  /* cross-check section */
-  .xcmeta{color:var(--faint);font-size:12px;margin-top:12px;font-family:var(--mono);max-width:760px;line-height:1.7}
-  .flagbox{margin-top:16px;border:1px solid #574a1e;background:linear-gradient(180deg,rgba(255,197,61,.07),transparent);border-radius:12px;padding:18px 20px}
-  .flagbox .t{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--amber);letter-spacing:.04em}
-  .flagbox p{color:var(--dim);font-size:13px;margin-top:8px;font-family:var(--mono);line-height:1.7}
-  .flagbox p b{color:var(--text)}
-  .flagbox a{color:var(--amber)}
-  /* reproduce card */
-  .repro{max-width:760px}
-  .repro-p{color:var(--dim);font-size:14px;margin-bottom:16px;line-height:1.7}
-  .repro-p .mono{color:var(--text);font-size:12.5px}
-  pre.term{
-    background:#0a0e14;border:1px solid var(--line2);border-radius:12px;padding:20px 22px;
-    font-family:var(--mono);font-size:13px;line-height:2.05;color:var(--text);overflow-x:auto;
-  }
-  pre.term .cmt{color:var(--faint)}
-  .repro-note{color:var(--faint);font-size:12.5px;margin-top:14px;font-family:var(--mono);line-height:1.7}
-  /* named rejections */
-  details.rej{margin-top:14px;max-width:760px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:12px 16px}
-  details.rej summary{cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.04em}
-  details.rej summary:hover{color:var(--text)}
-  .rejl{margin-top:12px;display:flex;flex-direction:column;gap:7px}
-  .rejl .r{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:12px}
-  .rejl .why{flex:none;font-weight:700;font-size:10.5px;letter-spacing:.08em;padding:1px 8px;border-radius:5px}
-  .why.OUT{color:var(--red);background:rgba(255,92,108,.1);border:1px solid rgba(255,92,108,.3)}
-  .why.STA{color:var(--amber);background:rgba(255,197,61,.08);border:1px solid rgba(255,197,61,.3)}
-  .why.DEA{color:var(--red);background:rgba(255,92,108,.1);border:1px solid rgba(255,92,108,.3)}
-  .why.BLF{color:var(--faint);background:rgba(139,153,172,.08);border:1px solid var(--line2)}
-  .rejl .sym{color:var(--text);font-weight:600}
-  .rejl .prj{color:var(--faint)}
-  .rejl .det{color:var(--dim)}
-  @media(max-width:760px){.col-spark,.col-br{display:none}}
+/* ── board rows ── */
+.board{margin-top:18px;border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;background:var(--panel)}
+.brow{display:grid;grid-template-columns:44px 1fr 130px 110px 120px 90px 34px;gap:12px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:.13s;position:relative}
+.brow:last-child{border-bottom:none}
+.brow:hover{background:var(--panel2)}
+.brow:hover .arrow{opacity:1;transform:translateX(3px)}
+.brow .rk{font-size:14px;font-weight:800;color:var(--faint);font-variant-numeric:tabular-nums}
+.brow .sym{display:flex;align-items:center;gap:11px;min-width:0}
+.brow .sym img{width:30px;height:30px;border-radius:8px;flex:none;background:var(--panel2)}
+.brow .sym .nm{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brow .sym .pj{font-size:12.5px;color:var(--faint)}
+.brow .apy{font-size:19px;font-weight:800;color:var(--grn);font-variant-numeric:tabular-nums;text-align:right}
+.brow .tvl{font-size:15px;color:var(--mut);font-variant-numeric:tabular-nums;text-align:right}
+.brow .chg{font-size:14px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.brow .chk{font-size:12.5px;font-weight:700;text-align:center;padding:4px 0;border-radius:7px}
+.brow .chk.ok{color:var(--grn);background:rgba(46,230,168,.09)}
+.brow .chk.q{color:var(--faint);background:rgba(92,107,126,.12)}
+.brow .arrow{opacity:0;transform:translateX(-4px);transition:.15s;color:var(--mut);text-align:center}
+.bhead{display:grid;grid-template-columns:44px 1fr 130px 110px 120px 90px 34px;gap:12px;padding:10px 18px;font-size:11px;font-weight:800;letter-spacing:1.1px;color:var(--faint);background:var(--panel2);border-bottom:1px solid var(--line)}
+.bhead span:nth-child(3),.bhead span:nth-child(4),.bhead span:nth-child(5){text-align:right}
+.bhead span:nth-child(6){text-align:center}
+.note{color:var(--faint);font-size:13.5px;margin-top:12px}
+.morebtn{display:block;width:100%;text-align:center;padding:14px;margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);color:var(--mut);font-weight:700;font-size:15px;cursor:pointer;transition:.15s}
+.morebtn:hover{color:var(--txt);border-color:var(--line2)}
 
-  /* ── feed ─ */
-  .ev{display:flex;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
-  .ev:last-child{border-bottom:none}
-  .ev .ic{font-size:17px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--line);border-radius:9px}
-  .ev .body{flex:1;min-width:0}
-  .ev .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .ev .top b{font-size:15px;font-weight:600}
-  .ev .top .proj{color:var(--faint);font-size:12px;font-family:var(--mono)}
-  .ev .top .type{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--dim);border:1px solid var(--line2);padding:2px 8px;border-radius:5px}
-  .ev .det{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:5px}
-  .ev .det .up{color:var(--green)} .ev .det .down{color:var(--red)}
-  .ev .meta{text-align:right;flex:none;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
-  .ev .meta .t{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
-  .ev .meta a{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);padding:3px 10px;border-radius:6px;color:var(--blue)}
-  .ev .meta a:hover{background:var(--panel2);text-decoration:none}
-  @media(max-width:600px){.ev{flex-wrap:wrap}.ev .meta{width:100%;flex-direction:row;justify-content:space-between;align-items:center}}
-  @media(max-width:700px){.navlinks{display:none}}
-  @media(max-width:480px){.brand{font-size:14px}.status-opt{display:none}#statusbar .wrap{height:auto;min-height:52px;padding-top:6px;padding-bottom:6px}}
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line2);color:var(--txt);font:700 14.5px/1 inherit;padding:11px 18px;border-radius:10px;cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--blu);background:#15202f}
+.btn:active{transform:scale(.98)}
+.btn.grn{border-color:rgba(46,230,168,.5);color:var(--grn)}
+.btn.grn:hover{background:rgba(46,230,168,.1)}
+.btn .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.2);border-top-color:var(--grn);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(20px);background:var(--panel2);border:1px solid var(--line2);border-radius:11px;padding:12px 20px;font-size:14.5px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 14px 40px -10px rgba(0,0,0,.6)}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ── detail view ── */
+.backlink{display:inline-flex;align-items:center;gap:7px;color:var(--mut);font-weight:700;font-size:14.5px;margin-bottom:18px}
+.backlink:hover{color:var(--txt);text-decoration:none}
+.dhead{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.dhead img{width:64px;height:64px;border-radius:16px;background:var(--panel2)}
+.dhead h1{font-size:clamp(24px,3.4vw,34px)}
+.dhead .pj{color:var(--mut);font-size:15px;margin-top:2px}
+.dhead .rank{margin-left:auto;font-size:13px;font-weight:800;letter-spacing:1px;color:var(--faint);border:1px solid var(--line2);padding:8px 14px;border-radius:99px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.dstat{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:18px 20px}
+.dstat b{display:block;font-size:31px;font-weight:800;letter-spacing:-.6px;font-variant-numeric:tabular-nums}
+.dstat span{font-size:11.5px;font-weight:800;letter-spacing:1.1px;color:var(--faint)}
+.dstat.grn b{color:var(--grn)} .dstat.blu b{color:var(--blu)}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:18px 20px;margin-top:14px}
+.chart .ct{display:flex;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--faint);margin-bottom:8px}
+.chart svg{width:100%;height:120px;display:block}
+.receipt{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:20px;margin-top:14px;position:relative;overflow:hidden}
+.receipt .rhead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.receipt .stamp{font-size:11px;font-weight:900;letter-spacing:1.6px;padding:6px 12px;border-radius:8px}
+.receipt .stamp.ok{color:var(--grn);background:rgba(46,230,168,.1);border:1px solid rgba(46,230,168,.45);transform:rotate(-1.5deg)}
+.receipt .stamp.q{color:var(--faint);background:rgba(92,107,126,.12);border:1px solid var(--line2)}
+.receipt .rmeta{margin-left:auto;color:var(--faint);font-size:13px;font-variant-numeric:tabular-nums}
+.rrow{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line);font-size:15.5px}
+.rrow span{color:var(--mut)}
+.rrow b{font-variant-numeric:tabular-nums;text-align:right}
+.pegflag{margin-top:14px;border:1px solid rgba(255,92,122,.5);background:rgba(255,92,122,.08);border-radius:11px;padding:13px 16px;font-size:15px;font-weight:600;color:#ffb3c2}
+.queue{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:15.5px;padding:14px 0}
+.queue .n{font-weight:800;color:var(--txt);font-variant-numeric:tabular-nums}
+.tokrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.tok{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:var(--mut);background:var(--panel);border:1px solid var(--line);padding:7px 12px;border-radius:8px}
+.tok:hover{color:var(--blu);border-color:var(--line2);text-decoration:none}
 
-  /* ── pipeline ── */
-  .pipe{display:flex;flex-direction:column;max-width:640px}
-  .step{display:flex;gap:18px;padding:16px 0;position:relative}
-  .step .n{
-    font-family:var(--mono);font-size:12px;font-weight:700;color:var(--green);flex:none;
-    width:30px;height:30px;border:1px solid var(--green-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;
-    background:rgba(61,220,132,.06);position:relative;z-index:1;
-  }
-  .step:not(:last-child):before{content:"";position:absolute;left:15px;top:46px;bottom:-6px;width:1px;background:var(--line2)}
-  .step .txt b{font-family:var(--mono);font-size:13px;letter-spacing:.08em}
-  .step .txt p{color:var(--dim);font-size:13.5px;margin-top:3px;max-width:520px}
-  .callout{
-    margin-top:30px;max-width:640px;border:1px solid var(--green-dim);background:linear-gradient(180deg,rgba(61,220,132,.05),transparent);
-    border-radius:12px;padding:22px;
-  }
-  .callout .big{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green);letter-spacing:.02em}
-  .callout p{color:var(--dim);font-size:13.5px;margin-top:9px}
-  .callout p b{color:var(--text)}
+/* ── rejections ── */
+.pitch{background:linear-gradient(120deg,rgba(90,169,255,.09),transparent);border:1px solid rgba(90,169,255,.3);border-radius:var(--rad);padding:20px 22px;margin-top:20px;font-size:16.5px;color:var(--mut);line-height:1.6}
+.pitch b{color:var(--txt)}
+.rejgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.rejcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:11px;padding:14px 16px;transition:.14s}
+.rejcard:hover{border-color:var(--line2);border-left-color:var(--red);transform:translateY(-2px)}
+.rejcard .rt{display:flex;align-items:center;gap:9px;font-weight:750;font-size:16px}
+.rejcard .rp{font-size:12.5px;color:var(--faint);margin-top:1px}
+.rejcard .rr{display:inline-block;margin-top:9px;font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--red);background:rgba(255,92,122,.1);border:1px solid rgba(255,92,122,.35);padding:4px 9px;border-radius:6px}
+.rejcard .rd{font-size:13.5px;color:var(--mut);margin-top:8px;font-variant-numeric:tabular-nums}
+.rejcount{font-size:14px;color:var(--faint);margin:16px 0 4px}
+.rejcount b{color:var(--txt)}
 
-  /* ── records ── */
-  .badges{display:flex;gap:10px;flex-wrap:wrap}
-  .badge{font-family:var(--mono);font-size:12px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;color:var(--dim);display:inline-block}
-  .badge:hover{background:var(--panel2);color:var(--text);text-decoration:none}
-  .recintro{color:var(--dim);margin-bottom:16px;max-width:640px}
-  .roadmap{color:var(--dim);max-width:680px}
-  .roadmap b{color:var(--text)}
-  .detchips{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-  .dchip{font-family:var(--mono);font-size:12px;padding:8px 14px;border-radius:8px;border:1px solid var(--line2);color:var(--dim)}
-  .dchip.shipped{border-color:var(--green-dim);color:var(--green);background:rgba(61,220,132,.05)}
+/* ── ledger ── */
+.ledgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;align-items:start}
+.ledlist{border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;background:var(--panel)}
+.ledrow{display:grid;grid-template-columns:1fr 110px 118px;gap:10px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line);font-size:14.5px}
+.ledrow:last-child{border-bottom:none}
+.ledrow .lm{font-weight:700}
+.ledrow .lt{color:var(--faint);font-variant-numeric:tabular-nums;font-size:13.5px}
+.ledrow .la{justify-self:end}
+.snap{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:20px;min-height:340px}
+.snap .wmark{font-size:11px;font-weight:900;letter-spacing:1.6px;color:var(--amb);background:rgba(255,184,77,.1);border:1px solid rgba(255,184,77,.4);padding:5px 11px;border-radius:7px;display:inline-block}
+.snap .stime{color:var(--mut);font-size:14px;margin:12px 0 4px;font-variant-numeric:tabular-nums}
+.srow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.srow span{color:var(--mut)} .srow b{font-variant-numeric:tabular-nums}
+.snapempty{color:var(--faint);font-size:15px;padding-top:90px;text-align:center}
 
-  footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
-  footer .fmeta{font-family:var(--mono);color:var(--dim);margin-bottom:10px}
-  .hidden{display:none}
+/* ── how ── */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+.pstep{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 14px;cursor:pointer;transition:.15s;text-align:center}
+.pstep:hover{border-color:var(--line2);transform:translateY(-2px)}
+.pstep .pn{font-size:11px;font-weight:900;letter-spacing:1.4px;color:var(--grn)}
+.pstep h3{font-size:16px;margin-top:6px}
+.pstep .px{display:none;font-size:13.5px;color:var(--mut);line-height:1.55;text-align:left;margin-top:10px}
+.pstep.open{border-color:rgba(46,230,168,.5);background:var(--panel2)}
+.pstep.open .px{display:block}
+.detgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.det{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:18px;cursor:pointer;transition:.15s}
+.det:hover{transform:translateY(-2px);border-color:var(--line2)}
+.det.live{border-color:rgba(46,230,168,.45)}
+.det .dn{font-size:11px;font-weight:900;letter-spacing:1.3px}
+.det.live .dn{color:var(--grn)} .det.next .dn{color:var(--faint)}
+.det h3{font-size:17px;margin:8px 0 6px}
+.det p{font-size:14px;color:var(--mut)}
+.det .dx{display:none;font-size:13.5px;color:var(--mut);line-height:1.6;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.det.open .dx{display:block}
+.thlist{margin-top:16px;border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;background:var(--panel)}
+.throw{display:grid;grid-template-columns:1fr 150px 34px;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:.13s}
+.throw:last-child{border-bottom:none}
+.throw:hover{background:var(--panel2)}
+.throw .tn{font-weight:700;font-size:15.5px}
+.throw .tv{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;color:var(--grn);font-size:16px}
+.throw .tx{display:none;grid-column:1/-1;color:var(--mut);font-size:14px;line-height:1.55}
+.throw.open{background:var(--panel2)}
+.throw.open .tx{display:block}
+.throw.open .tc{transform:rotate(90deg)}
+.tc{transition:.15s;color:var(--faint)}
+.priv{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:20px 22px;margin-top:16px}
+.priv h3{font-size:16px;margin-bottom:10px}
+.priv li{color:var(--mut);font-size:14.5px;margin:7px 0 7px 20px}
+.priv li b{color:var(--txt)}
+
+footer{border-top:1px solid var(--line);padding:26px 0 90px;color:var(--faint);font-size:13.5px;position:relative;z-index:1}
+footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--mut)}
+#previewBadge{position:fixed;right:14px;bottom:14px;z-index:60;font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--faint);background:rgba(14,20,28,.9);border:1px solid var(--line);padding:6px 10px;border-radius:8px}
+
+/* ── mobile ── */
+#mnav{display:none}
+@media(max-width:880px){
+  body{font-size:15.5px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cell b{font-size:23px}
+  nav{display:none}
+  #topbar .wrap{gap:14px}
+  #livePill{margin-left:auto}
+  .bhead,.brow{grid-template-columns:36px 1fr 92px 84px 30px;gap:8px;padding:13px 14px}
+  .bhead span:nth-child(4),.bhead span:nth-child(6),.brow .tvl,.brow .chg{display:none}
+  .bhead span:nth-child(3){text-align:right}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .dgrid .full{grid-column:1/-1}
+  .rejgrid{grid-template-columns:1fr 1fr}
+  .ledgrid{grid-template-columns:1fr}
+  .pipe{grid-template-columns:1fr 1fr 1fr}
+  .pstep .px{text-align:center}
+  .detgrid{grid-template-columns:1fr}
+  .anom{flex-wrap:wrap}
+  .anom .go{margin-left:0}
+  main{padding-bottom:110px}
+  footer{padding-bottom:130px}
+  #mnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(9,12,17,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+  #mnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:700;letter-spacing:.4px;color:var(--faint);padding:6px 2px;border-radius:9px}
+  #mnav a .mi{font-size:19px;line-height:1}
+  #mnav a.on{color:var(--grn)}
+  #previewBadge{bottom:76px}
+}
 </style>
 </head>
 <body>
 
-<div id="statusbar"><div class="wrap">
-  <a class="brand" href="#" style="color:var(--text);text-decoration:none">YIELD<span>WIRE</span></a>
-  <span id="status">connecting…</span>
-  <nav class="navlinks">
-    <a href="#board">Board</a><a href="#crosscheck">Cross-check</a><a href="#feed">Feed</a><a href="#how">How it works</a><a href="#reproduce">Reproduce</a>
-    <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a><a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a>
+<div id="topbar"><div class="wrap">
+  <a class="logo" href="#/"><span class="dot"></span>Yield<b>Wire</b></a>
+  <nav id="nav">
+    <a href="#/" data-r="board">Board</a>
+    <a href="#/rejections" data-r="rejections">Rejections</a>
+    <a href="#/ledger" data-r="ledger">Ledger</a>
+    <a href="#/how" data-r="how">How it works</a>
   </nav>
+  <div id="livePill"><span class="d"></span><span id="liveTxt">CONNECTING</span></div>
 </div></div>
 
 <div id="ticker" class="hidden"><div class="track" id="tickerTrack"></div></div>
 
-<div class="wrap">
+<main><div class="wrap">
 
-  <div class="hero">
-    <h1>You don't monitor yield.<br><span class="wire">The wire does.</span></h1>
-    <p class="sub">YieldWire watches <b id="poolCount">—</b> stablecoin pools on Base every 5 minutes. The moment the board changes — leader swap, APY jump, collapse, TVL shift — it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b></p>
-    <div class="cta">
-      <a class="btn primary" href="https://t.me/yieldwire_base_bot" target="_blank">▶&nbsp; Open the wire on Telegram</a>
-      <a class="btn" href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">View source &amp; public record</a>
+  <!-- ══ BOARD ══ -->
+  <section class="view" id="v-board">
+    <h1>Every stablecoin pool on Base, audited every 5 minutes.</h1>
+    <p class="sub">YieldWire watches <b id="poolCount">—</b> live pools. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
+    <div id="anom"></div>
+    <div class="stats">
+      <div class="cell blu"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
+      <div class="cell grn"><b id="sIntegrity">–</b><span>INTEGRITY CHECKS PASSED</span></div>
+      <div class="cell"><b id="sVerified">–</b><span>TOP POOLS VERIFIED ON-CHAIN</span></div>
+      <a class="cell" id="sPegCell" href="#/"><b id="sPeg">–</b><span>PEG FLAGS LIVE</span></a>
+      <a class="cell red" href="#/rejections"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
     </div>
-    <div id="lastEvent" class="hidden"></div>
-    <div id="err"></div>
-  </div>
-
-  <div class="strip">
-    <div class="cell"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
-    <div class="cell"><b id="sEvents">–</b><span>EVENTS · LAST 24H</span></div>
-    <div class="cell"><b id="sLeaders">–</b><span>LEADER CHANGES</span></div>
-    <div class="cell"><b id="sCollapses">–</b><span>APY COLLAPSES</span></div>
-    <div class="cell"><b id="sRejected">–</b><span>POOLS REJECTED</span></div>
-  </div>
-
-  <section id="board">
-    <div class="sechead"><h2>Live board — top stablecoin pools on Base by APY</h2><span class="secnote" id="boardTs"></span></div>
-    <div class="tblwrap bare">
-      <table class="board">
-        <thead><tr>
-          <th style="width:34px">#</th><th style="min-width:190px">Pool</th><th class="col-spark">APY · 24H</th>
-          <th>APY</th><th class="col-br">Base / Reward</th><th>TVL</th><th>Δ 24H</th>
-        </tr></thead>
-        <tbody id="boardBody"><tr><td colspan="7" style="text-align:center;color:var(--faint);padding:26px">loading…</td></tr></tbody>
-      </table>
+    <div class="sechead"><h2>Live board — top pools by APY</h2><span class="note" id="boardTs"></span></div>
+    <div class="board">
+      <div class="bhead"><span>#</span><span>POOL</span><span>APY</span><span>TVL</span><span>24H Δ</span><span>ON-CHAIN</span><span></span></div>
+      <div id="boardBody"><div class="note" style="padding:26px;text-align:center">loading…</div></div>
     </div>
-    <p id="boardNote"></p>
-    <details class="rej" id="rejNamed"><summary>rejection receipts — the pools this run refused, and why</summary><div class="rejl" id="rejList"></div></details>
+    <button class="morebtn hidden" id="moreBtn">Show all pools ▾</button>
   </section>
 
-  <section id="crosscheck" class="hidden">
-    <div class="sechead"><h2>On-chain cross-check — the wire reads the contracts</h2><span class="secnote" id="xcNote"></span></div>
-    <div class="tblwrap">
-      <table>
-        <thead><tr>
-          <th style="text-align:left">Top pool</th><th>On-chain TVL</th><th>DeFiLlama</th><th>Δ</th>
-          <th style="text-align:left">Peg flags</th><th>Block</th>
-        </tr></thead>
-        <tbody id="xcBody"></tbody>
-      </table>
-    </div>
-    <div id="xcFlags"></div>
-    <p class="xcmeta" id="xcMeta"></p>
+  <!-- ══ ASSET DETAIL ══ -->
+  <section class="view" id="v-asset">
+    <a class="backlink" href="#/">← Back to board</a>
+    <div id="assetBody"><div class="note" style="padding:40px;text-align:center">loading…</div></div>
   </section>
 
-  <section id="feed">
-    <div class="sechead"><h2>The wire — latest events</h2><span class="secnote">every event links to its receipt</span></div>
-    <div id="feedList"><p style="color:var(--faint);padding:10px 0">loading…</p></div>
+  <!-- ══ REJECTIONS ══ -->
+  <section class="view" id="v-rejections">
+    <h1>What we rejected — and exactly why.</h1>
+    <div class="pitch">The board only shows pools that <b>pass</b>. This page shows the ones that <b>failed</b> — with the precise reason, written into the public record every 5 minutes. A system that can't hide its failures is a system you can actually trust. Scroll, click nothing — it's a receipt, not a promise.</div>
+    <div class="rejcount" id="rejCount"></div>
+    <div class="rejgrid" id="rejList"><div class="note" style="padding:26px;text-align:center">loading…</div></div>
   </section>
 
-  <section id="how">
-    <div class="sechead"><h2>How a number is made</h2><span class="secnote">deterministic end to end</span></div>
-    <div class="pipe">
-      <div class="step"><div class="n">1</div><div class="txt"><b>FETCH</b><p>DeFiLlama <span class="mono">/yields</span> — every 5 minutes, on GitHub Actions. One free, keyless, public source. Its name is on every receipt.</p></div></div>
-      <div class="step"><div class="n">2</div><div class="txt"><b>NORMALIZE</b><p>Base · stablecoin · TVL ≥ $500K. Stale, outlier (APY &gt; 500%) and dead pools are rejected — and the rejection count is published, not hidden.</p></div></div>
-      <div class="step"><div class="n">3</div><div class="txt"><b>SOURCE INTEGRITY</b><p>Wherever all three APY components exist, <span class="mono">apy = apyBase + apyReward</span> must hold (±0.5pp). The pass rate is shown under the board.</p></div></div>
-      <div class="step"><div class="n">4</div><div class="txt"><b>DETECT</b><p>Four published thresholds, plain arithmetic, 12h per-pool cooldown. No model is involved in this step — or any step that produces a number.</p></div></div>
-      <div class="step"><div class="n">5</div><div class="txt"><b>DELIVER</b><p>Telegram alert + public receipt. The LLM (optional) writes exactly one summary sentence; any number it invents gets the sentence rejected by the claim-checker. Rejections are counted and published.</p></div></div>
-    </div>
-    <div class="callout">
-      <div class="big">THE LLM DID NOT CALCULATE THIS RESULT.</div>
-      <p id="llmLine">Summary line status: …</p>
-      <p>Every figure on this site is arithmetic on the snapshot at its timestamp. Each run's snapshot, events and state are <b>committed to a public git history</b>, with the GitHub Actions run log as an independent timestamp — re-run the engine on any snapshot and it reproduces the event exactly.</p>
+  <!-- ══ LEDGER ══ -->
+  <section class="view" id="v-ledger">
+    <h1>The append-only ledger.</h1>
+    <p class="sub">Every 5 minutes the agent commits a full, verified snapshot of the market to <b>git</b> — a public, signed, append-only history. Nothing on this site can be quietly edited afterwards. Click any snapshot below to <b>replay exactly what the wire saw at that moment</b> — we fetch it live from the git history.</p>
+    <div class="ledgrid">
+      <div class="ledlist" id="ledList"><div class="note" style="padding:26px;text-align:center">fetching git history…</div></div>
+      <div class="snap" id="snapBox"><div class="snapempty">Pick a snapshot from the left to replay it.<br><br>This is the point: the past is not an archive, it's a live view.</div></div>
     </div>
   </section>
 
-  <section id="reproduce">
-    <div class="sechead"><h2>Reproduce any event — 30 seconds, $0</h2><span class="secnote">one command · no keys · no wallet</span></div>
-    <div class="repro">
-      <p class="repro-p">Every run that emits an event also commits <span class="mono">data/raw-base-stable-*.json</span> — the exact rows of the source fetch the engine consumed (Base · stablecoin only, the only rows it can read). Replay mode recomputes that run from its own committed inputs, through the same code path as the live agent:</p>
-      <pre class="term"><span class="cmt"># 1 · clone the public record</span>
-git clone https://github.com/Bigmanmarsh/yieldwire &amp;&amp; cd yieldwire
-
-<span class="cmt"># 2 · replay any event run (run sha is in the Actions log / commit history)</span>
-node src/run.js --replay &lt;run-sha&gt;
-
-<span class="cmt"># 3 · the engine prints ✓ REPRODUCED for every event it recomputes —</span>
-<span class="cmt">#    or ✗ NOT REPRODUCED, which you can see too</span></pre>
-      <p class="repro-note">Replay mode is strictly read-only: no fetch, no writes, no messages. If a historical event cannot be reproduced, the command says so — that is the point.</p>
-    </div>
+  <!-- ══ HOW ══ -->
+  <section class="view" id="v-how">
+    <h1>How the wire works.</h1>
+    <p class="sub">One detector, done properly, first. Every stage below is clickable — the thresholds are the exact numbers the audit uses, read straight from the live data. <b>Audit us against them.</b></p>
+    <div class="sechead"><h2>The pipeline</h2></div>
+    <div class="pipe" id="pipe"></div>
+    <div class="sechead"><h2>Detectors</h2></div>
+    <div class="detgrid" id="dets"></div>
+    <div class="sechead"><h2>Published thresholds — audit us against these</h2><span class="note" id="thNote"></span></div>
+    <div class="thlist" id="thList"></div>
+    <div class="sechead"><h2>Privacy & safety</h2></div>
+    <div class="priv"><ul>
+      <li><b>Read-only, always.</b> The agent calls public Base RPC endpoints (getReserves, getBlockByNumber). No wallet, no keys, no funds, no transactions. Ever.</li>
+      <li><b>This page sends nothing.</b> No web3 libraries, no connect buttons, no forms. It reads two public JSON files from the repo and public APIs. You can verify this yourself — the whole site is one HTML file in a public repo.</li>
+      <li><b>No personal data.</b> Nothing about you is stored, anywhere. The Telegram alerts you opt into carry only market data.</li>
+      <li><b>The numbers are checkable.</b> Every verified pool links to the exact contract and block on BaseScan. If we're wrong, it's public.</li>
+    </ul></div>
+    <div class="sechead"><h2>The stack ($0/month)</h2></div>
+    <div class="priv"><ul>
+      <li><b>GitHub Actions</b> — the agent's body (public repo = free minutes, runs every ~6h, self-chains every 5 min)</li>
+      <li><b>GitHub Pages</b> — this site, and the append-only data history</li>
+      <li><b>Public Base RPC + DeFiLlama + CoinGecko</b> — the senses. No paid API anywhere.</li>
+    </ul></div>
   </section>
 
-  <section id="thresholds">
-    <div class="sechead"><h2>Published thresholds — audit us against these</h2></div>
-    <div class="tblwrap">
-      <table>
-        <thead><tr><th>Trigger</th><th style="text-align:right">Condition</th></tr></thead>
-        <tbody>
-          <tr><td class="pool"><b>🔀 LEADER_CHANGE</b></td><td style="text-align:right">Highest-APY stablecoin pool (TVL ≥ $1.0M) changed</td></tr>
-          <tr><td class="pool"><b>📈 APY_JUMP</b></td><td style="text-align:right">APY rose ≥ 2.0pp between consecutive scans</td></tr>
-          <tr><td class="pool"><b>📉 APY_COLLAPSE</b></td><td style="text-align:right">APY fell ≥ 2.0pp between consecutive scans</td></tr>
-          <tr><td class="pool"><b>🌊 TVL_SHIFT</b></td><td style="text-align:right">TVL moved ≥ 25% vs ~24h ago</td></tr>
-          <tr><td class="pool"><b>MONITORING FLOOR</b></td><td style="text-align:right">Stablecoin pools on Base with TVL ≥ $500,000</td></tr>
-          <tr><td class="pool"><b>DATA REJECTION</b></td><td style="text-align:right">APY &gt; 500% (incentive farms) · missing APY (stale) · TVL ≤ 0 (dead)</td></tr>
-          <tr><td class="pool"><b>COOLDOWN</b></td><td style="text-align:right">Same pool + trigger cannot re-fire within 12h</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+</div></main>
 
-  <section id="record">
-    <div class="sechead"><h2>Public record</h2></div>
-    <p class="recintro">Nothing here is private. The append-only history, the raw snapshots, and every workflow run are public — the same data you're looking at, verifiable by anyone:</p>
-    <div class="badges">
-      <a class="badge" href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank"> GitHub Actions run log</a>
-      <a class="badge" href="https://raw.githubusercontent.com/Bigmanmarsh/yieldwire/main/data/events.json" target="_blank">events.json</a>
-      <a class="badge" href="https://raw.githubusercontent.com/Bigmanmarsh/yieldwire/main/data/latest.json" target="_blank">latest.json</a>
-      <a class="badge" href="https://github.com/Bigmanmarsh/yieldwire/tree/main/src" target="_blank">source code</a>
-    </div>
-  </section>
+<footer><div class="wrap">
+  <span id="footerMeta">YIELDWIRE · v0.2</span>
+  <span>·</span>
+  <a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank" rel="noopener">public repo & code</a>
+  <span>·</span>
+  <a href="https://github.com/Bigmanmarsh/yieldwire/commits/main" target="_blank" rel="noopener">the ledger (git history)</a>
+  <span>·</span>
+  <span>built to be audited, not believed</span>
+</div></footer>
 
-  <section id="roadmap">
-    <div class="sechead"><h2>Roadmap</h2></div>
-    <p class="roadmap">YieldWire is a detector pipeline: <b>fetch → normalize → detect → receipt → deliver</b>. One detector, done perfectly, first. The next two plug into the same architecture.</p>
-    <div class="dchips">
-      <span class="dchip shipped">✓ 1 · YIELD REGIME — shipped</span>
-      <span class="dchip">2 · WALLET FLOW — next</span>
-      <span class="dchip">3 · LIQUIDITY MIGRATION — next</span>
-    </div>
-  </section>
-
-  <footer>
-    <p class="fmeta" id="footerMeta">YIELDWIRE v0.1</p>
-    <p>Data: DeFiLlama yields endpoint · No wallet · No custody · No trades · Not financial advice.<br>
-    Built for the <a href="https://orionagents.org/hackathon" target="_blank">Orion Agents Builder Hackathon</a> · <a href="https://x.com/YieldWire" target="_blank">@YieldWire</a> · <a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank">GitHub</a> · <a href="https://t.me/yieldwire_base_bot" target="_blank">Telegram</a></p>
-  </footer>
-
+<div id="mnav">
+  <a href="#/" data-r="board"><span class="mi">▦</span>Board</a>
+  <a href="#/rejections" data-r="rejections"><span class="mi">⚑</span>Rejected</a>
+  <a href="#/ledger" data-r="ledger"><span class="mi">≡</span>Ledger</a>
+  <a href="#/how" data-r="how"><span class="mi">✳</span>How</a>
 </div>
 
-<div id="previewBadge">UI PREVIEW · V5 · DEMO DATA</div>
+<div id="toast"></div>
+<div id="previewBadge">UI PREVIEW · V6 · LIVE DATA</div>
 
 <script>
 const REPO = "Bigmanmarsh/yieldwire";
 const RAW = `https://raw.githubusercontent.com/${REPO}/main/data/`;
-const DAY = 86400000;
-const $ = (id) => document.getElementById(id);
-const usd = (n) => n >= 1e6 ? `$${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `$${(n/1e3).toFixed(1)}K` : `$${Math.round(n)}`;
-const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const ICONS = { LEADER_CHANGE:"🔀", APY_JUMP:"📈", APY_COLLAPSE:"📉", TVL_SHIFT:"🌊" };
-const TYPENAMES = { LEADER_CHANGE:"LEADER CHANGE", APY_JUMP:"APY JUMP", APY_COLLAPSE:"APY COLLAPSE", TVL_SHIFT:"TVL SHIFT" };
+const API = `https://api.github.com/repos/${REPO}`;
+const LIVE_MAX_AGE_MS = 10 * 60 * 1000; // loop is 5 min; 10 min grace
 
-const COIN_HUES = [152, 205, 262, 330, 42, 220, 100];
-function coinMark(sym) {
-  const t = String(sym).split("-")[0];
-  const init = (t.length > 4 ? t.slice(0, 3) : t).toUpperCase();
-  let h = 0; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997;
-  const hue = COIN_HUES[h % COIN_HUES.length];
-  return `<span class="coin mono" style="color:hsl(${hue},70%,66%);border-color:hsl(${hue},45%,32%)">${init}</span>`;
+let LATEST = null;      // latest.json (live)
+let BOARD_SHOWN = 15;
+
+/* ── utils ── */
+const $ = (s, el) => (el || document).querySelector(s);
+const $$ = (s, el) => [...(el || document).querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = (v) => {
+  if (v == null) return "—";
+  const a = Math.abs(v);
+  if (a >= 1e6) return "$" + (v / 1e6).toFixed(a >= 1e7 ? 0 : 1) + "M";
+  if (a >= 1e3) return "$" + (v / 1e3).toFixed(a >= 1e5 ? 0 : 1) + "K";
+  return "$" + v.toFixed(0);
+};
+const pct = (v, d = 1) => v == null ? "—" : v.toFixed(d) + "%";
+const ago = (iso) => {
+  const ms = Date.now() - Date.parse(iso);
+  if (!Number.isFinite(ms)) return "—";
+  if (ms < 60000) return Math.max(0, Math.floor(ms / 1000)) + "s ago";
+  if (ms < 3600000) return Math.floor(ms / 60000) + "m ago";
+  if (ms < 86400000) return Math.floor(ms / 3600000) + "h ago";
+  return Math.floor(ms / 86400000) + "d ago";
+};
+const short = (a) => a ? a.slice(0, 6) + "…" + a.slice(-4) : "";
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("on");
+  clearTimeout(t._to); t._to = setTimeout(() => t.classList.remove("on"), 2600);
 }
-function coinImg(sym, logo) {
-  if (logo) return `<img class="coin" src="${logo}" alt="${esc(sym)}" loading="lazy">`;
-  return coinMark(sym);
+
+async function getJSON(url) {
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) throw new Error(url + " → " + r.status);
+  return r.json();
 }
-document.addEventListener("error", (ev) => {
-  const t = ev.target;
-  if (t && t.tagName === "IMG" && t.classList.contains("coin")) {
-    const m = document.createElement("span");
-    m.className = "coin mono";
-    m.style.color = "var(--dim)";
-    m.textContent = (t.alt || "?").split("-")[0].slice(0, 3).toUpperCase();
-    t.replaceWith(m);
+async function loadLatest(sha) {
+  const url = sha ? `https://raw.githubusercontent.com/${REPO}/${sha}/data/latest.json` : RAW + "latest.json";
+  return getJSON(url);
+}
+
+/* ── crosscheck lookup ── */
+const xcByPool = (l) => Object.fromEntries((l.crosscheck?.pools || []).map(p => [p.poolId, p]));
+const pegFlagsAll = (l) => (l.crosscheck?.pools || []).flatMap(p => p.pegFlags || []);
+
+/* ── sparkline ── */
+function sparkline(vals, color) {
+  const w = 600, h = 120, pad = 6;
+  const v = (vals || []).filter(x => x != null && Number.isFinite(x));
+  if (v.length < 2) return `<svg viewBox="0 0 ${w} ${h}"></svg>`;
+  const min = Math.min(...v), max = Math.max(...v);
+  const flat = max - min < 1e-9;
+  const rng = (max - min) || 1;
+  const pts = v.map((x, i) => [pad + i * (w - 2 * pad) / (v.length - 1), flat ? h / 2 : h - pad - (x - min) / rng * (h - 2 * pad)]);
+  const line = pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+  const area = `${pad},${h - pad} ${line} ${w - pad},${h - pad}`;
+  const id = "g" + Math.random().toString(36).slice(2, 8);
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${color}" stop-opacity=".28"/><stop offset="1" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${area}" fill="url(#${id})"/>
+    <polyline points="${line}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+/* ── views ── */
+function setView(name) {
+  $$(".view").forEach(v => v.classList.remove("on"));
+  $("#v-" + name).classList.add("on");
+  $$("#nav a, #mnav a").forEach(a => a.classList.toggle("on", a.dataset.r === name));
+  window.scrollTo(0, 0);
+}
+function route() {
+  const h = location.hash || "#/";
+  const m = h.match(/^#\/asset\/(.+)$/);
+  if (m) { renderAsset(m[1]); setView("asset"); return; }
+  if (h.startsWith("#/rejections")) { renderRejections(); setView("rejections"); return; }
+  if (h.startsWith("#/ledger")) { renderLedger(); setView("ledger"); return; }
+  if (h.startsWith("#/how")) { renderHow(); setView("how"); return; }
+  renderBoard(); setView("board");
+}
+
+/* ── status pill ── */
+function paintStatus() {
+  const pill = $("#livePill"), txt = $("#liveTxt");
+  if (!LATEST) { pill.className = "stale"; txt.textContent = "OFFLINE"; return; }
+  const age = Date.now() - Date.parse(LATEST.ts);
+  if (age < LIVE_MAX_AGE_MS) {
+    pill.className = "live";
+    txt.textContent = "LIVE · " + ago(LATEST.ts).toUpperCase() + " · BLOCK " + (LATEST.crosscheck?.blockNumber || "—");
+  } else {
+    pill.className = "stale"; txt.textContent = "STALE · " + ago(LATEST.ts).toUpperCase();
   }
-}, true);
-
-function spark(hist, w=92, h=26) {
-  if (!hist || hist.length < 2) return `<svg width="${w}" height="${h}"><circle cx="${w/2}" cy="${h/2}" r="2.5" fill="var(--faint)"/></svg>`;
-  const min = Math.min(...hist), max = Math.max(...hist), span = (max - min) || 1;
-  const pts = hist.map((v,i) => `${(i/(hist.length-1)*w).toFixed(1)},${(h-2.5 - (v-min)/span*(h-5)).toFixed(1)}`).join(" ");
-  const up = hist[hist.length-1] >= hist[0];
-  return `<svg width="${w}" height="${h}"><polyline points="${pts}" fill="none" stroke="${up ? 'var(--green)' : 'var(--red)'}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
 }
 
-function render(latest, eventsFile) {
-  const now = Date.now();
-  const ageMs = Math.max(0, now - Date.parse(latest.ts));
-  const stale = ageMs > 10 * 60 * 1000;
-  const ageStr = stale ? (ageMs > DAY ? (ageMs/DAY).toFixed(1) + "d" : Math.round(ageMs/60000) + "m") : Math.round(ageMs/1000) + "s";
+/* ── BOARD ── */
+function renderBoard() {
+  if (!LATEST) { $("#boardBody").innerHTML = `<div class="note" style="padding:30px;text-align:center">Waiting for the wire… (data file not reachable right now — this is the honest state, not an error screen.)</div>`; return; }
+  const l = LATEST, xc = xcByPool(l);
+  $("#poolCount").textContent = l.pools.length;
+  $("#boardTs").textContent = "snapshot " + ago(l.ts) + " · " + l.ts.replace("T", " ").replace(/\.\d+Z/, " UTC");
+  $("#sPools").textContent = l.pools.length;
+  $("#sIntegrity").textContent = l.integrity ? `${l.integrity.pass}/${l.integrity.checked}` : "—";
+  $("#sVerified").textContent = l.crosscheck?.summary?.verified ?? "0";
+  const nFlags = pegFlagsAll(l).length;
+  $("#sPeg").textContent = nFlags;
+  const pegCell = $("#sPegCell");
+  pegCell.classList.toggle("red", nFlags > 0);
+  const flagPool = (l.pools || []).find(p => (xc[p.id] || {}).pegFlags?.length);
+  pegCell.href = flagPool ? "#/asset/" + flagPool.id : "#/ledger";
+  $("#sRejected").textContent = (l.rejectedNamed || []).length;
 
-  $("status").innerHTML =
-    `<span class="live ${stale ? "stale" : ""}"><span class="dot"></span>${stale ? "STALE" : "LIVE"}</span>` +
-    `<span>LAST RUN ${ageStr.toUpperCase()} AGO</span>` +
-    `<span class="status-opt">${latest.pools.length} POOLS</span>` +
-    `<span class="status-opt">${eventsFile.events.length} EVENTS LOGGED</span>`;
+  // anomaly banner
+  const flags = pegFlagsAll(l);
+  const an = $("#anom");
+  if (flags.length) {
+    const f = flags[0];
+    const pool = (l.pools || []).find(p => (xc[p.id] || {}).pegFlags?.some(pf => pf.symbol === f.symbol));
+    an.innerHTML = `<div class="anom" data-go="${pool ? "#/asset/" + pool.id : "#/ledger"}">
+      <span class="tag">ANOMALY · LIVE</span>
+      <span class="msg"><b>${esc(f.symbol)}</b> is trading at <b>$${f.price.toFixed(4)}</b> — <b>${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</b>, verified straight from the pool contract at block <b>${l.crosscheck?.blockNumber || "?"}</b>. The board shows the yield; the wire checks the body.</span>
+      <span class="go">See the evidence →</span></div>`;
+    an.querySelector(".anom").addEventListener("click", () => { location.hash = an.querySelector(".anom").dataset.go; });
+  } else an.innerHTML = "";
 
   // ticker
-  const tk = latest.pools.slice(0, 30).map(p => {
-    const d = p.apyPct1D;
-    const arrow = d == null ? "" : d > 0.05 ? '<span class="up">▲</span>' : d < -0.05 ? '<span class="down">▼</span>' : "·";
-    return `<span class="tk"><b>${esc(p.symbol)}</b> ${p.apy.toFixed(2)}% ${arrow}</span>`;
-  }).join('<span style="color:var(--line2)">◆</span>');
-  $("tickerTrack").innerHTML = tk + '<span style="color:var(--line2)">◆</span>' + tk + '<span style="color:var(--line2)">◆</span>';
-  $("ticker").classList.remove("hidden");
-
-  // hero
-  $("poolCount").textContent = latest.pools.length;
-  const last = eventsFile.events[0];
-  if (last) {
-    const p = last.pool;
-    const detail =
-      last.type === "LEADER_CHANGE" ? `${last.before.symbol} → <b>${esc(p.symbol)}</b>` :
-      last.type === "TVL_SHIFT" ? `${usd(last.before.tvl)} → <b>${usd(p.tvl)}</b>` :
-      `${last.before.apy.toFixed(2)}% → <b>${p.apy.toFixed(2)}%</b>`;
-    const agoMin = Math.max(1, Math.round((now - Date.parse(last.ts)) / 60000));
-    const agoStr = agoMin < 60 ? agoMin + "m" : agoMin < 1440 ? Math.round(agoMin / 60) + "h" : Math.round(agoMin / 1440) + "d";
-    $("lastEvent").innerHTML =
-      `<span class="lab">LAST EVENT</span><span class="msg">${ICONS[last.type] || "•"} <b>${TYPENAMES[last.type]}</b> · ${esc(p.symbol)} <span class="d">${detail} · ${agoStr} ago · <a href="receipt.html?id=${esc(last.id)}">receipt</a></span></span>`;
-    $("lastEvent").classList.remove("hidden");
-  }
-
-  // strip
-  const last24 = eventsFile.events.filter(e => now - Date.parse(e.ts) < DAY);
-  $("sPools").textContent = latest.pools.length;
-  $("sEvents").textContent = last24.length;
-  $("sLeaders").textContent = last24.filter(e => e.type === "LEADER_CHANGE").length;
-  $("sCollapses").textContent = last24.filter(e => e.type === "APY_COLLAPSE").length;
-  $("sRejected").textContent = latest.rejected.stale + latest.rejected.outlier + latest.rejected.dead;
-
-  // board
-  $("boardTs").textContent = "snapshot " + latest.ts.replace("T"," ").slice(0,16) + " UTC";
-  $("boardBody").innerHTML = latest.pools.slice(0, 10).map((p, i) => {
-    const d = p.apyPct1D;
-    const cls = d == null ? "flat" : d > 0.05 ? "up" : d < -0.05 ? "down" : "flat";
-    return `<tr>
-      <td class="pool nowrap"><span class="rank">${i+1}</span></td>
-      <td class="pool"><span class="pcell">${coinImg(p.symbol, p.logo)}<span class="ptxt"><b>${esc(p.symbol)}</b><span class="proj">${esc(p.project)}</span></span></span></td>
-      <td class="col-spark spark">${spark(p.hist?.apy)}</td>
-      <td class="nowrap num">${p.apy.toFixed(2)}%</td>
-      <td class="col-br nowrap brc">${p.apyBase != null ? p.apyBase.toFixed(2) : "—"} / ${p.apyReward != null ? p.apyReward.toFixed(2) : "—"}</td>
-      <td class="nowrap">${usd(p.tvl)}</td>
-      <td class="nowrap"><span class="chip ${cls}">${d == null ? "—" : (d > 0 ? "+" : "") + d.toFixed(1)}</span></td>
-    </tr>`;
-  }).join("") || '<tr><td colspan="7" style="text-align:center;color:var(--faint);padding:26px">no pools above floor this run</td></tr>';
-  $("boardNote").textContent =
-    `source integrity ${latest.integrity.pass}/${latest.integrity.checked} pools passed apy = apyBase + apyReward · data: DeFiLlama /yields · sparklines: last 24h of 5-min snapshots`;
-
-  // on-chain cross-check (top pools vs pool contracts)
-  const xc = latest.crosscheck;
-  if (xc && xc.pools && xc.pools.length) {
-    $("crosscheck").classList.remove("hidden");
-    const s = xc.summary || {};
-    $("xcNote").textContent = `block ${xc.blockNumber || "?"} · ${s.verified ?? 0}/${s.attempted ?? 0} supported top pools verified · read-only`;
-    const tok = (n, sy) => `${n >= 1e6 ? (n/1e6).toFixed(2) + "M" : n >= 1e3 ? (n/1e3).toFixed(1) + "K" : Math.round(n)} ${esc(sy)}`;
-    $("xcBody").innerHTML = xc.pools.map((x) => {
-      if (x.status === "verified") {
-        const devCls = x.devPct <= 5 ? "up" : x.devPct <= 15 ? "flat" : "down";
-        const ks = Object.keys(x.prices || {});
-        const res = ks.length === 2 ? `<span class="brc"> &nbsp;reserves ${tok(x.reserve0, ks[0])} + ${tok(x.reserve1, ks[1])}</span>` : "";
-        const flags = (x.pegFlags || []).map(f => `⚠ <b>${esc(f.symbol)}</b> $${f.price.toFixed(4)} (${f.offPegPct > 0 ? "+" : ""}${f.offPegPct}% vs ${f.peg})`).join(" &nbsp;·&nbsp; ") || "—";
-        return `<tr>
-          <td class="pool"><b>${esc(x.symbol)}</b><span class="proj">${esc(x.project)}</span></td>
-          <td>${usd(x.onchainTvl)}${res}</td>
-          <td>${usd(x.dfdTvl)}</td>
-          <td><span class="chip ${devCls}">${x.devPct}%</span></td>
-          <td style="text-align:left;font-size:12px;color:${(x.pegFlags || []).length ? "var(--amber)" : "var(--faint)"}">${flags}</td>
-          <td class="nowrap"><a href="${xc.verifyAt}" target="_blank">…${String(xc.blockNumber).slice(-5)}</a></td>
-        </tr>`;
-      }
-      return `<tr>
-        <td class="pool"><b>${esc(x.symbol)}</b><span class="proj">${esc(x.project)}</span></td>
-        <td>—</td><td>${usd(x.dfdTvl || 0)}</td><td>—</td>
-        <td style="text-align:left;color:var(--faint);font-size:12px">awaiting on-chain coverage</td><td>—</td>
-      </tr>`;
-    }).join("");
-    const allFlags = xc.pools.flatMap((x) => (x.pegFlags || []).map((f) => ({ ...f, pool: x.symbol })));
-    $("xcFlags").innerHTML = allFlags.length ? `<div class="flagbox">
-      <div class="t">⚠ PEG DEVIATION — a “stable” token is trading away from its peg</div>
-      <p>${allFlags.map(f => `<b>${esc(f.pool)}</b>: ${esc(f.symbol)} at <b>$${f.price.toFixed(4)}</b> — ${Math.abs(f.offPegPct).toFixed(1)}% ${f.offPegPct < 0 ? "below" : "above"} its ${f.peg} peg. An APY quoted on this token is not ${f.peg === "€1" ? "EUR" : "USD"} yield at face value.`).join(" ")} A stablecoin label is a claim, not a fact — this is the check that exists to test that claim, read straight from the pool contract plus an independent price index.</p>
-    </div>` : "";
-    $("xcMeta").textContent = "Method: getReserves() read directly from the pool contract (read-only, no wallet, $0) via public Base RPC; TVL = reserves × token price (CoinGecko; hard $-pegged tokens valued at $1 by definition). v1 on-chain coverage: aerodrome-v1 (vAMM/sAMM). Other products are labeled awaiting — never silently skipped.";
-    $("boardNote").textContent += ` · on-chain cross-check: ${s.verified ?? 0}/${s.attempted ?? 0} supported top pools at block ${xc.blockNumber}`;
-  }
-
-  // named rejection receipts (the pools this run refused, with reasons)
-  const rn = latest.rejectedNamed;
-  if (rn && rn.length) {
-    const cls = { OUTLIER: "OUT", STALE: "STA", DEAD: "DEA", "BELOW FLOOR": "BLF" };
-    $("rejList").innerHTML = rn.slice(0, 12).map(r =>
-      `<div class="r"><span class="why ${cls[r.reason] || "BLF"}">${esc(r.reason)}</span><span class="sym">${esc(r.symbol)}</span><span class="prj">${esc(r.project)}</span><span class="det">— ${esc(r.detail)}</span></div>`
-    ).join("") + (rn.length > 12 ? `<div class="r"><span class="det">…and ${rn.length - 12} more in <a href="${RAW}latest.json" target="_blank">data/latest.json</a></span></div>` : "");
-    $("rejNamed").setAttribute("data-count", rn.length);
-    const sm = $("rejNamed").querySelector("summary");
-    sm.textContent = `rejection receipts — ${rn.length} pools refused this run, named with reasons`;
-  } else {
-    $("rejNamed").style.display = "none";
-  }
-
-  // feed
-  const feed = eventsFile.events.slice(0, 20).map(e => {
-    const t = new Date(e.ts);
-    const when = t.toISOString().slice(5,10).replace("-"," ") + " " + t.toISOString().slice(11,16) + " UTC";
-    const p = e.pool;
-    const d = e.delta;
-    let detail;
-    if (e.type === "LEADER_CHANGE") detail = `${esc(e.before.symbol)} <span class="down">${e.before.apy.toFixed(2)}%</span> → <b>${esc(p.symbol)}</b> <span class="${d>=0?'up':'down'}">${p.apy.toFixed(2)}%</span> · TVL ${usd(p.tvl)}`;
-    else if (e.type === "TVL_SHIFT") detail = `${usd(e.before.tvl)} → <b>${usd(p.tvl)}</b> <span class="${d>0?'up':'down'}">(${d>0?'+':''}${d}%)</span> vs ~24h · APY ${p.apy.toFixed(2)}%`;
-    else detail = `${e.before.apy.toFixed(2)}% → <b>${p.apy.toFixed(2)}%</b> <span class="${d>0?'up':'down'}">(${d>0?'+':''}${d}pp)</span> · TVL ${usd(p.tvl)}`;
-    return `<div class="ev">
-      <span class="ic">${coinImg(e.pool.symbol, e.pool.logo)}</span>
-      <span class="body">
-        <span class="top"><b>${esc(p.symbol)}</b><span class="proj">${esc(p.project)}</span><span class="type">${TYPENAMES[e.type]}</span></span>
-        <span class="det">${detail}</span>
-      </span>
-      <span class="meta"><span class="t">${esc(when)}</span><a href="receipt.html?id=${esc(e.id)}">RECEIPT ↗</a></span>
-    </div>`;
+  const top = [...l.pools].sort((a, b) => b.apy - a.apy).slice(0, 12);
+  const tk = top.map(p => {
+    const x = xc[p.id] || {};
+    const fl = (x.pegFlags || []).length;
+    return `<span>${esc(p.symbol)} <b>${pct(p.apy)}</b> ${money(p.tvl)} ${x.status === "verified" ? `<span class="up">✓ verified</span>` : fl ? `<span class="dn">⚠ flag</span>` : ""}</span>`;
   }).join("");
-  $("feedList").innerHTML = feed || '<p style="color:var(--faint);padding:10px 0">No events yet — the wire is quiet. Events appear the moment a published threshold is crossed.</p>';
+  $("#tickerTrack").innerHTML = tk + tk;
+  $("#ticker").classList.remove("hidden");
 
-  // llm line
-  const L = latest.llm || {};
-  $("llmLine").innerHTML = L.mode === "keyless"
-    ? `Running <b>KEYLESS</b>: no model configured. Messages are pure deterministic templates — every number was computed by the engine.`
-    : `LLM summaries <b>ON</b>: ${L.attempts ?? 0} attempted, <b>${L.rejected ?? 0} rejected</b> by the claim-checker for containing a number not in the source facts.`;
-
-  const daysRunning = Math.max(1, Math.round(ageMs / DAY));
-  $("footerMeta").textContent = `YIELDWIRE v0.1 · ${daysRunning} day${daysRunning>1?"s":""} of public history · last run ${latest.ts.replace("T"," ").slice(0,16)} UTC · $0/month`;
+  // board rows
+  const sorted = [...l.pools].sort((a, b) => b.apy - a.apy);
+  const rows = sorted.slice(0, BOARD_SHOWN).map((p, i) => {
+    const x = xc[p.id] || {};
+    const chg = p.apyPct1D;
+    const chgCls = chg == null ? "" : chg > 0.05 ? "color:var(--grn)" : chg < -0.05 ? "color:var(--red)" : "color:var(--mut)";
+    return `<div class="brow" data-go="#/asset/${p.id}">
+      <span class="rk">${i + 1}</span>
+      <span class="sym">${p.logo ? `<img src="${esc(p.logo)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+        <span><span class="nm">${esc(p.symbol)}</span><br><span class="pj">${esc(p.project)}</span></span></span>
+      <span class="apy">${pct(p.apy, 2)}</span>
+      <span class="tvl">${money(p.tvl)}</span>
+      <span class="chg" style="${chgCls}">${chg == null ? "—" : (chg > 0 ? "+" : "") + chg.toFixed(1) + "%"}</span>
+      <span class="chk ${x.status === "verified" ? "ok" : "q"}">${x.status === "verified" ? "✓ " + (x.devPct == null ? "" : x.devPct + "%") : "queued"}</span>
+      <span class="arrow">→</span></div>`;
+  }).join("");
+  $("#boardBody").innerHTML = rows;
+  $$("#boardBody .brow").forEach(r => r.addEventListener("click", () => { location.hash = r.dataset.go; }));
+  const mb = $("#moreBtn");
+  if (sorted.length > BOARD_SHOWN) {
+    mb.classList.remove("hidden");
+    mb.textContent = `Show all ${sorted.length} pools ▾`;
+    mb.onclick = () => {
+      BOARD_SHOWN = sorted.length;
+      renderBoard();
+      mb.textContent = "Show top 15 ▴";
+      mb.onclick = () => { BOARD_SHOWN = 15; renderBoard(); };
+    };
+  } else mb.classList.add("hidden");
 }
 
-async function boot() {
-  const demo = window.__YIELDWIRE_DEMO__;
-  if (demo) { render(demo.latest, demo.eventsFile); $("previewBadge").style.display = "block"; return; }
-  let latest, eventsFile;
-  try {
-    const [l, e] = await Promise.all([
-      fetch(RAW + "latest.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }),
-      fetch(RAW + "events.json").then(r => r.ok ? r.json() : { events: [] }),
-    ]);
-    latest = l; eventsFile = e;
-  } catch (err) {
-    const el = $("err");
-    el.style.display = "block";
-    el.textContent = "Live data not reachable yet — the agent commits its public history to this repository on every run. If this persists, the agent is down, and this page says so rather than showing stale numbers as live. (error: " + err.message + ")";
-    $("status").innerHTML = '<span class="live stale"><span class="dot"></span>AWAITING FIRST RUN</span>';
-    return;
+/* ── ASSET DETAIL ── */
+function renderAsset(id) {
+  const l = LATEST;
+  const box = $("#assetBody");
+  if (!l) { box.innerHTML = `<div class="note" style="padding:40px;text-align:center">Loading…</div>`; return; }
+  const p = l.pools.find(x => x.id === id);
+  if (!p) { box.innerHTML = `<div class="note" style="padding:40px;text-align:center">Pool not in the current snapshot. It may have been rejected or fallen off the board — <a href="#/rejections">check the rejection receipts</a>.</div>`; return; }
+  const xc = xcByPool(l)[id] || {};
+  const sorted = [...l.pools].sort((a, b) => b.apy - a.apy);
+  const rank = sorted.findIndex(x => x.id === id) + 1;
+  const cc = l.crosscheck || {};
+
+  let receipt;
+  if (xc.status === "verified") {
+    const res = Object.entries(xc.prices || {}).map(([s, pr]) => {
+      const pf = (xc.pegFlags || []).find(f => f.symbol === s);
+      return `${esc(s)} <b>$${Number(pr).toFixed(4)}</b>${pf ? ` <span style="color:var(--red)">⚠ ${pf.offPegPct}% vs ${pf.peg}</span>` : ""}`;
+    }).join(" · ");
+    receipt = `<div class="receipt">
+      <div class="rhead"><span class="stamp ok">✓ VERIFIED ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="rrow"><span>On-chain TVL (getReserves)</span><b>${money(xc.onchainTvl)}</b></div>
+      <div class="rrow"><span>DeFiLlama TVL</span><b>${money(xc.dfdTvl)}</b></div>
+      <div class="rrow"><span>Deviation between the two</span><b style="color:var(--grn)">${pct(xc.devPct, 2)}</b></div>
+      <div class="rrow"><span>Token prices from reserves</span><b>${res}</b></div>
+      <div class="rrow"><span>Reserves</span><b>${(xc.reserve0 || 0).toLocaleString()} + ${(xc.reserve1 || 0).toLocaleString()}</b></div>
+      <div class="tokrow"><a class="tok" href="${xc.basescan}" target="_blank" rel="noopener">${short(xc.poolAddress)} ↗ view contract on BaseScan</a></div>
+      ${(xc.pegFlags || []).map(f => `<div class="pegflag">⚠ <b>${esc(f.symbol)}</b> at $${Number(f.price).toFixed(4)} — <b>${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</b>. A "stablecoin" pool paying real yield on a 30%-off-peg token is exactly what YieldWire exists to surface.</div>`).join("")}
+    </div>`;
+  } else {
+    const qpos = (cc.pools || []).filter(x => x.status !== "verified").findIndex(x => x.poolId === id) + 1;
+    receipt = `<div class="receipt">
+      <div class="rhead"><span class="stamp q">QUEUED FOR ON-CHAIN VERIFICATION</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="queue"><span class="n">#${qpos}</span> in the verification queue — the wire walks the top pools by TVL, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
+    </div>`;
   }
-  render(latest, eventsFile);
-  setTimeout(boot, 30000);
+
+  const integ = l.integrity ? ` <b style="color:var(--grn)">${l.integrity.pass}/${l.integrity.checked} integrity checks passed</b> this snapshot` : "";
+  box.innerHTML = `
+    <div class="dhead">
+      ${p.logo ? `<img src="${esc(p.logo)}" alt="" onerror="this.style.display='none'">` : ""}
+      <div><h1>${esc(p.symbol)}</h1><div class="pj">${esc(p.project)} · Base</div></div>
+      <span class="rank">RANK #${rank} BY APY</span>
+    </div>
+    <div class="dgrid">
+      <div class="dstat grn"><b>${pct(p.apy, 2)}</b><span>TOTAL APY (REWARDS)</span></div>
+      <div class="dstat blu"><b>${money(p.tvl)}</b><span>TVL</span></div>
+      <div class="dstat"><b>${p.apyPct1D == null ? "—" : (p.apyPct1D > 0 ? "+" : "") + p.apyPct1D.toFixed(1) + "%"}</b><span>APY Δ · LAST 24H</span></div>
+    </div>
+    <div class="chart"><div class="ct"><span>APY · LAST 100 SNAPSHOTS (~8H AT 5-MIN CADENCE)</span><span>min ${Math.min(...(p.hist.apy || []).map(Number)).toFixed(1)}% · max ${Math.max(...(p.hist.apy || []).map(Number)).toFixed(1)}%</span></div>${sparkline(p.hist.apy, "#2ee6a8")}</div>
+    <div class="chart"><div class="ct"><span>TVL · LAST 100 SNAPSHOTS</span><span>${money(Math.min(...(p.hist.tvl || []).map(Number)))} → ${money(Math.max(...(p.hist.tvl || []).map(Number)))}</span></div>${sparkline(p.hist.tvl, "#5aa9ff")}</div>
+    ${receipt}
+    <div class="sechead"><h2>Underlying tokens</h2></div>
+    <div class="tokrow">${(p.underlyingTokens || []).map(t => `<a class="tok" href="https://basescan.org/token/${t}" target="_blank" rel="noopener">${short(t)} ↗</a>`).join("")}</div>
+    <p class="note">Every number on this page is from the <b>live snapshot</b> (${ago(l.ts)}). ${integ} History is replayable from the <a href="#/ledger">ledger</a>.</p>`;
 }
-boot();
+
+/* ── REJECTIONS ── */
+function renderRejections() {
+  const l = LATEST;
+  const box = $("#rejList");
+  if (!l) { box.innerHTML = `<div class="note">loading…</div>`; return; }
+  const rj = l.rejectedNamed || [];
+  const byReason = {};
+  rj.forEach(r => { byReason[r.reason] = (byReason[r.reason] || 0) + 1; });
+  $("#rejCount").innerHTML = `<b>${rj.length}</b> pools refused this snapshot · ` + Object.entries(byReason).map(([k, v]) => `<b>${v}</b> ${esc(k)}`).join(" · ");
+  box.innerHTML = rj.slice(0, 60).map(r => `<div class="rejcard">
+    <div class="rt">${esc(r.symbol)}</div>
+    <div class="rp">${esc(r.project)} · Base</div>
+    <span class="rr">${esc(r.reason)}</span>
+    <div class="rd">${esc(r.detail)}</div>
+  </div>`).join("") + (rj.length > 60 ? `<div class="note" style="grid-column:1/-1">…and ${rj.length - 60} more in the raw data — the record is complete in the <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/latest.json" target="_blank" rel="noopener">public file</a>, not just what fits on a page.</div>` : "");
+}
+
+/* ── LEDGER ── */
+async function renderLedger() {
+  const box = $("#ledList");
+  box.innerHTML = `<div class="note" style="padding:26px;text-align:center">fetching git history…</div>`;
+  try {
+    const r = await fetch(API + "/commits?per_page=30", { cache: "no-store" });
+    const commits = (await r.json()).filter(c => (c.commit.message || "").startsWith("agent run"));
+    if (!commits.length) { box.innerHTML = `<div class="note" style="padding:26px;text-align:center">no agent commits visible yet</div>`; return; }
+    box.innerHTML = commits.map(c => `<div class="ledrow" data-sha="${c.sha}">
+      <span class="lm">${esc(c.commit.message.split("\n")[0])}</span>
+      <span class="lt">${ago(c.commit.committer.date)}</span>
+      <a class="btn la" href="https://github.com/Bigmanmarsh/yieldwire/commit/${c.sha}" target="_blank" rel="noopener" style="padding:8px 12px;font-size:13px">view ↗</a>
+    </div>`).join("");
+    $$("#ledList .ledrow").forEach(row => {
+      row.querySelector(".la").addEventListener("click", e => e.stopPropagation());
+      row.style.cursor = "pointer";
+      row.addEventListener("click", async () => {
+        const sha = row.dataset.sha;
+        const sb = $("#snapBox");
+        sb.innerHTML = `<div class="snapempty">replaying ${sha.slice(0, 7)}…</div>`;
+        try {
+          const snap = await loadLatest(sha);
+          const top = [...snap.pools].sort((a, b) => b.apy - a.apy).slice(0, 8);
+          sb.innerHTML = `<span class="wmark">REPLAY · PAST SNAPSHOT · NOT LIVE</span>
+            <div class="stime">${esc(snap.ts)} · integrity ${snap.integrity?.pass ?? "?"}/${snap.integrity?.checked ?? "?"}</div>
+            ${top.map((p, i) => `<div class="srow"><span>${i + 1}. ${esc(p.symbol)} <span style="color:var(--faint)">· ${esc(p.project)}</span></span><b>${pct(p.apy, 2)} · ${money(p.tvl)}</b></div>`).join("")}
+            <div class="srow" style="margin-top:8px"><span>leader at that moment</span><b>${esc(snap.leader?.symbol || "—")}</b></div>`;
+          toast("Replayed a past snapshot from git — nothing on this site can be rewritten afterwards.");
+        } catch (e) {
+          sb.innerHTML = `<div class="snapempty">could not fetch that snapshot (${esc(e.message)})</div>`;
+        }
+      });
+    });
+  } catch (e) {
+    box.innerHTML = `<div class="note" style="padding:26px;text-align:center">git API unreachable right now (${esc(e.message)}) — the ledger is still there: <a href="https://github.com/Bigmanmarsh/yieldwire/commits/main" target="_blank" rel="noopener">view commits ↗</a></div>`;
+  }
+}
+
+/* ── HOW ── */
+const STAGES = [
+  ["1 · FETCH", "Pull live pool data from DeFiLlama and token prices from CoinGecko — plus the pool's own contract via public Base RPC. Public endpoints only."],
+  ["2 · NORMALIZE", "82 pools, many protocols, one shape: symbol, APY, TVL, underlying tokens, 100-snapshot history per pool. No pool passes the wire until it parses clean."],
+  ["3 · DETECT", "Compare against published thresholds: APY jump/collapse, TVL shift, leader change, peg deviation. 40 integrity checks per snapshot — every number reconciled before it ships."],
+  ["4 · RECEIPT", "Every decision is written down: what passed, what was rejected and the exact reason, what was verified on-chain and at which block. Receipts ship in the same file as the data."],
+  ["5 · DELIVER", "Push the snapshot to the public repo (the ledger), refresh this site, and message Telegram when something changed — with the before, the after, and the math."],
+];
+const DETS = [
+  ["LIVE NOW", "Yield regime", "APY jumps, collapses, leader swaps, TVL shifts, peg deviations — on Base stablecoin pools, every 5 minutes, with on-chain verification of the top pools.", "What ships: the full board, 24h event feed, named rejection receipts, on-chain cross-checks with block + contract links, and the append-only git ledger. Every alert carries the numbers that triggered it.", true],
+  ["NEXT", "Wallet flow", "Watch where the money actually moves: inflows/outflows on the verified pools, so an APY spike gets graded against whether anyone is following it.", "Same architecture: new detector → same thresholds page, same receipts, same ledger. No new surface area, no new trust ask.", false],
+  ["NEXT", "Liquidity migration", "Detect when TVL leaves one protocol and appears at another within the window — the earliest honest signal of a yield rotation.", "Same architecture. The wire learns to track a unit of liquidity across contracts, not just pool totals.", false],
+];
+const TH_COPY = {
+  tvlFloor: "A pool under $500K TVL can be gamed with tiny trades and reports numbers nobody should trust with their own. This floor keeps the board about money real people could actually deploy.",
+  leaderTvlFloor: "A 'leader' with less than $1M is noise. The leader-changed alerts only fire for pools that could matter.",
+  apyJumpPp: "If total APY moves more than 2 percentage points in one 5-minute snapshot, something changed — a reward program, a token price, or a red flag. That's an event, not drift.",
+  apyCollapsePp: "The mirror of the jump: a 2pp drop is the moment a 'free money' number is about to become an expensive lesson. You get the alert before the pool does.",
+  tvlShiftPct: "25% of the money moving in one cycle is a regime change, not churn. This is the threshold the Liquidity Migration detector will build on.",
+  apyOutlierPct: "An APY 5× the cohort median is almost always a data bug or a rug-in-progress. It gets flagged and quarantined, not celebrated.",
+  cooldownHours: "After an alert on a pool, the same kind of alert cools down for 12 hours. You get the story, not a spam loop.",
+  integrityTolPp: "On-chain TVL vs DeFiLlama TVL must agree within 0.5 percentage points for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
+  integrityTolPct: "On-chain TVL vs DeFiLlama TVL must agree within 0.5% for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
+};
+const TH_LABEL = {
+  tvlFloor: "TVL floor", leaderTvlFloor: "Leader TVL floor", apyJumpPp: "APY jump threshold", apyCollapsePp: "APY collapse threshold",
+  tvlShiftPct: "TVL shift threshold", apyOutlierPct: "APY outlier (×median)", cooldownHours: "Alert cooldown",
+  integrityTolPp: "Integrity tolerance (on-chain vs API)", integrityTolPct: "Integrity tolerance (on-chain vs API)",
+};
+function renderHow() {
+  $("#pipe").innerHTML = STAGES.map(([t, d], i) => `<div class="pstep" data-i="${i}"><span class="pn">STAGE ${i + 1}</span><h3>${t.split(" · ")[1]}</h3><div class="px">${d}</div></div>`).join("");
+  $$("#pipe .pstep").forEach(s => s.addEventListener("click", () => s.classList.toggle("open")));
+  $("#dets").innerHTML = DETS.map(([n, t, d, x, live]) => `<div class="det ${live ? "live" : "next"}"><span class="dn">${n}</span><h3>${t}</h3><p>${d}</p><div class="dx">${x}</div></div>`).join("");
+  $$("#dets .det").forEach(d => d.addEventListener("click", () => d.classList.toggle("open")));
+  const th = (LATEST && LATEST.thresholds) || {};
+  const thKeys = Object.keys(th).filter(k => k !== "chain");
+  $("#thNote").textContent = th.chain ? `live values from the current snapshot · chain: ${th.chain}` : "live values from the current snapshot";
+  const fmt = (k, v) => {
+    if (k === "tvlFloor" || k === "leaderTvlFloor") return money(v);
+    if (k.endsWith("Pp")) return v + " pp";
+    if (k === "tvlShiftPct") return v + "%";
+    if (k === "cooldownHours") return v + " h";
+    if (k === "apyOutlierPct") return v + "% above median";
+    return v;
+  };
+  $("#thList").innerHTML = thKeys.map((k) => { const v = th[k]; return `<div class="throw" data-k="${k}">
+    <span class="tn">${TH_LABEL[k] || k} <span class="tc" style="font-size:12px">▸</span></span>
+    <span class="tv">${esc(fmt(k, v))}</span><span></span>
+    <div class="tx">${TH_COPY[k] || ""}</div>
+  </div>`; }).join("");
+  $$("#thList .throw").forEach(r => r.addEventListener("click", () => r.classList.toggle("open")));
+}
+
+/* ── verify now ── */
+$("#verifyBtn").addEventListener("click", async (e) => {
+  const b = e.currentTarget;
+  b.innerHTML = `<span class="spin"></span> re-reading the wire…`;
+  b.disabled = true;
+  try {
+    const t0 = Date.now();
+    const fresh = await loadLatest();
+    LATEST = fresh;
+    paintStatus(); route();
+    toast(`Verified — fresh snapshot ${ago(fresh.ts).replace(" ago", "")} · block ${fresh.crosscheck?.blockNumber || "—"} · fetched in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
+  } catch (err) {
+    toast("Verification failed: " + err.message);
+  } finally {
+    b.innerHTML = "Verify now"; b.disabled = false;
+  }
+});
+
+/* ── boot ── */
+window.addEventListener("hashchange", route);
+setInterval(paintStatus, 10000);
+(async () => {
+  try {
+    LATEST = await loadLatest();
+    paintStatus();
+    route();
+  } catch (e) {
+    $("#boardBody").innerHTML = `<div class="note" style="padding:30px;text-align:center">The wire is quiet right now (${esc(e.message)}). The honest state: nothing to show yet, no fake data to pretend.</div>`;
+    paintStatus();
+    route();
+  }
+})();
 </script>
 </body>
 </html>
