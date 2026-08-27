@@ -48,7 +48,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // runs exactly one cycle and never touches git.
 const IS_ACTIONS = !!process.env.GITHUB_ACTIONS;
 const PACE_MS = Number(process.env.YW_PACE_MS) || 5 * 60 * 1000;
-const GUARD_MS = Number(process.env.YW_GUARD_MS) || 4 * 60 * 1000;
+const GUARD_MS = process.env.YW_GUARD_MS !== undefined ? Math.max(0, Number(process.env.YW_GUARD_MS)) : 4 * 60 * 1000;
 const LOOP_ITERS = IS_ACTIONS ? (Number(process.env.YW_LOOP_ITERS) || 70) : 1;
 const liveLatestTs = async () => {
   const onDisk = readJson("latest.json", null);
@@ -198,8 +198,10 @@ async function runCycle(cycleNo) {
   // 5 ── Persist public history
   const nextWindow = updateWindow24h(window24h, pools, nowMs);
   const today = now.toISOString().slice(0, 10);
-  // Coin logos (decorative only — never read by detection, never fail a run)
-  const logos = await getCoinLogos(top.map((p) => baseSymbol(p.symbol)));
+  // Coin logos (decorative only — never read by detection, never fail a run).
+  // state.coinLogos persists newly resolved URLs (see src/logos.js layers).
+  state.coinLogos = state.coinLogos || {};
+  const logos = await getCoinLogos(top.map((p) => baseSymbol(p.symbol)), state.coinLogos);
 
   const poolsOut = top.map((p) => ({
     ...p,
@@ -267,7 +269,7 @@ async function runCycle(cycleNo) {
     }
     state.lastDigestDate = today;
   }
-  writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm, crosscheckCache: state.crosscheckCache, xrefStats: state.xrefStats });
+  writeJson("state.json", { seq: state.seq, cooldowns, lastDigestDate: state.lastDigestDate, llm: state.llm, crosscheckCache: state.crosscheckCache, xrefStats: state.xrefStats, coinLogos: state.coinLogos || {} });
 
   // In Actions: commit this cycle's history ourselves (append-only, per cycle).
   if (IS_ACTIONS) gitCommitData(cycleNo);
