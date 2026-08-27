@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>YieldWire — live yield audit for Base stablecoin pools</title>
 <meta name="description" content="An autonomous agent audits stablecoin yield pools on Base every 5 minutes, verifies numbers on-chain, and leaves a public, replayable record of every snapshot.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YieldWire">
+<meta property="og:title" content="YieldWire — every stablecoin pool on Base, audited every 5 minutes">
+<meta property="og:description" content="On-chain verified. Public append-only ledger. Read-only, no wallet, $0/month. The wire checks the body.">
+<meta property="og:image" content="https://bigmanmarsh.github.io/yieldwire/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YieldWire — every stablecoin pool on Base, audited every 5 minutes">
+<meta name="twitter:description" content="On-chain verified. Public append-only ledger. Read-only, no wallet, $0/month.">
+<meta name="twitter:image" content="https://bigmanmarsh.github.io/yieldwire/og-image.png">
 <style>
 :root{
   --bg:#07090d; --panel:#0e141c; --panel2:#111926; --line:#1d2836; --line2:#2a3a4e;
@@ -35,9 +47,8 @@ a:hover{text-decoration:underline}
 /* ── top bar ── */
 #topbar{position:sticky;top:0;z-index:50;background:rgba(7,9,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 #topbar .wrap{display:flex;align-items:center;gap:26px;height:62px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.4px;white-space:nowrap}
-.logo .dot{width:11px;height:11px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 0 rgba(46,230,168,.5);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,230,168,.5)}70%{box-shadow:0 0 0 9px rgba(46,230,168,0)}100%{box-shadow:0 0 0 0 rgba(46,230,168,0)}}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:.4px;white-space:nowrap}
+.logo .mark{width:29px;height:29px;display:block}
 .logo b{color:var(--grn)}
 nav{display:flex;gap:4px;margin-left:auto}
 nav a{color:var(--mut);font-size:15px;font-weight:600;padding:8px 14px;border-radius:9px;transition:.15s}
@@ -222,6 +233,8 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 footer{border-top:1px solid var(--line);padding:26px 0 90px;color:var(--faint);font-size:13.5px;position:relative;z-index:1}
 footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--mut)}
+footer img{width:22px;height:22px;display:block}
+footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--mut);letter-spacing:.3px}
 #previewBadge{position:fixed;right:14px;bottom:14px;z-index:60;font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--faint);background:rgba(14,20,28,.9);border:1px solid var(--line);padding:6px 10px;border-radius:8px}
 
 /* ── mobile ── */
@@ -258,7 +271,7 @@ footer a{color:var(--mut)}
 <body>
 
 <div id="topbar"><div class="wrap">
-  <a class="logo" href="#/"><span class="dot"></span>Yield<b>Wire</b></a>
+  <a class="logo" href="#/"><img class="mark" src="logo.svg" alt="YieldWire logo">Yield<b>Wire</b></a>
   <nav id="nav">
     <a href="#/" data-r="board">Board</a>
     <a href="#/rejections" data-r="rejections">Rejections</a>
@@ -344,7 +357,7 @@ footer a{color:var(--mut)}
 </div></main>
 
 <footer><div class="wrap">
-  <span id="footerMeta">YIELDWIRE · v0.2</span>
+  <span class="fbrand"><img src="logo.svg" alt="">YIELDWIRE · v0.2</span>
   <span>·</span>
   <a href="https://github.com/Bigmanmarsh/yieldwire" target="_blank" rel="noopener">public repo & code</a>
   <span>·</span>
@@ -361,7 +374,7 @@ footer a{color:var(--mut)}
 </div>
 
 <div id="toast"></div>
-<div id="previewBadge">UI PREVIEW · V6 · LIVE DATA</div>
+<div id="previewBadge">UI PREVIEW · V7 · LIVE DATA</div>
 
 <script>
 const REPO = "Bigmanmarsh/yieldwire";
