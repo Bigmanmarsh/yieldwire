@@ -85,15 +85,32 @@ h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
 .sub{color:var(--mut);font-size:17px;margin-top:10px;max-width:720px}
 .sub b{color:var(--txt)}
 
-/* ── anomaly banner ── */
-.anom{margin-top:22px;border:1px solid rgba(255,92,122,.5);background:linear-gradient(120deg,rgba(255,92,122,.12),rgba(255,92,122,.03));border-radius:var(--rad);padding:18px 20px;display:flex;gap:16px;align-items:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
-.anom:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 10px 34px -12px rgba(255,92,122,.45)}
-.anom .tag{flex:none;font-size:11px;font-weight:800;letter-spacing:1.4px;color:#fff;background:var(--red);padding:5px 10px;border-radius:7px}
-.anom .msg{font-size:16.5px;font-weight:600;line-height:1.45}
-.anom .msg b{color:var(--red)}
-.anom .go{margin-left:auto;flex:none;color:var(--red);font-weight:700;font-size:15px}
-.anom::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.05) 50%,transparent 60%);animation:sheen 4s linear infinite}
+/* ── anomaly hero card ── */
+.anom{margin-top:22px;border:1px solid rgba(255,92,122,.55);background:linear-gradient(120deg,rgba(255,92,122,.13),rgba(255,92,122,.02));border-radius:var(--rad);padding:22px 24px;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.anom:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 12px 40px -12px rgba(255,92,122,.5)}
+.anom .ahead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.anom .tag{flex:none;font-size:11px;font-weight:800;letter-spacing:1.4px;color:#fff;background:var(--red);padding:6px 11px;border-radius:7px}
+.anom h3{font-size:clamp(20px,2.8vw,27px);font-weight:800;letter-spacing:-.3px}
+.anom h3 b{color:var(--red)}
+.anom .apool{width:100%;font-size:13.5px;color:var(--faint);margin-top:2px}
+.anom .apool b{color:var(--txt)}
+.anom .cols{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:16px}
+.anom .col{background:rgba(7,9,13,.5);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.anom .col h4{font-size:10.5px;font-weight:900;letter-spacing:1.3px;color:var(--faint);margin-bottom:8px}
+.anom .col.red{border-color:rgba(255,92,122,.4)}
+.anom .col.red h4{color:var(--red)}
+.anom .col .big{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.anom .col.red .big{color:var(--red)}
+.anom .col .l{font-size:13.5px;color:var(--mut);margin-top:5px;font-variant-numeric:tabular-nums;line-height:1.5}
+.anom .why{margin-top:14px;font-size:14.5px;color:var(--mut);line-height:1.55}
+.anom .go{display:inline-block;margin-top:12px;color:var(--red);font-weight:700;font-size:15px}
+.anom::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 50%,transparent 60%);animation:sheen 4s linear infinite;pointer-events:none}
 @keyframes sheen{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+/* ── how-we-know flow ── */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:20px}
+.flow .fstep{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:12.5px;color:var(--mut)}
+.flow .fstep b{display:block;font-size:10.5px;font-weight:900;letter-spacing:1.2px;color:var(--txt)}
+.flow .farr{color:var(--faint);font-size:15px}
 
 /* ── stat cells ── */
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
@@ -117,9 +134,10 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .brow .apy{font-size:19px;font-weight:800;color:var(--grn);font-variant-numeric:tabular-nums;text-align:right}
 .brow .tvl{font-size:15px;color:var(--mut);font-variant-numeric:tabular-nums;text-align:right}
 .brow .chg{font-size:14px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
-.brow .chk{font-size:12.5px;font-weight:700;text-align:center;padding:4px 0;border-radius:7px}
+.brow .chk{font-size:12.5px;font-weight:700;text-align:center;padding:4px 0;border-radius:7px;cursor:help}
 .brow .chk.ok{color:var(--grn);background:rgba(46,230,168,.09)}
 .brow .chk.q{color:var(--faint);background:rgba(92,107,126,.12)}
+.brow .chk.err{color:var(--red);background:rgba(255,92,122,.1)}
 .brow .arrow{opacity:0;transform:translateX(-4px);transition:.15s;color:var(--mut);text-align:center}
 .bhead{display:grid;grid-template-columns:44px 1fr 130px 110px 120px 90px 34px;gap:12px;padding:10px 18px;font-size:11px;font-weight:800;letter-spacing:1.1px;color:var(--faint);background:var(--panel2);border-bottom:1px solid var(--line)}
 .bhead span:nth-child(3),.bhead span:nth-child(4),.bhead span:nth-child(5){text-align:right}
@@ -146,6 +164,22 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .dhead img{width:64px;height:64px;border-radius:16px;background:var(--panel2)}
 .dhead h1{font-size:clamp(24px,3.4vw,34px)}
 .dhead .pj{color:var(--mut);font-size:15px;margin-top:2px}
+.dhead .pk{font-size:10.5px;font-weight:900;letter-spacing:1.6px;color:var(--faint);margin-bottom:5px}
+.whybox{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:16px 20px;margin-top:14px}
+.whybox h4{font-size:11px;font-weight:900;letter-spacing:1.3px;color:var(--faint);margin-bottom:10px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+.wgrid span{font-size:14px;color:var(--mut)}
+.wgrid .ok{color:var(--grn)} .wgrid .no{color:var(--faint)} .wgrid .warn{color:var(--red)}
+@media(max-width:880px){.wgrid{grid-template-columns:1fr}}
+.rejcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.rcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;transition:.14s}
+.rcard:hover{border-color:var(--line2);transform:translateY(-2px)}
+.rcard.on{border-color:rgba(46,230,168,.55);background:var(--panel2)}
+.rcard b{display:block;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.rcard span{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--faint)}
+.llmlines{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.llmlines span{font-size:13px;color:var(--mut);background:rgba(7,9,13,.5);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
+.llmlines b{color:var(--txt)}
 .dhead .rank{margin-left:auto;font-size:13px;font-weight:800;letter-spacing:1px;color:var(--faint);border:1px solid var(--line2);padding:8px 14px;border-radius:99px}
 .dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
 .dstat{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:18px 20px}
@@ -173,6 +207,8 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .receipt .stamp.ok{color:var(--grn);background:rgba(46,230,168,.1);border:1px solid rgba(46,230,168,.45);transform:rotate(-1.5deg)}
 .receipt .stamp.q{color:var(--faint);background:rgba(92,107,126,.12);border:1px solid var(--line2)}
 .receipt .rmeta{margin-left:auto;color:var(--faint);font-size:13px;font-variant-numeric:tabular-nums}
+.receipt .src{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.8px;color:var(--faint);border:1px solid var(--line2);border-radius:5px;padding:2px 6px;margin-left:7px;vertical-align:1px}
+.proofline{font-size:13px;color:var(--faint);line-height:1.55;margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
 .rrow{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line);font-size:15.5px}
 .rrow span{color:var(--mut)}
 .rrow b{font-variant-numeric:tabular-nums;text-align:right}
@@ -308,13 +344,20 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
     <div id="anom"></div>
     <div class="stats">
       <div class="cell blu"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
-      <div class="cell grn"><b id="sIntegrity">–</b><span>SOURCE CONSISTENCY CHECKS</span></div>
-      <div class="cell"><b id="sVerified">–</b><span>TOP POOLS VERIFIED ON-CHAIN</span></div>
-      <a class="cell" id="sPegCell" href="#/"><b id="sPeg">–</b><span>PEG FLAGS LIVE</span></a>
-      <a class="cell red" href="#/rejections"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
+      <div class="cell grn" title="Pools that had all three APY fields to test — the rest are excluded from the count, not marked failed"><b id="sIntegrity">–</b><span>APY SOURCE CHECKS</span></div>
+      <div class="cell" title="This cycle: top pools within supported protocols (Aerodrome v1) + anything previously flagged"><b id="sVerified">–</b><span>ON-CHAIN CHECKS · THIS CYCLE</span></div>
+      <a class="cell" id="sPegCell" href="#/" title="Stablecoins in verified pools trading away from their peg — live from the latest on-chain read"><b id="sPeg">–</b><span>PEG FLAGS LIVE</span></a>
+      <a class="cell red" href="#/rejections" title="Every refusal is counted; named receipts are published up to 100 per snapshot"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
+    </div>
+    <div class="flow">
+      <span class="fstep"><b>INDEX</b>DeFiLlama</span><span class="farr">→</span>
+      <span class="fstep"><b>FILTER</b>published rules</span><span class="farr">→</span>
+      <span class="fstep"><b>CHECK</b>Base contract</span><span class="farr">→</span>
+      <span class="fstep"><b>COMPARE</b>independent evidence</span><span class="farr">→</span>
+      <span class="fstep"><b>RECORD</b>public snapshot</span>
     </div>
     <div class="sechead"><h2>Live board — highest reported APY, among pools that pass our published filters</h2><span class="note" id="boardTs"></span></div>
-    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>ON-CHAIN ✓</b> — we read that pool's own contract on Base · <b>queued</b> — in the on-chain verification line · <b>—</b> — protocol not yet covered by the on-chain reader (still fully monitored via the index). High APY is a number, not a recommendation.</p>
+    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>✓ 0.1%</b> — we read that pool's own contract on Base; the number is the difference between the reserve-derived value and the index · <b>not checked</b> — not in this cycle's verification set · <b>failed</b> — we tried the chain read and got no evidence this cycle · <b>—</b> — no contract coverage for this protocol yet (still fully monitored via the index). "Stablecoin pool" = the data source classifies it as stablecoin-related; it does not mean every asset in it is currently at its peg. High APY is a number, not a recommendation. Hover any value for detail.</p>
     <div class="board">
       <div class="bhead"><span>#</span><span>POOL</span><span>APY</span><span>TVL</span><span>24H Δ</span><span>ON-CHAIN</span><span></span></div>
       <div id="boardBody"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
@@ -356,6 +399,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
     <div class="detgrid" id="dets"></div>
     <div class="priv" style="margin-top:14px">
       <h3>Where the AI fits — and doesn't.</h3>
+      <div class="llmlines"><span><b>Facts:</b> deterministic rules</span><span><b>Verification:</b> on-chain + source data</span><span><b>Explanation:</b> optional AI</span></div>
       <p style="color:var(--mut);font-size:14.5px;line-height:1.6">The agent gathers, filters, detects, and verifies with <b style="color:var(--txt)">deterministic rules</b> — the same input always produces the same output. An optional LLM may write <b style="color:var(--txt)">at most one summary sentence</b>, only about already-verified facts, and a claim-checker rejects any sentence that invents a number. <b style="color:var(--txt)">The AI never decides whether a number is true.</b> Keyless mode (no model at all) is fully supported, and the site shows which mode produced each snapshot.</p>
     </div>
     <div class="sechead"><h2>Plain-English glossary</h2></div>
@@ -496,6 +540,22 @@ function bindLogoFallbacks(root, size) {
     if (w) w.innerHTML = monogram(w.dataset.sym, size);
   }, { once: true }));
 }
+function whyChain(xc, cc) {
+  const fl = (xc.pegFlags || []).map(f => `<span class="warn">⚠ ${esc(f.symbol)} ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</span>`).join("");
+  if (xc.status === "verified") {
+    return `<span class="ok">✓ Contract found (${short(xc.poolAddress || "")})</span>
+      <span class="ok">✓ Reserves read at block ${cc.blockNumber || "—"}</span>
+      <span class="ok">✓ Compared with index (Δ ${xc.devPct == null ? "n/a" : xc.devPct + "%"})</span>
+      ${fl || `<span class="ok">✓ No peg deviation found</span>`}`;
+  }
+  if (xc.status && String(xc.status).indexOf("error") === 0) {
+    return `<span class="warn">✗ Chain check attempted — no evidence this cycle</span>`;
+  }
+  if ((cc.pools || []).some(x => x.poolId === xc.poolId)) {
+    return `<span class="no">— In the verification pipeline, not completed this cycle</span>`;
+  }
+  return `<span class="no">— No contract coverage for this protocol yet (still monitored via the index)</span>`;
+}
 
 /* ── views ── */
 function setView(name) {
@@ -544,16 +604,31 @@ function renderBoard() {
   pegCell.href = flagPool ? "#/asset/" + flagPool.id : "#/ledger";
   $("#sRejected").textContent = (l.rejectedNamed || []).length;
 
-  // anomaly banner
+  // anomaly hero card
   const flags = pegFlagsAll(l);
   const an = $("#anom");
   if (flags.length) {
     const f = flags[0];
     const pool = (l.pools || []).find(p => (xc[p.id] || {}).pegFlags?.some(pf => pf.symbol === f.symbol));
+    const x = pool ? xc[pool.id] : null;
     an.innerHTML = `<div class="anom" data-go="${pool ? "#/asset/" + pool.id : "#/ledger"}">
-      <span class="tag">ANOMALY · LIVE</span>
-      <span class="msg"><b>${esc(f.symbol)}</b> is trading at <b>$${f.price.toFixed(4)}</b> — <b>${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</b>, verified straight from the pool contract at block <b>${l.crosscheck?.blockNumber || "?"}</b>. The board shows the yield; the wire checks the body.</span>
-      <span class="go">See the evidence →</span></div>`;
+      <div class="ahead">
+        <span class="tag">⚠ LIVE ANOMALY</span>
+        <h3>${esc(f.symbol)} is <b>$${Number(f.price).toFixed(4)}</b> — ${Math.abs(f.offPegPct).toFixed(1)}% below its ${f.peg} peg</h3>
+        <span class="apool">Pool: ${pool ? `${esc(pool.symbol)} · ${esc(pool.project)}` : "see the ledger"}${x ? ` · verified at Base block <b>${(l.crosscheck || {}).blockNumber || "—"}</b>` : ""}</span>
+      </div>
+      <div class="cols">
+        <div class="col"><h4>YIELD ADVERTISED · INDEX</h4>
+          <div class="big">${pool ? pct(pool.apy, 1) : "—"}</div>
+          <div class="l">${pool ? money(pool.tvl) + " TVL per DeFiLlama" : ""}</div>
+        </div>
+        <div class="col red"><h4>ON-CHAIN FINDING · BASE CONTRACT</h4>
+          <div class="big">${esc(f.symbol)} ≈ $${Number(f.price).toFixed(4)}</div>
+          <div class="l">${x ? `${(x.reserve0 || 0).toLocaleString()} + ${(x.reserve1 || 0).toLocaleString()} in the contract · reserve-derived ${money(x.onchainTvl)}` : "reserves read directly from the pool contract"}</div>
+        </div>
+      </div>
+      <div class="why"><b style="color:var(--txt)">Why this matters:</b> a yield dashboard can show an attractive APY while the asset earning that yield trades far below its intended peg. The index shows the yield; the wire checks what the yield is actually backed by.</div>
+      <span class="go">View the full evidence →</span></div>`;
     an.querySelector(".anom").addEventListener("click", () => { location.hash = an.querySelector(".anom").dataset.go; });
   } else an.innerHTML = "";
 
@@ -569,10 +644,26 @@ function renderBoard() {
 
   // board rows
   const sorted = [...l.pools].sort((a, b) => b.apy - a.apy);
+  const ccMeta = l.crosscheck || {};
   const rows = sorted.slice(0, BOARD_SHOWN).map((p, i) => {
     const x = xc[p.id] || {};
     const chg = p.apyPct1D;
     const chgCls = chg == null ? "" : chg > 0.05 ? "color:var(--grn)" : chg < -0.05 ? "color:var(--red)" : "color:var(--mut)";
+    let chk, chkCls, chkTip;
+    if (x.status === "verified") {
+      chk = "✓ " + (x.devPct == null ? "" : x.devPct + "%");
+      chkCls = "ok";
+      chkTip = "Chain checked — reserves read at block " + (ccMeta.blockNumber || "—") + (x.devPct == null ? "" : " · " + x.devPct + "% difference vs index");
+    } else if (x.status && String(x.status).indexOf("error") === 0) {
+      chk = "failed"; chkCls = "err";
+      chkTip = "We attempted the chain read and couldn't obtain evidence this cycle: " + x.status;
+    } else if (p.project === "aerodrome-v1") {
+      chk = "not checked"; chkCls = "q";
+      chkTip = "Not in this cycle's verification set (top pools in supported protocols + previously flagged)";
+    } else {
+      chk = "—"; chkCls = "q";
+      chkTip = "No contract coverage for this protocol yet — still fully monitored via the index";
+    }
     return `<div class="brow" data-go="#/asset/${p.id}">
       <span class="rk">${i + 1}</span>
       <span class="sym">${coinImg(p, 30)}
@@ -580,7 +671,7 @@ function renderBoard() {
       <span class="apy">${pct(p.apy, 2)}</span>
       <span class="tvl">${money(p.tvl)}</span>
       <span class="chg" style="${chgCls}">${chg == null ? "—" : (chg > 0 ? "+" : "") + chg.toFixed(1) + "%"}</span>
-      <span class="chk ${x.status === "verified" ? "ok" : "q"}">${x.status === "verified" ? "✓ " + (x.devPct == null ? "" : x.devPct + "%") : p.project === "aerodrome-v1" ? "queued" : "—"}</span>
+      <span class="chk ${chkCls}" title="${esc(chkTip)}">${chk}</span>
       <span class="arrow">→</span></div>`;
   }).join("");
   $("#boardBody").innerHTML = rows;
@@ -619,15 +710,17 @@ function renderAsset(id) {
       const pf = (xc.pegFlags || []).find(f => f.symbol === s);
       return `${esc(s)} <b>$${Number(pr).toFixed(4)}</b>${pf ? ` <span style="color:var(--red)">⚠ ${pf.offPegPct}% vs ${pf.peg}</span>` : ""}`;
     }).join(" · ");
+    const dev = xc.devPct;
+    const devCol = dev == null ? "var(--mut)" : dev <= 1 ? "var(--grn)" : dev <= 3 ? "var(--amb)" : "var(--red)";
     receipt = `<div class="receipt">
-      <div class="rhead"><span class="stamp ok">✓ RESERVES VERIFIED ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
-      <p style="font-size:13px;color:var(--faint);margin:-6px 0 8px">What this proves: the contract's token reserves at that exact block, and that they match the index within 0.5%. What it doesn't: the protocol's reported APY — that number still comes from the data source, and the wire says so rather than pretending otherwise.</p>
-      <div class="rrow"><span>On-chain reserves, USD-converted (CoinGecko prices)</span><b>${money(xc.onchainTvl)}</b></div>
-      <div class="rrow"><span>DeFiLlama-reported TVL</span><b>${money(xc.dfdTvl)}</b></div>
-      <div class="rrow"><span>Deviation between the two</span><b style="color:var(--grn)">${pct(xc.devPct, 2)}</b></div>
-      <div class="rrow"><span>Token prices from reserves</span><b>${res}</b></div>
-      <div class="rrow"><span>Reserves</span><b>${(xc.reserve0 || 0).toLocaleString()} + ${(xc.reserve1 || 0).toLocaleString()}</b></div>
+      <div class="rhead"><span class="stamp ok">✓ RESERVES READ ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract on Base</span><span class="rmeta">all reads pinned to block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="rrow"><span>Reserve amounts <i class="src">Base contract</i></span><b>${(xc.reserve0 || 0).toLocaleString()} + ${(xc.reserve1 || 0).toLocaleString()}</b></div>
+      <div class="rrow"><span>Prices used for valuation <i class="src">CoinGecko</i></span><b>${res}</b></div>
+      <div class="rrow"><span>Reserve-derived TVL <i class="src">reserves × prices</i></span><b>${money(xc.onchainTvl)}</b></div>
+      <div class="rrow"><span>Index TVL <i class="src">DeFiLlama</i></span><b>${money(xc.dfdTvl)}</b></div>
+      <div class="rrow"><span>Difference between the two</span><b style="color:${devCol}">${pct(dev, 2)}</b></div>
       <div class="tokrow"><a class="tok" href="${xc.basescan}" target="_blank" rel="noopener">${short(xc.poolAddress)} ↗ view contract on BaseScan</a></div>
+      <p class="proofline">What this proves: the tokens the contract holds, at that exact block. What it doesn't prove: the protocol's reported APY (that still comes from the index, and is labeled as such) — and the USD figures depend on the stated price source. Large gaps are shown as data-quality signals, never hidden.</p>
       ${(xc.pegFlags || []).map(f => `<div class="pegflag">⚠ <b>${esc(f.symbol)}</b> at $${Number(f.price).toFixed(4)} — <b>${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</b>. A "stablecoin" pool paying real yield on a 30%-off-peg token is exactly what YieldWire exists to surface.</div>`).join("")}
     </div>`;
   } else if ((cc.pools || []).some(x => x.poolId === id)) {
@@ -647,9 +740,17 @@ function renderAsset(id) {
   box.innerHTML = `
     <div class="dhead">
       ${coinImg(p, 64)}
-      <div><h1>${esc(p.symbol)}</h1><div class="pj">${esc(p.project)} · Base</div></div>
-      <span class="rank">RANK #${rank} BY APY</span>
+      <div><div class="pk">POOL · ${esc(p.project).toUpperCase()} · BASE</div><h1>${esc(p.symbol)}</h1></div>
+      <span class="rank">RANK #${rank} BY REPORTED APY</span>
     </div>
+    <div class="whybox"><h4>WHY YOU'RE SEEING THIS POOL</h4><div class="wgrid">
+      <span class="ok">✓ Base chain</span>
+      <span class="ok">✓ Stablecoin classification (data source)</span>
+      <span class="ok">✓ TVL ${money(p.tvl)} ≥ $500K floor</span>
+      <span class="ok">✓ APY below the 500% outlier ceiling</span>
+      <span class="ok">✓ Data fresh — snapshot ${ago(l.ts)}</span>
+      ${whyChain(xc, cc)}
+    </div></div>
     <div class="dgrid">
       <div class="dstat grn"><b>${pct(p.apy, 2)}</b><span>TOTAL APY (REWARDS)</span></div>
       <div class="dstat blu"><b>${money(p.tvl)}</b><span>TVL</span></div>
@@ -687,6 +788,9 @@ function renderAsset(id) {
 }
 
 /* ── REJECTIONS ── */
+let REJ_FILTER = null;
+const REJ_LABELS = { stale: "STALE DATA", outlier: "APY OUTLIER", dead: "DEAD POOL", belowFloor: "BELOW TVL FLOOR" };
+const REJ_REASON = { stale: "STALE", outlier: "OUTLIER", dead: "DEAD", belowFloor: "BELOW FLOOR" }; // exact strings in the data
 function renderRejections() {
   const l = LATEST;
   const box = $("#rejList");
@@ -694,14 +798,21 @@ function renderRejections() {
   const rj = l.rejectedNamed || [];
   const counts = l.rejected || {};
   const total = Object.values(counts).reduce((a, b) => a + (b || 0), 0);
-  const countLabels = { stale: "STALE DATA", outlier: "APY OUTLIER", dead: "DEAD POOL", belowFloor: "BELOW FLOOR" };
-  $("#rejCount").innerHTML = `<b>${total}</b> pools refused this snapshot — every one counted: ` + Object.entries(counts).map(([k, v]) => `<b>${v}</b> ${countLabels[k] || esc(k.toUpperCase())}`).join(" · ") + ` · named receipts shown below (up to 100, most severe first)`;
-  box.innerHTML = rj.slice(0, 60).map(r => `<div class="rejcard">
+  $("#rejCount").innerHTML = `<div class="rejcards">
+    <div class="rcard ${REJ_FILTER === null ? "on" : ""}" data-f="">ALL<b>${total}</b><span>REFUSED THIS SNAPSHOT</span></div>
+    ${Object.entries(counts).filter(([, v]) => v > 0).map(([k, v]) => `<div class="rcard ${REJ_FILTER === (REJ_REASON[k] || k) ? "on" : ""}" data-f="${esc(REJ_REASON[k] || k)}"><b>${v}</b><span>${esc(REJ_LABELS[k] || k)}</span></div>`).join("")}
+  </div><p class="note">Every refusal is counted. Named receipts (up to 100 per snapshot, most severe first) are below — click a number to filter. The full counts ship in the <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/latest.json" target="_blank" rel="noopener">public data file</a> every snapshot.</p>`;
+  $$("#rejCount .rcard").forEach(c => c.addEventListener("click", () => {
+    REJ_FILTER = c.dataset.f || null;
+    renderRejections();
+  }));
+  const shown = (REJ_FILTER ? rj.filter(r => r.reason === REJ_FILTER) : rj).slice(0, 60);
+  box.innerHTML = shown.map(r => `<div class="rejcard">
     <div class="rt">${esc(r.symbol)}</div>
     <div class="rp">${esc(r.project)} · Base</div>
     <span class="rr">${esc(r.reason)}</span>
     <div class="rd">${esc(r.detail)}</div>
-  </div>`).join("") + (rj.length > 60 ? `<div class="note" style="grid-column:1/-1">Showing the first 60 of ${rj.length} named receipts. Every other refusal is still counted and published in the <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/latest.json" target="_blank" rel="noopener">public data file</a> — counts for all ${Object.keys(l.rejected || {}).length} categories, updated every snapshot.</div>` : "");
+  </div>`).join("") + (shown.length === 0 ? `<div class="note" style="grid-column:1/-1">No named receipts in this category this snapshot.</div>` : (REJ_FILTER ? `<div class="note" style="grid-column:1/-1">Showing ${shown.length} of ${rj.filter(r => r.reason === REJ_FILTER).length} receipts for ${esc(REJ_FILTER)}.</div>` : rj.length > 60 ? `<div class="note" style="grid-column:1/-1">Showing the first 60 of ${rj.length} named receipts.</div>` : ""));
 }
 
 /* ── LEDGER ── */
@@ -763,8 +874,8 @@ const TH_COPY = {
   tvlShiftPct: "Reported TVL moved 25% in one cycle vs ~24h ago. We report the number that moved, not a cause — TVL can change because capital flowed, a token's price moved, or the valuation shifted. (That's exactly why the on-chain reserve check exists.)",
   apyOutlierPct: "A hard ceiling on reported APY: above 500%, the row is almost always an incentive-farming anomaly or a data bug, and publishing it would let one manipulated pool dominate the board. It's a published noise filter — not a claim that yields above 500% are impossible.",
   cooldownHours: "After an alert on a pool, the same kind of alert cools down for 12 hours. You get the story, not a spam loop.",
-  integrityTolPp: "On-chain TVL vs DeFiLlama TVL must agree within 0.5 percentage points for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
-  integrityTolPct: "On-chain TVL vs DeFiLlama TVL must agree within 0.5% for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
+  integrityTolPp: "A source-consistency check: where the index publishes all three APY components, the total must equal base + rewards within 0.5 percentage points. This tests the source's internal consistency — it does not prove the APY is economically real, and the site says so.",
+  integrityTolPct: "A source-consistency check: where the index publishes all three APY components, the total must equal base + rewards within 0.5%. This tests the source's internal consistency — it does not prove the APY is economically real.",
 };
 const GLOSSARY = [
   ["APY", "Annual Percentage Yield — the yearly return a pool reports. 36% APY means $100 could become ~$136 in a year, if the rate held. It's a reported number, not a promise."],
@@ -777,7 +888,7 @@ const GLOSSARY = [
 const TH_LABEL = {
   tvlFloor: "TVL floor", leaderTvlFloor: "Leader TVL floor", apyJumpPp: "APY jump threshold", apyCollapsePp: "APY collapse threshold",
   tvlShiftPct: "TVL shift threshold", apyOutlierPct: "APY outlier (×median)", cooldownHours: "Alert cooldown",
-  integrityTolPp: "Integrity tolerance (on-chain vs API)", integrityTolPct: "Integrity tolerance (on-chain vs API)",
+  integrityTolPp: "APY source-consistency tolerance", integrityTolPct: "APY source-consistency tolerance",
 };
 function renderHow() {
   $("#pipe").innerHTML = STAGES.map(([t, d], i) => `<div class="pstep" data-i="${i}"><span class="pn">STAGE ${i + 1}</span><h3>${t.split(" · ")[1]}</h3><div class="px">${d}</div></div>`).join("");

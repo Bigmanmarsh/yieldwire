@@ -47,10 +47,11 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
 **File: `src/crosscheck.js`.** Each cycle, the verification set is the **top pools by TVL within the supported protocols (v1: Aerodrome v1 on Base)**, plus any pool verified or peg-flagged in the previous snapshot (once caught, still watched). For each, the agent:
 
 1. Resolves the pool's actual contract address from the protocol's factory registry on Base.
-2. Calls `getReserves()` on that contract via **public, read-only Base RPC** (no wallet, no keys, no funds).
-3. Fetches token prices from CoinGecko (one batched call) and converts reserves to USD.
-4. Compares against the index-reported TVL (published tolerance: 0.5%) and records the **block number and timestamp** of the read.
-5. Checks each stablecoin's price against its peg — this is how the live MSUSD flag is produced (a "stablecoin" trading $0.68 while its pool advertises ~36% APY).
+2. Captures the current Base block and **pins every subsequent read to that block** — so "reserves at block X" is literally true, not an approximation.
+3. Calls `getReserves()` on that contract via **public, read-only Base RPC** (no wallet, no keys, no funds).
+4. Fetches token prices from CoinGecko (one batched call) and converts reserves to USD — "reserve-derived TVL": on-chain reserves × external prices, each labeled as such in the UI.
+5. Records the difference vs the index-reported TVL as a data-quality signal — large gaps are shown, never hidden, and no tolerance is claimed that the code doesn't enforce.
+6. Checks each stablecoin's price against its peg — this is how the live MSUSD flag is produced (a "stablecoin" trading $0.68 while its pool advertises high APY).
 
 **What this proves:** the contract's token reserves at a specific, publicly checkable block (every verified pool links to its contract on BaseScan).
 **What it does not prove:** the protocol's reported APY. YieldWire deliberately keeps those claims separate and says so on the site.

@@ -60,14 +60,16 @@ const PACE_MS = 250;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (l) => console.log(`[YIELDWIRE:crosscheck] ${l}`);
 
-async function ethCall(to, data) {
+async function ethCall(to, data, block) {
   let lastErr;
   for (let i = 0; i < RPCS.length; i++) {
     try {
       const r = await fetch(RPCS[i % RPCS.length], {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_call", params: [{ to, data }, "latest"] }),
+        // Pinned to the captured block when available, so "reserves at
+        // block X" is literally true for every read in the cycle.
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_call", params: [{ to, data }, block || "latest"] }),
         signal: AbortSignal.timeout(12000),
       });
       const j = await r.json();
@@ -128,7 +130,7 @@ export async function crosscheckPools(pools, cache = {}) {
     // ── factory list (cached 24h)
     if (!cacheOut.factories || Date.now() - cacheOut.lastFactories > 86400000) {
       try {
-        const raw = await ethCall(FACTORY_REGISTRY, SEL.pfList);
+        const raw = await ethCall(FACTORY_REGISTRY, SEL.pfList, blockNumber);
         const words = raw.slice(2).match(/.{64}/g);
         const n = Number(BigInt("0x" + words[1]));
         const fs = [];
@@ -188,7 +190,7 @@ export async function crosscheckPools(pools, cache = {}) {
           for (const f of cacheOut.factories) {
             for (const [a, b] of [[t0, t1], [t1, t0]]) {
               try {
-                const w = await ethCall(f, SEL.getPoolStable + pad32(a) + pad32(b) + "1".padStart(64, "0"));
+                const w = await ethCall(f, SEL.getPoolStable + pad32(a) + pad32(b) + "1".padStart(64, "0"), blockNumber);
                 const a2 = "0x" + w.slice(-40);
                 if (!isZeroAddr(a2) && a2 !== "0x" + "0".repeat(40)) { poolAddr = a2; break; }
               } catch { /* try next */ }
@@ -198,7 +200,7 @@ export async function crosscheckPools(pools, cache = {}) {
             if (!poolAddr) {
               for (const fee of FEES_TO_TRY) {
                 try {
-                  const w = await ethCall(f, SEL.getPoolFee + pad32(t0) + pad32(t1) + fee.toString(16).padStart(64, "0"));
+                  const w = await ethCall(f, SEL.getPoolFee + pad32(t0) + pad32(t1) + fee.toString(16).padStart(64, "0"), blockNumber);
                   const a2 = "0x" + w.slice(-40);
                   if (!isZeroAddr(a2) && a2 !== "0x" + "0".repeat(40)) { poolAddr = a2; break; }
                 } catch { /* try next */ }
@@ -214,7 +216,7 @@ export async function crosscheckPools(pools, cache = {}) {
         entry.basescan = `https://basescan.org/address/${poolAddr}`;
 
         // reserves
-        const res = await ethCall(poolAddr, SEL.getReserves);
+        const res = await ethCall(poolAddr, SEL.getReserves, blockNumber);
         const words = res.slice(2).match(/.{64}/g);
         const r0 = Number(BigInt("0x" + words[0]));
         const r1 = Number(BigInt("0x" + words[1]));
@@ -223,7 +225,7 @@ export async function crosscheckPools(pools, cache = {}) {
         // decimals (cached per token address)
         const dec = async (addr) => {
           if (cacheOut.decimals[addr]) return cacheOut.decimals[addr];
-          const d = Number(BigInt("0x" + (await ethCall(addr, SEL.decimals)).slice(-40)));
+          const d = Number(BigInt("0x" + (await ethCall(addr, SEL.decimals, blockNumber)).slice(-40)));
           cacheOut.decimals[addr] = d;
           await sleep(PACE_MS);
           return d;
