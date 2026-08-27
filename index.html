@@ -76,8 +76,9 @@ main{padding:26px 0 60px;min-height:70vh}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 h1{font-size:clamp(26px,4vw,38px);line-height:1.18;font-weight:800;letter-spacing:-.5px}
 h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
-.sechead{display:flex;align-items:baseline;gap:14px;margin:30px 0 14px}
+.sechead{display:flex;align-items:baseline;gap:14px;margin:30px 0 14px;flex-wrap:wrap}
 .sechead .note{color:var(--faint);font-size:13.5px;margin-left:auto;white-space:nowrap}
+@media(max-width:640px){.sechead .note{white-space:normal;margin-left:0;text-align:left}}
 .legend{margin:-6px 0 12px;font-size:13.5px;color:var(--faint);line-height:1.5}
 .legend b{color:var(--mut)}
 .skel{height:44px;border-radius:10px;margin:9px 0;background:linear-gradient(100deg,var(--panel) 40%,var(--panel2) 50%,var(--panel) 60%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
@@ -111,6 +112,55 @@ h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
 .flow .fstep{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:12.5px;color:var(--mut)}
 .flow .fstep b{display:block;font-size:10.5px;font-weight:900;letter-spacing:1.2px;color:var(--txt)}
 .flow .farr{color:var(--faint);font-size:15px}
+/* ── hero hierarchy ── */
+.hero h1{font-size:clamp(34px,5vw,54px);line-height:1.04;letter-spacing:-1.2px}
+.hero .sub{max-width:820px;font-size:16.5px;line-height:1.65}
+.stats{margin-top:34px}
+.cell span{font-size:12px;font-weight:700;letter-spacing:.3px;color:var(--mut)}
+/* ── peg gauge ── */
+.gauge{position:relative;width:232px;max-width:100%;margin:0 auto}
+.gauge .big{position:absolute;left:0;right:0;bottom:-2px;text-align:center}
+.gauge .big b{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;display:block;letter-spacing:-.5px}
+.gauge .big span{font-size:11px;color:var(--faint);font-weight:800;letter-spacing:1px}
+/* ── board mini sparkline ── */
+.sprk{display:block;width:62px;height:17px;margin-top:4px;opacity:.9}
+.sprk polyline{fill:none;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+/* ── watch chip ── */
+.wtag{font-size:9px;font-weight:900;letter-spacing:1.1px;color:var(--amb);border:1px solid rgba(255,184,77,.42);background:rgba(255,184,77,.09);border-radius:5px;padding:2px 6px;margin-left:8px;vertical-align:2px;cursor:help;text-transform:uppercase}
+/* ── scan pulse (the one animation) ── */
+#livePill.scanning{color:var(--blu);border-color:rgba(90,169,255,.5)}
+#livePill.scanning .d{background:var(--blu);animation:blink .5s infinite}
+@keyframes blink{50%{opacity:.25}}
+/* ── latest-cycle activity ── */
+.activity{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:20px 24px;margin-top:16px;max-width:780px}
+.activity h4{font-size:11px;font-weight:900;letter-spacing:1.4px;color:var(--faint);margin-bottom:12px}
+.activity h4 b{color:var(--grn)}
+.aline{display:flex;gap:12px;align-items:baseline;padding:6px 0;font-size:14.5px;color:var(--mut);line-height:1.45;border-top:1px solid var(--line)}
+.aline:first-of-type{border-top:0}
+.aline .ic{flex:none;width:18px;text-align:center;font-weight:800}
+.aline .ic.ok{color:var(--grn)} .aline .ic.warn{color:var(--red)} .aline .ic.chain{color:var(--blu)}
+.aline b{color:var(--txt);font-weight:700}
+.aline a{color:var(--mut)}
+.activity .ameta{margin-top:12px;font-size:12.5px;color:var(--faint);line-height:1.5}
+.activity .ameta a{color:var(--mut)}
+/* ── trust strip ── */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.tcard{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--rad);padding:18px 18px 16px;transition:.15s}
+.tcard:hover{border-color:var(--line2);transform:translateY(-2px)}
+.tcard .ti{font-size:16px}
+.tcard h4{font-size:15px;font-weight:800;margin:9px 0 5px;letter-spacing:-.1px}
+.tcard p{font-size:13px;color:var(--mut);line-height:1.55}
+.tcard .tgo{display:inline-block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--blu);text-decoration:none}
+.tcard .tgo:hover{text-decoration:underline}
+@media(max-width:1080px){.trust{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.trust{grid-template-columns:1fr}}
+.meter{background:linear-gradient(120deg,rgba(255,92,122,.08),rgba(255,92,122,.015));border:1px solid rgba(255,92,122,.4);border-radius:var(--rad);padding:20px 24px;margin-top:14px}
+.meter .mhead{font-size:11px;font-weight:900;letter-spacing:1.4px;color:var(--faint);margin-bottom:16px}
+.meter .mhint{font-weight:400;font-size:13px;letter-spacing:0;margin-left:10px;color:var(--mut)}
+.meter .mrow{display:flex;gap:36px;flex-wrap:wrap}
+.anom .tri{display:grid;grid-template-columns:232px 1fr 1fr;gap:13px;margin-top:16px;align-items:stretch}
+.anom .tri .gcard{display:flex;flex-direction:column;justify-content:center}
+@media(max-width:880px){.anom .tri{grid-template-columns:1fr}.anom .tri .gcard{order:-1}}
 
 /* ── stat cells ── */
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
@@ -226,7 +276,7 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .rejcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:11px;padding:14px 16px;transition:.14s}
 .rejcard:hover{border-color:var(--line2);border-left-color:var(--red);transform:translateY(-2px)}
 .rejcard .rt{display:flex;align-items:center;gap:9px;font-weight:750;font-size:16px}
-.rejcard .rp{font-size:12.5px;color:var(--faint);margin-top:1px}
+.rejcard .rp{font-size:12.5px;color:var(--faint);margin-top:1px;overflow-wrap:anywhere}
 .rejcard .rr{display:inline-block;margin-top:9px;font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--red);background:rgba(255,92,122,.1);border:1px solid rgba(255,92,122,.35);padding:4px 9px;border-radius:6px}
 .rejcard .rd{font-size:13.5px;color:var(--mut);margin-top:8px;font-variant-numeric:tabular-nums}
 .rejcount{font-size:14px;color:var(--faint);margin:16px 0 4px}
@@ -303,7 +353,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   .bhead span:nth-child(3){text-align:right}
   .dgrid{grid-template-columns:1fr 1fr}
   .dgrid .full{grid-column:1/-1}
-  .rejgrid{grid-template-columns:1fr 1fr}
+  .rejgrid{grid-template-columns:1fr}
   .ledgrid{grid-template-columns:1fr}
   .pipe{grid-template-columns:1fr 1fr 1fr}
   .pstep .px{text-align:center}
@@ -340,14 +390,14 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   <!-- ══ BOARD ══ -->
   <section class="view" id="v-board">
     <h1>Yield isn't the whole story.</h1>
-    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin pools on Base on a 5-minute cadence — and checks the numbers against the chain and its own published rules before you're asked to believe them. When the board changes it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
+    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin yield markets on Base every five minutes — and checks the numbers against the chain and its own published rules before you're asked to believe them. When the board changes it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
     <div id="anom"></div>
     <div class="stats">
-      <div class="cell blu"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
-      <div class="cell grn" title="Pools that had all three APY fields to test — the rest are excluded from the count, not marked failed"><b id="sIntegrity">–</b><span>APY SOURCE CHECKS</span></div>
-      <div class="cell" title="This cycle: top pools within supported protocols (Aerodrome v1) + anything previously flagged"><b id="sVerified">–</b><span>ON-CHAIN CHECKS · THIS CYCLE</span></div>
-      <a class="cell" id="sPegCell" href="#/" title="Stablecoins in verified pools trading away from their peg — live from the latest on-chain read"><b id="sPeg">–</b><span>PEG FLAGS LIVE</span></a>
-      <a class="cell red" href="#/rejections" title="Every refusal is counted; named receipts are published up to 100 per snapshot"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
+      <div class="cell blu"><b id="sPools">–</b><span>Pools monitored</span></div>
+      <div class="cell grn" title="Pools that had all three APY fields to test — the rest are excluded from the count, not marked failed"><b id="sIntegrity">–</b><span>APY source checks</span></div>
+      <div class="cell" title="This cycle: top pools within supported protocols (Aerodrome v1) + anything previously flagged"><b id="sVerified">–</b><span>On-chain checks · this cycle</span></div>
+      <a class="cell" id="sPegCell" href="#/" title="Stablecoins in verified pools trading away from their peg — live from the latest on-chain read"><b id="sPeg">–</b><span>Peg flags live</span></a>
+      <a class="cell red" href="#/rejections" title="Every refusal is counted; named receipts are published up to 100 per snapshot"><b id="sRejected">–</b><span>Pools rejected ↗</span></a>
     </div>
     <div class="flow">
       <span class="fstep"><b>INDEX</b>DeFiLlama</span><span class="farr">→</span>
@@ -356,8 +406,15 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
       <span class="fstep"><b>COMPARE</b>independent evidence</span><span class="farr">→</span>
       <span class="fstep"><b>RECORD</b>public snapshot</span>
     </div>
+    <div class="activity" id="activity"></div>
     <div class="sechead"><h2>Live board — highest reported APY, among pools that pass our published filters</h2><span class="note" id="boardTs"></span></div>
-    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>✓ 0.1%</b> — we read that pool's own contract on Base; the number is the difference between the reserve-derived value and the index · <b>not checked</b> — not in this cycle's verification set · <b>failed</b> — we tried the chain read and got no evidence this cycle · <b>—</b> — no contract coverage for this protocol yet (still fully monitored via the index). "Stablecoin pool" = the data source classifies it as stablecoin-related; it does not mean every asset in it is currently at its peg. High APY is a number, not a recommendation. Hover any value for detail.</p>
+    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>✓ 0.1%</b> — we read that pool's own contract on Base; the number is the difference between the reserve-derived value and the index · <b>not checked</b> — not in this cycle's verification set · <b>failed</b> — we tried the chain read and got no evidence this cycle · <b>—</b> — no contract coverage for this protocol yet (still fully monitored via the index) · <b>watch</b> — reported APY down 10%+ in 24h (a display flag, not a new detector). "Stablecoin pool" = the data source classifies it as stablecoin-related; it does not mean every asset in it is currently at its peg. High APY is a number, not a recommendation. Hover any value for detail.</p>
+    <div class="trust">
+      <div class="tcard"><div class="ti">🏷</div><h4>Every number has a named source</h4><p>Reserves from the Base contract, prices from CoinGecko, the index from DeFiLlama — each labeled at the point of use.</p><a class="tgo" href="#/how">How a number is made →</a></div>
+      <div class="tcard"><div class="ti">📜</div><h4>Append-only ledger</h4><p>Every five minutes a full snapshot is committed to public git. Replay any past moment, down to the raw numbers.</p><a class="tgo" href="#/ledger">Open the ledger →</a></div>
+      <div class="tcard"><div class="ti">🚫</div><h4>Rejections are public</h4><p>Refusals are counted and named with the exact rule that killed them. A monitor that hides its no's isn't a monitor.</p><a class="tgo" href="#/rejections">See the receipts →</a></div>
+      <div class="tcard"><div class="ti">🤖</div><h4>The AI is optional</h4><p>Every check is deterministic and runs keyless. A model may write a sentence — it can never change a number.</p><a class="tgo" href="#/how">Where the AI fits →</a></div>
+    </div>
     <div class="board">
       <div class="bhead"><span>#</span><span>POOL</span><span>APY</span><span>TVL</span><span>24H Δ</span><span>ON-CHAIN</span><span></span></div>
       <div id="boardBody"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
@@ -540,6 +597,48 @@ function bindLogoFallbacks(root, size) {
     if (w) w.innerHTML = monogram(w.dataset.sym, size);
   }, { once: true }));
 }
+/* Semicircular peg meter. Scale: 0.5× to 1.5× of peg; green band ±3%. */
+function pegGauge(price, peg) {
+  const pegV = typeof peg === "number" ? peg : (parseFloat(String(peg).replace(/[^0-9.]/g, "")) || 1);
+  const lo = pegV * 0.5, hi = pegV * 1.5;
+  const cl = Math.min(Math.max(price, lo), hi);
+  const ang = ((cl - lo) / (hi - lo)) * 180; // 0 = left, 180 = right, 90 = top (peg)
+  const P = (a, r) => { const t = Math.PI * (1 - a / 180), cx = 110, cy = 102; return [cx + r * Math.cos(t), cy - r * Math.sin(t)]; };
+  const arc = (a0, a1, r) => { const [x0, y0] = P(a0, r), [x1, y1] = P(a1, r); return `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+  const off = (price - pegV) / pegV * 100;
+  const col = Math.abs(off) <= 3 ? "var(--grn)" : Math.abs(off) <= 10 ? "var(--amb)" : "var(--red)";
+  const [nx, ny] = P(ang, 92);
+  return `<div class="gauge">
+    <svg viewBox="0 0 220 112" style="width:100%;height:auto;display:block">
+      <path d="${arc(0, 180, 92)}" fill="none" stroke="rgba(92,107,126,.22)" stroke-width="12" stroke-linecap="round"/>
+      <path d="${arc(0, 84.6, 92)}" fill="none" stroke="rgba(255,92,122,.20)" stroke-width="12"/>
+      <path d="${arc(84.6, 95.4, 92)}" fill="none" stroke="rgba(46,230,168,.5)" stroke-width="12"/>
+      <line x1="110" y1="10" x2="110" y2="24" stroke="rgba(233,238,245,.55)" stroke-width="2"/>
+      <text x="110" y="34" text-anchor="middle" fill="var(--faint)" font-size="9" font-weight="800" letter-spacing="1">PEG ${(pegV * 100).toFixed(0)}¢</text>
+      <line x1="110" y1="102" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="110" cy="102" r="4" fill="var(--mut)"/>
+      <circle cx="${nx.toFixed(1)}" cy="${ny.toFixed(1)}" r="5.5" fill="${col}"/>
+    </svg>
+    <div class="big"><b style="color:${col}">${(price * 100).toFixed(2)}¢</b><span>VS ${(pegV * 100).toFixed(0)}¢ PEG · ${off > 0 ? "+" : ""}${off.toFixed(1)}%</span></div>
+  </div>`;
+}
+function sparkMini(vals, color) {
+  const v = (vals || []).filter(x => x != null && Number.isFinite(x));
+  if (v.length < 2) return "";
+  const w = 62, h = 17, pad = 2;
+  const min = Math.min(...v), max = Math.max(...v), rng = (max - min) || 1;
+  const pts = v.map((x, i) => (pad + i * (w - 2 * pad) / (v.length - 1)).toFixed(1) + "," + (h - pad - (x - min) / rng * (h - 2 * pad)).toFixed(1)).join(" ");
+  return `<svg class="sprk" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" stroke="${color}"/></svg>`;
+}
+function pegMeter(xc) {
+  const pfl = xc.pegFlags || [];
+  if (!pfl.length) return "";
+  return `<div class="meter">
+    <div class="mhead">PEG METER — ${esc(pfl[0].symbol)}${pfl.length > 1 ? ` + ${pfl.length - 1} MORE` : ""}<span class="mhint">where it trades vs where it should</span></div>
+    <div class="mrow">${pfl.map(f => pegGauge(f.price, f.peg)).join("")}</div>
+    <p class="note" style="margin-top:14px">Price from this snapshot's CoinGecko read, checked against the ${pfl[0].peg} peg — ${pfl.map(f => `${esc(f.symbol)} ${Math.abs(f.offPegPct).toFixed(1)}% off`).join(", ")}. "Stablecoin" is the data source's classification; the meter shows what the market actually pays. The contract's own reserves are in the evidence card below.</p>
+  </div>`;
+}
 function whyChain(xc, cc) {
   const fl = (xc.pegFlags || []).map(f => `<span class="warn">⚠ ${esc(f.symbol)} ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</span>`).join("");
   if (xc.status === "verified") {
@@ -575,13 +674,22 @@ function route() {
 }
 
 /* ── status pill ── */
+let SCAN_PULSED = false;
 function paintStatus() {
   const pill = $("#livePill"), txt = $("#liveTxt");
   if (!LATEST) { pill.className = "stale"; txt.textContent = "OFFLINE"; return; }
+  if (!SCAN_PULSED) { // the one animation: a scan pulse on first load, then steady
+    SCAN_PULSED = true;
+    pill.className = "scanning";
+    txt.textContent = "SCANNING " + LATEST.pools.length + " MARKETS…";
+    setTimeout(paintStatus, 1500);
+    return;
+  }
   const age = Date.now() - Date.parse(LATEST.ts);
+  const slim = window.innerWidth < 700;
   if (age < LIVE_MAX_AGE_MS) {
     pill.className = "live";
-    txt.textContent = "LIVE · " + ago(LATEST.ts).toUpperCase() + " · BLOCK " + (LATEST.crosscheck?.blockNumber || "—");
+    txt.textContent = "LIVE · " + ago(LATEST.ts).toUpperCase() + (slim ? "" : " · BLOCK " + (LATEST.crosscheck?.blockNumber || "—"));
   } else {
     pill.className = "stale"; txt.textContent = "STALE · " + ago(LATEST.ts).toUpperCase();
   }
@@ -600,6 +708,21 @@ function renderBoard() {
   $("#sPeg").textContent = nFlags;
   const pegCell = $("#sPegCell");
   pegCell.classList.toggle("red", nFlags > 0);
+  // latest-cycle activity — every line computed from the snapshot itself
+  const act = $("#activity");
+  if (act) {
+    const sum = (l.crosscheck || {}).summary || {};
+    const rejTot = Object.values(l.rejected || {}).reduce((a, b) => a + (b || 0), 0);
+    const fl = pegFlagsAll(l);
+    act.innerHTML = `<h4>LATEST CYCLE · <b>${l.ts.replace("T", " ").replace(/\.\d+Z/, "")} UTC</b></h4>
+      <div class="aline"><span class="ic">◈</span><span>Scanned <b>${l.pools.length}</b> stablecoin yield markets on Base</span></div>
+      <div class="aline"><span class="ic ok">✓</span><span>APY source-consistency: <b>${l.integrity ? l.integrity.pass + " of " + l.integrity.checked + " pools passed" : "not applicable this cycle"}</b> — where the index publishes all three components</span></div>
+      <div class="aline"><span class="ic ok">✓</span><span><b>${rejTot}</b> pools refused by the published rules — named receipts in the <a href="#/rejections">refusal ledger</a></span></div>
+      <div class="aline"><span class="ic chain">⛓</span><span>On-chain reserve reads: <b>${sum.attempted ?? 0} attempted at block ${(l.crosscheck || {}).blockNumber || "—"} — ${sum.verified ?? 0} succeeded</b>, every read pinned to that block</span></div>
+      ${fl.length ? fl.map(f => `<div class="aline"><span class="ic warn">⚠</span><span><b>${esc(f.symbol)}</b> ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg — flag published to the board and Telegram</span></div>`).join("") : `<div class="aline"><span class="ic ok">✓</span><span>No peg deviation in the pools checked on-chain</span></div>`}
+      <div class="aline"><span class="ic ok">✓</span><span>Snapshot appended to the public, versioned ledger — anyone can replay this exact moment</span></div>
+      <div class="ameta">Every line above is computed from the snapshot itself — no narration, no AI. <a href="#/ledger">See every cycle →</a></div>`;
+  }
   const flagPool = (l.pools || []).find(p => (xc[p.id] || {}).pegFlags?.length);
   pegCell.href = flagPool ? "#/asset/" + flagPool.id : "#/ledger";
   $("#sRejected").textContent = (l.rejectedNamed || []).length;
@@ -617,10 +740,11 @@ function renderBoard() {
         <h3>${esc(f.symbol)} is <b>$${Number(f.price).toFixed(4)}</b> — ${Math.abs(f.offPegPct).toFixed(1)}% below its ${f.peg} peg</h3>
         <span class="apool">Pool: ${pool ? `${esc(pool.symbol)} · ${esc(pool.project)}` : "see the ledger"}${x ? ` · verified at Base block <b>${(l.crosscheck || {}).blockNumber || "—"}</b>` : ""}</span>
       </div>
-      <div class="cols">
+      <div class="tri">
+        <div class="col gcard">${pegGauge(f.price, f.peg)}<div class="l" style="text-align:center;margin-top:10px">where ${esc(f.symbol)} actually trades</div></div>
         <div class="col"><h4>YIELD ADVERTISED · INDEX</h4>
           <div class="big">${pool ? pct(pool.apy, 1) : "—"}</div>
-          <div class="l">${pool ? money(pool.tvl) + " TVL per DeFiLlama" : ""}</div>
+          <div class="l">${pool ? money(pool.tvl) + " TVL per DeFiLlama — the number a dashboard would show you" : ""}</div>
         </div>
         <div class="col red"><h4>ON-CHAIN FINDING · BASE CONTRACT</h4>
           <div class="big">${esc(f.symbol)} ≈ $${Number(f.price).toFixed(4)}</div>
@@ -664,11 +788,13 @@ function renderBoard() {
       chk = "—"; chkCls = "q";
       chkTip = "No contract coverage for this protocol yet — still fully monitored via the index";
     }
+    const chgCol = chg == null ? "var(--mut)" : chg > 0.05 ? "var(--grn)" : chg < -0.05 ? "var(--red)" : "var(--mut)";
+    const watch = (chg != null && chg <= -10) ? `<span class="wtag" title="Reported APY down ${Math.abs(chg).toFixed(1)}% in 24h — a display flag, not a new detector">watch</span>` : "";
     return `<div class="brow" data-go="#/asset/${p.id}">
       <span class="rk">${i + 1}</span>
       <span class="sym">${coinImg(p, 30)}
-        <span><span class="nm">${esc(p.symbol)}</span><br><span class="pj">${esc(p.project)}</span></span></span>
-      <span class="apy">${pct(p.apy, 2)}</span>
+        <span><span class="nm">${esc(p.symbol)}${watch}</span><br><span class="pj">${esc(p.project)}</span></span></span>
+      <span class="apy">${pct(p.apy, 2)}${sparkMini(p.hist && p.hist.apy, chgCol)}</span>
       <span class="tvl">${money(p.tvl)}</span>
       <span class="chg" style="${chgCls}">${chg == null ? "—" : (chg > 0 ? "+" : "") + chg.toFixed(1) + "%"}</span>
       <span class="chk ${chkCls}" title="${esc(chkTip)}">${chk}</span>
@@ -756,7 +882,8 @@ function renderAsset(id) {
       <div class="dstat blu"><b>${money(p.tvl)}</b><span>TVL</span></div>
       <div class="dstat"><b>${p.apyPct1D == null ? "—" : (p.apyPct1D > 0 ? "+" : "") + p.apyPct1D.toFixed(1) + "%"}</b><span>APY Δ · LAST 24H</span></div>
     </div>
-    <div class="chart"><div class="ct"><span>APY · LAST ${nA} SNAPSHOTS (~${hrs(nA)}H AT 5-MIN CADENCE) — hover for values</span><span>min ${Math.min(...(p.hist.apy || []).map(Number)).toFixed(1)}% · max ${Math.max(...(p.hist.apy || []).map(Number)).toFixed(1)}%</span></div><div class="cwrap">${sparkline(p.hist.apy, "#2ee6a8", (x) => x.toFixed(2) + "% APY")}<div class="tip"></div></div></div>
+    ${pegMeter(xc)}
+    <div class="chart"><div class="ct"><span>APY · LAST ${nA} SNAPSHOTS (~${hrs(nA)}H AT 5-MIN CADENCE) — hover for values${(xc.pegFlags || []).length ? ` · <b style="color:var(--red)">⚠ PEG FLAG LIVE IN THIS SNAPSHOT</b>` : ""}</span><span>min ${Math.min(...(p.hist.apy || []).map(Number)).toFixed(1)}% · max ${Math.max(...(p.hist.apy || []).map(Number)).toFixed(1)}%</span></div><div class="cwrap">${sparkline(p.hist.apy, "#2ee6a8", (x) => x.toFixed(2) + "% APY")}<div class="tip"></div></div></div>
     <div class="chart"><div class="ct"><span>TVL · LAST ${nT} SNAPSHOTS (~${hrs(nT)}H)</span><span>${money(Math.min(...(p.hist.tvl || []).map(Number)))} → ${money(Math.max(...(p.hist.tvl || []).map(Number)))}</span></div><div class="cwrap">${sparkline(p.hist.tvl, "#5aa9ff", (x) => money(x) + " TVL")}<div class="tip"></div></div></div>
     ${receipt}
     <div class="sechead"><h2>Underlying tokens</h2></div>

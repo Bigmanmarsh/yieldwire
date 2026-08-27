@@ -2,6 +2,13 @@
 
 **You don't monitor yield. The wire does.**
 
+> **Every yield dashboard answers "how much?". YieldWire answers "can I actually trust it?"**
+> An autonomous agent reads the Base market every five minutes, refuses pools that fail its
+> published rules, reads the top pools' *own contracts* on-chain, and appends everything to a
+> public ledger. Live right now: a "stablecoin" called **MSUSD trades at $0.68** — 31.9% below
+> its $1 peg — while its pool advertises yield. The index showed the yield. The wire checked
+> the body.
+
 YieldWire is an autonomous agent that monitors every stablecoin pool on Base (TVL ≥ $500K) on a 5-minute cadence, **verifies the top pools by reading their own contracts on-chain**, and leaves a public, versioned record of every snapshot. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — it messages you on Telegram with the before, the after, and the math attached. No wallet. No custody. No trades.
 
 Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon).
@@ -25,6 +32,24 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
 - Does not claim blockchain-grade immutability for its history — it's public, versioned, and tamper-evident, which is exactly what it claims to be.
 
 ## The pipeline (60-second version)
+
+```text
+              every 5 min
+  DeFiLlama ──────────────────►┌──────────────────────────────────────┐
+  (index)                      │ YIELDWIRE AGENT — GitHub Actions, $0 │
+                               │                                      │
+  Base L1  ◄── hex RPC reads ──│ 1 INDEX     read the market           │
+  (contracts)                  │ 2 FILTER    published rules,          │
+                               │              receipts published       │
+                               │ 3 CHECK     reserves @ pinned block   │
+                               │ 4 COMPARE   pegs, source consistency  │
+                               │ 5 RECORD    append-only public ledger │
+                               └──────────────┬───────────────────────┘
+        ┌──────────────────────┬──────────────┴──────────────┐
+        ▼                      ▼                             ▼
+ GitHub Pages site       Telegram alert (diff)         data/*.json in git
+ the evidence UI         before · after · math         replay any moment
+```
 
 1. **Fetch** — the free, keyless [DeFiLlama yields endpoint](https://yields.llama.fi/pools), every 5 minutes via GitHub Actions. One source, published on the site.
 2. **Normalize** — Base · stablecoin · TVL ≥ $500K. Stale, outlier (APY > 500% ceiling), and dead pools are rejected; **every rejection is counted** and named receipts (up to 100 per snapshot, most severe first) are published.
