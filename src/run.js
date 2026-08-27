@@ -165,7 +165,18 @@ async function runCycle(cycleNo) {
   // (decorative + data-quality; read-only, $0, can never fail the run)
   let crosscheck = { pools: [], summary: { attempted: 0, verified: 0, pegFlags: 0, skipped: 0 }, note: "unavailable this run" };
   try {
-    crosscheck = await crosscheckPools(top.slice(0, 10), state.crosscheckCache || {});
+    // Verification set (published on the site): the top pools by TVL — where
+    // the most user money sits — plus carry-over: any pool that was verified
+    // or peg-flagged in the previous snapshot keeps being checked while it's
+    // relevant. Once we catch something, we keep watching it.
+    const prevCcPools = (prev && prev.crosscheck && prev.crosscheck.pools) || [];
+    const carryIds = prevCcPools.filter(x => x.status === "verified" || (x.pegFlags || []).length).map(x => x.poolId);
+    const ccSet = [...pools].sort((a, b) => (b.tvl || 0) - (a.tvl || 0)).slice(0, 10);
+    for (const id of carryIds) {
+      const p = pools.find(x => x.id === id);
+      if (p && !ccSet.includes(p)) ccSet.push(p);
+    }
+    crosscheck = await crosscheckPools(ccSet, state.crosscheckCache || {});
     state.crosscheckCache = crosscheck.cache;
     delete crosscheck.cache;
   } catch (e) {

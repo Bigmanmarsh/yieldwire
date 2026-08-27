@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>YieldWire — live yield audit for Base stablecoin pools</title>
-<meta name="description" content="An autonomous agent audits stablecoin yield pools on Base every 5 minutes, verifies numbers on-chain, and leaves a public, replayable record of every snapshot.">
+<title>YieldWire — independent yield monitoring for Base stablecoin pools, verified on-chain</title>
+<meta name="description" content="An autonomous agent monitors stablecoin yield pools on Base every 5 minutes, verifies the top pools directly on-chain, and leaves a public, replayable record of every snapshot.">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="YieldWire">
-<meta property="og:title" content="YieldWire — every stablecoin pool on Base, audited every 5 minutes">
-<meta property="og:description" content="On-chain verified. Public append-only ledger. Read-only, no wallet, $0/month. The wire checks the body.">
+<meta property="og:title" content="YieldWire — Base stablecoin yields, monitored every 5 minutes and checked against the chain">
+<meta property="og:description" content="On-chain reserve verification. Public versioned ledger. Read-only, no wallet, $0/month. The wire checks the body.">
 <meta property="og:image" content="https://bigmanmarsh.github.io/yieldwire/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="YieldWire — every stablecoin pool on Base, audited every 5 minutes">
-<meta name="twitter:description" content="On-chain verified. Public append-only ledger. Read-only, no wallet, $0/month.">
+<meta name="twitter:title" content="YieldWire — Base stablecoin yields, monitored every 5 minutes and checked against the chain">
+<meta name="twitter:description" content="On-chain reserve verification. Public versioned ledger. Read-only, no wallet, $0/month.">
 <meta name="twitter:image" content="https://bigmanmarsh.github.io/yieldwire/og-image.png">
 <style>
 :root{
@@ -78,6 +78,10 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.18;font-weight:800;letter-spacin
 h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
 .sechead{display:flex;align-items:baseline;gap:14px;margin:30px 0 14px}
 .sechead .note{color:var(--faint);font-size:13.5px;margin-left:auto;white-space:nowrap}
+.legend{margin:-6px 0 12px;font-size:13.5px;color:var(--faint);line-height:1.5}
+.legend b{color:var(--mut)}
+.skel{height:44px;border-radius:10px;margin:9px 0;background:linear-gradient(100deg,var(--panel) 40%,var(--panel2) 50%,var(--panel) 60%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
 .sub{color:var(--mut);font-size:17px;margin-top:10px;max-width:720px}
 .sub b{color:var(--txt)}
 
@@ -299,20 +303,21 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
 
   <!-- ══ BOARD ══ -->
   <section class="view" id="v-board">
-    <h1>Every stablecoin pool on Base, audited every 5 minutes.</h1>
-    <p class="sub">YieldWire watches <b id="poolCount">—</b> live pools. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
+    <h1>Yield isn't the whole story.</h1>
+    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin pools on Base on a 5-minute cadence — and checks the numbers against the chain and its own published rules before you're asked to believe them. When the board changes it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
     <div id="anom"></div>
     <div class="stats">
       <div class="cell blu"><b id="sPools">–</b><span>POOLS MONITORED</span></div>
-      <div class="cell grn"><b id="sIntegrity">–</b><span>INTEGRITY CHECKS PASSED</span></div>
+      <div class="cell grn"><b id="sIntegrity">–</b><span>SOURCE CONSISTENCY CHECKS</span></div>
       <div class="cell"><b id="sVerified">–</b><span>TOP POOLS VERIFIED ON-CHAIN</span></div>
       <a class="cell" id="sPegCell" href="#/"><b id="sPeg">–</b><span>PEG FLAGS LIVE</span></a>
       <a class="cell red" href="#/rejections"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
     </div>
-    <div class="sechead"><h2>Live board — top pools by APY</h2><span class="note" id="boardTs"></span></div>
+    <div class="sechead"><h2>Live board — highest reported APY, among pools that pass our published filters</h2><span class="note" id="boardTs"></span></div>
+    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>ON-CHAIN ✓</b> — we read that pool's own contract on Base · <b>queued</b> — next in the on-chain verification line. High APY is a number, not a recommendation.</p>
     <div class="board">
       <div class="bhead"><span>#</span><span>POOL</span><span>APY</span><span>TVL</span><span>24H Δ</span><span>ON-CHAIN</span><span></span></div>
-      <div id="boardBody"><div class="note" style="padding:26px;text-align:center">loading…</div></div>
+      <div id="boardBody"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
     </div>
     <button class="morebtn hidden" id="moreBtn">Show all pools ▾</button>
   </section>
@@ -320,21 +325,21 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   <!-- ══ ASSET DETAIL ══ -->
   <section class="view" id="v-asset">
     <a class="backlink" href="#/">← Back to board</a>
-    <div id="assetBody"><div class="note" style="padding:40px;text-align:center">loading…</div></div>
+    <div id="assetBody"><div class="skel"></div><div class="skel" style="height:120px"></div><div class="skel" style="height:120px"></div></div>
   </section>
 
   <!-- ══ REJECTIONS ══ -->
   <section class="view" id="v-rejections">
     <h1>What we rejected — and exactly why.</h1>
-    <div class="pitch">The board only shows pools that <b>pass</b>. This page shows the ones that <b>failed</b> — with the precise reason, written into the public record every 5 minutes. A system that can't hide its failures is a system you can actually trust. Scroll, click nothing — it's a receipt, not a promise.</div>
+    <div class="pitch">The board only shows pools that <b>pass</b>. This page shows the ones that <b>failed</b>. <b>Every refusal is counted</b> — and published — and the most severe classes get a named receipt with the precise reason, up to 100 per snapshot. A system that can't hide the shape of its failures is a system you can actually trust. It's a receipt, not a promise.</div>
     <div class="rejcount" id="rejCount"></div>
-    <div class="rejgrid" id="rejList"><div class="note" style="padding:26px;text-align:center">loading…</div></div>
+    <div class="rejgrid" id="rejList"><div class="skel" style="grid-column:1/-1"></div><div class="skel" style="grid-column:1/-1"></div><div class="skel" style="grid-column:1/-1"></div></div>
   </section>
 
   <!-- ══ LEDGER ══ -->
   <section class="view" id="v-ledger">
-    <h1>The append-only ledger.</h1>
-    <p class="sub">Every 5 minutes the agent commits a full, verified snapshot of the market to <b>git</b> — a public, signed, append-only history. Nothing on this site can be quietly edited afterwards. Click any snapshot below to <b>replay exactly what the wire saw at that moment</b> — we fetch it live from the git history.</p>
+    <h1>The public ledger.</h1>
+    <p class="sub">Every ~5 minutes the agent commits a full snapshot of the market to <b>git</b> — a public, versioned history where each snapshot is a timestamped commit the agent only ever appends to. <b>Tamper-evident, not tamper-proof:</b> its value is that everything is public, versioned, and anyone can replay any moment — including the raw numbers behind every figure on this site. Click any snapshot below to <b>replay exactly what the wire saw at that moment</b>; we fetch it live from the git history.</p>
     <div class="ledgrid">
       <div class="ledlist" id="ledList"><div class="note" style="padding:26px;text-align:center">fetching git history…</div></div>
       <div class="snap" id="snapBox"><div class="snapempty">Pick a snapshot from the left to replay it.<br><br>This is the point: the past is not an archive, it's a live view.</div></div>
@@ -344,11 +349,17 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   <!-- ══ HOW ══ -->
   <section class="view" id="v-how">
     <h1>How the wire works.</h1>
-    <p class="sub">One detector, done properly, first. Every stage below is clickable — the thresholds are the exact numbers the audit uses, read straight from the live data. <b>Audit us against them.</b></p>
+    <p class="sub">One detector, done properly, first. Every stage below is clickable — the thresholds are the exact numbers the monitor uses, read straight from the live data. <b>Check us against them.</b></p>
     <div class="sechead"><h2>The pipeline</h2></div>
     <div class="pipe" id="pipe"></div>
     <div class="sechead"><h2>Detectors</h2></div>
     <div class="detgrid" id="dets"></div>
+    <div class="priv" style="margin-top:14px">
+      <h3>Where the AI fits — and doesn't.</h3>
+      <p style="color:var(--mut);font-size:14.5px;line-height:1.6">The agent gathers, filters, detects, and verifies with <b style="color:var(--txt)">deterministic rules</b> — the same input always produces the same output. An optional LLM may write <b style="color:var(--txt)">at most one summary sentence</b>, only about already-verified facts, and a claim-checker rejects any sentence that invents a number. <b style="color:var(--txt)">The AI never decides whether a number is true.</b> Keyless mode (no model at all) is fully supported, and the site shows which mode produced each snapshot.</p>
+    </div>
+    <div class="sechead"><h2>Plain-English glossary</h2></div>
+    <div class="thlist" id="glossary"></div>
     <div class="sechead"><h2>Published thresholds — audit us against these</h2><span class="note" id="thNote"></span></div>
     <div class="thlist" id="thList"></div>
     <div class="sechead"><h2>Privacy & safety</h2></div>
@@ -360,9 +371,9 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
     </ul></div>
     <div class="sechead"><h2>The stack ($0/month)</h2></div>
     <div class="priv"><ul>
-      <li><b>GitHub Actions</b> — the agent's body (public repo = free minutes, runs every ~6h, self-chains every 5 min)</li>
-      <li><b>GitHub Pages</b> — this site, and the append-only data history</li>
-      <li><b>Public Base RPC + DeFiLlama + CoinGecko</b> — the senses. No paid API anywhere.</li>
+      <li><b>GitHub Actions</b> — runs a monitoring cycle every 5 minutes. Public repos get free compute, and each ~6-hour job hands off to the next one automatically, so the cadence never depends on one job surviving.</li>
+      <li><b>GitHub Pages</b> — this site, and the public, versioned data history</li>
+      <li><b>Public Base RPC + DeFiLlama + CoinGecko</b> — the senses. One yield index, one on-chain reader, one price source. No paid API anywhere.</li>
     </ul></div>
   </section>
 
@@ -521,7 +532,7 @@ function renderBoard() {
   if (!LATEST) { $("#boardBody").innerHTML = `<div class="note" style="padding:30px;text-align:center">Waiting for the wire… (data file not reachable right now — this is the honest state, not an error screen.)</div>`; return; }
   const l = LATEST, xc = xcByPool(l);
   $("#poolCount").textContent = l.pools.length;
-  $("#boardTs").textContent = "snapshot " + ago(l.ts) + " · " + l.ts.replace("T", " ").replace(/\.\d+Z/, " UTC");
+  $("#boardTs").textContent = "snapshot " + ago(l.ts) + " · " + l.ts.replace("T", " ").replace(/\.\d+Z/, " UTC") + " · next scan ~5 min";
   $("#sPools").textContent = l.pools.length;
   $("#sIntegrity").textContent = l.integrity ? `${l.integrity.pass}/${l.integrity.checked}` : "—";
   $("#sVerified").textContent = l.crosscheck?.summary?.verified ?? "0";
@@ -609,20 +620,26 @@ function renderAsset(id) {
       return `${esc(s)} <b>$${Number(pr).toFixed(4)}</b>${pf ? ` <span style="color:var(--red)">⚠ ${pf.offPegPct}% vs ${pf.peg}</span>` : ""}`;
     }).join(" · ");
     receipt = `<div class="receipt">
-      <div class="rhead"><span class="stamp ok">✓ VERIFIED ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
-      <div class="rrow"><span>On-chain TVL (getReserves)</span><b>${money(xc.onchainTvl)}</b></div>
-      <div class="rrow"><span>DeFiLlama TVL</span><b>${money(xc.dfdTvl)}</b></div>
+      <div class="rhead"><span class="stamp ok">✓ RESERVES VERIFIED ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <p style="font-size:13px;color:var(--faint);margin:-6px 0 8px">What this proves: the contract's token reserves at that exact block, and that they match the index within 0.5%. What it doesn't: the protocol's reported APY — that number still comes from the data source, and the wire says so rather than pretending otherwise.</p>
+      <div class="rrow"><span>On-chain reserves, USD-converted (CoinGecko prices)</span><b>${money(xc.onchainTvl)}</b></div>
+      <div class="rrow"><span>DeFiLlama-reported TVL</span><b>${money(xc.dfdTvl)}</b></div>
       <div class="rrow"><span>Deviation between the two</span><b style="color:var(--grn)">${pct(xc.devPct, 2)}</b></div>
       <div class="rrow"><span>Token prices from reserves</span><b>${res}</b></div>
       <div class="rrow"><span>Reserves</span><b>${(xc.reserve0 || 0).toLocaleString()} + ${(xc.reserve1 || 0).toLocaleString()}</b></div>
       <div class="tokrow"><a class="tok" href="${xc.basescan}" target="_blank" rel="noopener">${short(xc.poolAddress)} ↗ view contract on BaseScan</a></div>
       ${(xc.pegFlags || []).map(f => `<div class="pegflag">⚠ <b>${esc(f.symbol)}</b> at $${Number(f.price).toFixed(4)} — <b>${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</b>. A "stablecoin" pool paying real yield on a 30%-off-peg token is exactly what YieldWire exists to surface.</div>`).join("")}
     </div>`;
-  } else {
+  } else if ((cc.pools || []).some(x => x.poolId === id)) {
     const qpos = (cc.pools || []).filter(x => x.status !== "verified").findIndex(x => x.poolId === id) + 1;
     receipt = `<div class="receipt">
       <div class="rhead"><span class="stamp q">QUEUED FOR ON-CHAIN VERIFICATION</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
-      <div class="queue"><span class="n">#${qpos}</span> in the verification queue — the wire walks the top pools by TVL, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
+      <div class="queue"><span class="n">#${Math.max(1, qpos)}</span> in the verification set this cycle — the wire checks the top pools by TVL, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
+    </div>`;
+  } else {
+    receipt = `<div class="receipt">
+      <div class="rhead"><span class="stamp q">NOT IN THIS CYCLE'S VERIFICATION SET</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="queue">Each cycle the wire on-chain-checks the top pools by TVL, plus anything it has already flagged (once we catch something, we keep watching). This pool is monitored and screened like every other — the index TVL is <b style="color:var(--txt)">${money(xc.dfdTvl)}</b> — but its contract read comes when it's in the set. That's the published rule, not a gap.</div>
     </div>`;
   }
 
@@ -673,17 +690,18 @@ function renderAsset(id) {
 function renderRejections() {
   const l = LATEST;
   const box = $("#rejList");
-  if (!l) { box.innerHTML = `<div class="note">loading…</div>`; return; }
+  if (!l) { box.innerHTML = `<div class="skel" style="grid-column:1/-1"></div><div class="skel" style="grid-column:1/-1"></div>`; return; }
   const rj = l.rejectedNamed || [];
-  const byReason = {};
-  rj.forEach(r => { byReason[r.reason] = (byReason[r.reason] || 0) + 1; });
-  $("#rejCount").innerHTML = `<b>${rj.length}</b> pools refused this snapshot · ` + Object.entries(byReason).map(([k, v]) => `<b>${v}</b> ${esc(k)}`).join(" · ");
+  const counts = l.rejected || {};
+  const total = Object.values(counts).reduce((a, b) => a + (b || 0), 0);
+  const countLabels = { stale: "STALE DATA", outlier: "APY OUTLIER", dead: "DEAD POOL", belowFloor: "BELOW FLOOR" };
+  $("#rejCount").innerHTML = `<b>${total}</b> pools refused this snapshot — every one counted: ` + Object.entries(counts).map(([k, v]) => `<b>${v}</b> ${countLabels[k] || esc(k.toUpperCase())}`).join(" · ") + ` · named receipts shown below (up to 100, most severe first)`;
   box.innerHTML = rj.slice(0, 60).map(r => `<div class="rejcard">
     <div class="rt">${esc(r.symbol)}</div>
     <div class="rp">${esc(r.project)} · Base</div>
     <span class="rr">${esc(r.reason)}</span>
     <div class="rd">${esc(r.detail)}</div>
-  </div>`).join("") + (rj.length > 60 ? `<div class="note" style="grid-column:1/-1">…and ${rj.length - 60} more in the raw data — the record is complete in the <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/latest.json" target="_blank" rel="noopener">public file</a>, not just what fits on a page.</div>` : "");
+  </div>`).join("") + (rj.length > 60 ? `<div class="note" style="grid-column:1/-1">Showing the first 60 of ${rj.length} named receipts. Every other refusal is still counted and published in the <a href="https://github.com/Bigmanmarsh/yieldwire/blob/main/data/latest.json" target="_blank" rel="noopener">public data file</a> — counts for all ${Object.keys(l.rejected || {}).length} categories, updated every snapshot.</div>` : "");
 }
 
 /* ── LEDGER ── */
@@ -742,12 +760,20 @@ const TH_COPY = {
   leaderTvlFloor: "A 'leader' with less than $1M is noise. The leader-changed alerts only fire for pools that could matter.",
   apyJumpPp: "If total APY moves more than 2 percentage points in one 5-minute snapshot, something changed — a reward program, a token price, or a red flag. That's an event, not drift.",
   apyCollapsePp: "The mirror of the jump: a 2pp drop is the moment a 'free money' number is about to become an expensive lesson. You get the alert before the pool does.",
-  tvlShiftPct: "25% of the money moving in one cycle is a regime change, not churn. This is the threshold the Liquidity Migration detector will build on.",
-  apyOutlierPct: "An APY 5× the cohort median is almost always a data bug or a rug-in-progress. It gets flagged and quarantined, not celebrated.",
+  tvlShiftPct: "Reported TVL moved 25% in one cycle vs ~24h ago. We report the number that moved, not a cause — TVL can change because capital flowed, a token's price moved, or the valuation shifted. (That's exactly why the on-chain reserve check exists.)",
+  apyOutlierPct: "A hard ceiling on reported APY: above 500%, the row is almost always an incentive-farming anomaly or a data bug, and publishing it would let one manipulated pool dominate the board. It's a published noise filter — not a claim that yields above 500% are impossible.",
   cooldownHours: "After an alert on a pool, the same kind of alert cools down for 12 hours. You get the story, not a spam loop.",
   integrityTolPp: "On-chain TVL vs DeFiLlama TVL must agree within 0.5 percentage points for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
   integrityTolPct: "On-chain TVL vs DeFiLlama TVL must agree within 0.5% for a pool to be stamped verified. If the wire and the API disagree, we don't pretend — the pool stays queued.",
 };
+const GLOSSARY = [
+  ["APY", "Annual Percentage Yield — the yearly return a pool reports. 36% APY means $100 could become ~$136 in a year, if the rate held. It's a reported number, not a promise."],
+  ["TVL (total value locked)", "Roughly how much money is deposited in the pool right now."],
+  ["Stablecoin", "A token designed to hold a fixed value — usually $1 (USDC, USDT) or €1 (EURC, JEUR). The price it's pinned to is called its peg."],
+  ["Peg", "The fixed price a stablecoin is supposed to hold. A token pegged to $1 trading at $0.68 is 32% off its peg — that's not a discount, it's a warning."],
+  ["On-chain verified", "We read the pool's own contract on the Base blockchain — the tokens it actually holds — and compared that with what the data index reports. It verifies the reserves at a specific block; it does not verify the protocol's reported APY."],
+  ["Rejected", "A pool we saw but excluded from the board because it failed a published rule (too small, stale data, extreme APY). Every rejection is counted, and the most severe ones get a named receipt with the exact reason."],
+];
 const TH_LABEL = {
   tvlFloor: "TVL floor", leaderTvlFloor: "Leader TVL floor", apyJumpPp: "APY jump threshold", apyCollapsePp: "APY collapse threshold",
   tvlShiftPct: "TVL shift threshold", apyOutlierPct: "APY outlier (×median)", cooldownHours: "Alert cooldown",
@@ -775,6 +801,7 @@ function renderHow() {
     <div class="tx">${TH_COPY[k] || ""}</div>
   </div>`; }).join("");
   $$("#thList .throw").forEach(r => r.addEventListener("click", () => r.classList.toggle("open")));
+  $("#glossary").innerHTML = GLOSSARY.map(([t, d]) => `<div class="throw open" style="cursor:default"><span class="tn">${t}</span><span></span><span></span><div class="tx">${d}</div></div>`).join("");
 }
 
 /* ── verify now ── */
