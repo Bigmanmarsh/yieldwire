@@ -23,7 +23,7 @@ import {
 } from "./engine.js";
 import { summarize } from "./llm.js";
 import { send, alertMessage, digestMessage } from "./telegram.js";
-import { crosscheckPools } from "./crosscheck.js";
+import { crosscheckPools, PROJECTS } from "./crosscheck.js";
 import { crossReference } from "./xref.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -165,13 +165,16 @@ async function runCycle(cycleNo) {
   // (decorative + data-quality; read-only, $0, can never fail the run)
   let crosscheck = { pools: [], summary: { attempted: 0, verified: 0, pegFlags: 0, skipped: 0 }, note: "unavailable this run" };
   try {
-    // Verification set (published on the site): the top pools by TVL — where
-    // the most user money sits — plus carry-over: any pool that was verified
-    // or peg-flagged in the previous snapshot keeps being checked while it's
-    // relevant. Once we catch something, we keep watching it.
+    // Verification set (published on the site): within the supported
+    // protocols (currently Aerodrome v1 on Base), the top pools by TVL —
+    // where the most user money sits — plus carry-over: any pool that was
+    // verified or peg-flagged in the previous snapshot keeps being checked
+    // while it's relevant. Once we catch something, we keep watching it.
+    // (A global top-by-TVL list would be dominated by vaults we don't
+    // have contract coverage for — that's "pending-coverage", not skipped.)
     const prevCcPools = (prev && prev.crosscheck && prev.crosscheck.pools) || [];
     const carryIds = prevCcPools.filter(x => x.status === "verified" || (x.pegFlags || []).length).map(x => x.poolId);
-    const ccSet = [...pools].sort((a, b) => (b.tvl || 0) - (a.tvl || 0)).slice(0, 10);
+    const ccSet = pools.filter(p => PROJECTS.has(p.project)).sort((a, b) => (b.tvl || 0) - (a.tvl || 0)).slice(0, 10);
     for (const id of carryIds) {
       const p = pools.find(x => x.id === id);
       if (p && !ccSet.includes(p)) ccSet.push(p);

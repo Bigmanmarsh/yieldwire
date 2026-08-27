@@ -44,7 +44,7 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
 
 ## On-chain cross-check — the part that proves we don't trust the index
 
-**File: `src/crosscheck.js`.** For the top pools by TVL each cycle, the agent:
+**File: `src/crosscheck.js`.** Each cycle, the verification set is the **top pools by TVL within the supported protocols (v1: Aerodrome v1 on Base)**, plus any pool verified or peg-flagged in the previous snapshot (once caught, still watched). For each, the agent:
 
 1. Resolves the pool's actual contract address from the protocol's factory registry on Base.
 2. Calls `getReserves()` on that contract via **public, read-only Base RPC** (no wallet, no keys, no funds).

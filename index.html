@@ -314,7 +314,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
       <a class="cell red" href="#/rejections"><b id="sRejected">–</b><span>POOLS REJECTED ↗</span></a>
     </div>
     <div class="sechead"><h2>Live board — highest reported APY, among pools that pass our published filters</h2><span class="note" id="boardTs"></span></div>
-    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>ON-CHAIN ✓</b> — we read that pool's own contract on Base · <b>queued</b> — next in the on-chain verification line. High APY is a number, not a recommendation.</p>
+    <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>ON-CHAIN ✓</b> — we read that pool's own contract on Base · <b>queued</b> — in the on-chain verification line · <b>—</b> — protocol not yet covered by the on-chain reader (still fully monitored via the index). High APY is a number, not a recommendation.</p>
     <div class="board">
       <div class="bhead"><span>#</span><span>POOL</span><span>APY</span><span>TVL</span><span>24H Δ</span><span>ON-CHAIN</span><span></span></div>
       <div id="boardBody"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
@@ -580,7 +580,7 @@ function renderBoard() {
       <span class="apy">${pct(p.apy, 2)}</span>
       <span class="tvl">${money(p.tvl)}</span>
       <span class="chg" style="${chgCls}">${chg == null ? "—" : (chg > 0 ? "+" : "") + chg.toFixed(1) + "%"}</span>
-      <span class="chk ${x.status === "verified" ? "ok" : "q"}">${x.status === "verified" ? "✓ " + (x.devPct == null ? "" : x.devPct + "%") : "queued"}</span>
+      <span class="chk ${x.status === "verified" ? "ok" : "q"}">${x.status === "verified" ? "✓ " + (x.devPct == null ? "" : x.devPct + "%") : p.project === "aerodrome-v1" ? "queued" : "—"}</span>
       <span class="arrow">→</span></div>`;
   }).join("");
   $("#boardBody").innerHTML = rows;
@@ -634,12 +634,12 @@ function renderAsset(id) {
     const qpos = (cc.pools || []).filter(x => x.status !== "verified").findIndex(x => x.poolId === id) + 1;
     receipt = `<div class="receipt">
       <div class="rhead"><span class="stamp q">QUEUED FOR ON-CHAIN VERIFICATION</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
-      <div class="queue"><span class="n">#${Math.max(1, qpos)}</span> in the verification set this cycle — the wire checks the top pools by TVL, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
+      <div class="queue"><span class="n">#${Math.max(1, qpos)}</span> in the verification set this cycle — the wire on-chain-checks the top pools by TVL within its supported protocols, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
     </div>`;
   } else {
     receipt = `<div class="receipt">
       <div class="rhead"><span class="stamp q">NOT IN THIS CYCLE'S VERIFICATION SET</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
-      <div class="queue">Each cycle the wire on-chain-checks the top pools by TVL, plus anything it has already flagged (once we catch something, we keep watching). This pool is monitored and screened like every other — the index TVL is <b style="color:var(--txt)">${money(xc.dfdTvl)}</b> — but its contract read comes when it's in the set. That's the published rule, not a gap.</div>
+      <div class="queue">Each cycle the wire on-chain-checks the top pools by TVL within its supported protocols (v1: Aerodrome v1 on Base), plus anything it has already flagged — once we catch something, we keep watching. This pool is monitored and screened like every other — the index TVL is <b style="color:var(--txt)">${money(xc.dfdTvl)}</b> — its contract read comes when it's in the set. That's the published rule, not a gap.</div>
     </div>`;
   }
 

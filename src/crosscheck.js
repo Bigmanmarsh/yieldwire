@@ -54,7 +54,7 @@ export const HARD_PEG_USD = new Set(["USDC", "USDT", "DAI", "USDBC", "ZVUSDC", "
 export const EUR_PEG = new Set(["JEUR", "EURC", "MWEURC"]); // €-pegged: peg reference is the EUR/USD market rate, not $1
 const EUR_CG_ID = "eur";                    // CoinGecko "euro"
 const PEG_BAND = 0.03;                     // ±3% off the token's own peg → flag
-const PROJECTS = new Set(["aerodrome-v1"]); // v1 coverage
+export const PROJECTS = new Set(["aerodrome-v1"]); // v1 coverage (exported so run.js selects the verification set from the same source)
 const PACE_MS = 250;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
