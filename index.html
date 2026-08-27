@@ -215,6 +215,9 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .dhead h1{font-size:clamp(24px,3.4vw,34px)}
 .dhead .pj{color:var(--mut);font-size:15px;margin-top:2px}
 .dhead .pk{font-size:10.5px;font-weight:900;letter-spacing:1.6px;color:var(--faint);margin-bottom:5px}
+.dflag{margin:14px 0 0;padding:14px 20px;border:1px solid rgba(255,92,122,.5);background:linear-gradient(120deg,rgba(255,92,122,.12),rgba(255,92,122,.03));border-radius:12px;font-size:17px;font-weight:700;color:var(--mut)}
+.dflag b{color:var(--red);font-variant-numeric:tabular-nums}
+.dsrc{display:block;font-size:11px;font-weight:600;letter-spacing:.2px;color:var(--faint);margin-top:5px}
 .whybox{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:16px 20px;margin-top:14px}
 .whybox h4{font-size:11px;font-weight:900;letter-spacing:1.3px;color:var(--faint);margin-bottom:10px}
 .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
@@ -498,7 +501,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
 </div>
 
 <div id="toast"></div>
-<div id="previewBadge">UI PREVIEW · V7 · LIVE DATA</div>
+<div id="previewBadge">LIVE DATA</div>
 
 <script>
 const REPO = "Bigmanmarsh/yieldwire";
@@ -630,6 +633,8 @@ function sparkMini(vals, color) {
   const pts = v.map((x, i) => (pad + i * (w - 2 * pad) / (v.length - 1)).toFixed(1) + "," + (h - pad - (x - min) / rng * (h - 2 * pad)).toFixed(1)).join(" ");
   return `<svg class="sprk" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" stroke="${color}"/></svg>`;
 }
+const prettify = (s) => (s || "").split("-").map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(" ");
+const comma = (n) => (n == null || n === "") ? "—" : Number(n).toLocaleString("en-US");
 function pegMeter(xc) {
   const pfl = xc.pegFlags || [];
   if (!pfl.length) return "";
@@ -640,11 +645,12 @@ function pegMeter(xc) {
   </div>`;
 }
 function whyChain(xc, cc) {
-  const fl = (xc.pegFlags || []).map(f => `<span class="warn">⚠ ${esc(f.symbol)} ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</span>`).join("");
+  const fl = (xc.pegFlags || []).map(f => `<span class="warn">⚠ ${esc(f.symbol)} is $${Number(f.price).toFixed(4)} — ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg</span>`).join("");
   if (xc.status === "verified") {
-    return `<span class="ok">✓ Contract found (${short(xc.poolAddress || "")})</span>
-      <span class="ok">✓ Reserves read at block ${cc.blockNumber || "—"}</span>
-      <span class="ok">✓ Compared with index (Δ ${xc.devPct == null ? "n/a" : xc.devPct + "%"})</span>
+    const viewLink = xc.basescan ? ` · <a href="${xc.basescan}" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:2px">view on Base ↗</a>` : "";
+    return `<span class="ok">✓ Contract found · ${short(xc.poolAddress || "")}${viewLink}</span>
+      <span class="ok">✓ Reserves read at Base block ${comma(cc.blockNumber)}</span>
+      <span class="ok">✓ TVL cross-check · ${xc.devPct == null ? "n/a" : Math.abs(xc.devPct).toFixed(1) + "% difference"} — base reserves × CoinGecko prices vs DeFiLlama</span>
       ${fl || `<span class="ok">✓ No peg deviation found</span>`}`;
   }
   if (xc.status && String(xc.status).indexOf("error") === 0) {
@@ -666,7 +672,14 @@ function setView(name) {
 function route() {
   const h = location.hash || "#/";
   const m = h.match(/^#\/asset\/(.+)$/);
-  if (m) { renderAsset(m[1]); setView("asset"); return; }
+  // the ticker lists many pools — on a single-pool page it can read as a
+  // contradiction ("two different numbers for the same symbol"), so it hides
+  // there; pool identity stays unambiguous wherever it does show.
+  if (m) {
+    $("#ticker")?.classList.add("hidden");
+    renderAsset(m[1]); setView("asset"); return;
+  }
+  if (LATEST) $("#ticker")?.classList.remove("hidden");
   if (h.startsWith("#/rejections")) { renderRejections(); setView("rejections"); return; }
   if (h.startsWith("#/ledger")) { renderLedger(); setView("ledger"); return; }
   if (h.startsWith("#/how")) { renderHow(); setView("how"); return; }
@@ -689,7 +702,7 @@ function paintStatus() {
   const slim = window.innerWidth < 700;
   if (age < LIVE_MAX_AGE_MS) {
     pill.className = "live";
-    txt.textContent = "LIVE · " + ago(LATEST.ts).toUpperCase() + (slim ? "" : " · BLOCK " + (LATEST.crosscheck?.blockNumber || "—"));
+    txt.textContent = "LIVE · " + ago(LATEST.ts).toUpperCase() + (slim ? "" : " · BLOCK " + comma(LATEST.crosscheck?.blockNumber));
   } else {
     pill.className = "stale"; txt.textContent = "STALE · " + ago(LATEST.ts).toUpperCase();
   }
@@ -718,7 +731,7 @@ function renderBoard() {
       <div class="aline"><span class="ic">◈</span><span>Scanned <b>${l.pools.length}</b> stablecoin yield markets on Base</span></div>
       <div class="aline"><span class="ic ok">✓</span><span>APY source-consistency: <b>${l.integrity ? l.integrity.pass + " of " + l.integrity.checked + " pools passed" : "not applicable this cycle"}</b> — where the index publishes all three components</span></div>
       <div class="aline"><span class="ic ok">✓</span><span><b>${rejTot}</b> pools refused by the published rules — named receipts in the <a href="#/rejections">refusal ledger</a></span></div>
-      <div class="aline"><span class="ic chain">⛓</span><span>On-chain reserve reads: <b>${sum.attempted ?? 0} attempted at block ${(l.crosscheck || {}).blockNumber || "—"} — ${sum.verified ?? 0} succeeded</b>, every read pinned to that block</span></div>
+      <div class="aline"><span class="ic chain">⛓</span><span>On-chain reserve reads: <b>${sum.attempted ?? 0} attempted at Base block ${comma((l.crosscheck || {}).blockNumber)} — ${sum.verified ?? 0} succeeded</b>, every read pinned to that block</span></div>
       ${fl.length ? fl.map(f => `<div class="aline"><span class="ic warn">⚠</span><span><b>${esc(f.symbol)}</b> ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg — flag published to the board and Telegram</span></div>`).join("") : `<div class="aline"><span class="ic ok">✓</span><span>No peg deviation in the pools checked on-chain</span></div>`}
       <div class="aline"><span class="ic ok">✓</span><span>Snapshot appended to the public, versioned ledger — anyone can replay this exact moment</span></div>
       <div class="ameta">Every line above is computed from the snapshot itself — no narration, no AI. <a href="#/ledger">See every cycle →</a></div>`;
@@ -738,7 +751,7 @@ function renderBoard() {
       <div class="ahead">
         <span class="tag">⚠ LIVE ANOMALY</span>
         <h3>${esc(f.symbol)} is <b>$${Number(f.price).toFixed(4)}</b> — ${Math.abs(f.offPegPct).toFixed(1)}% below its ${f.peg} peg</h3>
-        <span class="apool">Pool: ${pool ? `${esc(pool.symbol)} · ${esc(pool.project)}` : "see the ledger"}${x ? ` · verified at Base block <b>${(l.crosscheck || {}).blockNumber || "—"}</b>` : ""}</span>
+        <span class="apool">Pool: ${pool ? `${esc(pool.symbol)} · ${esc(pool.project)}` : "see the ledger"}${x ? ` · verified at Base block <b>${comma((l.crosscheck || {}).blockNumber)}</b>` : ""}</span>
       </div>
       <div class="tri">
         <div class="col gcard">${pegGauge(f.price, f.peg)}<div class="l" style="text-align:center;margin-top:10px">where ${esc(f.symbol)} actually trades</div></div>
@@ -761,7 +774,7 @@ function renderBoard() {
   const tk = top.map(p => {
     const x = xc[p.id] || {};
     const fl = (x.pegFlags || []).length;
-    return `<span>${esc(p.symbol)} <b>${pct(p.apy)}</b> ${money(p.tvl)} ${x.status === "verified" ? `<span class="up">✓ verified</span>` : fl ? `<span class="dn">⚠ flag</span>` : ""}</span>`;
+    return `<span>${esc(p.symbol)} · ${esc(prettify(p.project))} <b>${pct(p.apy)}</b> ${money(p.tvl)} ${x.status === "verified" ? `<span class="up">✓ verified</span>` : fl ? `<span class="dn">⚠ flag</span>` : ""}</span>`;
   }).join("");
   $("#tickerTrack").innerHTML = tk + tk;
   $("#ticker").classList.remove("hidden");
@@ -777,7 +790,7 @@ function renderBoard() {
     if (x.status === "verified") {
       chk = "✓ " + (x.devPct == null ? "" : x.devPct + "%");
       chkCls = "ok";
-      chkTip = "Chain checked — reserves read at block " + (ccMeta.blockNumber || "—") + (x.devPct == null ? "" : " · " + x.devPct + "% difference vs index");
+      chkTip = "Chain checked — reserves read at Base block " + comma(ccMeta.blockNumber) + (x.devPct == null ? "" : " · " + Math.abs(x.devPct).toFixed(1) + "% difference vs index");
     } else if (x.status && String(x.status).indexOf("error") === 0) {
       chk = "failed"; chkCls = "err";
       chkTip = "We attempted the chain read and couldn't obtain evidence this cycle: " + x.status;
@@ -839,7 +852,7 @@ function renderAsset(id) {
     const dev = xc.devPct;
     const devCol = dev == null ? "var(--mut)" : dev <= 1 ? "var(--grn)" : dev <= 3 ? "var(--amb)" : "var(--red)";
     receipt = `<div class="receipt">
-      <div class="rhead"><span class="stamp ok">✓ RESERVES READ ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract on Base</span><span class="rmeta">all reads pinned to block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="rhead"><span class="stamp ok">✓ RESERVES READ ON-CHAIN</span><span style="font-weight:700">The wire read this pool's own contract on Base</span><span class="rmeta">all reads pinned to Base block ${comma(cc.blockNumber)} · ${ago(cc.checkedAt)}</span></div>
       <div class="rrow"><span>Reserve amounts <i class="src">Base contract</i></span><b>${(xc.reserve0 || 0).toLocaleString()} + ${(xc.reserve1 || 0).toLocaleString()}</b></div>
       <div class="rrow"><span>Prices used for valuation <i class="src">CoinGecko</i></span><b>${res}</b></div>
       <div class="rrow"><span>Reserve-derived TVL <i class="src">reserves × prices</i></span><b>${money(xc.onchainTvl)}</b></div>
@@ -852,23 +865,26 @@ function renderAsset(id) {
   } else if ((cc.pools || []).some(x => x.poolId === id)) {
     const qpos = (cc.pools || []).filter(x => x.status !== "verified").findIndex(x => x.poolId === id) + 1;
     receipt = `<div class="receipt">
-      <div class="rhead"><span class="stamp q">QUEUED FOR ON-CHAIN VERIFICATION</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="rhead"><span class="stamp q">QUEUED FOR ON-CHAIN VERIFICATION</span><span class="rmeta">Base block ${comma(cc.blockNumber)} · ${ago(cc.checkedAt)}</span></div>
       <div class="queue"><span class="n">#${Math.max(1, qpos)}</span> in the verification set this cycle — the wire on-chain-checks the top pools by TVL within its supported protocols, contract by contract, every 5 minutes. When it reaches this one, this card becomes a verified receipt with block + contract links. DeFiLlama TVL meanwhile: <b style="color:var(--txt)">${money(xc.dfdTvl)}</b></div>
     </div>`;
   } else {
     receipt = `<div class="receipt">
-      <div class="rhead"><span class="stamp q">NOT IN THIS CYCLE'S VERIFICATION SET</span><span class="rmeta">block ${cc.blockNumber} · ${ago(cc.checkedAt)}</span></div>
+      <div class="rhead"><span class="stamp q">NOT IN THIS CYCLE'S VERIFICATION SET</span><span class="rmeta">Base block ${comma(cc.blockNumber)} · ${ago(cc.checkedAt)}</span></div>
       <div class="queue">Each cycle the wire on-chain-checks the top pools by TVL within its supported protocols (v1: Aerodrome v1 on Base), plus anything it has already flagged — once we catch something, we keep watching. This pool is monitored and screened like every other — the index TVL is <b style="color:var(--txt)">${money(xc.dfdTvl)}</b> — its contract read comes when it's in the set. That's the published rule, not a gap.</div>
     </div>`;
   }
 
   const integ = l.integrity ? ` <b style="color:var(--grn)">${l.integrity.pass}/${l.integrity.checked} integrity checks passed</b> this snapshot` : "";
+  const pfl = xc.pegFlags || [];
+  const dflag = pfl.length ? `<div class="dflag">⚠ ${esc(pfl[0].symbol)} is <b>$${Number(pfl[0].price).toFixed(4)}</b> — ${Math.abs(pfl[0].offPegPct).toFixed(1)}% below its ${pfl[0].peg} peg${pfl.length > 1 ? ` (+${pfl.length - 1} more)` : ""}</div>` : "";
   box.innerHTML = `
     <div class="dhead">
       ${coinImg(p, 64)}
-      <div><div class="pk">POOL · ${esc(p.project).toUpperCase()} · BASE</div><h1>${esc(p.symbol)}</h1></div>
+      <div><div class="pk">POOL · ${esc(prettify(p.project).toUpperCase())} · BASE</div><h1>${esc(p.symbol.replace(/-/g, " / "))}</h1></div>
       <span class="rank">RANK #${rank} BY REPORTED APY</span>
     </div>
+    ${dflag}
     <div class="whybox"><h4>WHY YOU'RE SEEING THIS POOL</h4><div class="wgrid">
       <span class="ok">✓ Base chain</span>
       <span class="ok">✓ Stablecoin classification (data source)</span>
@@ -878,7 +894,7 @@ function renderAsset(id) {
       ${whyChain(xc, cc)}
     </div></div>
     <div class="dgrid">
-      <div class="dstat grn"><b>${pct(p.apy, 2)}</b><span>TOTAL APY (REWARDS)</span></div>
+      <div class="dstat grn"><b>${pct(p.apy, 2)}</b><span>REPORTED APY</span><span class="dsrc">per DeFiLlama — reported, not measured or guaranteed</span></div>
       <div class="dstat blu"><b>${money(p.tvl)}</b><span>TVL</span></div>
       <div class="dstat"><b>${p.apyPct1D == null ? "—" : (p.apyPct1D > 0 ? "+" : "") + p.apyPct1D.toFixed(1) + "%"}</b><span>APY Δ · LAST 24H</span></div>
     </div>
