@@ -1,6 +1,59 @@
 {
   "events": [
     {
+      "type": "APY_JUMP",
+      "poolId": "fbce5857-69c4-4142-938b-62bdc9444967",
+      "pool": {
+        "id": "fbce5857-69c4-4142-938b-62bdc9444967",
+        "project": "aerodrome-slipstream",
+        "symbol": "EURC-USDC",
+        "tvl": 547285,
+        "apy": 23.00213,
+        "apyBase": null,
+        "apyReward": 23.00213,
+        "apyPct1D": null,
+        "underlyingTokens": [
+          "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 19.51289,
+        "tvl": 589967
+      },
+      "after": {
+        "apy": 23.00213,
+        "tvl": 547285
+      },
+      "delta": 3.49,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0007",
+      "ts": "2026-08-27T02:25:01.334Z",
+      "factLine": "EURC-USDC (aerodrome-slipstream) on Base: APY moved from 19.51289% to 23.00213% (+3.49 percentage points). TVL $547.3K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-27T02:25:01.334Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-27T02-25-01.json"
+    },
+    {
       "type": "APY_COLLAPSE",
       "poolId": "fbce5857-69c4-4142-938b-62bdc9444967",
       "pool": {
