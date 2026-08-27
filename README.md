@@ -9,7 +9,7 @@
 > its $1 peg — while its pool advertises yield. The index showed the yield. The wire checked
 > the body.
 
-YieldWire is an autonomous agent that monitors every stablecoin pool on Base (TVL ≥ $500K) on a 5-minute cadence, **verifies the top pools by reading their own contracts on-chain**, and leaves a public, versioned record of every snapshot. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — it messages you on Telegram with the before, the after, and the math attached. No wallet. No custody. No trades.
+YieldWire is an autonomous agent that monitors every stablecoin pool on Base (TVL ≥ $500K) on a 5-minute cadence, **verifies the top pools by reading their own contracts on-chain**, and leaves a public, versioned record of every snapshot. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — the before, the after, and the math are committed to a public, replayable ledger. A Telegram delivery layer is built into the agent (deterministic templates, claim-checked); this deployment runs it log-only, and the exact messages the agent composes are in every run's log. No wallet. No custody. No trades.
 
 Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon).
 
@@ -47,8 +47,8 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
                                └──────────────┬───────────────────────┘
         ┌──────────────────────┬──────────────┴──────────────┐
         ▼                      ▼                             ▼
- GitHub Pages site       Telegram alert (diff)         data/*.json in git
- the evidence UI         before · after · math         replay any moment
+ GitHub Pages site       run log (exact messages)    data/*.json in git
+ the evidence UI         before · after · math       replay any moment
 ```
 
 1. **Fetch** — the free, keyless [DeFiLlama yields endpoint](https://yields.llama.fi/pools), every 5 minutes via GitHub Actions. One source, published on the site.
@@ -65,7 +65,7 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
    | 🌊 TVL_SHIFT | Reported TVL moved ≥ 25% vs ~24h ago |
 
    Plus **peg monitoring**: any stablecoin in a verified pool trading more than 5% off its peg gets flagged with its price, the peg, and the block it was read at.
-6. **Deliver** — Telegram alert + site refresh. An optional LLM (free tier, keyless mode fully supported) may write exactly one summary sentence — and a claim-checker rejects any number it invents. **The LLM did not calculate any number on this site.**
+6. **Deliver** — public snapshot + site refresh. The Telegram delivery layer is included (deterministic templates; this deployment composes the exact messages into the run log instead of sending them). An optional LLM (free tier, keyless mode fully supported) may write exactly one summary sentence — and a claim-checker rejects any number it invents. **The LLM did not calculate any number on this site.**
 
 ## On-chain cross-check — the part that proves we don't trust the index
 
@@ -100,7 +100,8 @@ DeFiLlama /yields ──► normalize + source-consistency ──► 4 determini
         │        │
         └────────┴──────────────┬───────────────────────────────────────┐
                                 ▼                                       ▼
-                    Telegram alerts + daily digest          data/*.json committed (public, versioned)
+                    alert messages (log-only in this        data/*.json committed (public, versioned)
+                    deployment; templates in src/telegram.js)
                                 │                                       │
                                 ▼                                       ▼
                           public site (GitHub Pages) ◄── raw.githubusercontent ◄── repo

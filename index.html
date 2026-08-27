@@ -113,8 +113,8 @@ h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
 .flow .fstep b{display:block;font-size:10.5px;font-weight:900;letter-spacing:1.2px;color:var(--txt)}
 .flow .farr{color:var(--faint);font-size:15px}
 /* ── hero hierarchy ── */
-.hero h1{font-size:clamp(34px,5vw,54px);line-height:1.04;letter-spacing:-1.2px}
-.hero .sub{max-width:820px;font-size:16.5px;line-height:1.65}
+#v-board h1{font-size:clamp(34px,5vw,54px);line-height:1.04;letter-spacing:-1.2px}
+#v-board .sub{max-width:820px;font-size:16.5px;line-height:1.65}
 .stats{margin-top:34px}
 .cell span{font-size:12px;font-weight:700;letter-spacing:.3px;color:var(--mut)}
 /* ── peg gauge ── */
@@ -393,7 +393,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   <!-- ══ BOARD ══ -->
   <section class="view" id="v-board">
     <h1>Yield isn't the whole story.</h1>
-    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin yield markets on Base every five minutes — and checks the numbers against the chain and its own published rules before you're asked to believe them. When the board changes it messages you on Telegram with the before, the after, and the math attached. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
+    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin yield markets on Base every five minutes — and checks the numbers against the chain and its own published rules before you're asked to believe them. Every change lands in a public, replayable snapshot — <b>the evidence is the delivery</b>. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
     <div id="anom"></div>
     <div class="stats">
       <div class="cell blu"><b id="sPools">–</b><span>Pools monitored</span></div>
@@ -470,7 +470,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
     <div class="priv"><ul>
       <li><b>Read-only, always.</b> The agent calls public Base RPC endpoints (getReserves, getBlockByNumber). No wallet, no keys, no funds, no transactions. Ever.</li>
       <li><b>This page sends nothing.</b> No web3 libraries, no connect buttons, no forms. It reads two public JSON files from the repo and public APIs. You can verify this yourself — the whole site is one HTML file in a public repo.</li>
-      <li><b>No personal data.</b> Nothing about you is stored, anywhere. The Telegram alerts you opt into carry only market data.</li>
+      <li><b>No personal data.</b> Nothing about you is stored, anywhere. Everything the agent publishes is market data — the public ledger contains no personal information.</li>
       <li><b>The numbers are checkable.</b> Every verified pool links to the exact contract and block on BaseScan. If we're wrong, it's public.</li>
     </ul></div>
     <div class="sechead"><h2>The stack ($0/month)</h2></div>
@@ -732,7 +732,7 @@ function renderBoard() {
       <div class="aline"><span class="ic ok">✓</span><span>APY source-consistency: <b>${l.integrity ? l.integrity.pass + " of " + l.integrity.checked + " pools passed" : "not applicable this cycle"}</b> — where the index publishes all three components</span></div>
       <div class="aline"><span class="ic ok">✓</span><span><b>${rejTot}</b> pools refused by the published rules — named receipts in the <a href="#/rejections">refusal ledger</a></span></div>
       <div class="aline"><span class="ic chain">⛓</span><span>On-chain reserve reads: <b>${sum.attempted ?? 0} attempted at Base block ${comma((l.crosscheck || {}).blockNumber)} — ${sum.verified ?? 0} succeeded</b>, every read pinned to that block</span></div>
-      ${fl.length ? fl.map(f => `<div class="aline"><span class="ic warn">⚠</span><span><b>${esc(f.symbol)}</b> ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg — flag published to the board and Telegram</span></div>`).join("") : `<div class="aline"><span class="ic ok">✓</span><span>No peg deviation in the pools checked on-chain</span></div>`}
+      ${fl.length ? fl.map(f => `<div class="aline"><span class="ic warn">⚠</span><span><b>${esc(f.symbol)}</b> ${Math.abs(f.offPegPct).toFixed(1)}% off its ${f.peg} peg — flag published to the board and the public ledger</span></div>`).join("") : `<div class="aline"><span class="ic ok">✓</span><span>No peg deviation in the pools checked on-chain</span></div>`}
       <div class="aline"><span class="ic ok">✓</span><span>Snapshot appended to the public, versioned ledger — anyone can replay this exact moment</span></div>
       <div class="ameta">Every line above is computed from the snapshot itself — no narration, no AI. <a href="#/ledger">See every cycle →</a></div>`;
   }
@@ -1002,7 +1002,7 @@ const STAGES = [
   ["2 · NORMALIZE", "82 pools, many protocols, one shape: symbol, APY, TVL, underlying tokens, 100-snapshot history per pool. No pool passes the wire until it parses clean."],
   ["3 · DETECT", "Compare against published thresholds: APY jump/collapse, TVL shift, leader change, peg deviation. 40 integrity checks per snapshot — every number reconciled before it ships."],
   ["4 · RECEIPT", "Every decision is written down: what passed, what was rejected and the exact reason, what was verified on-chain and at which block. Receipts ship in the same file as the data."],
-  ["5 · DELIVER", "Push the snapshot to the public repo (the ledger), refresh this site, and message Telegram when something changed — with the before, the after, and the math."],
+  ["5 · DELIVER", "Push the snapshot to the public repo (the ledger) and refresh this site. The exact alert messages — before, after, math — are composed in the run log (the Telegram delivery layer is built; this deployment runs it log-only)."],
 ];
 const DETS = [
   ["LIVE NOW", "Yield regime", "APY jumps, collapses, leader swaps, TVL shifts, peg deviations — on Base stablecoin pools, every 5 minutes, with on-chain verification of the top pools.", "What ships: the full board, 24h event feed, named rejection receipts, on-chain cross-checks with block + contract links, and the append-only git ledger. Every alert carries the numbers that triggered it.", true],
