@@ -1,6 +1,166 @@
 {
   "events": [
     {
+      "type": "LEADER_CHANGE",
+      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+      "pool": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "project": "aerodrome-slipstream",
+        "symbol": "MSUSD-USDC",
+        "tvl": 1073313,
+        "apy": 92.62947,
+        "apyBase": null,
+        "apyReward": 92.62947,
+        "apyPct1D": 66.34693,
+        "underlyingTokens": [
+          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "id": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
+        "symbol": "USDC",
+        "project": "harvest-finance",
+        "apy": 14.59,
+        "tvl": 1861448
+      },
+      "after": {
+        "apy": 92.62947,
+        "tvl": 1073313
+      },
+      "delta": 78.04,
+      "trigger": "Highest-APY stablecoin pool (TVL ≥ $1,000,000) changed",
+      "id": "EVT-0016",
+      "ts": "2026-08-27T23:51:20.481Z",
+      "factLine": "USDC (harvest-finance) at 14.59% APY lost the top spot to MSUSD-USDC (aerodrome-slipstream) at 92.62947% APY on Base. New leader TVL $1.1M, old leader TVL $1.9M. APY gap change 78.04 percentage points. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-27T23:51:20.481Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-27T23-51-20.json"
+    },
+    {
+      "type": "TVL_SHIFT",
+      "poolId": "14170877-8941-4c7d-b12c-06517c70f1e7",
+      "pool": {
+        "id": "14170877-8941-4c7d-b12c-06517c70f1e7",
+        "project": "morpho-blue",
+        "symbol": "ETHENAUSDC",
+        "tvl": 30678627,
+        "apy": 4.46419,
+        "apyBase": 4.46419,
+        "apyReward": 0,
+        "apyPct1D": 0.34277,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 45675526,
+        "ts": 1787792198371
+      },
+      "after": {
+        "tvl": 30678627
+      },
+      "delta": -32.83,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0017",
+      "ts": "2026-08-27T23:51:20.481Z",
+      "factLine": "ETHENAUSDC (morpho-blue) on Base: TVL moved from $45.7M to $30.7M (-32.83% vs ~24h ago). APY is 4.46419%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-27T23:51:20.481Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-27T23-51-20.json"
+    },
+    {
+      "type": "APY_COLLAPSE",
+      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+      "pool": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "project": "aerodrome-slipstream",
+        "symbol": "MSUSD-USDC",
+        "tvl": 1073313,
+        "apy": 92.62947,
+        "apyBase": null,
+        "apyReward": 92.62947,
+        "apyPct1D": 66.34693,
+        "underlyingTokens": [
+          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 362.99177,
+        "tvl": 993052
+      },
+      "after": {
+        "apy": 92.62947,
+        "tvl": 1073313
+      },
+      "delta": -270.36,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0018",
+      "ts": "2026-08-27T23:51:20.481Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) on Base: APY moved from 362.99177% to 92.62947% (-270.36 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-27T23:51:20.481Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-27T23-51-20.json"
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
       "pool": {
