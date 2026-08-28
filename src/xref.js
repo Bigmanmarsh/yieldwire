@@ -12,7 +12,7 @@
 // UNVERIFIED (never silently drops — an unverifiable claim is labeled as such).
 // Any source failure degrades that claim to UNVERIFIED; the event still ships.
 
-import { poolTokens, EUR_PEG } from "./crosscheck.js";
+import { poolTokens, EUR_PEG, PEG_BAND, EUR_CG_ID } from "./crosscheck.js";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -78,8 +78,21 @@ export async function crossReference(ev, universe, priceMap) {
       claims.push({ id: "PEG", claim: `${s} treated as ${pegLabel}-stable`, verdict: "UNVERIFIED", detail: "independent price unavailable this run", via: "CoinGecko", link: null });
       continue;
     }
-    const dev = (p - 1) * 100;
-    claims.push({ id: "PEG", claim: `${s} treated as ${pegLabel}-stable`, verdict: "INDEPENDENT-SOURCE-MATCH", detail: `${s} at $${p.toFixed(5)} per CoinGecko (Δ ${dev.toFixed(2)}% vs $1)`, via: "CoinGecko" + (id ? " /coins/" + id : ""), link });
+    // The verdict tracks the PRICE, not whether the pool happened to be in
+    // this run's on-chain verification set: a token beyond the same ±3% band
+    // the cross-check uses is a PEG DEVIATION wherever it is read from.
+    const ref = EUR_PEG.has(s) ? await cgPriceById(EUR_CG_ID) : 1.0;
+    if (ref == null) {
+      claims.push({ id: "PEG", claim: `${s} treated as ${pegLabel}-stable`, verdict: "UNVERIFIED", detail: "peg reference unavailable this run", via: "CoinGecko", link: null });
+      continue;
+    }
+    const offPct = (p / ref - 1) * 100;
+    if (Math.abs(p - ref) / ref > PEG_BAND) {
+      claims.push({ id: "PEG", claim: `${s} treated as ${pegLabel}-stable`, verdict: "PEG DEVIATION", detail: `${s} trading at $${p.toFixed(4)} — ${Math.abs(offPct).toFixed(1)}% ${offPct < 0 ? "below" : "above"} its ${pegLabel}1 peg per CoinGecko. An APY on this token is not ${pegLabel === "€" ? "EUR" : "USD"} yield at face value.`, via: "CoinGecko" + (id ? " /coins/" + id : ""), link });
+      if (link) sources.push({ name: `CoinGecko · ${s}`, url: link, fetchedAt: ev.ts });
+      continue;
+    }
+    claims.push({ id: "PEG", claim: `${s} treated as ${pegLabel}-stable`, verdict: "INDEPENDENT-SOURCE-MATCH", detail: `${s} at $${p.toFixed(5)} per CoinGecko (Δ ${offPct.toFixed(2)}% vs ${pegLabel}1)`, via: "CoinGecko" + (id ? " /coins/" + id : ""), link });
     if (link) sources.push({ name: `CoinGecko · ${s}`, url: link, fetchedAt: ev.ts });
     if (id) await sleep(300);
   }

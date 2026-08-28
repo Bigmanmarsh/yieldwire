@@ -53,7 +53,8 @@ const FEES_TO_TRY = [3000, 500];           // vAMM 0.30%, sAMM 0.05%
 export const HARD_PEG_USD = new Set(["USDC", "USDT", "DAI", "USDBC", "ZVUSDC", "STEAKUSDC", "MWUSDC", "GTUSDA", "SYRUPUSDC", "SUSD", "SDAI"]); // $-pegged: valued at $1.00 by definition
 export const EUR_PEG = new Set(["JEUR", "EURC", "MWEURC"]); // €-pegged: peg reference is the EUR/USD market rate, not $1
 const EUR_CG_ID = "eur";                    // CoinGecko "euro"
-const PEG_BAND = 0.03;                     // ±3% off the token's own peg → flag
+export { EUR_CG_ID };
+export const PEG_BAND = 0.03;              // ±3% off the token's own peg → flag (same band used by the xref fallback)
 export const PROJECTS = new Set(["aerodrome-v1"]); // v1 coverage (exported so run.js selects the verification set from the same source)
 const PACE_MS = 250;
 

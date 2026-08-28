@@ -4,12 +4,16 @@
 
 > **Every yield dashboard answers "how much?". YieldWire answers "can I actually trust it?"**
 > An autonomous agent reads the Base market every five minutes, refuses pools that fail its
-> published rules, reads the top pools' *own contracts* on-chain, and appends everything to a
-> public ledger. Live right now: a "stablecoin" called **MSUSD trades at $0.68** — 31.9% below
-> its $1 peg — while its pool advertises yield. The index showed the yield. The wire checked
-> the body.
+> published rules, contract-reads the top pools in its supported protocols on-chain, and
+> appends everything to a public ledger. **On the record:** for ~30 hours (Aug 26–28) the agent
+> read a "stablecoin" called **MSUSD at $0.67–0.68 — up to 33.1% below its $1 peg** — across
+> **270 consecutive on-chain verified cycles**, while pools containing it advertised up to
+> ~46% APY and briefly ranked #1 on Base. The token has since left the data source's index
+> (monitoring ended by the source, not by us) — the full evidence lives in
+> `data/findings.json` and is replayable commit-by-commit from the public ledger.
+> The index showed the yield. The wire checked the body.
 
-YieldWire is an autonomous agent that monitors every stablecoin pool on Base (TVL ≥ $500K) on a 5-minute cadence, **verifies the top pools by reading their own contracts on-chain**, and leaves a public, versioned record of every snapshot. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — the before, the after, and the math are committed to a public, replayable ledger. A Telegram delivery layer is built into the agent (deterministic templates, claim-checked); this deployment runs it log-only, and the exact messages the agent composes are in every run's log. No wallet. No custody. No trades.
+YieldWire is an autonomous agent that monitors every stablecoin pool on Base (TVL ≥ $500K) on a 5-minute cadence, **contract-reads the top pools in its supported protocols (currently Aerodrome v1) directly on-chain**, and leaves a public, versioned record of every snapshot. Pools outside contract coverage are labeled as such — monitored via the index, cross-checked the moment coverage exists. The moment the board changes — leader swap, APY jump, collapse, TVL shift, a token drifting off its peg — the before, the after, and the math are committed to a public, replayable ledger. A Telegram delivery layer is built into the agent (deterministic templates, claim-checked); this deployment runs it log-only, and the exact messages the agent composes are in every run's log. No wallet. No custody. No trades.
 
 Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon).
 
@@ -18,7 +22,7 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
 1. Finds stablecoin yield pools on Base (one public index: DeFiLlama).
 2. Records the advertised yield and liquidity for each.
 3. Rejects pools that fail published rules — and publishes every rejection, counted, with named receipts for the most severe.
-4. **Checks the top pools directly against the blockchain** (on-chain reserve verification).
+4. **Checks the top pools in its supported protocols directly against the blockchain** (on-chain reserve verification; coverage is per-protocol and published).
 5. Detects meaningful changes with deterministic thresholds (all published).
 6. Sends alerts with the evidence attached.
 7. Publishes the data, events, and state permanently in public, versioned history.
@@ -86,7 +90,7 @@ Two honest caveats:
    | 📉 APY_COLLAPSE | APY fell ≥ 2.0pp between consecutive scans |
    | 🌊 TVL_SHIFT | Reported TVL moved ≥ 25% vs ~24h ago |
 
-   Plus **peg monitoring**: any stablecoin in a verified pool trading more than 5% off its peg gets flagged with its price, the peg, and the block it was read at.
+   Plus **peg monitoring**: any stablecoin in a verified pool trading more than **3%** off its peg gets flagged with its price, the peg, and the block it was read at (band: `PEG_BAND = 0.03` in `src/crosscheck.js`).
 6. **Deliver** — public snapshot + site refresh. The Telegram delivery layer is included (deterministic templates; this deployment composes the exact messages into the run log instead of sending them). An optional LLM (free tier, keyless mode fully supported) may write exactly one summary sentence — and a claim-checker rejects any number it invents. **The LLM did not calculate any number on this site.**
 
 ## On-chain cross-check — the part that proves we don't trust the index
@@ -98,7 +102,7 @@ Two honest caveats:
 3. Calls `getReserves()` on that contract via **public, read-only Base RPC** (no wallet, no keys, no funds).
 4. Fetches token prices from CoinGecko (one batched call) and converts reserves to USD — "reserve-derived TVL": on-chain reserves × external prices, each labeled as such in the UI.
 5. Records the difference vs the index-reported TVL as a data-quality signal — large gaps are shown, never hidden, and no tolerance is claimed that the code doesn't enforce.
-6. Checks each stablecoin's price against its peg — this is how the live MSUSD flag is produced (a "stablecoin" trading $0.68 while its pool advertises high APY).
+6. Checks each stablecoin's price against its peg — this is how the MSUSD finding was produced (Aug 26–28: a "stablecoin" reading ~$0.67–0.68 on-chain-verified cycles while pools containing it advertised up to ~46% APY). Every peg flag is preserved in `data/findings.json` (`src/findings.js`), including findings whose token later left the index.
 
 **What this proves:** the contract's token reserves at a specific, publicly checkable block (every verified pool links to its contract on BaseScan).
 **What it does not prove:** the protocol's reported APY. YieldWire deliberately keeps those claims separate and says so on the site.
@@ -141,6 +145,8 @@ DeFiLlama /yields ──► normalize + source-consistency ──► 4 determini
 | Telegram templates | `src/telegram.js` |
 | Triggers + public-history commit | `.github/workflows/agent.yml` |
 | Site | repo root (`index.html`) |
+| Token-level findings ledger (preserved evidence) | `data/findings.json` via `src/findings.js` |
+| One-time history backfill (same engine, replayed) | `scripts/backfill-findings.mjs` |
 | Public record | `data/` (committed every ~5 min) |
 
 Zero runtime dependencies. Node 20. **$0/month.**
@@ -152,9 +158,9 @@ The workflow is scheduled to fire every 5 minutes, and each job also runs a **se
 ## What a technical reviewer might ask (and the honest answers)
 
 1. **"Where does your APY actually come from?"** — DeFiLlama's public yields endpoint. We preserve the source data with every snapshot and never let the LLM calculate numbers.
-2. **"How do you know DeFiLlama isn't wrong?"** — We don't assume it's infallible. We run source-consistency checks, and we independently read the top pools' contracts on Base (`src/crosscheck.js`) to verify on-chain state against the index.
+2. **"How do you know DeFiLlama isn't wrong?"** — We don't assume it's infallible. We run source-consistency checks, and we independently read the top covered pools' contracts on Base (`src/crosscheck.js`) to verify on-chain state against the index. Coverage is per-protocol and published; what isn't covered yet is labeled, not hidden.
 3. **"Does `getReserves` prove APY?"** — No. It proves the pool's reported reserves at a specific block. APY comes from the yield index. We keep those claims separate and label them as such.
-4. **"Why only the top pools on-chain?"** — Free public-RPC stack. We prioritize verification where the largest pools have the greatest user impact; the full universe is still monitored and screened through the index.
+4. **"Why only some pools on-chain?"** — Contract coverage is per-protocol (factories + reserve interfaces). v1 covers Aerodrome v1 pools; within it, the top pools by TVL are checked where user money concentrates, plus anything previously flagged. Pools outside coverage are labeled `pending-coverage` — still monitored and screened through the index, cross-checked the moment coverage exists. No tolerance or guarantee is claimed beyond what the code enforces.
 5. **"Why 2 percentage points / 25% / 500%?"** — Published deterministic thresholds designed to separate meaningful change (or obvious data garbage) from noise. They are noise filters, not claims about what's possible.
 6. **"Can you manipulate the historical records?"** — The history is public and versioned in Git, and every monitoring run is visible in GitHub Actions. We don't claim blockchain-level immutability; we claim everything is publicly inspectable and replayable — and we mean exactly that.
 7. **"Where is the AI?"** — The AI doesn't decide financial facts. The deterministic agent gathers, filters, calculates, and verifies. The optional LLM only converts already-verified facts into one human-readable, claim-checked sentence.

@@ -25,6 +25,7 @@ import { summarize } from "./llm.js";
 import { send, alertMessage, digestMessage } from "./telegram.js";
 import { crosscheckPools, PROJECTS } from "./crosscheck.js";
 import { crossReference } from "./xref.js";
+import { updateFindings } from "./findings.js";
 import { validateSnapshot } from "./validate.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -110,6 +111,7 @@ async function runCycle(cycleNo) {
   // 1 ── Load public history
   const prev = readJson("latest.json", null);
   const eventsFile = readJson("events.json", { events: [] });
+  const findingsFile = readJson("findings.json", { findings: [] });
   const state = readJson("state.json", { seq: 0, cooldowns: {}, lastDigestDate: null, llm: { attempts: 0, rejected: 0 } });
   const window24h = readJson("window24h.json", {});
 
@@ -139,6 +141,7 @@ async function runCycle(cycleNo) {
   if (suppressed) log(`${suppressed} event(s) suppressed by ${THRESHOLDS.cooldownHours}h cooldown`);
 
   // 4 ── Enrich: ids, fact line, claim-checked summary
+  const LLM_ON = !!process.env.GEMINI_API_KEY;
   for (const ev of events) {
     state.seq += 1;
     ev.id = `EVT-${String(state.seq).padStart(4, "0")}`;
@@ -146,7 +149,7 @@ async function runCycle(cycleNo) {
     ev.factLine = factLine(ev);
     ev.source = { endpoint: ENDPOINT, fields: FIELDS_USED, fetchedAt: ev.ts };
     const sum = await summarize(ev, ev.factLine);
-    state.llm.attempts += 1;
+    if (LLM_ON) state.llm.attempts += 1; // keyless mode: no attempt is made, none is counted
     if (sum.source.includes("rejected by claim-checker")) state.llm.rejected += 1;
     ev.summary = sum;
     ev.thresholds = THRESHOLDS;
@@ -155,7 +158,6 @@ async function runCycle(cycleNo) {
     const rawFile = `raw-base-stable-${now.toISOString().replace(/[:.]/g, "-").slice(0, 19)}.json`;
     writeJson(rawFile, rawSlice);
     for (const ev of events) ev.rawFile = rawFile;
-    eventsFile.events = [...events.map(({ thresholds, ...rest }) => rest), ...eventsFile.events].slice(0, 500);
     log(`events: ${events.map((e) => `${e.id} ${e.type} ${e.pool.symbol}`).join(" · ")}`);
     log(`raw slice committed for replay: data/${rawFile} (${(JSON.stringify(rawSlice).length / 1024).toFixed(0)} KB)`);
   } else {
@@ -199,6 +201,13 @@ async function runCycle(cycleNo) {
       return { claims: [{ id: "ALL", claim: "all claims", verdict: "UNVERIFIED", detail: "cross-reference failed this run: " + e.message.slice(0, 60), via: null, link: null }], sources: [], checkedAt: ev.ts };
     });
   }
+
+  // Persist events WITH their evidence attached (crosscheckEntry + crossRef).
+  // This snapshot must be taken AFTER step 4.6 — the claims are the receipts;
+  // an event published without them is a claim without evidence.
+  if (events.length) {
+    eventsFile.events = [...events.map(({ thresholds, ...rest }) => rest), ...eventsFile.events].slice(0, 500);
+  }
   const xrefStats = state.xrefStats || { events: 0, corroborated: 0, deviations: 0, unverified: 0 };
   for (const ev of events) {
     xrefStats.events += 1;
@@ -234,7 +243,7 @@ async function runCycle(cycleNo) {
     rejectedNamed, // rejection receipts: names + reasons (capped at 100, outliers first)
     integrity,
     leader: leaderNow,
-    llm: { mode: process.env.GEMINI_API_KEY ? "on" : "keyless", ...state.llm },
+    llm: { mode: LLM_ON ? "on" : "keyless", attempts: LLM_ON ? state.llm.attempts : 0, rejected: state.llm.rejected },
     crosscheck,
     xrefStats,
   };
@@ -254,6 +263,19 @@ async function runCycle(cycleNo) {
   writeJson("latest.json", out);
   writeJson("events.json", eventsFile);
   writeJson("window24h.json", nextWindow);
+
+  // 5.5 ── Findings ledger (record, not detection — see src/findings.js).
+  // Written only when something actually changed, so quiet markets stay quiet.
+  try {
+    const updatedFindings = updateFindings(findingsFile, { pools, crosscheck, events, ts: now.toISOString() });
+    if (JSON.stringify(updatedFindings) !== JSON.stringify(findingsFile)) {
+      writeJson("findings.json", updatedFindings);
+      const flagged = updatedFindings.findings.filter((f) => f.status === "flagged").length;
+      log(`findings ledger: ${updatedFindings.findings.length} token finding(s) · ${flagged} flagged this cycle`);
+    }
+  } catch (e) {
+    log("findings update failed (non-fatal): " + e.message);
+  }
 
   // 6 ── Telegram delivery
   const token = process.env.TG_BOT_TOKEN;
