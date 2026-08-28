@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "YieldWire — the autonomous agent that watches Base stablecoin yield and messages you when the board changes. No custody. No trades. Receipts on everything.",
+  "description": "YieldWire — the autonomous agent that watches Base stablecoin yield every 5 minutes and publishes public receipts on everything it finds. No custody. No trades.",
   "scripts": {
     "agent": "node src/run.js"
   }

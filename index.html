@@ -215,6 +215,8 @@ a.cell:hover{border-color:var(--line2);transform:translateY(-2px);text-decoratio
 .btn:active{transform:scale(.98)}
 .btn.grn{border-color:rgba(46,230,168,.5);color:var(--grn)}
 .btn.grn:hover{background:rgba(46,230,168,.1)}
+.btn.gh{border-color:rgba(90,169,255,.5);color:var(--blu)}
+.btn.gh:hover{background:rgba(90,169,255,.1)}
 .btn .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.2);border-top-color:var(--grn);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 #toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(20px);background:var(--panel2);border:1px solid var(--line2);border-radius:11px;padding:12px 20px;font-size:14.5px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 14px 40px -10px rgba(0,0,0,.6)}
@@ -406,7 +408,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
   <!-- ══ BOARD ══ -->
   <section class="view" id="v-board">
     <h1>Yield isn't the whole story.</h1>
-    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin yield markets on Base every five minutes — and checks the numbers against the chain and its own published rules before you're asked to believe them. Every change lands in a public, replayable snapshot — <b>the evidence is the delivery</b>. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button></p>
+    <p class="sub">YieldWire monitors <b id="poolCount">—</b> stablecoin yield markets on Base every five minutes — and checks the numbers against the chain and its own published rules before you're asked to believe them. Every change lands in a public, replayable snapshot — <b>the evidence is the delivery</b>. <b>No wallet. No custody. No trades.</b> <button class="btn grn" id="verifyBtn" style="margin-left:10px">Verify now</button> <a class="btn gh" href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank" rel="noopener" style="margin-left:10px">watch it run live ↗</a></p>
     <div id="anom"></div>
     <div class="stats">
       <div class="cell blu"><b id="sPools">–</b><span>Pools monitored</span></div>
@@ -489,7 +491,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
     </ul></div>
     <div class="sechead"><h2>The stack ($0/month)</h2></div>
     <div class="priv"><ul>
-      <li><b>GitHub Actions</b> — runs a monitoring cycle every 5 minutes. Public repos get free compute, and each ~6-hour job hands off to the next one automatically, so the cadence never depends on one job surviving.</li>
+      <li><b><a href="https://github.com/Bigmanmarsh/yieldwire/actions" target="_blank" rel="noopener">GitHub Actions</a></b> — runs a monitoring cycle every 5 minutes. Public repos get free compute, and each ~6-hour job hands off to the next one automatically, so the cadence never depends on one job surviving.</li>
       <li><b>GitHub Pages</b> — this site, and the public, versioned data history</li>
       <li><b>Public Base RPC + DeFiLlama + CoinGecko</b> — the senses. One yield index, one on-chain reader, one price source. No paid API anywhere.</li>
     </ul></div>
@@ -1099,9 +1101,9 @@ async function loadFindings() {
         const addr = x.poolAddress ? `${esc(String(x.poolAddress).slice(0, 10))}…${esc(String(x.poolAddress).slice(-6))}` : null;
         return `<div class="ffind ${hot ? "hot" : ""}">
         <div class="fhead">${badge(x.status)}<h4>${esc(x.symbol)} traded <b>${Math.abs(x.worstOffPegPct || 0).toFixed(1)}% ${dir}</b> its ${esc(x.peg || "$1")} peg — worst reading <b>$${Number(x.worstPrice).toFixed(4)}</b></h4></div>
-        <div class="fmeta">first seen ${fUtc(x.firstSeen)} · last confirmed ${fUtc(x.lastFlaggedAt)} · <b>${x.cyclesFlagged}</b> on-chain verified cycle${x.cyclesFlagged === 1 ? "" : "s"}${x.poolSymbol ? ` · pool ${esc(x.poolSymbol)} (${esc(x.projectId || "?")})` : ""}${addr && x.basescan ? ` · contract <a href="${esc(x.basescan)}" target="_blank" rel="noopener">${addr} ↗</a>` : ""}${x.lastBlock ? ` · block ${comma(x.lastBlock)}` : ""}</div>
+        <div class="fmeta">first seen ${fUtc(x.firstSeen)} · last confirmed ${fUtc(x.lastFlaggedAt)} · <b>${x.cyclesFlagged}</b> on-chain verified cycle${x.cyclesFlagged === 1 ? "" : "s"}${x.poolSymbol ? ` · pool ${esc(x.poolSymbol)} (${esc(x.projectId || "?")})` : ""}${addr && x.basescan ? ` · contract <a href="${esc(x.basescan)}" target="_blank" rel="noopener">${addr} ↗</a>` : ""}${x.lastBlock ? ` · block <a href="https://basescan.org/block/${x.lastBlock}" target="_blank" rel="noopener">${comma(x.lastBlock)}</a>` : ""}</div>
         ${x.status === "off-index" && x.offIndexNote ? `<div class="fnote">${esc(x.offIndexNote)}</div>` : ""}
-        ${rel.length ? `<div class="fmeta">While flagged, pools with this token fired <b>${rel.length}</b> detected event${rel.length === 1 ? "" : "s"}${maxApy ? ` — advertised APY ran as high as <b>${maxApy.toFixed(1)}%</b> at the same time` : ""} · <a href="#/ledger">replay any snapshot from ${fUtc(x.firstSeen)} to ${fUtc(x.lastFlaggedAt)} in the ledger →</a></div>` : ""}
+        ${rel.length ? `<div class="fmeta">While flagged, pools with this token fired <b>${rel.length}</b> detected event${rel.length === 1 ? "" : "s"}${maxApy ? ` — advertised APY ran as high as <b>${maxApy.toFixed(1)}%</b> at the same time` : ""} · <a href="#/ledger">replay recent snapshots in the ledger →</a> · <a href="https://github.com/Bigmanmarsh/yieldwire/commits/main/data/latest.json" target="_blank" rel="noopener">every snapshot's commit since day one ↗</a></div>` : ""}
       </div>`; }).join("")}
       <div class="ameta">Live peg flags appear on the board the moment they are read — this section is the preserved record. The distinction is kept on purpose. Maintained by the agent (src/findings.js)${f.generatedBy ? "; initially backfilled from the committed run history" : ""}.</div>
     </div>`;
