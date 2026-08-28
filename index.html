@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>YieldWire — independent yield monitoring for Base stablecoin pools, verified on-chain</title>
-<meta name="description" content="An autonomous agent monitors stablecoin yield pools on Base every 5 minutes, verifies the top pools directly on-chain, and leaves a public, replayable record of every snapshot.">
+<title>YieldWire — autonomous stablecoin-yield monitor for Base · on-chain cross-checked</title>
+<meta name="description" content="An autonomous agent monitors stablecoin yield pools on Base every 5 minutes, cross-checks the top pools in its supported protocols directly on-chain, and leaves a public, replayable record of every snapshot.">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -141,6 +141,19 @@ h2{font-size:21px;font-weight:750;letter-spacing:-.2px}
 .aline .ic.ok{color:var(--grn)} .aline .ic.warn{color:var(--red)} .aline .ic.chain{color:var(--blu)}
 .aline b{color:var(--txt);font-weight:700}
 .aline a{color:var(--mut)}
+/* ── findings (the record — distinct from live flags on purpose) ── */
+.findings{margin-top:16px;max-width:820px}
+.ffind{border:1px solid var(--line);border-left:3px solid var(--amb);background:var(--panel);border-radius:var(--rad);padding:16px 20px;margin-top:10px}
+.ffind.hot{border-left-color:var(--red)}
+.fhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.fbadge{flex:none;font-size:10.5px;font-weight:800;letter-spacing:1.1px;padding:4px 9px;border-radius:6px;background:var(--amb);color:#231703}
+.ffind.hot .fbadge.live{background:var(--red);color:#fff}
+.fbadge.off{background:#39465a;color:#dce5f0}
+.fhead h4{font-size:15.5px;font-weight:600;color:var(--txt)}
+.fmeta{margin-top:8px;font-size:13.5px;color:var(--mut);line-height:1.6}
+.fmeta b{color:var(--txt)}
+.fmeta a{color:var(--blu)}
+.fnote{margin-top:8px;font-size:13.5px;color:var(--mut);line-height:1.6;font-style:italic}
 .activity .ameta{margin-top:12px;font-size:12.5px;color:var(--faint);line-height:1.5}
 .activity .ameta a{color:var(--mut)}
 /* ── trust strip ── */
@@ -410,6 +423,7 @@ footer .fbrand{display:flex;align-items:center;gap:9px;font-weight:800;color:var
       <span class="fstep"><b>RECORD</b>public snapshot</span>
     </div>
     <div class="activity" id="activity"></div>
+    <div id="findingsWrap"></div>
     <div class="sechead"><h2>Live board — highest reported APY, among pools that pass our published filters</h2><span class="note" id="boardTs"></span></div>
     <p class="legend"><b>Plain English:</b> APY — the yearly return the pool reports · TVL — roughly how much money is deposited · 24H Δ — change since yesterday · <b>✓ 0.1%</b> — we read that pool's own contract on Base; the number is the difference between the reserve-derived value and the index · <b>not checked</b> — not in this cycle's verification set · <b>failed</b> — we tried the chain read and got no evidence this cycle · <b>—</b> — no contract coverage for this protocol yet (still fully monitored via the index) · <b>watch</b> — reported APY down 10%+ in 24h (a display flag, not a new detector). "Stablecoin pool" = the data source classifies it as stablecoin-related; it does not mean every asset in it is currently at its peg. High APY is a number, not a recommendation. Hover any value for detail.</p>
     <div class="trust">
@@ -981,10 +995,13 @@ async function renderLedger() {
         try {
           const snap = await loadLatest(sha);
           const top = [...snap.pools].sort((a, b) => b.apy - a.apy).slice(0, 8);
+          const cc = snap.crosscheck || {};
+          const pfs = (cc.pools || []).flatMap(p => (p.pegFlags || []).map(f => ({ ...f, pool: p })));
           sb.innerHTML = `<span class="wmark">REPLAY · PAST SNAPSHOT · NOT LIVE</span>
-            <div class="stime">${esc(snap.ts)} · integrity ${snap.integrity?.pass ?? "?"}/${snap.integrity?.checked ?? "?"}</div>
+            <div class="stime">${esc(snap.ts)} · integrity ${snap.integrity?.pass ?? "?"}/${snap.integrity?.checked ?? "?"}${cc.blockNumber ? ` · Base block ${comma(cc.blockNumber)}` : ""}</div>
             ${top.map((p, i) => `<div class="srow"><span>${i + 1}. ${esc(p.symbol)} <span style="color:var(--faint)">· ${esc(p.project)}</span></span><b>${pct(p.apy, 2)} · ${money(p.tvl)}</b></div>`).join("")}
-            <div class="srow" style="margin-top:8px"><span>leader at that moment</span><b>${esc(snap.leader?.symbol || "—")}</b></div>`;
+            <div class="srow" style="margin-top:8px"><span>leader at that moment</span><b>${esc(snap.leader?.symbol || "—")}</b></div>
+            ${pfs.length ? pfs.map(f => `<div class="srow" style="margin-top:8px"><span style="color:var(--red)">⚠ ${esc(f.symbol)} at $${Number(f.price).toFixed(4)} — ${Math.abs(f.offPegPct).toFixed(1)}% off its ${esc(f.peg)} peg · ${esc(f.pool.symbol)}${f.pool.poolAddress ? ` · <a href="https://basescan.org/address/${esc(f.pool.poolAddress)}" target="_blank" rel="noopener" style="color:var(--blu)">contract ↗</a>` : ""}</span><b>peg flag · recorded</b></div>`).join("") : `<div class="srow" style="margin-top:8px"><span>peg check at that moment</span><b>no deviation in the pools checked on-chain</b></div>`}`;
           toast("Replayed a past snapshot from git — nothing on this site can be rewritten afterwards.");
         } catch (e) {
           sb.innerHTML = `<div class="snapempty">could not fetch that snapshot (${esc(e.message)})</div>`;
@@ -999,13 +1016,13 @@ async function renderLedger() {
 /* ── HOW ── */
 const STAGES = [
   ["1 · FETCH", "Pull live pool data from DeFiLlama and token prices from CoinGecko — plus the pool's own contract via public Base RPC. Public endpoints only."],
-  ["2 · NORMALIZE", "82 pools, many protocols, one shape: symbol, APY, TVL, underlying tokens, 100-snapshot history per pool. No pool passes the wire until it parses clean."],
-  ["3 · DETECT", "Compare against published thresholds: APY jump/collapse, TVL shift, leader change, peg deviation. 40 integrity checks per snapshot — every number reconciled before it ships."],
+  ["2 · NORMALIZE", "Every Base stablecoin pool the index returns (~80 today — the count floats with the market), many protocols, one shape: symbol, APY, TVL, underlying tokens. No pool passes the wire until it parses clean."],
+  ["3 · DETECT", "Compare against published thresholds: APY jump/collapse, TVL shift, leader change. Separately: source-consistency (apy = base + rewards, ±0.5pp) on every pool that publishes all three components, and peg checks in the on-chain step."],
   ["4 · RECEIPT", "Every decision is written down: what passed, what was rejected and the exact reason, what was verified on-chain and at which block. Receipts ship in the same file as the data."],
   ["5 · DELIVER", "Push the snapshot to the public repo (the ledger) and refresh this site. The exact alert messages — before, after, math — are composed in the run log (the Telegram delivery layer is built; this deployment runs it log-only)."],
 ];
 const DETS = [
-  ["LIVE NOW", "Yield regime", "APY jumps, collapses, leader swaps, TVL shifts, peg deviations — on Base stablecoin pools, every 5 minutes, with on-chain verification of the top pools.", "What ships: the full board, 24h event feed, named rejection receipts, on-chain cross-checks with block + contract links, and the append-only git ledger. Every alert carries the numbers that triggered it.", true],
+  ["LIVE NOW", "Yield regime", "APY jumps, collapses, leader swaps, TVL shifts, peg deviations — on Base stablecoin pools, every 5 minutes, with on-chain cross-checks of the top pools in its supported protocols.", "What ships: the full board, 24h event feed, named rejection receipts, on-chain cross-checks with block + contract links, and the append-only git ledger. Every alert carries the numbers that triggered it.", true],
   ["NEXT", "Wallet flow", "Watch where the money actually moves: inflows/outflows on the verified pools, so an APY spike gets graded against whether anyone is following it.", "Same architecture: new detector → same thresholds page, same receipts, same ledger. No new surface area, no new trust ask.", false],
   ["NEXT", "Liquidity migration", "Detect when TVL leaves one protocol and appears at another within the window — the earliest honest signal of a yield rotation.", "Same architecture. The wire learns to track a unit of liquidity across contracts, not just pool totals.", false],
 ];
@@ -1058,6 +1075,39 @@ function renderHow() {
   $("#glossary").innerHTML = GLOSSARY.map(([t, d]) => `<div class="throw open" style="cursor:default"><span class="tn">${t}</span><span></span><span></span><div class="tx">${d}</div></div>`).join("");
 }
 
+/* ── findings — the record (agent-maintained data/findings.json) ── */
+function fUtc(iso) { return esc(String(iso || "").slice(0, 16).replace("T", " ") + " UTC"); }
+async function loadFindings() {
+  const wrap = $("#findingsWrap");
+  if (!wrap) return;
+  try {
+    const f = await getJSON(RAW + "findings.json");
+    const list = (f.findings || []).filter((x) => x.lastFlaggedAt);
+    if (!list.length) return;
+    const badge = (s) => s === "flagged"
+      ? `<span class="fbadge live">⚠ FLAGGED · LIVE</span>`
+      : s === "watch"
+        ? `<span class="fbadge off">WATCH · NOT FLAGGED THIS CYCLE</span>`
+        : `<span class="fbadge off" title="The data source stopped listing this token — the record is preserved, monitoring ended by the source, not by YieldWire">OFF-INDEX · RECORD PRESERVED</span>`;
+    wrap.innerHTML = `<div class="findings">
+      <div class="sechead"><h2>The record — what the wire caught</h2><span class="note">every entry produced by a real run · replayable in the ledger</span></div>
+      ${list.map((x) => {
+        const rel = x.relatedEvents || [];
+        const maxApy = rel.reduce((m, e) => Math.max(m, e.apy || 0), 0);
+        const dir = (x.worstOffPegPct ?? 0) < 0 ? "below" : "above";
+        const hot = Math.abs(x.worstOffPegPct || 0) >= 10;
+        const addr = x.poolAddress ? `${esc(String(x.poolAddress).slice(0, 10))}…${esc(String(x.poolAddress).slice(-6))}` : null;
+        return `<div class="ffind ${hot ? "hot" : ""}">
+        <div class="fhead">${badge(x.status)}<h4>${esc(x.symbol)} traded <b>${Math.abs(x.worstOffPegPct || 0).toFixed(1)}% ${dir}</b> its ${esc(x.peg || "$1")} peg — worst reading <b>$${Number(x.worstPrice).toFixed(4)}</b></h4></div>
+        <div class="fmeta">first seen ${fUtc(x.firstSeen)} · last confirmed ${fUtc(x.lastFlaggedAt)} · <b>${x.cyclesFlagged}</b> on-chain verified cycle${x.cyclesFlagged === 1 ? "" : "s"}${x.poolSymbol ? ` · pool ${esc(x.poolSymbol)} (${esc(x.projectId || "?")})` : ""}${addr && x.basescan ? ` · contract <a href="${esc(x.basescan)}" target="_blank" rel="noopener">${addr} ↗</a>` : ""}${x.lastBlock ? ` · block ${comma(x.lastBlock)}` : ""}</div>
+        ${x.status === "off-index" && x.offIndexNote ? `<div class="fnote">${esc(x.offIndexNote)}</div>` : ""}
+        ${rel.length ? `<div class="fmeta">While flagged, pools with this token fired <b>${rel.length}</b> detected event${rel.length === 1 ? "" : "s"}${maxApy ? ` — advertised APY ran as high as <b>${maxApy.toFixed(1)}%</b> at the same time` : ""} · <a href="#/ledger">replay any snapshot from ${fUtc(x.firstSeen)} to ${fUtc(x.lastFlaggedAt)} in the ledger →</a></div>` : ""}
+      </div>`; }).join("")}
+      <div class="ameta">Live peg flags appear on the board the moment they are read — this section is the preserved record. The distinction is kept on purpose. Maintained by the agent (src/findings.js)${f.generatedBy ? "; initially backfilled from the committed run history" : ""}.</div>
+    </div>`;
+  } catch { /* findings file unreachable — the section stays empty; the site never pretends */ }
+}
+
 /* ── verify now ── */
 $("#verifyBtn").addEventListener("click", async (e) => {
   const b = e.currentTarget;
@@ -1080,6 +1130,7 @@ $("#verifyBtn").addEventListener("click", async (e) => {
 window.addEventListener("hashchange", route);
 setInterval(paintStatus, 10000);
 (async () => {
+  loadFindings();
   try {
     LATEST = await loadLatest();
     paintStatus();
