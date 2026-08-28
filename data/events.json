@@ -1,6 +1,108 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "b39b492a-0a64-4926-8598-d5acf05d62b5",
+      "pool": {
+        "id": "b39b492a-0a64-4926-8598-d5acf05d62b5",
+        "project": "morpho-blue",
+        "symbol": "MWUSDC",
+        "tvl": 5185509,
+        "apy": 4.17163,
+        "apyBase": 3.97048,
+        "apyReward": 0.20115,
+        "apyPct1D": -0.01676,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 8671341,
+        "ts": 1787792198371
+      },
+      "after": {
+        "tvl": 5185509
+      },
+      "delta": -40.2,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0019",
+      "ts": "2026-08-28T00:26:40.881Z",
+      "factLine": "MWUSDC (morpho-blue) on Base: TVL moved from $8.7M to $5.2M (-40.2% vs ~24h ago). APY is 4.17163%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-28T00:26:40.881Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-28T00-26-40.json"
+    },
+    {
+      "type": "TVL_SHIFT",
+      "poolId": "a7e28f73-d613-4ddf-ab90-756018fdf299",
+      "pool": {
+        "id": "a7e28f73-d613-4ddf-ab90-756018fdf299",
+        "project": "superform",
+        "symbol": "SUPERUSDC",
+        "tvl": 1060569,
+        "apy": 5.30112,
+        "apyBase": 3.53185,
+        "apyReward": 1.76926,
+        "apyPct1D": -0.06026,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "tvl": 840046,
+        "ts": 1787792198371
+      },
+      "after": {
+        "tvl": 1060569
+      },
+      "delta": 26.25,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0020",
+      "ts": "2026-08-28T00:26:40.881Z",
+      "factLine": "SUPERUSDC (superform) on Base: TVL moved from $840.0K to $1.1M (+26.25% vs ~24h ago). APY is 5.30112%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-28T00:26:40.881Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-28T00-26-40.json"
+    },
+    {
       "type": "LEADER_CHANGE",
       "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
       "pool": {
