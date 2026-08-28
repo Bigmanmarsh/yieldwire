@@ -25,6 +25,7 @@ import { summarize } from "./llm.js";
 import { send, alertMessage, digestMessage } from "./telegram.js";
 import { crosscheckPools, PROJECTS } from "./crosscheck.js";
 import { crossReference } from "./xref.js";
+import { validateSnapshot } from "./validate.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(root, "data");
@@ -223,8 +224,10 @@ async function runCycle(cycleNo) {
     hist: { apy: nextWindow[p.id]?.apyHist ?? [p.apy], tvl: nextWindow[p.id]?.tvlHist ?? [p.tvl] },
   }));
 
-  writeJson("latest.json", {
+  const out = {
     ts: now.toISOString(),
+    run: process.env.GITHUB_RUN_NUMBER || null, // matches the commit message — a file whose run/cycle/ts don't match its commit is a version mix, and that's now visible
+    cycle: cycleNo,
     thresholds: THRESHOLDS,
     pools: poolsOut, // full monitored set, sorted by APY desc (site board uses top 10)
     rejected,
@@ -234,7 +237,21 @@ async function runCycle(cycleNo) {
     llm: { mode: process.env.GEMINI_API_KEY ? "on" : "keyless", ...state.llm },
     crosscheck,
     xrefStats,
-  });
+  };
+
+  // ── Atomicity gate: refuse to publish a snapshot whose parts disagree ──
+  // Every field above is from this run's one in-process state; the gate
+  // makes that provable — a leader that doesn't match its pool record, or a
+  // crosscheck timestamp from a different run, fails the cycle (red run)
+  // instead of shipping an inconsistent file. See src/validate.js.
+  const { ok, problems } = validateSnapshot(out, nowMs);
+  if (!ok) {
+    log("SNAPSHOT VALIDATION FAILED — nothing published: " + problems.join("; "));
+    throw new Error("snapshot validation failed: " + problems.join("; "));
+  }
+  log("snapshot validation: ok (ts/leader/pools/crosscheck internally consistent)");
+
+  writeJson("latest.json", out);
   writeJson("events.json", eventsFile);
   writeJson("window24h.json", nextWindow);
 

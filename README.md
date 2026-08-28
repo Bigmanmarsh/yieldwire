@@ -31,6 +31,28 @@ Built for the [Orion Agents Builder Hackathon](https://orionagents.org/hackathon
 - Does not pretend APY is guaranteed, or that on-chain reserve checks prove APY.
 - Does not claim blockchain-grade immutability for its history — it's public, versioned, and tamper-evident, which is exactly what it claims to be.
 
+## Snapshot atomicity
+
+Every 5-minute cycle writes `data/latest.json` as **one atomic object**: `ts`,
+`pools`, `leader`, `rejected`, and `integrity` come from that run's single
+fetch; `crosscheck.*` comes from that run's on-chain reads (seconds later).
+Before each publish, `src/validate.js` refuses to ship a snapshot whose leader
+doesn't exactly match its pool record, or whose crosscheck timestamps drift
+far from `ts` — a failed gate turns the run **red** instead of publishing an
+inconsistent file. Each snapshot also stamps its `run` and `cycle`, so any
+file can be matched against the commit that published it.
+
+Two honest caveats:
+
+- **Delivery is cached.** `raw.githubusercontent.com` and the GitHub UI can
+  serve a file minutes behind the newest commit. Reading the URL twice within
+  a minute can show you two *different* snapshots — each internally consistent
+  on its own (self-check: `ts` ≈ `crosscheck.checkedAt`, leader `apy`/`tvl`
+  equal to its pool record, `run`/`cycle` matching the commit message).
+- **`hist` arrays are deliberately cross-run** — a labeled 24-hour rolling
+  window ("LAST N SNAPSHOTS") powering the charts, not a claim that every
+  number in the file is from one instant.
+
 ## The pipeline (60-second version)
 
 ```text
