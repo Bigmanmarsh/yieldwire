@@ -1,6 +1,61 @@
 {
   "events": [
     {
+      "type": "LEADER_CHANGE",
+      "poolId": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
+      "pool": {
+        "id": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
+        "project": "harvest-finance",
+        "symbol": "USDC",
+        "tvl": 1861742,
+        "apy": 14.58,
+        "apyBase": 14.58,
+        "apyReward": null,
+        "apyPct1D": 0.26,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "symbol": "MSUSD-USDC",
+        "project": "aerodrome-slipstream",
+        "apy": 46.12764,
+        "tvl": 1047628
+      },
+      "after": {
+        "apy": 14.58,
+        "tvl": 1861742
+      },
+      "delta": -31.55,
+      "trigger": "Highest-APY stablecoin pool (TVL ≥ $1,000,000) changed",
+      "id": "EVT-0023",
+      "ts": "2026-08-28T04:23:46.081Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) at 46.12764% APY lost the top spot to USDC (harvest-finance) at 14.58% APY on Base. New leader TVL $1.9M, old leader TVL $1.0M. APY gap change -31.55 percentage points. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-28T04:23:46.081Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-28T04-23-46.json"
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
       "pool": {
