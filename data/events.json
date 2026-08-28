@@ -1,6 +1,84 @@
 {
   "events": [
     {
+      "type": "LEADER_CHANGE",
+      "poolId": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
+      "pool": {
+        "id": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
+        "project": "harvest-finance",
+        "symbol": "USDC",
+        "tvl": 1862005,
+        "apy": 14.58,
+        "apyBase": 14.58,
+        "apyReward": null,
+        "apyPct1D": -0.01,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "symbol": "MSUSD-USDC",
+        "project": "aerodrome-slipstream",
+        "apy": 95.13274,
+        "tvl": 1058313
+      },
+      "after": {
+        "apy": 14.58,
+        "tvl": 1862005
+      },
+      "delta": -80.55,
+      "trigger": "Highest-APY stablecoin pool (TVL ≥ $1,000,000) changed",
+      "id": "EVT-0031",
+      "ts": "2026-08-28T21:22:45.090Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) at 95.13274% APY lost the top spot to USDC (harvest-finance) at 14.58% APY on Base. New leader TVL $1.9M, old leader TVL $1.1M. APY gap change -80.55 percentage points. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-28T21:22:45.090Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-28T21-22-45.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,862,005",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "LEADER",
+            "claim": "highest APY among monitored Base stablecoin pools",
+            "verdict": "RECOMPUTED-CHANGED",
+            "detail": "recomputed: this pool is rank #3 of 80; current top is MSUSD-USDC at 152.64%",
+            "via": "deterministic re-derivation (no LLM)",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-08-28T21:22:45.090Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "1a833dd0-fc33-4bc2-8383-6c34b71bb735",
       "pool": {
