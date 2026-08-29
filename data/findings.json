@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": "Backfilled from committed run history by scripts/backfill-findings.mjs: it replays every agent commit of data/latest.json through the same updateFindings() code the live agent runs (src/findings.js). Every price, block, and timestamp comes from a real committed snapshot — verify any of them with `node src/run.js --replay <sha>` or the site's ledger tab. The agent maintains this file from here on.",
-  "updated": "2026-08-29T19:39:23.524Z",
+  "updated": "2026-08-29T19:44:26.746Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,7 +9,7 @@
       "status": "flagged",
       "firstSeen": "2026-08-26T22:10:08.296Z",
       "firstPrice": 0.6817,
-      "cyclesFlagged": 583,
+      "cyclesFlagged": 584,
       "relatedEvents": [
         {
           "id": "EVT-0002",
@@ -96,13 +96,13 @@
           "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-08-29T19:39:23.524Z",
-      "lastFlaggedAt": "2026-08-29T19:39:23.524Z",
-      "lastPrice": 0.6511,
+      "lastSeen": "2026-08-29T19:44:26.746Z",
+      "lastFlaggedAt": "2026-08-29T19:44:26.746Z",
+      "lastPrice": 0.6506,
       "lastOffPegPct": -34.9,
       "worstPrice": 0.6455,
       "worstOffPegPct": -35.5,
-      "lastBlock": "50621508",
+      "lastBlock": "50621660",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
