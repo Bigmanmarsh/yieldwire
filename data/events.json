@@ -1,6 +1,73 @@
 {
   "events": [
     {
+      "type": "APY_JUMP",
+      "poolId": "437a4c66-b5a7-416b-853a-565433679627",
+      "pool": {
+        "id": "437a4c66-b5a7-416b-853a-565433679627",
+        "project": "zircuit-finance",
+        "symbol": "ZVUSDC",
+        "tvl": 1399471,
+        "apy": 7.73948,
+        "apyBase": 7.73948,
+        "apyReward": null,
+        "apyPct1D": -0.28763,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 3.86573,
+        "tvl": 1399251
+      },
+      "after": {
+        "apy": 7.73948,
+        "tvl": 1399471
+      },
+      "delta": 3.87,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0047",
+      "ts": "2026-08-29T22:25:58.005Z",
+      "factLine": "ZVUSDC (zircuit-finance) on Base: APY moved from 3.86573% to 7.73948% (+3.87 percentage points). TVL $1.4M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-29T22:25:58.005Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-29T22-25-58.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,399,471",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-08-29T22:25:58.005Z"
+      }
+    },
+    {
       "type": "LEADER_CHANGE",
       "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
       "pool": {
