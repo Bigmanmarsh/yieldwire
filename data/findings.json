@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": "Backfilled from committed run history by scripts/backfill-findings.mjs: it replays every agent commit of data/latest.json through the same updateFindings() code the live agent runs (src/findings.js). Every price, block, and timestamp comes from a real committed snapshot — verify any of them with `node src/run.js --replay <sha>` or the site's ledger tab. The agent maintains this file from here on.",
-  "updated": "2026-08-30T19:17:30.065Z",
+  "updated": "2026-08-30T19:22:32.862Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,15 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-08-26T22:10:08.296Z",
       "firstPrice": 0.6817,
-      "cyclesFlagged": 865,
+      "cyclesFlagged": 866,
       "relatedEvents": [
-        {
-          "id": "EVT-0021",
-          "type": "APY_JUMP",
-          "ts": "2026-08-28T03:23:13.420Z",
-          "apy": 46.12764,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0025",
           "type": "LEADER_CHANGE",
@@ -94,22 +87,29 @@
           "ts": "2026-08-30T17:31:25.871Z",
           "apy": 124.51434,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0061",
+          "type": "APY_COLLAPSE",
+          "ts": "2026-08-30T19:22:32.862Z",
+          "apy": 150.16372,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-08-30T19:17:30.065Z",
-      "lastFlaggedAt": "2026-08-30T19:17:30.065Z",
-      "lastPrice": 0.6146,
-      "lastOffPegPct": -38.5,
+      "lastSeen": "2026-08-30T19:22:32.862Z",
+      "lastFlaggedAt": "2026-08-30T19:22:32.862Z",
+      "lastPrice": 0.6144,
+      "lastOffPegPct": -38.6,
       "worstPrice": 0.6137,
       "worstOffPegPct": -38.6,
-      "lastBlock": "50664051",
+      "lastBlock": "50664203",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 3909824,
-      "poolApyAtLastFlag": 6.2963,
+      "poolTvl": 3850624,
+      "poolApyAtLastFlag": 6.40254,
       "offIndexAt": "2026-08-28T04:23:46.081Z",
       "offIndexNote": "No longer in the monitored universe — the data source stopped listing this token. Monitoring ended by the source, not by YieldWire; every past reading stays replayable in the ledger."
     }
