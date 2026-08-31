@@ -1,6 +1,139 @@
 {
   "events": [
     {
+      "type": "APY_JUMP",
+      "poolId": "437a4c66-b5a7-416b-853a-565433679627",
+      "pool": {
+        "id": "437a4c66-b5a7-416b-853a-565433679627",
+        "project": "zircuit-finance",
+        "symbol": "ZVUSDC",
+        "tvl": 1399837,
+        "apy": 11.43888,
+        "apyBase": 11.43888,
+        "apyReward": null,
+        "apyPct1D": 3.6994,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 7.58868,
+        "tvl": 1399688
+      },
+      "after": {
+        "apy": 11.43888,
+        "tvl": 1399837
+      },
+      "delta": 3.85,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0072",
+      "ts": "2026-08-31T09:25:12.056Z",
+      "factLine": "ZVUSDC (zircuit-finance) on Base: APY moved from 7.58868% to 11.43888% (+3.85 percentage points). TVL $1.4M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-31T09:25:12.056Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-31T09-25-12.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,399,837",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-08-31T09:25:12.056Z"
+      }
+    },
+    {
+      "type": "TVL_SHIFT",
+      "poolId": "c29704a4-3537-459d-bc4d-1f8812f28bcd",
+      "pool": {
+        "id": "c29704a4-3537-459d-bc4d-1f8812f28bcd",
+        "project": "morpho-blue",
+        "symbol": "EDGEUSDC",
+        "tvl": 872683,
+        "apy": 6.83228,
+        "apyBase": 6.83228,
+        "apyReward": 0,
+        "apyPct1D": 1.00611,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 672655,
+        "ts": 1788138341790
+      },
+      "after": {
+        "tvl": 872683
+      },
+      "delta": 29.74,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0073",
+      "ts": "2026-08-31T09:25:12.056Z",
+      "factLine": "EDGEUSDC (morpho-blue) on Base: TVL moved from $672.7K to $872.7K (+29.74% vs ~24h ago). APY is 6.83228%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-31T09:25:12.056Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-31T09-25-12.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $872,683",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-08-31T09:25:12.056Z"
+      }
+    },
+    {
       "type": "LEADER_CHANGE",
       "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "pool": {
