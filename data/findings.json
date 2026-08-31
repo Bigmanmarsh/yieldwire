@@ -1,12 +1,12 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": "Backfilled from committed run history by scripts/backfill-findings.mjs: it replays every agent commit of data/latest.json through the same updateFindings() code the live agent runs (src/findings.js). Every price, block, and timestamp comes from a real committed snapshot — verify any of them with `node src/run.js --replay <sha>` or the site's ledger tab. The agent maintains this file from here on.",
-  "updated": "2026-08-31T01:30:57.178Z",
+  "updated": "2026-08-31T01:35:57.239Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
-      "status": "flagged",
+      "status": "watch",
       "firstSeen": "2026-08-26T22:10:08.296Z",
       "firstPrice": 0.6817,
       "cyclesFlagged": 939,
