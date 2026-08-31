@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "4a2520ad-65ca-57fc-af80-f705c031e523",
+      "pool": {
+        "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
+        "project": "fusion-by-ipor",
+        "symbol": "USDC",
+        "tvl": 1132462,
+        "apy": 4.59081,
+        "apyBase": 4.59081,
+        "apyReward": 0,
+        "apyPct1D": -2.61434,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 7.19089,
+        "tvl": 1132446
+      },
+      "after": {
+        "apy": 4.59081,
+        "tvl": 1132462
+      },
+      "delta": -2.6,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0075",
+      "ts": "2026-08-31T11:26:16.916Z",
+      "factLine": "USDC (fusion-by-ipor) on Base: APY moved from 7.19089% to 4.59081% (-2.6 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-08-31T11:26:16.916Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-08-31T11-26-16.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,132,462",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-08-31T11:26:16.916Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "437a4c66-b5a7-416b-853a-565433679627",
       "pool": {
         "id": "437a4c66-b5a7-416b-853a-565433679627",
