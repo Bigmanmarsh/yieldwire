@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": "Backfilled from committed run history by scripts/backfill-findings.mjs: it replays every agent commit of data/latest.json through the same updateFindings() code the live agent runs (src/findings.js). Every price, block, and timestamp comes from a real committed snapshot — verify any of them with `node src/run.js --replay <sha>` or the site's ledger tab. The agent maintains this file from here on.",
-  "updated": "2026-09-01T20:19:36.281Z",
+  "updated": "2026-09-01T20:24:39.070Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,7 +9,7 @@
       "status": "flagged",
       "firstSeen": "2026-08-26T22:10:08.296Z",
       "firstPrice": 0.6817,
-      "cyclesFlagged": 1422,
+      "cyclesFlagged": 1423,
       "relatedEvents": [
         {
           "id": "EVT-0049",
@@ -96,20 +96,20 @@
           "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-09-01T20:19:36.281Z",
-      "lastFlaggedAt": "2026-09-01T20:19:36.281Z",
-      "lastPrice": 0.5815,
-      "lastOffPegPct": -41.8,
+      "lastSeen": "2026-09-01T20:24:39.070Z",
+      "lastFlaggedAt": "2026-09-01T20:24:39.070Z",
+      "lastPrice": 0.5811,
+      "lastOffPegPct": -41.9,
       "worstPrice": 0.5705,
       "worstOffPegPct": -42.9,
-      "lastBlock": "50752315",
+      "lastBlock": "50752466",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 2117119,
-      "poolApyAtLastFlag": 10.94385,
+      "poolTvl": 2112879,
+      "poolApyAtLastFlag": 11.09569,
       "offIndexAt": "2026-08-28T04:23:46.081Z",
       "offIndexNote": "No longer in the monitored universe — the data source stopped listing this token. Monitoring ended by the source, not by YieldWire; every past reading stays replayable in the ledger."
     }
