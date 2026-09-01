@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "735fb238-6c21-44b0-9f02-31fb880836e6",
+      "pool": {
+        "id": "735fb238-6c21-44b0-9f02-31fb880836e6",
+        "project": "morpho-blue",
+        "symbol": "YOUSD",
+        "tvl": 634560,
+        "apy": 0,
+        "apyBase": 0,
+        "apyReward": null,
+        "apyPct1D": 0,
+        "underlyingTokens": [
+          "0x0000000f2eB9f69274678c76222B35eEc7588a65"
+        ]
+      },
+      "before": {
+        "tvl": 1209502,
+        "ts": 1788138341790
+      },
+      "after": {
+        "tvl": 634560
+      },
+      "delta": -47.54,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0094",
+      "ts": "2026-09-01T00:29:16.036Z",
+      "factLine": "YOUSD (morpho-blue) on Base: TVL moved from $1.2M to $634.6K (-47.54% vs ~24h ago). APY is 0%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-01T00:29:16.036Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-01T00-29-16.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $634,560",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-01T00:29:16.036Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "pool": {
