@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_JUMP",
+      "poolId": "ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e",
+      "pool": {
+        "id": "ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e",
+        "project": "avantis",
+        "symbol": "USDC",
+        "tvl": 15919168,
+        "apy": 2.89835,
+        "apyBase": 2.89835,
+        "apyReward": null,
+        "apyPct1D": 2.89835,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 0,
+        "tvl": 15918056
+      },
+      "after": {
+        "apy": 2.89835,
+        "tvl": 15919168
+      },
+      "delta": 2.9,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0097",
+      "ts": "2026-09-01T05:26:35.496Z",
+      "factLine": "USDC (avantis) on Base: APY moved from 0% to 2.89835% (+2.9 percentage points). TVL $15.9M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-01T05:26:35.496Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-01T05-26-35.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $15,919,168",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-01T05:26:35.496Z"
+      }
+    },
+    {
+      "type": "APY_JUMP",
       "poolId": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
       "pool": {
         "id": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
