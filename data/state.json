@@ -1,12 +1,12 @@
 {
-  "seq": 144,
+  "seq": 148,
   "cooldowns": {
     "APY_JUMP:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1788393571220,
     "APY_COLLAPSE:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1788330290625,
     "APY_JUMP:847c874f-d4e7-47ed-8870-97d2f24a8767": 1788359020266,
     "APY_COLLAPSE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1788369877295,
     "APY_JUMP:437a4c66-b5a7-416b-853a-565433679627": 1788301555054,
-    "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1788337581896,
+    "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1788395088374,
     "APY_COLLAPSE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1788356290119,
     "TVL_SHIFT:c29704a4-3537-459d-bc4d-1f8812f28bcd": 1788356290119,
     "LEADER_CHANGE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1788337581896,
@@ -15,7 +15,6 @@
     "TVL_SHIFT:735fb238-6c21-44b0-9f02-31fb880836e6": 1788222556036,
     "APY_JUMP:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1788356290119,
     "TVL_SHIFT:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1788356290119,
-    "APY_JUMP:a23fd6f5-fd53-4934-830f-2ea789148cdd": 1788222252089,
     "APY_JUMP:ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e": 1788312436331,
     "APY_JUMP:1a833dd0-fc33-4bc2-8383-6c34b71bb735": 1788301555054,
     "TVL_SHIFT:7e0661bf-8cf3-45e6-9424-31916d4c7b84": 1788294279070,
@@ -29,7 +28,10 @@
     "APY_JUMP:d511efb8-f61b-43ce-bb1e-dffc6a57727f": 1788258278587,
     "TVL_SHIFT:7536ed73-da02-409c-bfb9-9ee69de7a426": 1788294279070,
     "APY_JUMP:e4f8123d-1e03-408e-869a-76708a62bc89": 1788356290119,
-    "LEADER_CHANGE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1788369877295
+    "LEADER_CHANGE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1788369877295,
+    "APY_COLLAPSE:ccf4821e-9aec-4aaa-aeaa-7914af0ed6c1": 1788395088374,
+    "APY_COLLAPSE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1788395088374,
+    "APY_JUMP:e5345fb1-416b-4649-8e75-fc975dada7a7": 1788395088374
   },
   "lastDigestDate": "2026-09-02",
   "llm": {
@@ -56,10 +58,10 @@
     "lastFactories": 1788393876612
   },
   "xrefStats": {
-    "events": 144,
-    "corroborated": 106,
-    "deviations": 25,
-    "unverified": 188
+    "events": 148,
+    "corroborated": 112,
+    "deviations": 26,
+    "unverified": 193
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
