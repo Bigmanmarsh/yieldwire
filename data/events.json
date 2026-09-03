@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "f03ea9e8-b17a-46f2-8a02-ff8486f939d2",
+      "pool": {
+        "id": "f03ea9e8-b17a-46f2-8a02-ff8486f939d2",
+        "project": "autofinance",
+        "symbol": "USDC",
+        "tvl": 4719456,
+        "apy": 9.27286,
+        "apyBase": 5.402,
+        "apyReward": 3.87086,
+        "apyPct1D": 1.44413,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "tvl": 7472004,
+        "ts": 1788398123774
+      },
+      "after": {
+        "tvl": 4719456
+      },
+      "delta": -36.84,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0163",
+      "ts": "2026-09-03T20:23:28.321Z",
+      "factLine": "USDC (autofinance) on Base: TVL moved from $7.5M to $4.7M (-36.84% vs ~24h ago). APY is 9.27286%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-03T20:23:28.321Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-03T20-23-28.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $4,719,456",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-03T20:23:28.321Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
       "pool": {
