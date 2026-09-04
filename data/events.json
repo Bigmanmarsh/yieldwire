@@ -2,6 +2,273 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "27de63d4-e52c-414f-a0e9-fbba61216398",
+      "pool": {
+        "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
+        "project": "harvest-finance",
+        "symbol": "USDC",
+        "tvl": 1140654,
+        "apy": 5.33,
+        "apyBase": 5.33,
+        "apyReward": null,
+        "apyPct1D": 0.16,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 7.33,
+        "tvl": 1240705
+      },
+      "after": {
+        "apy": 5.33,
+        "tvl": 1140654
+      },
+      "delta": -2,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0166",
+      "ts": "2026-09-04T05:57:01.243Z",
+      "factLine": "USDC (harvest-finance) on Base: APY moved from 7.33% to 5.33% (-2 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-04T05:57:01.243Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-04T05-57-01.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,140,654",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-04T05:57:01.243Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
+      "poolId": "724759e3-48d8-4ff6-ba11-505694cc2303",
+      "pool": {
+        "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
+        "project": "fusion-by-ipor",
+        "symbol": "USDC",
+        "tvl": 1140591,
+        "apy": 0.76963,
+        "apyBase": 0.76963,
+        "apyReward": 0,
+        "apyPct1D": 0.18959,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 6.77369,
+        "tvl": 1240542
+      },
+      "after": {
+        "apy": 0.76963,
+        "tvl": 1140591
+      },
+      "delta": -6,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0167",
+      "ts": "2026-09-04T05:57:01.243Z",
+      "factLine": "USDC (fusion-by-ipor) on Base: APY moved from 6.77369% to 0.76963% (-6 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-04T05:57:01.243Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-04T05-57-01.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,140,591",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-04T05:57:01.243Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
+      "poolId": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
+      "pool": {
+        "id": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
+        "project": "compound-v3",
+        "symbol": "USDC",
+        "tvl": 902390,
+        "apy": 4.29085,
+        "apyBase": 4.29085,
+        "apyReward": 0,
+        "apyPct1D": -1.50318,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 6.31144,
+        "tvl": 837336
+      },
+      "after": {
+        "apy": 4.29085,
+        "tvl": 902390
+      },
+      "delta": -2.02,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0168",
+      "ts": "2026-09-04T05:57:01.243Z",
+      "factLine": "USDC (compound-v3) on Base: APY moved from 6.31144% to 4.29085% (-2.02 percentage points). TVL $902.4K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-04T05:57:01.243Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-04T05-57-01.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $902,390",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-04T05:57:01.243Z"
+      }
+    },
+    {
+      "type": "TVL_SHIFT",
+      "poolId": "4a2520ad-65ca-57fc-af80-f705c031e523",
+      "pool": {
+        "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
+        "project": "fusion-by-ipor",
+        "symbol": "USDC",
+        "tvl": 564821,
+        "apy": 8.60806,
+        "apyBase": 5.10806,
+        "apyReward": 3.5,
+        "apyPct1D": -0.28897,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "tvl": 1214950,
+        "ts": 1788484563200
+      },
+      "after": {
+        "tvl": 564821
+      },
+      "delta": -53.51,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0169",
+      "ts": "2026-09-04T05:57:01.243Z",
+      "factLine": "USDC (fusion-by-ipor) on Base: TVL moved from $1.2M to $564.8K (-53.51% vs ~24h ago). APY is 8.60806%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-04T05:57:01.243Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-04T05-57-01.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $564,821",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-04T05:57:01.243Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
       "pool": {
         "id": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
