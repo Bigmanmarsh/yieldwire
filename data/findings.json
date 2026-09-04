@@ -1,117 +1,30 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
-  "generatedBy": "Backfilled from committed run history by scripts/backfill-findings.mjs: it replays every agent commit of data/latest.json through the same updateFindings() code the live agent runs (src/findings.js). Every price, block, and timestamp comes from a real committed snapshot — verify any of them with `node src/run.js --replay <sha>` or the site's ledger tab. The agent maintains this file from here on.",
-  "updated": "2026-09-04T14:27:36.189Z",
+  "generatedBy": null,
+  "updated": "2026-09-04T14:33:07.002Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
       "status": "flagged",
-      "firstSeen": "2026-08-26T22:10:08.296Z",
-      "firstPrice": 0.6817,
-      "cyclesFlagged": 2057,
-      "relatedEvents": [
-        {
-          "id": "EVT-0117",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-01T18:23:13.602Z",
-          "apy": 354.43698,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0131",
-          "type": "APY_JUMP",
-          "ts": "2026-09-02T02:27:45.731Z",
-          "apy": 169.13714,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0132",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-02T06:24:50.625Z",
-          "apy": 202.09881,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0136",
-          "type": "APY_JUMP",
-          "ts": "2026-09-02T13:38:10.119Z",
-          "apy": 17.83319,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0137",
-          "type": "TVL_SHIFT",
-          "ts": "2026-09-02T13:38:10.119Z",
-          "apy": 17.83319,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0142",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-09-02T17:24:37.295Z",
-          "apy": 20.37273,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0144",
-          "type": "APY_JUMP",
-          "ts": "2026-09-02T23:59:31.220Z",
-          "apy": 264.66416,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0146",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-03T00:24:48.374Z",
-          "apy": 17.45297,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0150",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-03T01:25:29.614Z",
-          "apy": 190.20285,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0161",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-03T14:23:47.192Z",
-          "apy": 165.64852,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0162",
-          "type": "APY_JUMP",
-          "ts": "2026-09-03T19:27:44.117Z",
-          "apy": 185.75116,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0170",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-04T07:22:57.834Z",
-          "apy": 159.43607,
-          "poolSymbol": "MSUSD-USDC"
-        }
-      ],
-      "lastSeen": "2026-09-04T14:27:36.189Z",
-      "lastFlaggedAt": "2026-09-04T14:27:36.189Z",
-      "lastPrice": 0.4616,
+      "firstSeen": "2026-09-04T14:33:07.002Z",
+      "firstPrice": 0.4617,
+      "cyclesFlagged": 1,
+      "relatedEvents": [],
+      "lastSeen": "2026-09-04T14:33:07.002Z",
+      "lastFlaggedAt": "2026-09-04T14:33:07.002Z",
+      "lastPrice": 0.4617,
       "lastOffPegPct": -53.8,
-      "worstPrice": 0.4422,
-      "worstOffPegPct": -55.8,
-      "lastBlock": "50871355",
+      "worstPrice": 0.4617,
+      "worstOffPegPct": -53.8,
+      "lastBlock": "50871520",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "poolTvl": 1023628,
-      "poolApyAtLastFlag": 20.05744,
-      "offIndexAt": "2026-08-28T04:23:46.081Z",
-      "offIndexNote": "No longer in the monitored universe — the data source stopped listing this token. Monitoring ended by the source, not by YieldWire; every past reading stays replayable in the ledger."
+      "poolApyAtLastFlag": 20.05744
     }
   ]
 }
