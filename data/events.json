@@ -1,6 +1,140 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "724759e3-48d8-4ff6-ba11-505694cc2303",
+      "pool": {
+        "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
+        "project": "fusion-by-ipor",
+        "symbol": "USDC",
+        "tvl": 1138829,
+        "apy": 0.96503,
+        "apyBase": 0.96503,
+        "apyReward": 0,
+        "apyPct1D": -6.96987,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 6.64328,
+        "tvl": 1141857
+      },
+      "after": {
+        "apy": 0.96503,
+        "tvl": 1138829
+      },
+      "delta": -5.68,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0183",
+      "ts": "2026-09-05T10:27:56.812Z",
+      "factLine": "USDC (fusion-by-ipor) on Base: APY moved from 6.64328% to 0.96503% (-5.68 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-05T10:27:56.812Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-05T10-27-56.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,138,829",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-05T10:27:56.812Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
+      "poolId": "27de63d4-e52c-414f-a0e9-fbba61216398",
+      "pool": {
+        "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
+        "project": "harvest-finance",
+        "symbol": "USDC",
+        "tvl": 1138785,
+        "apy": 4.62,
+        "apyBase": 4.62,
+        "apyReward": null,
+        "apyPct1D": -3.41,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 7.1,
+        "tvl": 1141815
+      },
+      "after": {
+        "apy": 4.62,
+        "tvl": 1138785
+      },
+      "delta": -2.48,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0184",
+      "ts": "2026-09-05T10:27:56.812Z",
+      "factLine": "USDC (harvest-finance) on Base: APY moved from 7.1% to 4.62% (-2.48 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-05T10:27:56.812Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-05T10-27-56.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,138,785",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-05T10:27:56.812Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "pool": {
