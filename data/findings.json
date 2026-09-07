@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-09-07T16:11:32.361Z",
+  "updated": "2026-09-07T16:16:34.957Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,7 +9,7 @@
       "status": "flagged",
       "firstSeen": "2026-09-04T14:33:07.002Z",
       "firstPrice": 0.4617,
-      "cyclesFlagged": 836,
+      "cyclesFlagged": 837,
       "relatedEvents": [
         {
           "id": "EVT-0178",
@@ -47,13 +47,13 @@
           "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-09-07T16:11:32.361Z",
-      "lastFlaggedAt": "2026-09-07T16:11:32.361Z",
+      "lastSeen": "2026-09-07T16:16:34.957Z",
+      "lastFlaggedAt": "2026-09-07T16:16:34.957Z",
       "lastPrice": 0.6218,
       "lastOffPegPct": -37.8,
       "worstPrice": 0.4587,
       "worstOffPegPct": -54.1,
-      "lastBlock": "51004073",
+      "lastBlock": "51004224",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
