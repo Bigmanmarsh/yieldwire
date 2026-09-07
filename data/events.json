@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "4a2520ad-65ca-57fc-af80-f705c031e523",
+      "pool": {
+        "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
+        "project": "fusion-by-ipor",
+        "symbol": "USDC",
+        "tvl": 669860,
+        "apy": 8.06715,
+        "apyBase": 4.56715,
+        "apyReward": 3.5,
+        "apyPct1D": -0.03962,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "tvl": 1162429,
+        "ts": 1788705467974
+      },
+      "after": {
+        "tvl": 669860
+      },
+      "delta": -42.37,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0214",
+      "ts": "2026-09-07T12:29:25.054Z",
+      "factLine": "USDC (fusion-by-ipor) on Base: TVL moved from $1.2M to $669.9K (-42.37% vs ~24h ago). APY is 8.06715%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-07T12:29:25.054Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-07T12-29-25.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $669,860",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-07T12:29:25.054Z"
+      }
+    },
+    {
       "type": "APY_COLLAPSE",
       "poolId": "82469f6f-951d-4578-b47e-fb4df326f059",
       "pool": {
