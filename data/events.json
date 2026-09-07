@@ -2,6 +2,72 @@
   "events": [
     {
       "type": "TVL_SHIFT",
+      "poolId": "77da7e88-b7a2-5e66-9fd8-19fd33c7e281",
+      "pool": {
+        "id": "77da7e88-b7a2-5e66-9fd8-19fd33c7e281",
+        "project": "harvest-finance",
+        "symbol": "USDC",
+        "tvl": 569620,
+        "apy": 8.39,
+        "apyBase": 8.39,
+        "apyReward": null,
+        "apyPct1D": 0.53,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 957962,
+        "ts": 1788708494675
+      },
+      "after": {
+        "tvl": 569620
+      },
+      "delta": -40.54,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0215",
+      "ts": "2026-09-07T13:30:06.980Z",
+      "factLine": "USDC (harvest-finance) on Base: TVL moved from $958.0K to $569.6K (-40.54% vs ~24h ago). APY is 8.39%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-07T13:30:06.980Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-07T13-30-06.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $569,620",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-07T13:30:06.980Z"
+      }
+    },
+    {
+      "type": "TVL_SHIFT",
       "poolId": "4a2520ad-65ca-57fc-af80-f705c031e523",
       "pool": {
         "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
