@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "82469f6f-951d-4578-b47e-fb4df326f059",
+      "pool": {
+        "id": "82469f6f-951d-4578-b47e-fb4df326f059",
+        "project": "centrifuge-protocol",
+        "symbol": "USDC",
+        "tvl": 50526829,
+        "apy": 3.35358,
+        "apyBase": 3.35358,
+        "apyReward": null,
+        "apyPct1D": -2.40939,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 5.76297,
+        "tvl": 50526258
+      },
+      "after": {
+        "apy": 3.35358,
+        "tvl": 50526829
+      },
+      "delta": -2.41,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0213",
+      "ts": "2026-09-07T12:24:21.604Z",
+      "factLine": "USDC (centrifuge-protocol) on Base: APY moved from 5.76297% to 3.35358% (-2.41 percentage points). TVL $50.5M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-07T12:24:21.604Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-07T12-24-21.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $50,526,829",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-07T12:24:21.604Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "27de63d4-e52c-414f-a0e9-fbba61216398",
       "pool": {
         "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
