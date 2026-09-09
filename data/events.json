@@ -1,6 +1,73 @@
 {
   "events": [
     {
+      "type": "APY_JUMP",
+      "poolId": "e4f8123d-1e03-408e-869a-76708a62bc89",
+      "pool": {
+        "id": "e4f8123d-1e03-408e-869a-76708a62bc89",
+        "project": "lagoon",
+        "symbol": "DTUSDC",
+        "tvl": 665709,
+        "apy": 12.70216,
+        "apyBase": 12.70216,
+        "apyReward": null,
+        "apyPct1D": 6.20021,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 6.50195,
+        "tvl": 665552
+      },
+      "after": {
+        "apy": 12.70216,
+        "tvl": 665709
+      },
+      "delta": 6.2,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0238",
+      "ts": "2026-09-09T09:24:53.340Z",
+      "factLine": "DTUSDC (lagoon) on Base: APY moved from 6.50195% to 12.70216% (+6.2 percentage points). TVL $665.7K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-09T09:24:53.340Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-09T09-24-53.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $665,709",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-09T09:24:53.340Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
       "pool": {
