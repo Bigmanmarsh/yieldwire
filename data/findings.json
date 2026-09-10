@@ -1,12 +1,12 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-09-10T01:13:50.330Z",
+  "updated": "2026-09-10T01:18:53.391Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
-      "status": "flagged",
+      "status": "watch",
       "firstSeen": "2026-09-10T00:02:58.934Z",
       "firstPrice": 0.6553,
       "cyclesFlagged": 15,
