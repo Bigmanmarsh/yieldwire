@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "bf346d43-ef94-4277-b159-ebadb93caef1",
+      "pool": {
+        "id": "bf346d43-ef94-4277-b159-ebadb93caef1",
+        "project": "morpho-blue",
+        "symbol": "BBQUSDC",
+        "tvl": 1909710,
+        "apy": 5.2692,
+        "apyBase": 5.2692,
+        "apyReward": 0,
+        "apyPct1D": -0.0339,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 2700304,
+        "ts": 1789397590648
+      },
+      "after": {
+        "tvl": 1909710
+      },
+      "delta": -29.28,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0306",
+      "ts": "2026-09-14T20:23:07.800Z",
+      "factLine": "BBQUSDC (morpho-blue) on Base: TVL moved from $2.7M to $1.9M (-29.28% vs ~24h ago). APY is 5.2692%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-14T20:23:07.800Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-14T20-23-07.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,909,710",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-14T20:23:07.800Z"
+      }
+    },
+    {
       "type": "APY_COLLAPSE",
       "poolId": "e4f8123d-1e03-408e-869a-76708a62bc89",
       "pool": {
