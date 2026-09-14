@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "4c7fc9a2-bc0c-4b16-bdd3-198006d09c1d",
+      "pool": {
+        "id": "4c7fc9a2-bc0c-4b16-bdd3-198006d09c1d",
+        "project": "sprinter",
+        "symbol": "USDC",
+        "tvl": 828356,
+        "apy": 6.09042,
+        "apyBase": null,
+        "apyReward": null,
+        "apyPct1D": 0,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 1128357,
+        "ts": 1789310942883
+      },
+      "after": {
+        "tvl": 828356
+      },
+      "delta": -26.59,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0296",
+      "ts": "2026-09-14T06:27:52.740Z",
+      "factLine": "USDC (sprinter) on Base: TVL moved from $1.1M to $828.4K (-26.59% vs ~24h ago). APY is 6.09042%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-14T06:27:52.740Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-14T06-27-52.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $828,356",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-14T06:27:52.740Z"
+      }
+    },
+    {
       "type": "APY_COLLAPSE",
       "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "pool": {
