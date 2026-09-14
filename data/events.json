@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "e4f8123d-1e03-408e-869a-76708a62bc89",
+      "pool": {
+        "id": "e4f8123d-1e03-408e-869a-76708a62bc89",
+        "project": "lagoon",
+        "symbol": "DTUSDC",
+        "tvl": 663551,
+        "apy": 8.64855,
+        "apyBase": 8.64855,
+        "apyReward": null,
+        "apyPct1D": -4.05361,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 12.70216,
+        "tvl": 665684
+      },
+      "after": {
+        "apy": 8.64855,
+        "tvl": 663551
+      },
+      "delta": -4.05,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0305",
+      "ts": "2026-09-14T17:25:46.198Z",
+      "factLine": "DTUSDC (lagoon) on Base: APY moved from 12.70216% to 8.64855% (-4.05 percentage points). TVL $663.6K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-14T17:25:46.198Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-14T17-25-46.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $663,551",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-14T17:25:46.198Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "pool": {
         "id": "847c874f-d4e7-47ed-8870-97d2f24a8767",
