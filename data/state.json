@@ -1,6 +1,8 @@
 {
-  "seq": 359,
-  "cooldowns": {},
+  "seq": 360,
+  "cooldowns": {
+    "APY_COLLAPSE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1789669623346
+  },
   "lastDigestDate": "2026-09-17",
   "llm": {
     "attempts": 24,
@@ -26,10 +28,10 @@
     "lastFactories": 1789605251764
   },
   "xrefStats": {
-    "events": 359,
-    "corroborated": 261,
+    "events": 360,
+    "corroborated": 262,
     "deviations": 47,
-    "unverified": 465
+    "unverified": 467
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
