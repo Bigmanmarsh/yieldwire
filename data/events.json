@@ -2,6 +2,72 @@
   "events": [
     {
       "type": "TVL_SHIFT",
+      "poolId": "b39b492a-0a64-4926-8598-d5acf05d62b5",
+      "pool": {
+        "id": "b39b492a-0a64-4926-8598-d5acf05d62b5",
+        "project": "morpho-blue",
+        "symbol": "MWUSDC",
+        "tvl": 6053367,
+        "apy": 4.00456,
+        "apyBase": 3.91685,
+        "apyReward": 0.08771,
+        "apyPct1D": 0.11935,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 4577709,
+        "ts": 1789570948142
+      },
+      "after": {
+        "tvl": 6053367
+      },
+      "delta": 32.24,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-0348",
+      "ts": "2026-09-17T08:24:32.127Z",
+      "factLine": "MWUSDC (morpho-blue) on Base: TVL moved from $4.6M to $6.1M (+32.24% vs ~24h ago). APY is 4.00456%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-17T08:24:32.127Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-17T08-24-32.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $6,053,367",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-17T08:24:32.127Z"
+      }
+    },
+    {
+      "type": "TVL_SHIFT",
       "poolId": "974b8732-2dce-4a46-8204-7f9e6b7efb71",
       "pool": {
         "id": "974b8732-2dce-4a46-8204-7f9e6b7efb71",
