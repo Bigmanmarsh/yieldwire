@@ -1,5 +1,5 @@
 {
-  "seq": 379,
+  "seq": 380,
   "cooldowns": {
     "LEADER_CHANGE:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1789708990767,
     "APY_JUMP:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1789760399438,
@@ -10,7 +10,8 @@
     "LEADER_CHANGE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1789760399438,
     "APY_JUMP:847c874f-d4e7-47ed-8870-97d2f24a8767": 1789760399438,
     "TVL_SHIFT:89c36167-17ae-571a-8adf-fca819b3a600": 1789763141420,
-    "APY_JUMP:fbce5857-69c4-4142-938b-62bdc9444967": 1789763141420
+    "APY_JUMP:fbce5857-69c4-4142-938b-62bdc9444967": 1789763141420,
+    "APY_COLLAPSE:fbce5857-69c4-4142-938b-62bdc9444967": 1789766785122
   },
   "lastDigestDate": "2026-09-18",
   "llm": {
@@ -37,10 +38,10 @@
     "lastFactories": 1789691661480
   },
   "xrefStats": {
-    "events": 379,
-    "corroborated": 276,
+    "events": 380,
+    "corroborated": 277,
     "deviations": 52,
-    "unverified": 498
+    "unverified": 500
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
