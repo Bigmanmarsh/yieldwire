@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "3e7c5e93-b741-573d-b699-22d823038e61",
+      "pool": {
+        "id": "3e7c5e93-b741-573d-b699-22d823038e61",
+        "project": "centrifuge-protocol",
+        "symbol": "USDC",
+        "tvl": 7138693,
+        "apy": 0,
+        "apyBase": 0,
+        "apyReward": null,
+        "apyPct1D": null,
+        "underlyingTokens": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+        ]
+      },
+      "before": {
+        "apy": 10.94649,
+        "tvl": 7138633
+      },
+      "after": {
+        "apy": 0,
+        "tvl": 7138693
+      },
+      "delta": -10.95,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0443",
+      "ts": "2026-09-22T08:24:03.108Z",
+      "factLine": "USDC (centrifuge-protocol) on Base: APY moved from 10.94649% to 0% (-10.95 percentage points). TVL $7.1M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-22T08:24:03.108Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-22T08-24-03.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $7,138,693",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-22T08:24:03.108Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "aeb97af6-bd75-4a34-975b-9166427a0ce3",
       "pool": {
         "id": "aeb97af6-bd75-4a34-975b-9166427a0ce3",
