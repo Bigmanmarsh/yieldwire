@@ -1,6 +1,73 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
+      "pool": {
+        "id": "7372edda-f07f-4598-83e5-4edec48c4039",
+        "project": "fluid-lending",
+        "symbol": "USDC",
+        "tvl": 20828126,
+        "apy": 6.02,
+        "apyBase": 0.95,
+        "apyReward": 5.07,
+        "apyPct1D": -5.95,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 10.41,
+        "tvl": 20178565
+      },
+      "after": {
+        "apy": 6.02,
+        "tvl": 20828126
+      },
+      "delta": -4.39,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0511",
+      "ts": "2026-09-24T08:24:15.634Z",
+      "factLine": "USDC (fluid-lending) on Base: APY moved from 10.41% to 6.02% (-4.39 percentage points). TVL $20.8M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-24T08:24:15.634Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-24T08-24-15.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $20,828,126",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-09-24T08:24:15.634Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
       "pool": {
@@ -41365,59 +41432,6 @@
       "id": "EVT-0011",
       "ts": "2026-08-27T14:27:02.851Z",
       "factLine": "MSUSD-USDC (aerodrome-slipstream) at 19.47645% APY lost the top spot to USDC (harvest-finance) at 14.59% APY on Base. New leader TVL $1.9M, old leader TVL $1.3M. APY gap change -4.89 percentage points. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-08-27T14:27:02.851Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-08-27T14-27-02.json"
-    },
-    {
-      "type": "APY_JUMP",
-      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
-      "pool": {
-        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
-        "project": "aerodrome-slipstream",
-        "symbol": "MSUSD-USDC",
-        "tvl": 979481,
-        "apy": 39.95092,
-        "apyBase": null,
-        "apyReward": 39.95092,
-        "apyPct1D": 12.52356,
-        "underlyingTokens": [
-          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "apy": 19.47645,
-        "tvl": 1283161
-      },
-      "after": {
-        "apy": 39.95092,
-        "tvl": 979481
-      },
-      "delta": 20.47,
-      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0012",
-      "ts": "2026-08-27T14:27:02.851Z",
-      "factLine": "MSUSD-USDC (aerodrome-slipstream) on Base: APY moved from 19.47645% to 39.95092% (+20.47 percentage points). TVL $979.5K. Source: DeFiLlama yields endpoint.",
       "source": {
         "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
         "fields": [
