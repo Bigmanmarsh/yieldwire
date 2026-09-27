@@ -1,6 +1,101 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+      "pool": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "project": "aerodrome-slipstream",
+        "symbol": "MSUSD-USDC",
+        "tvl": 1581910,
+        "apy": 40.20747,
+        "apyBase": 3.77952,
+        "apyReward": 36.42796,
+        "apyPct1D": -9.42746,
+        "underlyingTokens": [
+          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 43.19218,
+        "tvl": 1547145
+      },
+      "after": {
+        "apy": 40.20747,
+        "tvl": 1581910
+      },
+      "delta": -2.98,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0564",
+      "ts": "2026-09-27T12:25:38.033Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) on Base: APY moved from 43.19218% to 40.20747% (-2.98 percentage points). TVL $1.6M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-27T12:25:38.033Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-27T12-25-38.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,581,910",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "MSUSD treated as $-stable",
+            "verdict": "PEG DEVIATION",
+            "detail": "MSUSD trading at $0.8880 — 11.2% below its $1 peg per CoinGecko. An APY on this token is not USD yield at face value.",
+            "via": "CoinGecko /coins/metronome-synth-usd",
+            "link": "https://www.coingecko.com/en/coins/metronome-synth-usd"
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $0.99991 per CoinGecko (Δ -0.01% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          }
+        ],
+        "sources": [
+          {
+            "name": "CoinGecko · MSUSD",
+            "url": "https://www.coingecko.com/en/coins/metronome-synth-usd",
+            "fetchedAt": "2026-09-27T12:25:38.033Z"
+          },
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-09-27T12:25:38.033Z"
+          }
+        ],
+        "checkedAt": "2026-09-27T12:25:38.033Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
       "pool": {
@@ -41612,96 +41707,6 @@
             "detail": "USDC at $0.99985 per CoinGecko (Δ -0.02% vs $1)",
             "via": "CoinGecko /coins/usd-coin",
             "link": "https://www.coingecko.com/en/coins/usd-coin"
-          }
-        ],
-        "sources": [
-          {
-            "name": "CoinGecko · USDC",
-            "url": "https://www.coingecko.com/en/coins/usd-coin",
-            "fetchedAt": "2026-08-31T01:25:53.498Z"
-          }
-        ],
-        "checkedAt": "2026-08-31T01:25:53.498Z"
-      }
-    },
-    {
-      "type": "APY_COLLAPSE",
-      "poolId": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
-      "pool": {
-        "id": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
-        "project": "aerodrome-slipstream",
-        "symbol": "USDC-USDT",
-        "tvl": 1092390,
-        "apy": 2.39198,
-        "apyBase": 1.33562,
-        "apyReward": 1.05636,
-        "apyPct1D": -3.38799,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-          "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
-        ]
-      },
-      "before": {
-        "apy": 14.15266,
-        "tvl": 1064038
-      },
-      "after": {
-        "apy": 2.39198,
-        "tvl": 1092390
-      },
-      "delta": -11.76,
-      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0065",
-      "ts": "2026-08-31T01:25:53.498Z",
-      "factLine": "USDC-USDT (aerodrome-slipstream) on Base: APY moved from 14.15266% to 2.39198% (-11.76 percentage points). TVL $1.1M. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-08-31T01:25:53.498Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-08-31T01-25-53.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $1,092,390",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          },
-          {
-            "id": "PEG",
-            "claim": "USDC treated as $-stable",
-            "verdict": "INDEPENDENT-SOURCE-MATCH",
-            "detail": "USDC at $0.99985 per CoinGecko (Δ -0.02% vs $1)",
-            "via": "CoinGecko /coins/usd-coin",
-            "link": "https://www.coingecko.com/en/coins/usd-coin"
-          },
-          {
-            "id": "PEG",
-            "claim": "USDT treated as $-stable",
-            "verdict": "UNVERIFIED",
-            "detail": "independent price unavailable this run",
-            "via": "CoinGecko",
-            "link": null
           }
         ],
         "sources": [
