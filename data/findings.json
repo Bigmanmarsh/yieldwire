@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-09-28T12:21:36.029Z",
+  "updated": "2026-09-28T12:26:39.073Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,15 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-09-24T11:42:05.834Z",
       "firstPrice": 0.8774,
-      "cyclesFlagged": 1080,
+      "cyclesFlagged": 1081,
       "relatedEvents": [
-        {
-          "id": "EVT-0514",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-24T12:27:37.398Z",
-          "apy": 87.263,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0518",
           "type": "APY_JUMP",
@@ -94,22 +87,29 @@
           "ts": "2026-09-28T07:23:11.656Z",
           "apy": 45.91085,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0580",
+          "type": "APY_JUMP",
+          "ts": "2026-09-28T12:26:39.073Z",
+          "apy": 43.1448,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-09-28T12:21:36.029Z",
-      "lastFlaggedAt": "2026-09-28T12:21:36.029Z",
-      "lastPrice": 0.8861,
-      "lastOffPegPct": -11.4,
+      "lastSeen": "2026-09-28T12:26:39.073Z",
+      "lastFlaggedAt": "2026-09-28T12:26:39.073Z",
+      "lastPrice": 0.8871,
+      "lastOffPegPct": -11.3,
       "worstPrice": 0.8774,
       "worstOffPegPct": -12.3,
-      "lastBlock": "51904374",
+      "lastBlock": "51904526",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 1449989,
-      "poolApyAtLastFlag": 23.92908
+      "poolTvl": 1451121,
+      "poolApyAtLastFlag": 23.72346
     }
   ]
 }
