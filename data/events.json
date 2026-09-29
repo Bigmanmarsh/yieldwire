@@ -1,6 +1,101 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+      "pool": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "project": "aerodrome-slipstream",
+        "symbol": "MSUSD-USDC",
+        "tvl": 1657037,
+        "apy": 44.13761,
+        "apyBase": 13.528,
+        "apyReward": 30.60961,
+        "apyPct1D": 0.49137,
+        "underlyingTokens": [
+          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 50.99246,
+        "tvl": 1551550
+      },
+      "after": {
+        "apy": 44.13761,
+        "tvl": 1657037
+      },
+      "delta": -6.85,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0594",
+      "ts": "2026-09-29T00:25:17.527Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) on Base: APY moved from 50.99246% to 44.13761% (-6.85 percentage points). TVL $1.7M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-09-29T00:25:17.527Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-09-29T00-25-17.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,657,037",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "MSUSD treated as $-stable",
+            "verdict": "PEG DEVIATION",
+            "detail": "MSUSD trading at $0.8863 — 11.4% below its $1 peg per CoinGecko. An APY on this token is not USD yield at face value.",
+            "via": "CoinGecko /coins/metronome-synth-usd",
+            "link": "https://www.coingecko.com/en/coins/metronome-synth-usd"
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $0.99993 per CoinGecko (Δ -0.01% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          }
+        ],
+        "sources": [
+          {
+            "name": "CoinGecko · MSUSD",
+            "url": "https://www.coingecko.com/en/coins/metronome-synth-usd",
+            "fetchedAt": "2026-09-29T00:25:17.527Z"
+          },
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-09-29T00:25:17.527Z"
+          }
+        ],
+        "checkedAt": "2026-09-29T00:25:17.527Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "bef1c05d-3df9-4c2d-bcaf-eec3799fcae2",
       "pool": {
@@ -41644,72 +41739,6 @@
           }
         ],
         "checkedAt": "2026-09-01T02:25:21.522Z"
-      }
-    },
-    {
-      "type": "TVL_SHIFT",
-      "poolId": "735fb238-6c21-44b0-9f02-31fb880836e6",
-      "pool": {
-        "id": "735fb238-6c21-44b0-9f02-31fb880836e6",
-        "project": "morpho-blue",
-        "symbol": "YOUSD",
-        "tvl": 634560,
-        "apy": 0,
-        "apyBase": 0,
-        "apyReward": null,
-        "apyPct1D": 0,
-        "underlyingTokens": [
-          "0x0000000f2eB9f69274678c76222B35eEc7588a65"
-        ]
-      },
-      "before": {
-        "tvl": 1209502,
-        "ts": 1788138341790
-      },
-      "after": {
-        "tvl": 634560
-      },
-      "delta": -47.54,
-      "trigger": "TVL moved ≥ 25% vs ~24h ago",
-      "id": "EVT-0094",
-      "ts": "2026-09-01T00:29:16.036Z",
-      "factLine": "YOUSD (morpho-blue) on Base: TVL moved from $1.2M to $634.6K (-47.54% vs ~24h ago). APY is 0%. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-01T00:29:16.036Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-01T00-29-16.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $634,560",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-09-01T00:29:16.036Z"
       }
     }
   ]
