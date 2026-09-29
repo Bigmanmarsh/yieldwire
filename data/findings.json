@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-09-29T13:23:06.226Z",
+  "updated": "2026-09-29T15:25:00.652Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -11,13 +11,6 @@
       "firstPrice": 0.8774,
       "cyclesFlagged": 1272,
       "relatedEvents": [
-        {
-          "id": "EVT-0529",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-09-25T13:26:23.264Z",
-          "apy": 110.14952,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0539",
           "type": "APY_JUMP",
@@ -93,6 +86,13 @@
           "type": "LEADER_CHANGE",
           "ts": "2026-09-29T13:23:06.226Z",
           "apy": 51.46694,
+          "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0612",
+          "type": "APY_JUMP",
+          "ts": "2026-09-29T15:25:00.652Z",
+          "apy": 58.10726,
           "poolSymbol": "MSUSD-USDC"
         }
       ],
