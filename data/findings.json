@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-09-30T23:22:01.068Z",
+  "updated": "2026-09-30T23:27:05.250Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,15 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-09-24T11:42:05.834Z",
       "firstPrice": 0.8774,
-      "cyclesFlagged": 1480,
+      "cyclesFlagged": 1481,
       "relatedEvents": [
-        {
-          "id": "EVT-0568",
-          "type": "APY_JUMP",
-          "ts": "2026-09-27T22:22:22.719Z",
-          "apy": 48.62856,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0576",
           "type": "APY_COLLAPSE",
@@ -94,22 +87,29 @@
           "ts": "2026-09-30T21:25:36.161Z",
           "apy": 86.38202,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0638",
+          "type": "APY_COLLAPSE",
+          "ts": "2026-09-30T23:27:05.250Z",
+          "apy": 52.77543,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-09-30T23:22:01.068Z",
-      "lastFlaggedAt": "2026-09-30T23:22:01.068Z",
-      "lastPrice": 0.887,
+      "lastSeen": "2026-09-30T23:27:05.250Z",
+      "lastFlaggedAt": "2026-09-30T23:27:05.250Z",
+      "lastPrice": 0.8872,
       "lastOffPegPct": -11.3,
       "worstPrice": 0.8774,
       "worstOffPegPct": -12.3,
-      "lastBlock": "52010587",
+      "lastBlock": "52010739",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 1477515,
-      "poolApyAtLastFlag": 24.16054
+      "poolTvl": 1478914,
+      "poolApyAtLastFlag": 24.22952
     }
   ]
 }
