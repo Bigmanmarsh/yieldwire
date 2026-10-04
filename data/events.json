@@ -1,6 +1,101 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+      "pool": {
+        "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
+        "project": "aerodrome-slipstream",
+        "symbol": "MSUSD-USDC",
+        "tvl": 1760776,
+        "apy": 23.82047,
+        "apyBase": 2.04549,
+        "apyReward": 21.77498,
+        "apyPct1D": -3.86482,
+        "underlyingTokens": [
+          "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 26.21118,
+        "tvl": 1707840
+      },
+      "after": {
+        "apy": 23.82047,
+        "tvl": 1760776
+      },
+      "delta": -2.39,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0705",
+      "ts": "2026-10-04T22:26:55.910Z",
+      "factLine": "MSUSD-USDC (aerodrome-slipstream) on Base: APY moved from 26.21118% to 23.82047% (-2.39 percentage points). TVL $1.8M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-10-04T22:26:55.910Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-10-04T22-26-55.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,760,776",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "MSUSD treated as $-stable",
+            "verdict": "PEG DEVIATION",
+            "detail": "MSUSD trading at $0.8835 — 11.7% below its $1 peg per CoinGecko. An APY on this token is not USD yield at face value.",
+            "via": "CoinGecko /coins/metronome-synth-usd",
+            "link": "https://www.coingecko.com/en/coins/metronome-synth-usd"
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $0.99997 per CoinGecko (Δ -0.00% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          }
+        ],
+        "sources": [
+          {
+            "name": "CoinGecko · MSUSD",
+            "url": "https://www.coingecko.com/en/coins/metronome-synth-usd",
+            "fetchedAt": "2026-10-04T22:26:55.910Z"
+          },
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-10-04T22:26:55.910Z"
+          }
+        ],
+        "checkedAt": "2026-10-04T22:26:55.910Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "pool": {
@@ -41790,84 +41885,6 @@
           }
         ],
         "checkedAt": "2026-09-06T21:23:26.515Z"
-      }
-    },
-    {
-      "type": "LEADER_CHANGE",
-      "poolId": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
-      "pool": {
-        "id": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
-        "project": "harvest-finance",
-        "symbol": "USDC",
-        "tvl": 1837921,
-        "apy": 20.29,
-        "apyBase": 20.29,
-        "apyReward": null,
-        "apyPct1D": 0.03,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "id": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
-        "symbol": "MSUSD-USDC",
-        "project": "aerodrome-v1",
-        "apy": 20.6838,
-        "tvl": 1112879
-      },
-      "after": {
-        "apy": 20.29,
-        "tvl": 1837921
-      },
-      "delta": -0.39,
-      "trigger": "Highest-APY stablecoin pool (TVL ≥ $1,000,000) changed",
-      "id": "EVT-0205",
-      "ts": "2026-09-06T13:27:07.973Z",
-      "factLine": "MSUSD-USDC (aerodrome-v1) at 20.6838% APY lost the top spot to USDC (harvest-finance) at 20.29% APY on Base. New leader TVL $1.8M, old leader TVL $1.1M. APY gap change -0.39 percentage points. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-06T13:27:07.973Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-06T13-27-07.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $1,837,921",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          },
-          {
-            "id": "LEADER",
-            "claim": "highest APY among monitored Base stablecoin pools",
-            "verdict": "RECOMPUTED-CHANGED",
-            "detail": "recomputed: this pool is rank #4 of 79; current top is MSUSD-USDC at 140.94%",
-            "via": "deterministic re-derivation (no LLM)",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-09-06T13:27:07.973Z"
       }
     }
   ]
