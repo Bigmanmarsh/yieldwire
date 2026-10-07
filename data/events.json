@@ -1,6 +1,73 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "437a4c66-b5a7-416b-853a-565433679627",
+      "pool": {
+        "id": "437a4c66-b5a7-416b-853a-565433679627",
+        "project": "zircuit-finance",
+        "symbol": "ZVUSDC",
+        "tvl": 1425619,
+        "apy": 2.79126,
+        "apyBase": 2.79126,
+        "apyReward": null,
+        "apyPct1D": -2.6165,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 5.35199,
+        "tvl": 1425669
+      },
+      "after": {
+        "apy": 2.79126,
+        "tvl": 1425619
+      },
+      "delta": -2.56,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0758",
+      "ts": "2026-10-07T23:25:30.523Z",
+      "factLine": "ZVUSDC (zircuit-finance) on Base: APY moved from 5.35199% to 2.79126% (-2.56 percentage points). TVL $1.4M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-10-07T23:25:30.523Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-10-07T23-25-30.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,425,619",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-10-07T23:25:30.523Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
       "pool": {
@@ -41731,73 +41798,6 @@
           }
         ],
         "checkedAt": "2026-09-10T14:27:13.440Z"
-      }
-    },
-    {
-      "type": "APY_JUMP",
-      "poolId": "c043062f-fcd6-47aa-b063-70691dc25c1c",
-      "pool": {
-        "id": "c043062f-fcd6-47aa-b063-70691dc25c1c",
-        "project": "gauntlet",
-        "symbol": "GTUSDA",
-        "tvl": 51745232,
-        "apy": 4.69959,
-        "apyBase": 4.69959,
-        "apyReward": null,
-        "apyPct1D": -0.22301,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "apy": 0,
-        "tvl": 51747409
-      },
-      "after": {
-        "apy": 4.69959,
-        "tvl": 51745232
-      },
-      "delta": 4.7,
-      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0255",
-      "ts": "2026-09-10T13:26:24.852Z",
-      "factLine": "GTUSDA (gauntlet) on Base: APY moved from 0% to 4.69959% (+4.7 percentage points). TVL $51.7M. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-10T13:26:24.852Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-10T13-26-24.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $51,745,232",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-09-10T13:26:24.852Z"
       }
     }
   ]
