@@ -1,5 +1,5 @@
 {
-  "seq": 740,
+  "seq": 742,
   "cooldowns": {
     "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1791300421277,
     "APY_JUMP:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1791264461343,
@@ -9,7 +9,6 @@
     "LEADER_CHANGE:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1791163449414,
     "APY_COLLAPSE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791300421277,
     "LEADER_CHANGE:062ba2ef-c132-4989-8e67-0ea2ebd37888": 1791167092189,
-    "LEADER_CHANGE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1791159800176,
     "APY_COLLAPSE:437a4c66-b5a7-416b-853a-565433679627": 1791249889554,
     "APY_JUMP:437a4c66-b5a7-416b-853a-565433679627": 1791242853751,
     "LEADER_CHANGE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791170734328,
@@ -20,8 +19,8 @@
     "TVL_SHIFT:ae62a2de-6fe7-48cc-9e47-0dd2b28f665e": 1791246248551,
     "TVL_SHIFT:aeb97af6-bd75-4a34-975b-9166427a0ce3": 1791246248551,
     "TVL_SHIFT:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1791267802739,
-    "APY_COLLAPSE:aeb97af6-bd75-4a34-975b-9166427a0ce3": 1791267802739,
-    "TVL_SHIFT:6652ed18-d327-46cd-9bac-08e0e14ea715": 1791289405113,
+    "APY_COLLAPSE:aeb97af6-bd75-4a34-975b-9166427a0ce3": 1791333696037,
+    "TVL_SHIFT:6652ed18-d327-46cd-9bac-08e0e14ea715": 1791333696037,
     "APY_JUMP:7372edda-f07f-4598-83e5-4edec48c4039": 1791314778644,
     "APY_COLLAPSE:7372edda-f07f-4598-83e5-4edec48c4039": 1791318430394
   },
@@ -42,20 +41,22 @@
       "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42": 6,
       "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d": 18,
       "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913": 6,
-      "0x877014E21c32feA108B6A1f45f367efc9a2d9B9F": 18
+      "0x877014E21c32feA108B6A1f45f367efc9a2d9B9F": 18,
+      "0xCfA3Ef56d303AE4fAabA0592388F19d7C3399FB4": 18
     },
     "poolAddr": {
       "e5345fb1-416b-4649-8e75-fc975dada7a7": "0xc75799e0646470128a42d07335ab3bfa9e8ee7c2",
       "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "af1b872b-af09-511d-8124-2faa2c57b9b5": "0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa"
+      "af1b872b-af09-511d-8124-2faa2c57b9b5": "0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
+      "bde35fef-649f-4514-a564-e7e7da05eb52": "0x7a034374c89c463dd65d8c9bcfe63bcbced41f4f"
     },
     "lastFactories": 1791271451857
   },
   "xrefStats": {
-    "events": 740,
-    "corroborated": 530,
+    "events": 742,
+    "corroborated": 531,
     "deviations": 115,
-    "unverified": 1044
+    "unverified": 1047
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
