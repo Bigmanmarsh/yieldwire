@@ -1,108 +1,23 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-09T19:46:47.831Z",
+  "updated": "2026-10-09T19:53:27.211Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
       "status": "flagged",
-      "firstSeen": "2026-10-02T02:28:21.311Z",
-      "firstPrice": 0.8859,
-      "cyclesFlagged": 1834,
-      "relatedEvents": [
-        {
-          "id": "EVT-0732",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-06T07:24:10.226Z",
-          "apy": 19.70285,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0748",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-07T13:42:56.896Z",
-          "apy": 56.85859,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0749",
-          "type": "APY_JUMP",
-          "ts": "2026-10-07T13:42:56.896Z",
-          "apy": 56.85859,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0751",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-07T14:23:32.457Z",
-          "apy": 20.65593,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0759",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-08T00:26:17.305Z",
-          "apy": 45.12937,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0761",
-          "type": "APY_JUMP",
-          "ts": "2026-10-08T00:26:17.305Z",
-          "apy": 45.12937,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0765",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-08T01:27:08.606Z",
-          "apy": 41.71302,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0776",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-08T18:26:54.856Z",
-          "apy": 136.30293,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0777",
-          "type": "APY_JUMP",
-          "ts": "2026-10-08T18:26:54.856Z",
-          "apy": 136.30293,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0778",
-          "type": "TVL_SHIFT",
-          "ts": "2026-10-08T18:26:54.856Z",
-          "apy": 136.30293,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0781",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-08T20:24:23.156Z",
-          "apy": 28.13711,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0797",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-09T19:26:31.303Z",
-          "apy": 37.06652,
-          "poolSymbol": "MSUSD-USDC"
-        }
-      ],
-      "lastSeen": "2026-10-09T19:46:47.831Z",
-      "lastFlaggedAt": "2026-10-09T19:46:47.831Z",
-      "lastPrice": 0.8845,
+      "firstSeen": "2026-10-09T19:53:27.211Z",
+      "firstPrice": 0.8846,
+      "cyclesFlagged": 1,
+      "relatedEvents": [],
+      "lastSeen": "2026-10-09T19:53:27.211Z",
+      "lastFlaggedAt": "2026-10-09T19:53:27.211Z",
+      "lastPrice": 0.8846,
       "lastOffPegPct": -11.5,
-      "worstPrice": 0.8538,
-      "worstOffPegPct": -14.6,
-      "lastBlock": "52392930",
+      "worstPrice": 0.8846,
+      "worstOffPegPct": -11.5,
+      "lastBlock": "52393130",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
