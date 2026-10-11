@@ -1,7 +1,7 @@
 {
-  "ts": "2026-10-11T20:18:57.423Z",
+  "ts": "2026-10-11T20:24:01.670Z",
   "run": "303",
-  "cycle": 21,
+  "cycle": 22,
   "thresholds": {
     "chain": "Base",
     "tvlFloor": 500000,
@@ -18,11 +18,11 @@
       "id": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "project": "aerodrome-v1",
       "symbol": "MSUSD-USDC",
-      "tvl": 1786353,
-      "apy": 42.73923,
+      "tvl": 1785614,
+      "apy": 42.65741,
       "apyBase": null,
-      "apyReward": 42.73923,
-      "apyPct1D": 1.83364,
+      "apyReward": 42.65741,
+      "apyPct1D": 0.6137,
       "underlyingTokens": [
         "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -34,14 +34,16 @@
           42.73923,
           42.73923,
           42.73923,
-          42.73923
+          42.73923,
+          42.65741
         ],
         "tvl": [
           1786353,
           1786353,
           1786353,
           1786353,
-          1786353
+          1786353,
+          1785614
         ]
       }
     },
@@ -49,7 +51,7 @@
       "id": "062ba2ef-c132-4989-8e67-0ea2ebd37888",
       "project": "harvest-finance",
       "symbol": "USDC",
-      "tvl": 1820213,
+      "tvl": 1820241,
       "apy": 24.76,
       "apyBase": 24.76,
       "apyReward": null,
@@ -64,6 +66,7 @@
           24.76,
           24.76,
           24.76,
+          24.76,
           24.76
         ],
         "tvl": [
@@ -71,7 +74,8 @@
           1820213,
           1820213,
           1820213,
-          1820213
+          1820213,
+          1820241
         ]
       }
     },
@@ -79,11 +83,11 @@
       "id": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
       "project": "aerodrome-slipstream",
       "symbol": "USDC-USDT",
-      "tvl": 915048,
-      "apy": 21.30154,
-      "apyBase": 16.58036,
-      "apyReward": 4.72119,
-      "apyPct1D": 15.29911,
+      "tvl": 915509,
+      "apy": 21.33367,
+      "apyBase": 16.61807,
+      "apyReward": 4.7156,
+      "apyPct1D": 15.33124,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
@@ -95,14 +99,16 @@
           21.30154,
           21.30154,
           21.30154,
-          21.30154
+          21.30154,
+          21.33367
         ],
         "tvl": [
           915048,
           915048,
           915048,
           915048,
-          915048
+          915048,
+          915509
         ]
       }
     },
@@ -110,11 +116,11 @@
       "id": "af1b872b-af09-511d-8124-2faa2c57b9b5",
       "project": "aerodrome-v1",
       "symbol": "USDC-ALUSDB",
-      "tvl": 2124531,
-      "apy": 19.69995,
+      "tvl": 2124561,
+      "apy": 19.65385,
       "apyBase": null,
-      "apyReward": 19.69995,
-      "apyPct1D": 0.9579,
+      "apyReward": 19.65385,
+      "apyPct1D": 0.3882,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "0x877014E21c32feA108B6A1f45f367efc9a2d9B9F"
@@ -126,14 +132,16 @@
           19.69995,
           19.69995,
           19.69995,
-          19.69995
+          19.69995,
+          19.65385
         ],
         "tvl": [
           2124531,
           2124531,
           2124531,
           2124531,
-          2124531
+          2124531,
+          2124561
         ]
       }
     },
@@ -141,11 +149,11 @@
       "id": "ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e",
       "project": "veranta",
       "symbol": "USDC",
-      "tvl": 9598048,
-      "apy": 17.74869,
-      "apyBase": 17.74869,
+      "tvl": 9598235,
+      "apy": 17.74831,
+      "apyBase": 17.74831,
       "apyReward": null,
-      "apyPct1D": 0.22418,
+      "apyPct1D": 0.22387,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -156,14 +164,16 @@
           17.74869,
           17.74869,
           17.74869,
-          17.74869
+          17.74869,
+          17.74831
         ],
         "tvl": [
           9598048,
           9598048,
           9598048,
           9598048,
-          9598048
+          9598048,
+          9598235
         ]
       }
     },
@@ -171,11 +181,11 @@
       "id": "e5345fb1-416b-4649-8e75-fc975dada7a7",
       "project": "aerodrome-v1",
       "symbol": "JEUR-EURC",
-      "tvl": 748043,
-      "apy": 16.42436,
+      "tvl": 748116,
+      "apy": 16.38456,
       "apyBase": null,
-      "apyReward": 16.42436,
-      "apyPct1D": 0.74871,
+      "apyReward": 16.38456,
+      "apyPct1D": 0.27193,
       "underlyingTokens": [
         "0x4154550f4Db74Dc38d1FE98e1F3F28ed6daD627d",
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
@@ -187,14 +197,16 @@
           16.42436,
           16.42436,
           16.42436,
-          16.42436
+          16.42436,
+          16.38456
         ],
         "tvl": [
           748043,
           748043,
           748043,
           748043,
-          748043
+          748043,
+          748116
         ]
       }
     },
@@ -202,11 +214,11 @@
       "id": "aae6cc3a-783b-4a76-bea7-c3edccd28d62",
       "project": "aerodrome-slipstream",
       "symbol": "MSUSD-USDC",
-      "tvl": 2005149,
-      "apy": 16.12195,
-      "apyBase": 3.26321,
-      "apyReward": 12.85874,
-      "apyPct1D": -1.68408,
+      "tvl": 2042534,
+      "apy": 16.04281,
+      "apyBase": 3.62148,
+      "apyReward": 12.42133,
+      "apyPct1D": -12.28639,
       "underlyingTokens": [
         "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -218,14 +230,16 @@
           16.12195,
           16.12195,
           16.12195,
-          16.12195
+          16.12195,
+          16.04281
         ],
         "tvl": [
           2005149,
           2005149,
           2005149,
           2005149,
-          2005149
+          2005149,
+          2042534
         ]
       }
     },
@@ -233,11 +247,11 @@
       "id": "7372edda-f07f-4598-83e5-4edec48c4039",
       "project": "fluid-lending",
       "symbol": "USDC",
-      "tvl": 11482917,
-      "apy": 13.19,
-      "apyBase": 8.83,
-      "apyReward": 4.36,
-      "apyPct1D": 4.83,
+      "tvl": 11435727,
+      "apy": 13.54,
+      "apyBase": 9.16,
+      "apyReward": 4.38,
+      "apyPct1D": 5.22,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -248,14 +262,16 @@
           13.19,
           13.19,
           13.19,
-          13.19
+          13.19,
+          13.54
         ],
         "tvl": [
           11482917,
           11482917,
           11482917,
           11482917,
-          11482917
+          11482917,
+          11435727
         ]
       }
     },
@@ -263,11 +279,11 @@
       "id": "bde35fef-649f-4514-a564-e7e7da05eb52",
       "project": "aerodrome-v1",
       "symbol": "EUSD-USDC",
-      "tvl": 560290,
-      "apy": 11.5465,
+      "tvl": 559824,
+      "apy": 11.52925,
       "apyBase": null,
-      "apyReward": 11.5465,
-      "apyPct1D": 0.03453,
+      "apyReward": 11.52925,
+      "apyPct1D": -0.30107,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "0xCfA3Ef56d303AE4fAabA0592388F19d7C3399FB4"
@@ -279,14 +295,16 @@
           11.5465,
           11.5465,
           11.5465,
-          11.5465
+          11.5465,
+          11.52925
         ],
         "tvl": [
           560290,
           560290,
           560290,
           560290,
-          560290
+          560290,
+          559824
         ]
       }
     },
@@ -309,9 +327,11 @@
           9,
           9,
           9,
+          9,
           9
         ],
         "tvl": [
+          10535744,
           10535744,
           10535744,
           10535744,
@@ -339,9 +359,11 @@
           8.96279,
           8.96279,
           8.96279,
+          8.96279,
           8.96279
         ],
         "tvl": [
+          3663062,
           3663062,
           3663062,
           3663062,
@@ -351,44 +373,14 @@
       }
     },
     {
-      "id": "89c36167-17ae-571a-8adf-fca819b3a600",
-      "project": "morpho-blue",
-      "symbol": "NOONECOUSDC",
-      "tvl": 3592134,
-      "apy": 8.79532,
-      "apyBase": 3.79532,
-      "apyReward": 5,
-      "apyPct1D": 0.07149,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": null,
-      "hist": {
-        "apy": [
-          8.79532,
-          8.79532,
-          8.79532,
-          8.79532,
-          8.79532
-        ],
-        "tvl": [
-          3592134,
-          3592134,
-          3592134,
-          3592134,
-          3592134
-        ]
-      }
-    },
-    {
       "id": "d511efb8-f61b-43ce-bb1e-dffc6a57727f",
       "project": "gains-network",
       "symbol": "USDC",
-      "tvl": 621534,
-      "apy": 8.78253,
-      "apyBase": 8.78253,
+      "tvl": 621516,
+      "apy": 8.82096,
+      "apyBase": 8.82096,
       "apyReward": null,
-      "apyPct1D": -0.12706,
+      "apyPct1D": -0.10671,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -399,14 +391,48 @@
           8.78253,
           8.78253,
           8.78253,
-          8.78253
+          8.78253,
+          8.82096
         ],
         "tvl": [
           621534,
           621534,
           621534,
           621534,
-          621534
+          621534,
+          621516
+        ]
+      }
+    },
+    {
+      "id": "89c36167-17ae-571a-8adf-fca819b3a600",
+      "project": "morpho-blue",
+      "symbol": "NOONECOUSDC",
+      "tvl": 3650346,
+      "apy": 8.81068,
+      "apyBase": 3.81068,
+      "apyReward": 5,
+      "apyPct1D": 0.12055,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": null,
+      "hist": {
+        "apy": [
+          8.79532,
+          8.79532,
+          8.79532,
+          8.79532,
+          8.79532,
+          8.81068
+        ],
+        "tvl": [
+          3592134,
+          3592134,
+          3592134,
+          3592134,
+          3592134,
+          3650346
         ]
       }
     },
@@ -414,11 +440,11 @@
       "id": "847c874f-d4e7-47ed-8870-97d2f24a8767",
       "project": "aerodrome-slipstream",
       "symbol": "EURC-USDC",
-      "tvl": 2205875,
-      "apy": 7.98166,
-      "apyBase": 4.86063,
-      "apyReward": 3.12102,
-      "apyPct1D": 4.05327,
+      "tvl": 2206221,
+      "apy": 8.19546,
+      "apyBase": 5.07223,
+      "apyReward": 3.12323,
+      "apyPct1D": 4.31125,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -430,14 +456,16 @@
           7.98166,
           7.98166,
           7.98166,
-          7.98166
+          7.98166,
+          8.19546
         ],
         "tvl": [
           2205875,
           2205875,
           2205875,
           2205875,
-          2205875
+          2205875,
+          2206221
         ]
       }
     },
@@ -445,11 +473,11 @@
       "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
       "project": "harvest-finance",
       "symbol": "USDC",
-      "tvl": 1179504,
-      "apy": 7.92,
-      "apyBase": 7.92,
+      "tvl": 1179580,
+      "apy": 8.07,
+      "apyBase": 8.07,
       "apyReward": null,
-      "apyPct1D": 1.2,
+      "apyPct1D": 1.35,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -460,14 +488,16 @@
           7.92,
           7.92,
           7.92,
-          7.92
+          7.92,
+          8.07
         ],
         "tvl": [
           1179504,
           1179504,
           1179504,
           1179504,
-          1179504
+          1179504,
+          1179580
         ]
       }
     },
@@ -490,9 +520,11 @@
           7.79503,
           7.79503,
           7.79503,
+          7.79503,
           7.79503
         ],
         "tvl": [
+          1626778,
           1626778,
           1626778,
           1626778,
@@ -505,17 +537,18 @@
       "id": "d9eab20a-2251-4186-a2bb-f1adb8258538",
       "project": "yieldseeker",
       "symbol": "USDC",
-      "tvl": 910655,
+      "tvl": 910657,
       "apy": 7.68431,
       "apyBase": 7.68431,
       "apyReward": null,
-      "apyPct1D": 0.05033,
+      "apyPct1D": 0.05032,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          7.68431,
           7.68431,
           7.68431,
           7.68431,
@@ -527,7 +560,40 @@
           910655,
           910655,
           910655,
-          910655
+          910655,
+          910657
+        ]
+      }
+    },
+    {
+      "id": "82469f6f-951d-4578-b47e-fb4df326f059",
+      "project": "centrifuge-protocol",
+      "symbol": "USDC",
+      "tvl": 22749509,
+      "apy": 7.67044,
+      "apyBase": 7.67044,
+      "apyReward": null,
+      "apyPct1D": 1.38569,
+      "underlyingTokens": [
+        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          6.28475,
+          6.28475,
+          6.28475,
+          6.28475,
+          6.28475,
+          7.67044
+        ],
+        "tvl": [
+          22743779,
+          22743779,
+          22743779,
+          22743779,
+          22743779,
+          22749509
         ]
       }
     },
@@ -535,11 +601,11 @@
       "id": "1382b89f-180f-40f6-9347-62e5ddc905b2",
       "project": "extra-finance-leverage-farming",
       "symbol": "USDC",
-      "tvl": 3273187,
-      "apy": 7.1455,
-      "apyBase": 7.1455,
+      "tvl": 3273099,
+      "apy": 7.14561,
+      "apyBase": 7.14561,
       "apyReward": null,
-      "apyPct1D": -0.05315,
+      "apyPct1D": -0.05318,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -550,14 +616,16 @@
           7.1455,
           7.1455,
           7.1455,
-          7.1455
+          7.1455,
+          7.14561
         ],
         "tvl": [
           3273187,
           3273187,
           3273187,
           3273187,
-          3273187
+          3273187,
+          3273099
         ]
       }
     },
@@ -565,11 +633,11 @@
       "id": "77da7e88-b7a2-5e66-9fd8-19fd33c7e281",
       "project": "harvest-finance",
       "symbol": "USDC",
-      "tvl": 953920,
-      "apy": 7.07,
-      "apyBase": 7.07,
+      "tvl": 953927,
+      "apy": 7.04,
+      "apyBase": 7.04,
       "apyReward": null,
-      "apyPct1D": -0.28,
+      "apyPct1D": -0.31,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -580,14 +648,16 @@
           7.07,
           7.07,
           7.07,
-          7.07
+          7.07,
+          7.04
         ],
         "tvl": [
           953920,
           953920,
           953920,
           953920,
-          953920
+          953920,
+          953927
         ]
       }
     },
@@ -595,11 +665,11 @@
       "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
       "project": "fusion-by-ipor",
       "symbol": "USDC",
-      "tvl": 1179493,
-      "apy": 6.90614,
-      "apyBase": 4.81816,
-      "apyReward": 2.08798,
-      "apyPct1D": 0.89791,
+      "tvl": 1179563,
+      "apy": 6.96305,
+      "apyBase": 4.87245,
+      "apyReward": 2.0906,
+      "apyPct1D": 0.81029,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -610,14 +680,16 @@
           6.90614,
           6.90614,
           6.90614,
-          6.90614
+          6.90614,
+          6.96305
         ],
         "tvl": [
           1179493,
           1179493,
           1179493,
           1179493,
-          1179493
+          1179493,
+          1179563
         ]
       }
     },
@@ -640,9 +712,11 @@
           6.83449,
           6.83449,
           6.83449,
+          6.83449,
           6.83449
         ],
         "tvl": [
+          672301,
           672301,
           672301,
           672301,
@@ -655,11 +729,11 @@
       "id": "a7e28f73-d613-4ddf-ab90-756018fdf299",
       "project": "superform",
       "symbol": "SUPERUSDC",
-      "tvl": 795654,
-      "apy": 6.72551,
-      "apyBase": 3.85012,
-      "apyReward": 2.87539,
-      "apyPct1D": -0.02419,
+      "tvl": 780477,
+      "apy": 6.65637,
+      "apyBase": 3.80272,
+      "apyReward": 2.85365,
+      "apyPct1D": -0.08576,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -670,44 +744,16 @@
           6.72551,
           6.72551,
           6.72551,
-          6.72551
+          6.72551,
+          6.65637
         ],
         "tvl": [
           795654,
           795654,
           795654,
           795654,
-          795654
-        ]
-      }
-    },
-    {
-      "id": "82469f6f-951d-4578-b47e-fb4df326f059",
-      "project": "centrifuge-protocol",
-      "symbol": "USDC",
-      "tvl": 22743779,
-      "apy": 6.28475,
-      "apyBase": 6.28475,
-      "apyReward": null,
-      "apyPct1D": 0,
-      "underlyingTokens": [
-        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          6.28475,
-          6.28475,
-          6.28475,
-          6.28475,
-          6.28475
-        ],
-        "tvl": [
-          22743779,
-          22743779,
-          22743779,
-          22743779,
-          22743779
+          795654,
+          780477
         ]
       }
     },
@@ -730,9 +776,11 @@
           6.2,
           6.2,
           6.2,
+          6.2,
           6.2
         ],
         "tvl": [
+          51536763,
           51536763,
           51536763,
           51536763,
@@ -745,11 +793,11 @@
       "id": "097b18e2-9232-4c44-bd2e-502de4ba889e",
       "project": "morpho-blue",
       "symbol": "CSCBUSDC",
-      "tvl": 36282838,
-      "apy": 6.04813,
-      "apyBase": 4.24813,
+      "tvl": 36322411,
+      "apy": 6.05102,
+      "apyBase": 4.25102,
       "apyReward": 1.8,
-      "apyPct1D": -0.00917,
+      "apyPct1D": -0.00499,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -760,14 +808,16 @@
           6.04813,
           6.04813,
           6.04813,
-          6.04813
+          6.04813,
+          6.05102
         ],
         "tvl": [
           36282838,
           36282838,
           36282838,
           36282838,
-          36282838
+          36282838,
+          36322411
         ]
       }
     },
@@ -775,11 +825,11 @@
       "id": "92a97f48-005e-4819-a838-f442ea92c401",
       "project": "morpho-blue",
       "symbol": "GTUSDCF",
-      "tvl": 4267381,
-      "apy": 5.76048,
-      "apyBase": 5.76048,
+      "tvl": 4265892,
+      "apy": 5.76675,
+      "apyBase": 5.76675,
       "apyReward": 0,
-      "apyPct1D": 0.00131,
+      "apyPct1D": 0.00956,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -790,14 +840,16 @@
           5.76048,
           5.76048,
           5.76048,
-          5.76048
+          5.76048,
+          5.76675
         ],
         "tvl": [
           4267381,
           4267381,
           4267381,
           4267381,
-          4267381
+          4267381,
+          4265892
         ]
       }
     },
@@ -805,11 +857,11 @@
       "id": "8276be38-acc6-4005-ab0d-62680f49f4df",
       "project": "morpho-blue",
       "symbol": "SIRLOINUSDC",
-      "tvl": 463779314,
-      "apy": 5.74177,
-      "apyBase": 3.05867,
-      "apyReward": 2.68309,
-      "apyPct1D": -0.04188,
+      "tvl": 463737712,
+      "apy": 5.7427,
+      "apyBase": 3.06037,
+      "apyReward": 2.68233,
+      "apyPct1D": -0.04111,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -820,14 +872,16 @@
           5.74177,
           5.74177,
           5.74177,
-          5.74177
+          5.74177,
+          5.7427
         ],
         "tvl": [
           463779314,
           463779314,
           463779314,
           463779314,
-          463779314
+          463779314,
+          463737712
         ]
       }
     },
@@ -835,7 +889,7 @@
       "id": "3e7c5e93-b741-573d-b699-22d823038e61",
       "project": "centrifuge-protocol",
       "symbol": "USDC",
-      "tvl": 7153555,
+      "tvl": 7153580,
       "apy": 5.64484,
       "apyBase": 5.64484,
       "apyReward": null,
@@ -850,6 +904,7 @@
           5.64484,
           5.64484,
           5.64484,
+          5.64484,
           5.64484
         ],
         "tvl": [
@@ -857,7 +912,8 @@
           7153555,
           7153555,
           7153555,
-          7153555
+          7153555,
+          7153580
         ]
       }
     },
@@ -865,11 +921,11 @@
       "id": "bf346d43-ef94-4277-b159-ebadb93caef1",
       "project": "morpho-blue",
       "symbol": "BBQUSDC",
-      "tvl": 1013592,
-      "apy": 5.52719,
-      "apyBase": 5.52719,
+      "tvl": 998458,
+      "apy": 5.53199,
+      "apyBase": 5.53199,
       "apyReward": 0,
-      "apyPct1D": 0.49766,
+      "apyPct1D": 0.4779,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -880,14 +936,16 @@
           5.52719,
           5.52719,
           5.52719,
-          5.52719
+          5.52719,
+          5.53199
         ],
         "tvl": [
           1013592,
           1013592,
           1013592,
           1013592,
-          1013592
+          1013592,
+          998458
         ]
       }
     },
@@ -895,11 +953,11 @@
       "id": "cca340f1-03e7-5097-8d7c-f07def190cc2",
       "project": "morpho-blue",
       "symbol": "K3USDC",
-      "tvl": 3689910,
-      "apy": 5.41761,
-      "apyBase": 5.41761,
+      "tvl": 3689968,
+      "apy": 5.4203,
+      "apyBase": 5.4203,
       "apyReward": 0,
-      "apyPct1D": -0.01697,
+      "apyPct1D": -0.00874,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -910,14 +968,16 @@
           5.41761,
           5.41761,
           5.41761,
-          5.41761
+          5.41761,
+          5.4203
         ],
         "tvl": [
           3689910,
           3689910,
           3689910,
           3689910,
-          3689910
+          3689910,
+          3689968
         ]
       }
     },
@@ -925,11 +985,11 @@
       "id": "832c94db-4948-4f14-aa65-af6e737d984e",
       "project": "morpho-blue",
       "symbol": "BBQUSDC",
-      "tvl": 25497919,
-      "apy": 5.31423,
-      "apyBase": 5.31423,
+      "tvl": 25494869,
+      "apy": 5.31584,
+      "apyBase": 5.31584,
       "apyReward": 0,
-      "apyPct1D": -0.03995,
+      "apyPct1D": -0.03722,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -940,14 +1000,16 @@
           5.31423,
           5.31423,
           5.31423,
-          5.31423
+          5.31423,
+          5.31584
         ],
         "tvl": [
           25497919,
           25497919,
           25497919,
           25497919,
-          25497919
+          25497919,
+          25494869
         ]
       }
     },
@@ -955,11 +1017,11 @@
       "id": "14170877-8941-4c7d-b12c-06517c70f1e7",
       "project": "morpho-blue",
       "symbol": "ETHENAUSDC",
-      "tvl": 31487543,
-      "apy": 5.05149,
-      "apyBase": 5.05149,
+      "tvl": 31487260,
+      "apy": 5.05323,
+      "apyBase": 5.05323,
       "apyReward": 0,
-      "apyPct1D": -0.03519,
+      "apyPct1D": -0.0317,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -970,14 +1032,48 @@
           5.05149,
           5.05149,
           5.05149,
-          5.05149
+          5.05149,
+          5.05323
         ],
         "tvl": [
           31487543,
           31487543,
           31487543,
           31487543,
-          31487543
+          31487543,
+          31487260
+        ]
+      }
+    },
+    {
+      "id": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
+      "project": "beefy",
+      "symbol": "USDC",
+      "tvl": 1804956,
+      "apy": 4.87874,
+      "apyBase": null,
+      "apyReward": null,
+      "apyPct1D": 0.08784,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          4.79478,
+          4.79478,
+          4.79478,
+          4.79478,
+          4.79478,
+          4.87874
+        ],
+        "tvl": [
+          1804956,
+          1804956,
+          1804956,
+          1804956,
+          1804956,
+          1804956
         ]
       }
     },
@@ -985,11 +1081,11 @@
       "id": "ea721c71-9a61-481d-aa52-b0198f325c66",
       "project": "yearn-finance",
       "symbol": "USDC",
-      "tvl": 1610149,
-      "apy": 4.84299,
-      "apyBase": 4.84299,
+      "tvl": 1610180,
+      "apy": 4.84255,
+      "apyBase": 4.84255,
       "apyReward": 0,
-      "apyPct1D": -0.01152,
+      "apyPct1D": -0.01172,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -1000,44 +1096,16 @@
           4.84299,
           4.84299,
           4.84299,
-          4.84299
+          4.84299,
+          4.84255
         ],
         "tvl": [
           1610149,
           1610149,
           1610149,
           1610149,
-          1610149
-        ]
-      }
-    },
-    {
-      "id": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
-      "project": "beefy",
-      "symbol": "USDC",
-      "tvl": 1804956,
-      "apy": 4.79478,
-      "apyBase": null,
-      "apyReward": null,
-      "apyPct1D": 0.00303,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          4.79478,
-          4.79478,
-          4.79478,
-          4.79478,
-          4.79478
-        ],
-        "tvl": [
-          1804956,
-          1804956,
-          1804956,
-          1804956,
-          1804956
+          1610149,
+          1610180
         ]
       }
     },
@@ -1045,7 +1113,7 @@
       "id": "2d3b68a8-33d3-47e0-a4c0-0bafef4b01d5",
       "project": "morpho-blue",
       "symbol": "USDE",
-      "tvl": 392662787,
+      "tvl": 392527430,
       "apy": 4.75,
       "apyBase": 0,
       "apyReward": 4.75,
@@ -1060,6 +1128,7 @@
           4.75,
           4.75,
           4.75,
+          4.75,
           4.75
         ],
         "tvl": [
@@ -1067,7 +1136,8 @@
           392662787,
           392662787,
           392662787,
-          392662787
+          392662787,
+          392527430
         ]
       }
     },
@@ -1075,11 +1145,11 @@
       "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
       "project": "fusion-by-ipor",
       "symbol": "USDC",
-      "tvl": 2970658,
-      "apy": 4.73537,
-      "apyBase": 4.73537,
+      "tvl": 2948000,
+      "apy": 4.67987,
+      "apyBase": 4.67987,
       "apyReward": 0,
-      "apyPct1D": 0.07441,
+      "apyPct1D": -0.03785,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -1090,14 +1160,16 @@
           4.73537,
           4.73537,
           4.73537,
-          4.73537
+          4.73537,
+          4.67987
         ],
         "tvl": [
           2970658,
           2970658,
           2970658,
           2970658,
-          2970658
+          2970658,
+          2948000
         ]
       }
     },
@@ -1105,11 +1177,11 @@
       "id": "66471469-2dc4-4223-b867-ca780fe7457d",
       "project": "morpho-blue",
       "symbol": "MPUSDC",
-      "tvl": 601653,
-      "apy": 4.62501,
-      "apyBase": 4.62501,
+      "tvl": 603598,
+      "apy": 4.62576,
+      "apyBase": 4.62576,
       "apyReward": 0,
-      "apyPct1D": -0.01621,
+      "apyPct1D": -0.0124,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1120,14 +1192,16 @@
           4.62501,
           4.62501,
           4.62501,
-          4.62501
+          4.62501,
+          4.62576
         ],
         "tvl": [
           601653,
           601653,
           601653,
           601653,
-          601653
+          601653,
+          603598
         ]
       }
     },
@@ -1135,11 +1209,11 @@
       "id": "96ef2230-b5fc-47d7-bbb3-847816e1c15b",
       "project": "morpho-blue",
       "symbol": "GUSDCQ",
-      "tvl": 2034347,
-      "apy": 4.61817,
-      "apyBase": 4.61817,
+      "tvl": 2034376,
+      "apy": 4.62498,
+      "apyBase": 4.62498,
       "apyReward": 0,
-      "apyPct1D": -0.02688,
+      "apyPct1D": -0.0196,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1150,104 +1224,16 @@
           4.61817,
           4.61817,
           4.61817,
-          4.61817
+          4.61817,
+          4.62498
         ],
         "tvl": [
           2034347,
           2034347,
           2034347,
           2034347,
-          2034347
-        ]
-      }
-    },
-    {
-      "id": "e0672197-9f3e-4414-bca5-e6b4c90aa469",
-      "project": "morpho-blue",
-      "symbol": "GTUSDCP",
-      "tvl": 414364493,
-      "apy": 4.61661,
-      "apyBase": 4.61661,
-      "apyReward": 0,
-      "apyPct1D": -0.02903,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
-      "hist": {
-        "apy": [
-          4.61661,
-          4.61661,
-          4.61661,
-          4.61661,
-          4.61661
-        ],
-        "tvl": [
-          414364493,
-          414364493,
-          414364493,
-          414364493,
-          414364493
-        ]
-      }
-    },
-    {
-      "id": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
-      "project": "morpho-blue",
-      "symbol": "GTUSDCP",
-      "tvl": 186336164,
-      "apy": 4.61483,
-      "apyBase": 4.61483,
-      "apyReward": 0,
-      "apyPct1D": -0.03146,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
-      "hist": {
-        "apy": [
-          4.61483,
-          4.61483,
-          4.61483,
-          4.61483,
-          4.61483
-        ],
-        "tvl": [
-          186336164,
-          186336164,
-          186336164,
-          186336164,
-          186336164
-        ]
-      }
-    },
-    {
-      "id": "ba68527f-8ec2-4c55-827a-8f4673ae047c",
-      "project": "morpho-blue",
-      "symbol": "STEAKUSDC",
-      "tvl": 209331537,
-      "apy": 4.61482,
-      "apyBase": 4.61482,
-      "apyReward": 0,
-      "apyPct1D": -0.0315,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
-      "hist": {
-        "apy": [
-          4.61482,
-          4.61482,
-          4.61482,
-          4.61482,
-          4.61482
-        ],
-        "tvl": [
-          209331537,
-          209331537,
-          209331537,
-          209331537,
-          209331537
+          2034347,
+          2034376
         ]
       }
     },
@@ -1255,11 +1241,11 @@
       "id": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
       "project": "compound-v3",
       "symbol": "USDC",
-      "tvl": 934561,
-      "apy": 4.53889,
-      "apyBase": 4.53889,
+      "tvl": 931657,
+      "apy": 4.62423,
+      "apyBase": 4.62423,
       "apyReward": 0,
-      "apyPct1D": -1.2482,
+      "apyPct1D": -1.69674,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -1270,14 +1256,112 @@
           4.53889,
           4.53889,
           4.53889,
-          4.53889
+          4.53889,
+          4.62423
         ],
         "tvl": [
           934561,
           934561,
           934561,
           934561,
-          934561
+          934561,
+          931657
+        ]
+      }
+    },
+    {
+      "id": "e0672197-9f3e-4414-bca5-e6b4c90aa469",
+      "project": "morpho-blue",
+      "symbol": "GTUSDCP",
+      "tvl": 414387417,
+      "apy": 4.61657,
+      "apyBase": 4.61657,
+      "apyReward": 0,
+      "apyPct1D": -0.02911,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
+      "hist": {
+        "apy": [
+          4.61661,
+          4.61661,
+          4.61661,
+          4.61661,
+          4.61661,
+          4.61657
+        ],
+        "tvl": [
+          414364493,
+          414364493,
+          414364493,
+          414364493,
+          414364493,
+          414387417
+        ]
+      }
+    },
+    {
+      "id": "ba68527f-8ec2-4c55-827a-8f4673ae047c",
+      "project": "morpho-blue",
+      "symbol": "STEAKUSDC",
+      "tvl": 209334836,
+      "apy": 4.61579,
+      "apyBase": 4.61579,
+      "apyReward": 0,
+      "apyPct1D": -0.02985,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
+      "hist": {
+        "apy": [
+          4.61482,
+          4.61482,
+          4.61482,
+          4.61482,
+          4.61482,
+          4.61579
+        ],
+        "tvl": [
+          209331537,
+          209331537,
+          209331537,
+          209331537,
+          209331537,
+          209334836
+        ]
+      }
+    },
+    {
+      "id": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
+      "project": "morpho-blue",
+      "symbol": "GTUSDCP",
+      "tvl": 186407752,
+      "apy": 4.61575,
+      "apyBase": 4.61575,
+      "apyReward": 0,
+      "apyPct1D": -0.02984,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
+      "hist": {
+        "apy": [
+          4.61483,
+          4.61483,
+          4.61483,
+          4.61483,
+          4.61483,
+          4.61575
+        ],
+        "tvl": [
+          186336164,
+          186336164,
+          186336164,
+          186336164,
+          186336164,
+          186407752
         ]
       }
     },
@@ -1285,11 +1369,11 @@
       "id": "1994cc35-a2b9-434e-b197-df6742fb5d81",
       "project": "yo-protocol",
       "symbol": "USDC",
-      "tvl": 7827210,
-      "apy": 4.4417,
-      "apyBase": 4.4417,
+      "tvl": 7827045,
+      "apy": 4.4774,
+      "apyBase": 4.4774,
       "apyReward": null,
-      "apyPct1D": -0.0561,
+      "apyPct1D": -0.0204,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1300,14 +1384,16 @@
           4.4417,
           4.4417,
           4.4417,
-          4.4417
+          4.4417,
+          4.4774
         ],
         "tvl": [
           7827210,
           7827210,
           7827210,
           7827210,
-          7827210
+          7827210,
+          7827045
         ]
       }
     },
@@ -1315,11 +1401,11 @@
       "id": "38f24550-a071-447c-8083-d376edaba156",
       "project": "yearn-finance",
       "symbol": "USDC",
-      "tvl": 853013,
-      "apy": 4.40287,
-      "apyBase": 4.40287,
+      "tvl": 852889,
+      "apy": 4.40167,
+      "apyBase": 4.40167,
       "apyReward": 0,
-      "apyPct1D": -0.00989,
+      "apyPct1D": -0.01107,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -1330,14 +1416,16 @@
           4.40287,
           4.40287,
           4.40287,
-          4.40287
+          4.40287,
+          4.40167
         ],
         "tvl": [
           853013,
           853013,
           853013,
           853013,
-          853013
+          853013,
+          852889
         ]
       }
     },
@@ -1345,11 +1433,11 @@
       "id": "3c9e2fb0-6bf6-53aa-9ff6-d78ff4d044a1",
       "project": "morpho-blue",
       "symbol": "BITUSDCP",
-      "tvl": 1018865,
-      "apy": 4.39046,
-      "apyBase": 4.39046,
+      "tvl": 1024018,
+      "apy": 4.39001,
+      "apyBase": 4.39001,
       "apyReward": 0,
-      "apyPct1D": -0.02253,
+      "apyPct1D": -0.02409,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1360,14 +1448,16 @@
           4.39046,
           4.39046,
           4.39046,
-          4.39046
+          4.39046,
+          4.39001
         ],
         "tvl": [
           1018865,
           1018865,
           1018865,
           1018865,
-          1018865
+          1018865,
+          1024018
         ]
       }
     },
@@ -1375,17 +1465,18 @@
       "id": "7820bd3c-461a-4811-9f0b-1d39c1503c3f",
       "project": "morpho-blue",
       "symbol": "STEAKUSDC",
-      "tvl": 13323139,
+      "tvl": 13323957,
       "apy": 4.38136,
       "apyBase": 4.38136,
       "apyReward": 0,
-      "apyPct1D": -0.02796,
+      "apyPct1D": -0.02709,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
       "hist": {
         "apy": [
+          4.38136,
           4.38136,
           4.38136,
           4.38136,
@@ -1397,7 +1488,8 @@
           13323139,
           13323139,
           13323139,
-          13323139
+          13323139,
+          13323957
         ]
       }
     },
@@ -1405,11 +1497,11 @@
       "id": "15a4bbe2-d1fa-4dce-a780-27faeb859bd7",
       "project": "morpho-blue",
       "symbol": "ARCHGV1USDC",
-      "tvl": 1258710,
-      "apy": 4.38038,
-      "apyBase": 4.38038,
+      "tvl": 1258727,
+      "apy": 4.38134,
+      "apyBase": 4.38134,
       "apyReward": 0,
-      "apyPct1D": -0.03049,
+      "apyPct1D": -0.02863,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1420,14 +1512,16 @@
           4.38038,
           4.38038,
           4.38038,
-          4.38038
+          4.38038,
+          4.38134
         ],
         "tvl": [
           1258710,
           1258710,
           1258710,
           1258710,
-          1258710
+          1258710,
+          1258727
         ]
       }
     },
@@ -1435,11 +1529,11 @@
       "id": "47548a32-63c2-4485-b348-eac2cc3a587f",
       "project": "morpho-blue",
       "symbol": "RE7USDC",
-      "tvl": 1245632,
-      "apy": 4.37794,
-      "apyBase": 4.37794,
+      "tvl": 1245650,
+      "apy": 4.37889,
+      "apyBase": 4.37889,
       "apyReward": 0,
-      "apyPct1D": -0.03094,
+      "apyPct1D": -0.02928,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1450,14 +1544,16 @@
           4.37794,
           4.37794,
           4.37794,
-          4.37794
+          4.37794,
+          4.37889
         ],
         "tvl": [
           1245632,
           1245632,
           1245632,
           1245632,
-          1245632
+          1245632,
+          1245650
         ]
       }
     },
@@ -1465,11 +1561,11 @@
       "id": "44b5ceb6-274a-4193-9665-ff497ec1e535",
       "project": "morpho-blue",
       "symbol": "YCSUSDC",
-      "tvl": 707845,
-      "apy": 4.36796,
-      "apyBase": 4.36796,
+      "tvl": 707936,
+      "apy": 4.36765,
+      "apyBase": 4.36765,
       "apyReward": 0,
-      "apyPct1D": 0.02119,
+      "apyPct1D": 0.00802,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1480,14 +1576,16 @@
           4.36796,
           4.36796,
           4.36796,
-          4.36796
+          4.36796,
+          4.36765
         ],
         "tvl": [
           707845,
           707845,
           707845,
           707845,
-          707845
+          707845,
+          707936
         ]
       }
     },
@@ -1495,11 +1593,11 @@
       "id": "b39b492a-0a64-4926-8598-d5acf05d62b5",
       "project": "morpho-blue",
       "symbol": "MWUSDC",
-      "tvl": 3652906,
-      "apy": 4.27099,
-      "apyBase": 4.10153,
-      "apyReward": 0.16947,
-      "apyPct1D": -0.0052,
+      "tvl": 3653158,
+      "apy": 4.26718,
+      "apyBase": 4.09731,
+      "apyReward": 0.16986,
+      "apyPct1D": -0.00929,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1510,14 +1608,16 @@
           4.27099,
           4.27099,
           4.27099,
-          4.27099
+          4.27099,
+          4.26718
         ],
         "tvl": [
           3652906,
           3652906,
           3652906,
           3652906,
-          3652906
+          3652906,
+          3653158
         ]
       }
     },
@@ -1525,11 +1625,11 @@
       "id": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
       "project": "aave-v3",
       "symbol": "USDC",
-      "tvl": 17310358,
-      "apy": 4.18756,
-      "apyBase": 4.18756,
+      "tvl": 17295337,
+      "apy": 4.1952,
+      "apyBase": 4.1952,
       "apyReward": null,
-      "apyPct1D": -0.1162,
+      "apyPct1D": -0.13177,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1540,14 +1640,16 @@
           4.18756,
           4.18756,
           4.18756,
-          4.18756
+          4.18756,
+          4.1952
         ],
         "tvl": [
           17310358,
           17310358,
           17310358,
           17310358,
-          17310358
+          17310358,
+          17295337
         ]
       }
     },
@@ -1555,11 +1657,11 @@
       "id": "65653183-7d69-408f-a76c-9dd2914f306f",
       "project": "morpho-blue",
       "symbol": "GTUSDCC",
-      "tvl": 1865218,
-      "apy": 4.14816,
-      "apyBase": 4.14816,
+      "tvl": 1865245,
+      "apy": 4.14841,
+      "apyBase": 4.14841,
       "apyReward": 0,
-      "apyPct1D": -0.02329,
+      "apyPct1D": -0.02242,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1570,14 +1672,16 @@
           4.14816,
           4.14816,
           4.14816,
-          4.14816
+          4.14816,
+          4.14841
         ],
         "tvl": [
           1865218,
           1865218,
           1865218,
           1865218,
-          1865218
+          1865218,
+          1865245
         ]
       }
     },
@@ -1585,11 +1689,11 @@
       "id": "a5fab52f-73fa-4f44-9c09-9af1eb20996c",
       "project": "morpho-blue",
       "symbol": "SPARKUSDC",
-      "tvl": 390530410,
-      "apy": 4.14372,
-      "apyBase": 4.14372,
+      "tvl": 390605340,
+      "apy": 4.14371,
+      "apyBase": 4.14371,
       "apyReward": 0,
-      "apyPct1D": -0.02753,
+      "apyPct1D": -0.02609,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1600,14 +1704,16 @@
           4.14372,
           4.14372,
           4.14372,
-          4.14372
+          4.14372,
+          4.14371
         ],
         "tvl": [
           390530410,
           390530410,
           390530410,
           390530410,
-          390530410
+          390530410,
+          390605340
         ]
       }
     },
@@ -1615,11 +1721,11 @@
       "id": "c1949c46-0c01-445f-8017-b3192d9913bc",
       "project": "morpho-blue",
       "symbol": "PUSDC",
-      "tvl": 11653823,
-      "apy": 4.14372,
-      "apyBase": 4.14372,
+      "tvl": 11653988,
+      "apy": 4.14371,
+      "apyBase": 4.14371,
       "apyReward": 0,
-      "apyPct1D": -0.02754,
+      "apyPct1D": -0.02761,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1630,14 +1736,16 @@
           4.14372,
           4.14372,
           4.14372,
-          4.14372
+          4.14372,
+          4.14371
         ],
         "tvl": [
           11653823,
           11653823,
           11653823,
           11653823,
-          11653823
+          11653823,
+          11653988
         ]
       }
     },
@@ -1645,11 +1753,11 @@
       "id": "34b65551-cca1-48f4-9a62-2145c24e92a4",
       "project": "morpho-blue",
       "symbol": "CSUSDC",
-      "tvl": 856682,
-      "apy": 4.03075,
-      "apyBase": 4.03075,
+      "tvl": 856673,
+      "apy": 4.0296,
+      "apyBase": 4.0296,
       "apyReward": 0,
-      "apyPct1D": -0.03434,
+      "apyPct1D": -0.03426,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1660,14 +1768,16 @@
           4.03075,
           4.03075,
           4.03075,
-          4.03075
+          4.03075,
+          4.0296
         ],
         "tvl": [
           856682,
           856682,
           856682,
           856682,
-          856682
+          856682,
+          856673
         ]
       }
     },
@@ -1675,7 +1785,7 @@
       "id": "a71321b4-7873-4472-8146-13a426d51422",
       "project": "gami-labs",
       "symbol": "USDC",
-      "tvl": 3032298,
+      "tvl": 3032309,
       "apy": 3.99204,
       "apyBase": 3.99204,
       "apyReward": 0,
@@ -1690,6 +1800,7 @@
           3.99204,
           3.99204,
           3.99204,
+          3.99204,
           3.99204
         ],
         "tvl": [
@@ -1697,7 +1808,8 @@
           3032298,
           3032298,
           3032298,
-          3032298
+          3032298,
+          3032309
         ]
       }
     },
@@ -1720,9 +1832,11 @@
           3.99204,
           3.99204,
           3.99204,
+          3.99204,
           3.99204
         ],
         "tvl": [
+          3032186,
           3032186,
           3032186,
           3032186,
@@ -1735,11 +1849,11 @@
       "id": "4aa0a5d8-860a-4ca2-af92-69c99c6d98f2",
       "project": "yearn-finance",
       "symbol": "USDC",
-      "tvl": 662568,
-      "apy": 3.82842,
-      "apyBase": 3.82842,
+      "tvl": 662581,
+      "apy": 3.82719,
+      "apyBase": 3.82719,
       "apyReward": 0,
-      "apyPct1D": -0.00523,
+      "apyPct1D": -0.00524,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
@@ -1750,14 +1864,16 @@
           3.82842,
           3.82842,
           3.82842,
-          3.82842
+          3.82842,
+          3.82719
         ],
         "tvl": [
           662568,
           662568,
           662568,
           662568,
-          662568
+          662568,
+          662581
         ]
       }
     },
@@ -1765,7 +1881,7 @@
       "id": "aa2d08c0-0abd-4dcf-be93-ff8ca89d01cd",
       "project": "spark-savings",
       "symbol": "USDS",
-      "tvl": 12047301,
+      "tvl": 12048604,
       "apy": 3.8,
       "apyBase": 3.8,
       "apyReward": null,
@@ -1780,6 +1896,7 @@
           3.8,
           3.8,
           3.8,
+          3.8,
           3.8
         ],
         "tvl": [
@@ -1787,7 +1904,8 @@
           12047301,
           12047301,
           12047301,
-          12047301
+          12047301,
+          12048604
         ]
       }
     },
@@ -1795,11 +1913,11 @@
       "id": "ae62a2de-6fe7-48cc-9e47-0dd2b28f665e",
       "project": "morpho-blue",
       "symbol": "GTEURCB",
-      "tvl": 1318983,
-      "apy": 3.46629,
-      "apyBase": 3.46629,
+      "tvl": 1319263,
+      "apy": 3.50222,
+      "apyBase": 3.50222,
       "apyReward": 0,
-      "apyPct1D": 0.2658,
+      "apyPct1D": 0.28276,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
@@ -1810,14 +1928,48 @@
           3.46629,
           3.46629,
           3.46629,
-          3.46629
+          3.46629,
+          3.50222
         ],
         "tvl": [
           1318983,
           1318983,
           1318983,
           1318983,
-          1318983
+          1318983,
+          1319263
+        ]
+      }
+    },
+    {
+      "id": "cd35c563-0b37-47f6-a522-c7e5240b3f65",
+      "project": "morpho-blue",
+      "symbol": "STEAKEURC",
+      "tvl": 970002,
+      "apy": 3.45986,
+      "apyBase": 3.45986,
+      "apyReward": 0,
+      "apyPct1D": 0.36535,
+      "underlyingTokens": [
+        "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
+      ],
+      "logo": null,
+      "hist": {
+        "apy": [
+          3.42061,
+          3.42061,
+          3.42061,
+          3.42061,
+          3.42061,
+          3.45986
+        ],
+        "tvl": [
+          975793,
+          975793,
+          975793,
+          975793,
+          975793,
+          970002
         ]
       }
     },
@@ -1825,11 +1977,11 @@
       "id": "81ae8812-f04f-4f6e-9d71-ee5778f3a178",
       "project": "morpho-blue",
       "symbol": "STEAKUSDC",
-      "tvl": 121116320,
-      "apy": 3.4414,
-      "apyBase": 3.4414,
+      "tvl": 121139413,
+      "apy": 3.44183,
+      "apyBase": 3.44183,
       "apyReward": 0,
-      "apyPct1D": -0.02291,
+      "apyPct1D": -0.02256,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
@@ -1840,44 +1992,16 @@
           3.4414,
           3.4414,
           3.4414,
-          3.4414
+          3.4414,
+          3.44183
         ],
         "tvl": [
           121116320,
           121116320,
           121116320,
           121116320,
-          121116320
-        ]
-      }
-    },
-    {
-      "id": "cd35c563-0b37-47f6-a522-c7e5240b3f65",
-      "project": "morpho-blue",
-      "symbol": "STEAKEURC",
-      "tvl": 975793,
-      "apy": 3.42061,
-      "apyBase": 3.42061,
-      "apyReward": 0,
-      "apyPct1D": 0.33613,
-      "underlyingTokens": [
-        "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
-      ],
-      "logo": null,
-      "hist": {
-        "apy": [
-          3.42061,
-          3.42061,
-          3.42061,
-          3.42061,
-          3.42061
-        ],
-        "tvl": [
-          975793,
-          975793,
-          975793,
-          975793,
-          975793
+          121116320,
+          121139413
         ]
       }
     },
@@ -1885,11 +2009,11 @@
       "id": "e76a40b2-30d5-4b9c-9cf3-41249eeeeb3a",
       "project": "morpho-blue",
       "symbol": "STEAKEURC",
-      "tvl": 3207236,
-      "apy": 3.37553,
-      "apyBase": 3.37553,
+      "tvl": 3207917,
+      "apy": 3.41574,
+      "apyBase": 3.41574,
       "apyReward": 0,
-      "apyPct1D": 0.30312,
+      "apyPct1D": 0.32296,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
@@ -1900,14 +2024,16 @@
           3.37553,
           3.37553,
           3.37553,
-          3.37553
+          3.37553,
+          3.41574
         ],
         "tvl": [
           3207236,
           3207236,
           3207236,
           3207236,
-          3207236
+          3207236,
+          3207917
         ]
       }
     },
@@ -1915,11 +2041,11 @@
       "id": "ccf4821e-9aec-4aaa-aeaa-7914af0ed6c1",
       "project": "aerodrome-slipstream",
       "symbol": "USDC-MUSD",
-      "tvl": 1174637,
-      "apy": 3.23873,
-      "apyBase": 2.86855,
-      "apyReward": 0.37017,
-      "apyPct1D": 1.76952,
+      "tvl": 1174642,
+      "apy": 3.23182,
+      "apyBase": 2.86134,
+      "apyReward": 0.37047,
+      "apyPct1D": 1.75772,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "0xdD468A1DDc392dcdbEf6db6e34E89AA338F9F186"
@@ -1931,14 +2057,16 @@
           3.23873,
           3.23873,
           3.23873,
-          3.23873
+          3.23873,
+          3.23182
         ],
         "tvl": [
           1174637,
           1174637,
           1174637,
           1174637,
-          1174637
+          1174637,
+          1174642
         ]
       }
     },
@@ -1946,11 +2074,11 @@
       "id": "c1aee434-6c8e-4958-a851-eda8ab8bb32d",
       "project": "morpho-blue",
       "symbol": "MWEURC",
-      "tvl": 832453,
-      "apy": 3.05202,
-      "apyBase": 2.87516,
-      "apyReward": 0.17686,
-      "apyPct1D": 0.19335,
+      "tvl": 832189,
+      "apy": 3.06561,
+      "apyBase": 2.88821,
+      "apyReward": 0.1774,
+      "apyPct1D": 0.20454,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
@@ -1961,14 +2089,16 @@
           3.05202,
           3.05202,
           3.05202,
-          3.05202
+          3.05202,
+          3.06561
         ],
         "tvl": [
           832453,
           832453,
           832453,
           832453,
-          832453
+          832453,
+          832189
         ]
       }
     },
@@ -1976,17 +2106,18 @@
       "id": "68ebb322-e83a-45b3-8cea-edd62cd1467b",
       "project": "yo-protocol",
       "symbol": "EURC",
-      "tvl": 584145,
+      "tvl": 584269,
       "apy": 3.002,
       "apyBase": 3.002,
       "apyReward": null,
-      "apyPct1D": 0.1908,
+      "apyPct1D": 0.1857,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/26045/small/EURC.png?1769615705",
       "hist": {
         "apy": [
+          3.002,
           3.002,
           3.002,
           3.002,
@@ -1998,7 +2129,8 @@
           584145,
           584145,
           584145,
-          584145
+          584145,
+          584269
         ]
       }
     },
@@ -2006,7 +2138,7 @@
       "id": "e2bacd3c-8119-48d9-8c40-8b0da25ab10e",
       "project": "mortgagefi",
       "symbol": "USDC",
-      "tvl": 814187,
+      "tvl": 814028,
       "apy": 2.8,
       "apyBase": null,
       "apyReward": null,
@@ -2021,6 +2153,7 @@
           2.8,
           2.8,
           2.8,
+          2.8,
           2.8
         ],
         "tvl": [
@@ -2028,7 +2161,8 @@
           814187,
           814187,
           814187,
-          814187
+          814187,
+          814028
         ]
       }
     },
@@ -2036,7 +2170,7 @@
       "id": "18e2bbf0-f05f-4802-8e1e-d0ec4ab9a4d0",
       "project": "fluid-lending",
       "symbol": "EURC",
-      "tvl": 1269478,
+      "tvl": 1269745,
       "apy": 2.77,
       "apyBase": 2.77,
       "apyReward": null,
@@ -2051,6 +2185,7 @@
           2.77,
           2.77,
           2.77,
+          2.77,
           2.77
         ],
         "tvl": [
@@ -2058,7 +2193,8 @@
           1269478,
           1269478,
           1269478,
-          1269478
+          1269478,
+          1269745
         ]
       }
     },
@@ -2081,9 +2217,11 @@
           2.00097,
           2.00097,
           2.00097,
+          2.00097,
           2.00097
         ],
         "tvl": [
+          1426401,
           1426401,
           1426401,
           1426401,
@@ -2096,11 +2234,11 @@
       "id": "6652ed18-d327-46cd-9bac-08e0e14ea715",
       "project": "aave-v3",
       "symbol": "EURC",
-      "tvl": 6997454,
-      "apy": 1.23531,
-      "apyBase": 1.23531,
+      "tvl": 7004020,
+      "apy": 1.23262,
+      "apyBase": 1.23262,
       "apyReward": null,
-      "apyPct1D": 0.01535,
+      "apyPct1D": 0.01451,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
@@ -2111,14 +2249,16 @@
           1.23531,
           1.23531,
           1.23531,
-          1.23531
+          1.23531,
+          1.23262
         ],
         "tvl": [
           6997454,
           6997454,
           6997454,
           6997454,
-          6997454
+          6997454,
+          7004020
         ]
       }
     },
@@ -2126,11 +2266,11 @@
       "id": "fad7bc2b-3ac7-5554-bfd1-52cb1b2d4bcb",
       "project": "morpho-blue",
       "symbol": "SAVUSD",
-      "tvl": 4313015,
-      "apy": 1.17166,
+      "tvl": 4313789,
+      "apy": 1.17163,
       "apyBase": 0,
-      "apyReward": 1.17166,
-      "apyPct1D": -0.00285,
+      "apyReward": 1.17163,
+      "apyPct1D": -0.00288,
       "underlyingTokens": [
         "0xa6EF20FE18CD529cA15A8a53A29D1832B1F848ff"
       ],
@@ -2141,14 +2281,16 @@
           1.17166,
           1.17166,
           1.17166,
-          1.17166
+          1.17166,
+          1.17163
         ],
         "tvl": [
           4313015,
           4313015,
           4313015,
           4313015,
-          4313015
+          4313015,
+          4313789
         ]
       }
     },
@@ -2156,9 +2298,9 @@
       "id": "fa41acbb-df3a-4abc-8444-7ab982cc6af4",
       "project": "uniswap-v3",
       "symbol": "USDE-USDC",
-      "tvl": 1000036,
-      "apy": 0.28171,
-      "apyBase": 0.28171,
+      "tvl": 1000077,
+      "apy": 0.2819,
+      "apyBase": 0.2819,
       "apyReward": null,
       "apyPct1D": null,
       "underlyingTokens": [
@@ -2172,14 +2314,16 @@
           0.28171,
           0.28171,
           0.28171,
-          0.28171
+          0.28171,
+          0.2819
         ],
         "tvl": [
           1000036,
           1000036,
           1000036,
           1000036,
-          1000036
+          1000036,
+          1000077
         ]
       }
     },
@@ -2187,11 +2331,11 @@
       "id": "0dfc66d9-74eb-41be-a9d1-1d73f452934f",
       "project": "morpho-blue",
       "symbol": "STEAKXSGD",
-      "tvl": 1086470,
-      "apy": 0.21784,
-      "apyBase": 0.21784,
+      "tvl": 1088564,
+      "apy": 0.21778,
+      "apyBase": 0.21778,
       "apyReward": 0,
-      "apyPct1D": -0.10026,
+      "apyPct1D": -0.08674,
       "underlyingTokens": [
         "0x0A4C9cb2778aB3302996A34BeFCF9a8Bc288C33b"
       ],
@@ -2202,14 +2346,16 @@
           0.21784,
           0.21784,
           0.21784,
-          0.21784
+          0.21784,
+          0.21778
         ],
         "tvl": [
           1086470,
           1086470,
           1086470,
           1086470,
-          1086470
+          1086470,
+          1088564
         ]
       }
     },
@@ -2217,11 +2363,11 @@
       "id": "cb799bf9-80c7-5e2a-a560-efb5756a82bd",
       "project": "uniswap-v4",
       "symbol": "USDC-OUSD",
-      "tvl": 9987806,
-      "apy": 0.04553,
-      "apyBase": 0.04553,
+      "tvl": 9987551,
+      "apy": 0.04095,
+      "apyBase": 0.04095,
       "apyReward": null,
-      "apyPct1D": 0.01051,
+      "apyPct1D": 0.00593,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
         "0xb2000000000000000000002feb517dfec7415344"
@@ -2233,14 +2379,16 @@
           0.04553,
           0.04553,
           0.04553,
-          0.04553
+          0.04553,
+          0.04095
         ],
         "tvl": [
           9987806,
           9987806,
           9987806,
           9987806,
-          9987806
+          9987806,
+          9987551
         ]
       }
     },
@@ -2248,11 +2396,11 @@
       "id": "cdd1dd46-9c29-4c91-8f50-1edfdb583a2e",
       "project": "uniswap-v4",
       "symbol": "EUSD-USDC",
-      "tvl": 999357,
-      "apy": 0.00063,
-      "apyBase": 0.00063,
+      "tvl": 999395,
+      "apy": 0.00069,
+      "apyBase": 0.00069,
       "apyReward": null,
-      "apyPct1D": 0.00019,
+      "apyPct1D": 0.00025,
       "underlyingTokens": [
         "0x14913815bcfde78baead2111f463d038ac9c2949",
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
@@ -2264,14 +2412,16 @@
           0.00063,
           0.00063,
           0.00063,
-          0.00063
+          0.00063,
+          0.00069
         ],
         "tvl": [
           999357,
           999357,
           999357,
           999357,
-          999357
+          999357,
+          999395
         ]
       }
     },
@@ -2279,7 +2429,7 @@
       "id": "c043062f-fcd6-47aa-b063-70691dc25c1c",
       "project": "gauntlet",
       "symbol": "GTUSDA",
-      "tvl": 45293338,
+      "tvl": 45293367,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2294,6 +2444,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2301,7 +2452,8 @@
           45293338,
           45293338,
           45293338,
-          45293338
+          45293338,
+          45293367
         ]
       }
     },
@@ -2309,7 +2461,7 @@
       "id": "7536ed73-da02-409c-bfb9-9ee69de7a426",
       "project": "fluid-lending",
       "symbol": "SUSDAI",
-      "tvl": 5820404,
+      "tvl": 5819731,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2324,6 +2476,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2331,7 +2484,8 @@
           5820404,
           5820404,
           5820404,
-          5820404
+          5820404,
+          5819731
         ]
       }
     },
@@ -2339,7 +2493,7 @@
       "id": "c351a834-8b09-5b5a-b898-833a6c4bf7bc",
       "project": "morpho-blue",
       "symbol": "SUSN",
-      "tvl": 5406420,
+      "tvl": 5406790,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2354,6 +2508,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2361,7 +2516,8 @@
           5406420,
           5406420,
           5406420,
-          5406420
+          5406420,
+          5406790
         ]
       }
     },
@@ -2369,11 +2525,11 @@
       "id": "1a833dd0-fc33-4bc2-8383-6c34b71bb735",
       "project": "fluid-dex",
       "symbol": "SUSDAI-USDC",
-      "tvl": 2969739,
+      "tvl": 2969548,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
-      "apyPct1D": 0,
+      "apyPct1D": -0.1261,
       "underlyingTokens": [
         "0x0b2b2b2076d95dda7817e785989fe353fe955ef9",
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
@@ -2385,6 +2541,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2392,7 +2549,8 @@
           2969739,
           2969739,
           2969739,
-          2969739
+          2969739,
+          2969548
         ]
       }
     },
@@ -2400,7 +2558,7 @@
       "id": "735fb238-6c21-44b0-9f02-31fb880836e6",
       "project": "morpho-blue",
       "symbol": "YOUSD",
-      "tvl": 603263,
+      "tvl": 603290,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2415,6 +2573,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2422,7 +2581,8 @@
           603263,
           603263,
           603263,
-          603263
+          603263,
+          603290
         ]
       }
     }
@@ -2456,37 +2616,37 @@
       "symbol": "SYRUPUSDC-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $461,330 < $500,000"
+      "detail": "TVL $461,337 < $500,000"
     },
     {
       "symbol": "XSGD-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $458,746 < $500,000"
+      "detail": "TVL $459,072 < $500,000"
     },
     {
       "symbol": "EDGEUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $453,997 < $500,000"
+      "detail": "TVL $454,005 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "yo-protocol",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $452,654 < $500,000"
+      "detail": "TVL $452,649 < $500,000"
     },
     {
       "symbol": "GHO",
       "project": "fluid-lending",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $442,066 < $500,000"
+      "detail": "TVL $442,118 < $500,000"
     },
     {
       "symbol": "SUPERNVDA",
       "project": "superform",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $436,871 < $500,000"
+      "detail": "TVL $436,990 < $500,000"
     },
     {
       "symbol": "AVGUSDCCONSB",
@@ -2498,13 +2658,13 @@
       "symbol": "USDC",
       "project": "arcadia-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $412,315 < $500,000"
+      "detail": "TVL $412,643 < $500,000"
     },
     {
       "symbol": "USDC-EUSD",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $408,086 < $500,000"
+      "detail": "TVL $408,160 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2516,7 +2676,7 @@
       "symbol": "ZCHF",
       "project": "frankencoin",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $366,812 < $500,000"
+      "detail": "TVL $366,202 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2525,34 +2685,28 @@
       "detail": "TVL $366,007 < $500,000"
     },
     {
-      "symbol": "EURC-USDC",
-      "project": "aerodrome-slipstream",
-      "reason": "BELOW FLOOR",
-      "detail": "TVL $344,454 < $500,000"
-    },
-    {
-      "symbol": "JEUR-USDC",
-      "project": "aerodrome-slipstream",
-      "reason": "BELOW FLOOR",
-      "detail": "TVL $344,311 < $500,000"
-    },
-    {
       "symbol": "USDZ",
       "project": "extra-finance-leverage-farming",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $343,431 < $500,000"
+      "detail": "TVL $344,136 < $500,000"
+    },
+    {
+      "symbol": "EURC-USDC",
+      "project": "aerodrome-slipstream",
+      "reason": "BELOW FLOOR",
+      "detail": "TVL $342,197 < $500,000"
     },
     {
       "symbol": "DOLA-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $329,840 < $500,000"
+      "detail": "TVL $329,856 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $324,867 < $500,000"
+      "detail": "TVL $324,878 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2564,67 +2718,73 @@
       "symbol": "USDC-EUSD",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $302,322 < $500,000"
+      "detail": "TVL $302,359 < $500,000"
+    },
+    {
+      "symbol": "JEUR-USDC",
+      "project": "aerodrome-slipstream",
+      "reason": "BELOW FLOOR",
+      "detail": "TVL $299,256 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "extra-finance-xlend",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $280,621 < $500,000"
+      "detail": "TVL $280,614 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $268,723 < $500,000"
+      "detail": "TVL $268,727 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "kiloex",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $267,575 < $500,000"
+      "detail": "TVL $267,573 < $500,000"
     },
     {
       "symbol": "AAVEUSDC-AAVEGHO",
       "project": "balancer-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $261,507 < $500,000"
-    },
-    {
-      "symbol": "USDC-USDBC-AXLUSDC-CRVUSD",
-      "project": "curve-dex",
-      "reason": "BELOW FLOOR",
-      "detail": "TVL $258,627 < $500,000"
+      "detail": "TVL $261,525 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "ample",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $258,477 < $500,000"
+      "detail": "TVL $258,802 < $500,000"
+    },
+    {
+      "symbol": "USDC-USDBC-AXLUSDC-CRVUSD",
+      "project": "curve-dex",
+      "reason": "BELOW FLOOR",
+      "detail": "TVL $258,549 < $500,000"
     },
     {
       "symbol": "APVCHF",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $245,522 < $500,000"
+      "detail": "TVL $246,509 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "centrifuge-protocol",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $240,077 < $500,000"
+      "detail": "TVL $240,078 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "harvest-finance",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $237,985 < $500,000"
+      "detail": "TVL $237,987 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "fusion-by-ipor",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $231,631 < $500,000"
+      "detail": "TVL $231,632 < $500,000"
     },
     {
       "symbol": "DOLA-USDC",
@@ -2636,25 +2796,25 @@
       "symbol": "USDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $226,058 < $500,000"
+      "detail": "TVL $226,060 < $500,000"
     },
     {
       "symbol": "USDBC",
       "project": "stargate-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $217,437 < $500,000"
+      "detail": "TVL $217,570 < $500,000"
     },
     {
       "symbol": "SJEUR",
       "project": "spectra-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $213,259 < $500,000"
+      "detail": "TVL $213,260 < $500,000"
     },
     {
       "symbol": "SJEUR",
       "project": "spectra-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $213,259 < $500,000"
+      "detail": "TVL $213,260 < $500,000"
     },
     {
       "symbol": "JRROYSUSN",
@@ -2666,7 +2826,7 @@
       "symbol": "STEAKUSDCFARCASTER",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $195,144 < $500,000"
+      "detail": "TVL $195,147 < $500,000"
     },
     {
       "symbol": "MUSE-USDC",
@@ -2678,19 +2838,19 @@
       "symbol": "MSUSD-USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $190,726 < $500,000"
+      "detail": "TVL $190,697 < $500,000"
     },
     {
       "symbol": "USDC-ALUSDB",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $188,743 < $500,000"
+      "detail": "TVL $188,734 < $500,000"
     },
     {
       "symbol": "VCHF-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $185,482 < $500,000"
+      "detail": "TVL $186,050 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
@@ -2702,7 +2862,7 @@
       "symbol": "TGBP-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $174,759 < $500,000"
+      "detail": "TVL $174,756 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2720,7 +2880,7 @@
       "symbol": "USDC",
       "project": "native-credit-pool",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $158,339 < $500,000"
+      "detail": "TVL $158,335 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2732,13 +2892,13 @@
       "symbol": "USDC",
       "project": "mortgagefi",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $153,590 < $500,000"
+      "detail": "TVL $153,782 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "euler-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $148,788 < $500,000"
+      "detail": "TVL $148,787 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2750,13 +2910,13 @@
       "symbol": "USDC-USDBC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $141,787 < $500,000"
+      "detail": "TVL $141,828 < $500,000"
     },
     {
       "symbol": "GHO",
       "project": "aave-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $141,402 < $500,000"
+      "detail": "TVL $141,418 < $500,000"
     },
     {
       "symbol": "EURAU-USDC",
@@ -2780,13 +2940,13 @@
       "symbol": "SYRUPUSDC",
       "project": "aave-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $133,157 < $500,000"
+      "detail": "TVL $133,158 < $500,000"
     },
     {
       "symbol": "SIUSD",
       "project": "infinifi",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $129,965 < $500,000"
+      "detail": "TVL $129,970 < $500,000"
     },
     {
       "symbol": "USDC-USDBC",
@@ -2810,7 +2970,7 @@
       "symbol": "USDC-USDBC-AXLUSDC-CRVUSD",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $122,645 < $500,000"
+      "detail": "TVL $122,599 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2828,19 +2988,19 @@
       "symbol": "EURC-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $113,263 < $500,000"
+      "detail": "TVL $113,275 < $500,000"
     },
     {
       "symbol": "YUTY",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $112,904 < $500,000"
+      "detail": "TVL $112,907 < $500,000"
     },
     {
       "symbol": "YUTY",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $112,904 < $500,000"
+      "detail": "TVL $112,907 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2852,79 +3012,79 @@
       "symbol": "APXUSD",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $106,187 < $500,000"
+      "detail": "TVL $106,190 < $500,000"
     },
     {
       "symbol": "APXUSD",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $106,187 < $500,000"
+      "detail": "TVL $106,190 < $500,000"
     },
     {
       "symbol": "USDZ-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $103,139 < $500,000"
+      "detail": "TVL $103,266 < $500,000"
     },
     {
       "symbol": "OUSDT-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $103,115 < $500,000"
+      "detail": "TVL $103,116 < $500,000"
     },
     {
       "symbol": "USDC-SBC",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $102,053 < $500,000"
+      "detail": "TVL $102,052 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $98,870 < $500,000"
+      "detail": "TVL $98,872 < $500,000"
     },
     {
       "symbol": "USDC-ARCHAI",
       "project": "uniswap-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $96,322 < $500,000"
+      "detail": "TVL $96,321 < $500,000"
     },
     {
       "symbol": "CSCOREUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $96,241 < $500,000"
+      "detail": "TVL $96,242 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "peapods-finance",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $94,499 < $500,000"
+      "detail": "TVL $94,167 < $500,000"
     },
     {
       "symbol": "USDBC",
       "project": "symbiosis",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $89,449 < $500,000"
+      "detail": "TVL $89,503 < $500,000"
     },
     {
       "symbol": "WUSDR-USDBC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $86,730 < $500,000"
+      "detail": "TVL $86,758 < $500,000"
     },
     {
       "symbol": "HYUSD-EUSD",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $86,503 < $500,000"
+      "detail": "TVL $86,511 < $500,000"
     },
     {
       "symbol": "DOLA-USDBC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $86,027 < $500,000"
+      "detail": "TVL $86,054 < $500,000"
     },
     {
       "symbol": "EURC",
@@ -2936,49 +3096,43 @@
       "symbol": "EUR-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $84,978 < $500,000"
+      "detail": "TVL $84,734 < $500,000"
     },
     {
       "symbol": "FXUSD-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $84,648 < $500,000"
+      "detail": "TVL $84,641 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "lazy-summer-protocol",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $84,540 < $500,000"
-    },
-    {
-      "symbol": "GTUSDCF",
-      "project": "morpho-blue",
-      "reason": "BELOW FLOOR",
-      "detail": "TVL $80,816 < $500,000"
+      "detail": "TVL $84,537 < $500,000"
     },
     {
       "symbol": "DOLA-USDBC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $77,896 < $500,000"
+      "detail": "TVL $77,844 < $500,000"
     },
     {
       "symbol": "USDC-AVAIL",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $76,176 < $500,000"
+      "detail": "TVL $76,067 < $500,000"
     },
     {
       "symbol": "USDZ-USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $75,211 < $500,000"
+      "detail": "TVL $75,274 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "euler-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $74,090 < $500,000"
+      "detail": "TVL $74,089 < $500,000"
     },
     {
       "symbol": "ZVUSDT",
@@ -2993,16 +3147,22 @@
       "detail": "TVL $68,894 < $500,000"
     },
     {
+      "symbol": "GTUSDCF",
+      "project": "morpho-blue",
+      "reason": "BELOW FLOOR",
+      "detail": "TVL $67,841 < $500,000"
+    },
+    {
       "symbol": "USDC",
       "project": "harvest-finance",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $64,664 < $500,000"
+      "detail": "TVL $64,665 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $60,562 < $500,000"
+      "detail": "TVL $60,284 < $500,000"
     },
     {
       "symbol": "HYUSD",
@@ -3014,7 +3174,7 @@
       "symbol": "USDC-USDBC-AXLUSDC-CRVUSD",
       "project": "stake-dao-yield",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $57,415 < $500,000"
+      "detail": "TVL $57,394 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -3026,7 +3186,7 @@
       "symbol": "GHO-USDC",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $54,237 < $500,000"
+      "detail": "TVL $54,239 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -3043,11 +3203,11 @@
     "id": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
     "project": "aerodrome-v1",
     "symbol": "MSUSD-USDC",
-    "tvl": 1786353,
-    "apy": 42.73923,
+    "tvl": 1785614,
+    "apy": 42.65741,
     "apyBase": null,
-    "apyReward": 42.73923,
-    "apyPct1D": 1.83364,
+    "apyReward": 42.65741,
+    "apyPct1D": 0.6137,
     "underlyingTokens": [
       "0x526728DBc96689597F85ae4cd716d4f7fCcBAE9d",
       "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -3059,7 +3219,7 @@
     "rejected": 0
   },
   "crosscheck": {
-    "checkedAt": "2026-10-11T20:18:58.515Z",
+    "checkedAt": "2026-10-11T20:24:03.740Z",
     "method": "getReserves() read directly from pool contracts via public Base RPC (read-only, no wallet, no funds)",
     "rpc": "mainnet.base.org + public fallbacks",
     "pools": [
@@ -3068,7 +3228,7 @@
         "symbol": "USDC-ALUSDB",
         "project": "aerodrome-v1",
         "status": "verified-reserves-only",
-        "dfdTvl": 2124531,
+        "dfdTvl": 2124561,
         "poolAddress": "0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
         "basescan": "https://basescan.org/address/0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
         "reserve0": 877971.146677,
@@ -3084,7 +3244,7 @@
         "symbol": "MSUSD-USDC",
         "project": "aerodrome-v1",
         "status": "verified",
-        "dfdTvl": 1786353,
+        "dfdTvl": 1785614,
         "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
         "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
         "reserve0": 1348781.2026186734,
@@ -3110,7 +3270,7 @@
         "symbol": "JEUR-EURC",
         "project": "aerodrome-v1",
         "status": "verified",
-        "dfdTvl": 748043,
+        "dfdTvl": 748116,
         "poolAddress": "0xc75799e0646470128a42d07335ab3bfa9e8ee7c2",
         "basescan": "https://basescan.org/address/0xc75799e0646470128a42d07335ab3bfa9e8ee7c2",
         "reserve0": 376078.6227466114,
@@ -3120,7 +3280,7 @@
           "EURC": 1.12
         },
         "onchainTvl": 794048,
-        "devPct": 6.2,
+        "devPct": 6.1,
         "pegFlags": []
       },
       {
@@ -3128,7 +3288,7 @@
         "symbol": "EUSD-USDC",
         "project": "aerodrome-v1",
         "status": "verified-reserves-only",
-        "dfdTvl": 560290,
+        "dfdTvl": 559824,
         "poolAddress": "0x7a034374c89c463dd65d8c9bcfe63bcbced41f4f",
         "basescan": "https://basescan.org/address/0x7a034374c89c463dd65d8c9bcfe63bcbced41f4f",
         "reserve0": 258034.682746,
@@ -3146,9 +3306,9 @@
       "pegFlags": 1,
       "skipped": 0
     },
-    "blockNumber": "52480295",
-    "blockTs": "2026-10-11T20:18:57.000Z",
-    "verifyAt": "https://basescan.org/block/52480295"
+    "blockNumber": "52480448",
+    "blockTs": "2026-10-11T20:24:03.000Z",
+    "verifyAt": "https://basescan.org/block/52480448"
   },
   "xrefStats": {
     "events": 820,
