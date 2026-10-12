@@ -1,5 +1,5 @@
 {
-  "seq": 837,
+  "seq": 842,
   "cooldowns": {
     "APY_COLLAPSE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791829409694,
     "APY_JUMP:7372edda-f07f-4598-83e5-4edec48c4039": 1791824553708,
@@ -7,8 +7,8 @@
     "APY_COLLAPSE:7372edda-f07f-4598-83e5-4edec48c4039": 1791825768989,
     "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1791791619333,
     "APY_JUMP:0c8567f8-ba5b-41ad-80de-00a71895eb19": 1791714167107,
-    "APY_JUMP:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791791619333,
-    "APY_COLLAPSE:0c8567f8-ba5b-41ad-80de-00a71895eb19": 1791710826835,
+    "APY_JUMP:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791848077168,
+    "APY_COLLAPSE:0c8567f8-ba5b-41ad-80de-00a71895eb19": 1791848077168,
     "APY_JUMP:3e7c5e93-b741-573d-b699-22d823038e61": 1791728679469,
     "APY_COLLAPSE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1791824553708,
     "APY_JUMP:2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493": 1791800741959,
@@ -19,7 +19,10 @@
     "TVL_SHIFT:14170877-8941-4c7d-b12c-06517c70f1e7": 1791824553708,
     "APY_COLLAPSE:ccf4821e-9aec-4aaa-aeaa-7914af0ed6c1": 1791824553708,
     "APY_JUMP:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1791833051531,
-    "TVL_SHIFT:66471469-2dc4-4223-b867-ca780fe7457d": 1791836692126
+    "TVL_SHIFT:66471469-2dc4-4223-b867-ca780fe7457d": 1791836692126,
+    "LEADER_CHANGE:847c874f-d4e7-47ed-8870-97d2f24a8767": 1791848077168,
+    "APY_COLLAPSE:aae6cc3a-783b-4a76-bea7-c3edccd28d62": 1791848077168,
+    "APY_JUMP:27de63d4-e52c-414f-a0e9-fbba61216398": 1791848077168
   },
   "lastDigestDate": "2026-10-12",
   "llm": {
@@ -50,10 +53,10 @@
     "lastFactories": 1791791925954
   },
   "xrefStats": {
-    "events": 837,
-    "corroborated": 606,
-    "deviations": 129,
-    "unverified": 1171
+    "events": 842,
+    "corroborated": 608,
+    "deviations": 130,
+    "unverified": 1180
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
