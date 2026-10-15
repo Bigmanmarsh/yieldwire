@@ -1,6 +1,96 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "847c874f-d4e7-47ed-8870-97d2f24a8767",
+      "pool": {
+        "id": "847c874f-d4e7-47ed-8870-97d2f24a8767",
+        "project": "aerodrome-slipstream",
+        "symbol": "EURC-USDC",
+        "tvl": 1246107,
+        "apy": 82.09897,
+        "apyBase": 73.01065,
+        "apyReward": 9.08832,
+        "apyPct1D": 30.38864,
+        "underlyingTokens": [
+          "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 87.21398,
+        "tvl": 1246068
+      },
+      "after": {
+        "apy": 82.09897,
+        "tvl": 1246107
+      },
+      "delta": -5.12,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-0890",
+      "ts": "2026-10-15T13:26:12.814Z",
+      "factLine": "EURC-USDC (aerodrome-slipstream) on Base: APY moved from 87.21398% to 82.09897% (-5.12 percentage points). TVL $1.2M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-10-15T13:26:12.814Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-10-15T13-26-12.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,246,107",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "EURC treated as €-stable",
+            "verdict": "UNVERIFIED",
+            "detail": "peg reference unavailable this run",
+            "via": "CoinGecko",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $0.99963 per CoinGecko (Δ -0.04% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          }
+        ],
+        "sources": [
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-10-15T13:26:12.814Z"
+          }
+        ],
+        "checkedAt": "2026-10-15T13:26:12.814Z"
+      }
+    },
+    {
       "type": "APY_JUMP",
       "poolId": "437a4c66-b5a7-416b-853a-565433679627",
       "pool": {
@@ -42287,96 +42377,6 @@
           }
         ],
         "checkedAt": "2026-09-19T14:23:33.208Z"
-      }
-    },
-    {
-      "type": "APY_JUMP",
-      "poolId": "fbce5857-69c4-4142-938b-62bdc9444967",
-      "pool": {
-        "id": "fbce5857-69c4-4142-938b-62bdc9444967",
-        "project": "aerodrome-slipstream",
-        "symbol": "EURC-USDC",
-        "tvl": 532163,
-        "apy": 66.0422,
-        "apyBase": 18.74145,
-        "apyReward": 47.30076,
-        "apyPct1D": -168.64499,
-        "underlyingTokens": [
-          "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "apy": 39.18117,
-        "tvl": 579250
-      },
-      "after": {
-        "apy": 66.0422,
-        "tvl": 532163
-      },
-      "delta": 26.86,
-      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0390",
-      "ts": "2026-09-19T13:27:58.191Z",
-      "factLine": "EURC-USDC (aerodrome-slipstream) on Base: APY moved from 39.18117% to 66.0422% (+26.86 percentage points). TVL $532.2K. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-19T13:27:58.191Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-19T13-27-58.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $532,163",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          },
-          {
-            "id": "PEG",
-            "claim": "EURC treated as €-stable",
-            "verdict": "UNVERIFIED",
-            "detail": "peg reference unavailable this run",
-            "via": "CoinGecko",
-            "link": null
-          },
-          {
-            "id": "PEG",
-            "claim": "USDC treated as $-stable",
-            "verdict": "INDEPENDENT-SOURCE-MATCH",
-            "detail": "USDC at $0.99973 per CoinGecko (Δ -0.03% vs $1)",
-            "via": "CoinGecko /coins/usd-coin",
-            "link": "https://www.coingecko.com/en/coins/usd-coin"
-          }
-        ],
-        "sources": [
-          {
-            "name": "CoinGecko · USDC",
-            "url": "https://www.coingecko.com/en/coins/usd-coin",
-            "fetchedAt": "2026-09-19T13:27:58.191Z"
-          }
-        ],
-        "checkedAt": "2026-09-19T13:27:58.191Z"
       }
     }
   ]
