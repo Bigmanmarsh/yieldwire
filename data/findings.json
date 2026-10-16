@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-16T15:21:23.924Z",
+  "updated": "2026-10-16T15:26:27.478Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,15 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-10-14T01:31:22.440Z",
       "firstPrice": 0.8861,
-      "cyclesFlagged": 734,
+      "cyclesFlagged": 735,
       "relatedEvents": [
-        {
-          "id": "EVT-0866",
-          "type": "TVL_SHIFT",
-          "ts": "2026-10-14T11:24:29.238Z",
-          "apy": 34.52183,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0868",
           "type": "APY_COLLAPSE",
@@ -94,22 +87,29 @@
           "ts": "2026-10-16T14:25:38.873Z",
           "apy": 30.20408,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0910",
+          "type": "APY_COLLAPSE",
+          "ts": "2026-10-16T15:26:27.478Z",
+          "apy": 19.76675,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-10-16T15:21:23.924Z",
-      "lastFlaggedAt": "2026-10-16T15:21:23.924Z",
-      "lastPrice": 0.8856,
-      "lastOffPegPct": -11.4,
+      "lastSeen": "2026-10-16T15:26:27.478Z",
+      "lastFlaggedAt": "2026-10-16T15:26:27.478Z",
+      "lastPrice": 0.8844,
+      "lastOffPegPct": -11.6,
       "worstPrice": 0.8785,
       "worstOffPegPct": -12.2,
-      "lastBlock": "52687368",
+      "lastBlock": "52687520",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 2004911,
-      "poolApyAtLastFlag": 49.33364
+      "poolTvl": 2005075,
+      "poolApyAtLastFlag": 48.57354
     }
   ]
 }
