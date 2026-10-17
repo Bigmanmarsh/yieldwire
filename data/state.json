@@ -1,5 +1,5 @@
 {
-  "seq": 920,
+  "seq": 921,
   "cooldowns": {
     "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1792146173150,
     "APY_COLLAPSE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1792149815370,
@@ -24,7 +24,8 @@
     "APY_COLLAPSE:ccf4821e-9aec-4aaa-aeaa-7914af0ed6c1": 1792185948910,
     "APY_COLLAPSE:1382b89f-180f-40f6-9347-62e5ddc905b2": 1792192952172,
     "TVL_SHIFT:1382b89f-180f-40f6-9347-62e5ddc905b2": 1792192952172,
-    "TVL_SHIFT:1a833dd0-fc33-4bc2-8383-6c34b71bb735": 1792192952172
+    "TVL_SHIFT:1a833dd0-fc33-4bc2-8383-6c34b71bb735": 1792192952172,
+    "LEADER_CHANGE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1792200282530
   },
   "lastDigestDate": "2026-10-16",
   "llm": {
@@ -55,9 +56,9 @@
     "lastFactories": 1792138278903
   },
   "xrefStats": {
-    "events": 920,
-    "corroborated": 681,
-    "deviations": 148,
+    "events": 921,
+    "corroborated": 684,
+    "deviations": 149,
     "unverified": 1287
   },
   "coinLogos": {
