@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-21T22:29:48.628Z",
+  "updated": "2026-10-22T00:48:40.933Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,22 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-10-14T01:31:22.440Z",
       "firstPrice": 0.8861,
-      "cyclesFlagged": 2183,
+      "cyclesFlagged": 2184,
       "relatedEvents": [
-        {
-          "id": "EVT-0910",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-16T15:26:27.478Z",
-          "apy": 19.76675,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-0921",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-17T01:24:42.530Z",
-          "apy": 47.16288,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0929",
           "type": "APY_JUMP",
@@ -94,22 +80,36 @@
           "ts": "2026-10-20T18:22:24.435Z",
           "apy": 20.71638,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0984",
+          "type": "APY_COLLAPSE",
+          "ts": "2026-10-22T00:48:40.933Z",
+          "apy": 7.63473,
+          "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0985",
+          "type": "TVL_SHIFT",
+          "ts": "2026-10-22T00:48:40.933Z",
+          "apy": 7.63473,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-10-21T22:29:48.628Z",
-      "lastFlaggedAt": "2026-10-21T22:29:48.628Z",
-      "lastPrice": 0.885,
+      "lastSeen": "2026-10-22T00:48:40.933Z",
+      "lastFlaggedAt": "2026-10-22T00:48:40.933Z",
+      "lastPrice": 0.8848,
       "lastOffPegPct": -11.5,
       "worstPrice": 0.8785,
       "worstOffPegPct": -12.2,
-      "lastBlock": "52916221",
+      "lastBlock": "52920387",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 1780625,
-      "poolApyAtLastFlag": 50.74089
+      "poolTvl": 1724561,
+      "poolApyAtLastFlag": 51.13743
     }
   ]
 }
