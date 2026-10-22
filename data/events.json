@@ -1,6 +1,129 @@
 {
   "events": [
     {
+      "type": "LEADER_CHANGE",
+      "poolId": "af1b872b-af09-511d-8124-2faa2c57b9b5",
+      "pool": {
+        "id": "af1b872b-af09-511d-8124-2faa2c57b9b5",
+        "project": "aerodrome-v1",
+        "symbol": "USDC-ALUSDB",
+        "tvl": 1550635,
+        "apy": 29.2392,
+        "apyBase": null,
+        "apyReward": 29.2392,
+        "apyPct1D": 10.41307,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "0x877014E21c32feA108B6A1f45f367efc9a2d9B9F"
+        ]
+      },
+      "before": {
+        "id": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
+        "symbol": "MSUSD-USDC",
+        "project": "aerodrome-v1",
+        "apy": 116.41367,
+        "tvl": 1008633
+      },
+      "after": {
+        "apy": 29.2392,
+        "tvl": 1550635
+      },
+      "delta": -87.17,
+      "trigger": "Highest-APY stablecoin pool (TVL ≥ $1,000,000) changed",
+      "id": "EVT-0992",
+      "ts": "2026-10-22T08:23:38.054Z",
+      "factLine": "MSUSD-USDC (aerodrome-v1) at 116.41367% APY lost the top spot to USDC-ALUSDB (aerodrome-v1) at 29.2392% APY on Base. New leader TVL $1.6M, old leader TVL $1.0M. APY gap change -87.17 percentage points. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-10-22T08:23:38.054Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-10-22T08-23-38.json",
+      "crosscheckEntry": {
+        "poolId": "af1b872b-af09-511d-8124-2faa2c57b9b5",
+        "symbol": "USDC-ALUSDB",
+        "project": "aerodrome-v1",
+        "status": "verified-reserves-only",
+        "dfdTvl": 1550635,
+        "poolAddress": "0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
+        "basescan": "https://basescan.org/address/0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
+        "reserve0": 649459.717794,
+        "reserve1": 908913.0592904784,
+        "prices": {
+          "USDC": 1,
+          "ALUSDB": null
+        },
+        "pegFlags": [],
+        "blockNumber": "52934036",
+        "blockTs": "2026-10-22T08:23:39.000Z"
+      },
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $1,550,635",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (verified-reserves-only)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $1.00000 per CoinGecko (Δ 0.00% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          },
+          {
+            "id": "PEG",
+            "claim": "ALUSDB treated as $-stable",
+            "verdict": "UNVERIFIED",
+            "detail": "independent price unavailable this run",
+            "via": "CoinGecko",
+            "link": null
+          },
+          {
+            "id": "LEADER",
+            "claim": "highest APY among monitored Base stablecoin pools",
+            "verdict": "RECOMPUTED-CHANGED",
+            "detail": "recomputed: this pool is rank #2 of 76; current top is MSUSD-USDC at 130.70%",
+            "via": "deterministic re-derivation (no LLM)",
+            "link": null
+          }
+        ],
+        "sources": [
+          {
+            "name": "Basescan (on-chain)",
+            "url": "https://basescan.org/address/0x32d6ec4400fbdd4085ce1e1664c48f8d21c4f9aa",
+            "fetchedAt": "2026-10-22T08:23:38.054Z"
+          },
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-10-22T08:23:38.054Z"
+          }
+        ],
+        "checkedAt": "2026-10-22T08:23:38.054Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "pool": {
@@ -42769,90 +42892,6 @@
           {
             "id": "PEG",
             "claim": "MSUSD treated as $-stable",
-            "verdict": "UNVERIFIED",
-            "detail": "independent price unavailable this run",
-            "via": "CoinGecko",
-            "link": null
-          },
-          {
-            "id": "PEG",
-            "claim": "USDC treated as $-stable",
-            "verdict": "UNVERIFIED",
-            "detail": "independent price unavailable this run",
-            "via": "CoinGecko",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-09-24T00:25:04.594Z"
-      }
-    },
-    {
-      "type": "APY_COLLAPSE",
-      "poolId": "fbce5857-69c4-4142-938b-62bdc9444967",
-      "pool": {
-        "id": "fbce5857-69c4-4142-938b-62bdc9444967",
-        "project": "aerodrome-slipstream",
-        "symbol": "EURC-USDC",
-        "tvl": 511043,
-        "apy": 0,
-        "apyBase": null,
-        "apyReward": 0,
-        "apyPct1D": -55.01358,
-        "underlyingTokens": [
-          "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "apy": 76.02621,
-        "tvl": 531740
-      },
-      "after": {
-        "apy": 0,
-        "tvl": 511043
-      },
-      "delta": -76.03,
-      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0495",
-      "ts": "2026-09-24T00:25:04.594Z",
-      "factLine": "EURC-USDC (aerodrome-slipstream) on Base: APY moved from 76.02621% to 0% (-76.03 percentage points). TVL $511.0K. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-24T00:25:04.594Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-24T00-25-04.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $511,043",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          },
-          {
-            "id": "PEG",
-            "claim": "EURC treated as €-stable",
             "verdict": "UNVERIFIED",
             "detail": "independent price unavailable this run",
             "via": "CoinGecko",
