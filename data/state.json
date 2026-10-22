@@ -1,5 +1,5 @@
 {
-  "seq": 1001,
+  "seq": 1003,
   "cooldowns": {
     "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1792661055384,
     "APY_COLLAPSE:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1792682684361,
@@ -24,7 +24,9 @@
     "LEADER_CHANGE:af1b872b-af09-511d-8124-2faa2c57b9b5": 1792657418054,
     "TVL_SHIFT:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1792661055384,
     "LEADER_CHANGE:062ba2ef-c132-4989-8e67-0ea2ebd37888": 1792664692848,
-    "TVL_SHIFT:cd35c563-0b37-47f6-a522-c7e5240b3f65": 1792682684361
+    "TVL_SHIFT:cd35c563-0b37-47f6-a522-c7e5240b3f65": 1792682684361,
+    "TVL_SHIFT:c1aee434-6c8e-4958-a851-eda8ab8bb32d": 1792686318458,
+    "TVL_SHIFT:847c874f-d4e7-47ed-8870-97d2f24a8767": 1792686318458
   },
   "lastDigestDate": "2026-10-22",
   "llm": {
@@ -55,10 +57,10 @@
     "lastFactories": 1792657723292
   },
   "xrefStats": {
-    "events": 1001,
-    "corroborated": 753,
+    "events": 1003,
+    "corroborated": 754,
     "deviations": 166,
-    "unverified": 1413
+    "unverified": 1416
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
