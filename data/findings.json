@@ -1,7 +1,7 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-22T09:19:12.439Z",
+  "updated": "2026-10-22T09:24:15.384Z",
   "findings": [
     {
       "symbol": "MSUSD",
@@ -9,15 +9,8 @@
       "status": "flagged",
       "firstSeen": "2026-10-14T01:31:22.440Z",
       "firstPrice": 0.8861,
-      "cyclesFlagged": 2285,
+      "cyclesFlagged": 2286,
       "relatedEvents": [
-        {
-          "id": "EVT-0939",
-          "type": "LEADER_CHANGE",
-          "ts": "2026-10-18T21:25:56.730Z",
-          "apy": 41.73839,
-          "poolSymbol": "MSUSD-USDC"
-        },
         {
           "id": "EVT-0940",
           "type": "APY_COLLAPSE",
@@ -94,22 +87,29 @@
           "ts": "2026-10-22T04:26:16.390Z",
           "apy": 91.45016,
           "poolSymbol": "MSUSD-USDC"
+        },
+        {
+          "id": "EVT-0994",
+          "type": "APY_JUMP",
+          "ts": "2026-10-22T09:24:15.384Z",
+          "apy": 11.16426,
+          "poolSymbol": "MSUSD-USDC"
         }
       ],
-      "lastSeen": "2026-10-22T09:19:12.439Z",
-      "lastFlaggedAt": "2026-10-22T09:19:12.439Z",
+      "lastSeen": "2026-10-22T09:24:15.384Z",
+      "lastFlaggedAt": "2026-10-22T09:24:15.384Z",
       "lastPrice": 0.8633,
       "lastOffPegPct": -13.7,
       "worstPrice": 0.8633,
       "worstOffPegPct": -13.7,
-      "lastBlock": "52935703",
+      "lastBlock": "52935854",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
-      "poolTvl": 925979,
-      "poolApyAtLastFlag": 130.69695
+      "poolTvl": 916380,
+      "poolApyAtLastFlag": 130.77822
     }
   ]
 }
