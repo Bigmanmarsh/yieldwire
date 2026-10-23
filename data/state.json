@@ -1,6 +1,8 @@
 {
-  "seq": 1021,
-  "cooldowns": {},
+  "seq": 1022,
+  "cooldowns": {
+    "APY_COLLAPSE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1792769218545
+  },
   "lastDigestDate": "2026-10-23",
   "llm": {
     "attempts": 24,
@@ -30,9 +32,9 @@
     "lastFactories": 1792744342340
   },
   "xrefStats": {
-    "events": 1021,
-    "corroborated": 769,
-    "deviations": 169,
+    "events": 1022,
+    "corroborated": 771,
+    "deviations": 170,
     "unverified": 1438
   },
   "coinLogos": {
