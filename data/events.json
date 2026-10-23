@@ -2,6 +2,101 @@
   "events": [
     {
       "type": "APY_JUMP",
+      "poolId": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
+      "pool": {
+        "id": "ba557f7e-f287-45a9-bc37-8f3a24ca05c7",
+        "project": "aerodrome-slipstream",
+        "symbol": "USDC-USDT",
+        "tvl": 637872,
+        "apy": 22.37791,
+        "apyBase": 22.37791,
+        "apyReward": 0,
+        "apyPct1D": 0.76422,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
+        ]
+      },
+      "before": {
+        "apy": 1.55209,
+        "tvl": 642977
+      },
+      "after": {
+        "apy": 22.37791,
+        "tvl": 637872
+      },
+      "delta": 20.83,
+      "trigger": "APY rose ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-1024",
+      "ts": "2026-10-23T18:23:54.128Z",
+      "factLine": "USDC-USDT (aerodrome-slipstream) on Base: APY moved from 1.55209% to 22.37791% (+20.83 percentage points). TVL $637.9K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-10-23T18:23:54.128Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-10-23T18-23-54.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $637,872",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          },
+          {
+            "id": "PEG",
+            "claim": "USDC treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDC at $0.99963 per CoinGecko (Δ -0.04% vs $1)",
+            "via": "CoinGecko /coins/usd-coin",
+            "link": "https://www.coingecko.com/en/coins/usd-coin"
+          },
+          {
+            "id": "PEG",
+            "claim": "USDT treated as $-stable",
+            "verdict": "INDEPENDENT-SOURCE-MATCH",
+            "detail": "USDT at $0.99910 per CoinGecko (Δ -0.09% vs $1)",
+            "via": "CoinGecko /coins/tether",
+            "link": "https://www.coingecko.com/en/coins/tether"
+          }
+        ],
+        "sources": [
+          {
+            "name": "CoinGecko · USDC",
+            "url": "https://www.coingecko.com/en/coins/usd-coin",
+            "fetchedAt": "2026-10-23T18:23:54.128Z"
+          },
+          {
+            "name": "CoinGecko · USDT",
+            "url": "https://www.coingecko.com/en/coins/tether",
+            "fetchedAt": "2026-10-23T18:23:54.128Z"
+          }
+        ],
+        "checkedAt": "2026-10-23T18:23:54.128Z"
+      }
+    },
+    {
+      "type": "APY_JUMP",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
       "pool": {
         "id": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
@@ -42941,72 +43036,6 @@
           }
         ],
         "checkedAt": "2026-09-25T05:23:06.182Z"
-      }
-    },
-    {
-      "type": "TVL_SHIFT",
-      "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
-      "pool": {
-        "id": "7372edda-f07f-4598-83e5-4edec48c4039",
-        "project": "fluid-lending",
-        "symbol": "USDC",
-        "tvl": 13736221,
-        "apy": 2.38,
-        "apyBase": 2.38,
-        "apyReward": null,
-        "apyPct1D": -9.04,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "tvl": 18554304,
-        "ts": 1790250125834
-      },
-      "after": {
-        "tvl": 13736221
-      },
-      "delta": -25.97,
-      "trigger": "TVL moved ≥ 25% vs ~24h ago",
-      "id": "EVT-0524",
-      "ts": "2026-09-25T04:27:34.167Z",
-      "factLine": "USDC (fluid-lending) on Base: TVL moved from $18.6M to $13.7M (-25.97% vs ~24h ago). APY is 2.38%. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-09-25T04:27:34.167Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-09-25T04-27-34.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $13,736,221",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-09-25T04:27:34.167Z"
       }
     }
   ]
