@@ -1,52 +1,23 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-26T22:55:02.567Z",
+  "updated": "2026-10-26T23:00:28.570Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
       "status": "flagged",
-      "firstSeen": "2026-10-25T12:03:24.709Z",
-      "firstPrice": 0.8802,
-      "cyclesFlagged": 345,
-      "relatedEvents": [
-        {
-          "id": "EVT-1048",
-          "type": "APY_JUMP",
-          "ts": "2026-10-25T12:23:36.399Z",
-          "apy": 226.50522,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-1053",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-25T19:24:53.055Z",
-          "apy": 249.2108,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-1058",
-          "type": "APY_JUMP",
-          "ts": "2026-10-26T09:27:27.070Z",
-          "apy": 244.93615,
-          "poolSymbol": "MSUSD-USDC"
-        },
-        {
-          "id": "EVT-1059",
-          "type": "APY_COLLAPSE",
-          "ts": "2026-10-26T10:23:04.835Z",
-          "apy": 241.34786,
-          "poolSymbol": "MSUSD-USDC"
-        }
-      ],
-      "lastSeen": "2026-10-26T22:55:02.567Z",
-      "lastFlaggedAt": "2026-10-26T22:55:02.567Z",
-      "lastPrice": 0.8768,
+      "firstSeen": "2026-10-26T23:00:28.570Z",
+      "firstPrice": 0.8767,
+      "cyclesFlagged": 1,
+      "relatedEvents": [],
+      "lastSeen": "2026-10-26T23:00:28.570Z",
+      "lastFlaggedAt": "2026-10-26T23:00:28.570Z",
+      "lastPrice": 0.8767,
       "lastOffPegPct": -12.3,
-      "worstPrice": 0.8759,
-      "worstOffPegPct": -12.4,
-      "lastBlock": "53132978",
+      "worstPrice": 0.8767,
+      "worstOffPegPct": -12.3,
+      "lastBlock": "53133141",
       "poolSymbol": "MSUSD-USDC",
       "projectId": "aerodrome-v1",
       "poolId": "9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42",
