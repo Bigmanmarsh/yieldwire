@@ -1,5 +1,5 @@
 {
-  "seq": 1113,
+  "seq": 1116,
   "cooldowns": {
     "APY_JUMP:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1793255026959,
     "TVL_SHIFT:70267deb-6203-537d-b013-c861e063419c": 1793140159283,
@@ -8,7 +8,7 @@
     "APY_JUMP:847c874f-d4e7-47ed-8870-97d2f24a8767": 1793215651351,
     "APY_COLLAPSE:0c8567f8-ba5b-41ad-80de-00a71895eb19": 1793240799788,
     "APY_JUMP:437a4c66-b5a7-416b-853a-565433679627": 1793195923296,
-    "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1793244430107,
+    "APY_JUMP:ba557f7e-f287-45a9-bc37-8f3a24ca05c7": 1793291233521,
     "APY_COLLAPSE:9652fa5a-8b82-4b48-b1b8-5a5d41ddcc42": 1793237169533,
     "TVL_SHIFT:bf346d43-ef94-4277-b159-ebadb93caef1": 1793150758322,
     "APY_COLLAPSE:a7e28f73-d613-4ddf-ab90-756018fdf299": 1793204729024,
@@ -30,7 +30,9 @@
     "APY_COLLAPSE:77da7e88-b7a2-5e66-9fd8-19fd33c7e281": 1793240799788,
     "APY_JUMP:062ba2ef-c132-4989-8e67-0ea2ebd37888": 1793248064350,
     "TVL_SHIFT:c29704a4-3537-459d-bc4d-1f8812f28bcd": 1793258661243,
-    "APY_JUMP:e4f8123d-1e03-408e-869a-76708a62bc89": 1793265806771
+    "APY_JUMP:e4f8123d-1e03-408e-869a-76708a62bc89": 1793265806771,
+    "APY_JUMP:d6037d12-ff22-417b-bdd3-e8954bf27e83": 1793291233521,
+    "APY_JUMP:a71321b4-7873-4472-8146-13a426d51422": 1793291233521
   },
   "lastDigestDate": "2026-10-29",
   "llm": {
@@ -61,10 +63,10 @@
     "lastFactories": 1793263989537
   },
   "xrefStats": {
-    "events": 1113,
-    "corroborated": 841,
+    "events": 1116,
+    "corroborated": 843,
     "deviations": 185,
-    "unverified": 1532
+    "unverified": 1535
   },
   "coinLogos": {
     "GTUSDA": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
