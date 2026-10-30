@@ -1,12 +1,12 @@
 {
   "note": "Token-level findings maintained by the agent from real on-chain cross-checks (src/findings.js). One entry per token ever peg-flagged; preserved even after the token leaves the index. Every number is replayable from the ledger.",
   "generatedBy": null,
-  "updated": "2026-10-30T16:20:40.937Z",
+  "updated": "2026-10-30T16:25:44.165Z",
   "findings": [
     {
       "symbol": "MSUSD",
       "peg": "$1",
-      "status": "flagged",
+      "status": "off-index",
       "firstSeen": "2026-10-27T06:55:10.334Z",
       "firstPrice": 0.8777,
       "cyclesFlagged": 939,
@@ -88,7 +88,9 @@
       "poolAddress": "0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "basescan": "https://basescan.org/address/0xcefc8b799a8ee5d9b312aeca73262645d664aaf7",
       "poolTvl": 513348,
-      "poolApyAtLastFlag": 258.90805
+      "poolApyAtLastFlag": 258.90805,
+      "offIndexAt": "2026-10-30T16:25:44.165Z",
+      "offIndexNote": "No longer in the monitored universe — the data source stopped listing this token. Monitoring ended by the source, not by YieldWire; every past reading stays replayable in the ledger."
     }
   ]
 }
