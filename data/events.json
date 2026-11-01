@@ -1,6 +1,73 @@
 {
   "events": [
     {
+      "type": "APY_COLLAPSE",
+      "poolId": "85934f95-196b-48d8-bba5-1761b4627505",
+      "pool": {
+        "id": "85934f95-196b-48d8-bba5-1761b4627505",
+        "project": "arcadia-v2",
+        "symbol": "USDC",
+        "tvl": 599248,
+        "apy": 7.2458,
+        "apyBase": 7.2458,
+        "apyReward": null,
+        "apyPct1D": -5.31643,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 10.90394,
+        "tvl": 520814
+      },
+      "after": {
+        "apy": 7.2458,
+        "tvl": 599248
+      },
+      "delta": -3.66,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-1159",
+      "ts": "2026-11-01T03:23:17.208Z",
+      "factLine": "USDC (arcadia-v2) on Base: APY moved from 10.90394% to 7.2458% (-3.66 percentage points). TVL $599.2K. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-11-01T03:23:17.208Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-11-01T03-23-17.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $599,248",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-11-01T03:23:17.208Z"
+      }
+    },
+    {
       "type": "TVL_SHIFT",
       "poolId": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
       "pool": {
@@ -42588,72 +42655,6 @@
           }
         ],
         "checkedAt": "2026-10-01T12:23:40.708Z"
-      }
-    },
-    {
-      "type": "TVL_SHIFT",
-      "poolId": "b39b492a-0a64-4926-8598-d5acf05d62b5",
-      "pool": {
-        "id": "b39b492a-0a64-4926-8598-d5acf05d62b5",
-        "project": "morpho-blue",
-        "symbol": "MWUSDC",
-        "tvl": 3930054,
-        "apy": 4.08409,
-        "apyBase": 3.92703,
-        "apyReward": 0.15706,
-        "apyPct1D": 0.02702,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "tvl": 5404085,
-        "ts": 1790769505866
-      },
-      "after": {
-        "tvl": 3930054
-      },
-      "delta": -27.28,
-      "trigger": "TVL moved ≥ 25% vs ~24h ago",
-      "id": "EVT-0659",
-      "ts": "2026-10-01T11:33:09.080Z",
-      "factLine": "MWUSDC (morpho-blue) on Base: TVL moved from $5.4M to $3.9M (-27.28% vs ~24h ago). APY is 4.08409%. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-10-01T11:33:09.080Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-10-01T11-33-09.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $3,930,054",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-10-01T11:33:09.080Z"
       }
     }
   ]
