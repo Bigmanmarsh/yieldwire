@@ -1,6 +1,72 @@
 {
   "events": [
     {
+      "type": "TVL_SHIFT",
+      "poolId": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
+      "pool": {
+        "id": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
+        "project": "morpho-blue",
+        "symbol": "GTUSDCP",
+        "tvl": 108915353,
+        "apy": 5.82316,
+        "apyBase": 5.82316,
+        "apyReward": 0,
+        "apyPct1D": -0.48248,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "tvl": 87011123,
+        "ts": 1793537989072
+      },
+      "after": {
+        "tvl": 108915353
+      },
+      "delta": 25.17,
+      "trigger": "TVL moved ≥ 25% vs ~24h ago",
+      "id": "EVT-1163",
+      "ts": "2026-11-01T19:26:18.662Z",
+      "factLine": "GTUSDCP (morpho-blue) on Base: TVL moved from $87.0M to $108.9M (+25.17% vs ~24h ago). APY is 5.82316%. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-11-01T19:26:18.662Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-11-01T19-26-18.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $108,915,353",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-11-01T19:26:18.662Z"
+      }
+    },
+    {
       "type": "APY_COLLAPSE",
       "poolId": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
       "pool": {
@@ -42560,72 +42626,6 @@
           }
         ],
         "checkedAt": "2026-10-01T19:23:32.275Z"
-      }
-    },
-    {
-      "type": "TVL_SHIFT",
-      "poolId": "fad7bc2b-3ac7-5554-bfd1-52cb1b2d4bcb",
-      "pool": {
-        "id": "fad7bc2b-3ac7-5554-bfd1-52cb1b2d4bcb",
-        "project": "morpho-blue",
-        "symbol": "SAVUSD",
-        "tvl": 2825257,
-        "apy": 2.42928,
-        "apyBase": 0,
-        "apyReward": 2.42928,
-        "apyPct1D": 1.32182,
-        "underlyingTokens": [
-          "0xa6EF20FE18CD529cA15A8a53A29D1832B1F848ff"
-        ]
-      },
-      "before": {
-        "tvl": 991444,
-        "ts": 1790847111828
-      },
-      "after": {
-        "tvl": 2825257
-      },
-      "delta": 184.96,
-      "trigger": "TVL moved ≥ 25% vs ~24h ago",
-      "id": "EVT-0663",
-      "ts": "2026-10-01T19:18:28.429Z",
-      "factLine": "SAVUSD (morpho-blue) on Base: TVL moved from $991.4K to $2.8M (+184.96% vs ~24h ago). APY is 2.42928%. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-10-01T19:18:28.429Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-10-01T19-18-28.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $2,825,257",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-10-01T19:18:28.429Z"
       }
     }
   ]
