@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
+      "pool": {
+        "id": "7372edda-f07f-4598-83e5-4edec48c4039",
+        "project": "fluid-lending",
+        "symbol": "USDC",
+        "tvl": 5779910,
+        "apy": 5.34,
+        "apyBase": 5.34,
+        "apyReward": null,
+        "apyPct1D": -0.4,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 8.21,
+        "tvl": 5457751
+      },
+      "after": {
+        "apy": 5.34,
+        "tvl": 5779910
+      },
+      "delta": -2.87,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-1324",
+      "ts": "2026-11-20T07:23:24.133Z",
+      "factLine": "USDC (fluid-lending) on Base: APY moved from 8.21% to 5.34% (-2.87 percentage points). TVL $5.8M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-11-20T07:23:24.133Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-11-20T07-23-24.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $5,779,910",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-11-20T07:23:24.133Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "27de63d4-e52c-414f-a0e9-fbba61216398",
       "pool": {
         "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
@@ -39835,73 +39902,6 @@
           {
             "id": "TVL",
             "claim": "TVL $1,804,868",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-10-12T10:25:41.959Z"
-      }
-    },
-    {
-      "type": "APY_COLLAPSE",
-      "poolId": "724759e3-48d8-4ff6-ba11-505694cc2303",
-      "pool": {
-        "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
-        "project": "fusion-by-ipor",
-        "symbol": "USDC",
-        "tvl": 1044001,
-        "apy": 6.51179,
-        "apyBase": 4.07187,
-        "apyReward": 2.43992,
-        "apyPct1D": 0.42701,
-        "underlyingTokens": [
-          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
-        ]
-      },
-      "before": {
-        "apy": 8.55747,
-        "tvl": 1048624
-      },
-      "after": {
-        "apy": 6.51179,
-        "tvl": 1044001
-      },
-      "delta": -2.05,
-      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0825",
-      "ts": "2026-10-12T10:25:41.959Z",
-      "factLine": "USDC (fusion-by-ipor) on Base: APY moved from 8.55747% to 6.51179% (-2.05 percentage points). TVL $1.0M. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-10-12T10:25:41.959Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-10-12T10-25-41.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $1,044,001",
             "verdict": "UNVERIFIED",
             "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
             "via": "awaiting on-chain cross-check",
