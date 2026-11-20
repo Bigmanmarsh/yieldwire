@@ -2,6 +2,73 @@
   "events": [
     {
       "type": "APY_COLLAPSE",
+      "poolId": "7372edda-f07f-4598-83e5-4edec48c4039",
+      "pool": {
+        "id": "7372edda-f07f-4598-83e5-4edec48c4039",
+        "project": "fluid-lending",
+        "symbol": "USDC",
+        "tvl": 6174533,
+        "apy": 3.63,
+        "apyBase": 3.63,
+        "apyReward": null,
+        "apyPct1D": -4.41,
+        "underlyingTokens": [
+          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        ]
+      },
+      "before": {
+        "apy": 5.97,
+        "tvl": 5620286
+      },
+      "after": {
+        "apy": 3.63,
+        "tvl": 6174533
+      },
+      "delta": -2.34,
+      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
+      "id": "EVT-1329",
+      "ts": "2026-11-20T19:26:34.295Z",
+      "factLine": "USDC (fluid-lending) on Base: APY moved from 5.97% to 3.63% (-2.34 percentage points). TVL $6.2M. Source: DeFiLlama yields endpoint.",
+      "source": {
+        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
+        "fields": [
+          "pool (id)",
+          "chain",
+          "project",
+          "symbol",
+          "stablecoin",
+          "tvlUsd",
+          "underlyingTokens",
+          "apy",
+          "apyBase",
+          "apyReward",
+          "apyPct1D"
+        ],
+        "fetchedAt": "2026-11-20T19:26:34.295Z"
+      },
+      "summary": {
+        "text": null,
+        "source": "keyless — no LLM configured"
+      },
+      "rawFile": "raw-base-stable-2026-11-20T19-26-34.json",
+      "crosscheckEntry": null,
+      "crossRef": {
+        "claims": [
+          {
+            "id": "TVL",
+            "claim": "TVL $6,174,533",
+            "verdict": "UNVERIFIED",
+            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
+            "via": "awaiting on-chain cross-check",
+            "link": null
+          }
+        ],
+        "sources": [],
+        "checkedAt": "2026-11-20T19:26:34.295Z"
+      }
+    },
+    {
+      "type": "APY_COLLAPSE",
       "poolId": "27de63d4-e52c-414f-a0e9-fbba61216398",
       "pool": {
         "id": "27de63d4-e52c-414f-a0e9-fbba61216398",
@@ -39777,73 +39844,6 @@
           }
         ],
         "checkedAt": "2026-10-12T17:02:33.708Z"
-      }
-    },
-    {
-      "type": "APY_COLLAPSE",
-      "poolId": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
-      "pool": {
-        "id": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
-        "project": "beefy",
-        "symbol": "USDC",
-        "tvl": 1804804,
-        "apy": 5.91755,
-        "apyBase": null,
-        "apyReward": null,
-        "apyPct1D": 1.06054,
-        "underlyingTokens": [
-          "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-        ]
-      },
-      "before": {
-        "apy": 11.4687,
-        "tvl": 1804868
-      },
-      "after": {
-        "apy": 5.91755,
-        "tvl": 1804804
-      },
-      "delta": -5.55,
-      "trigger": "APY fell ≥ 2 percentage points between consecutive scans",
-      "id": "EVT-0827",
-      "ts": "2026-10-12T12:27:16.388Z",
-      "factLine": "USDC (beefy) on Base: APY moved from 11.4687% to 5.91755% (-5.55 percentage points). TVL $1.8M. Source: DeFiLlama yields endpoint.",
-      "source": {
-        "endpoint": "DeFiLlama /yields → GET https://yields.llama.fi/pools",
-        "fields": [
-          "pool (id)",
-          "chain",
-          "project",
-          "symbol",
-          "stablecoin",
-          "tvlUsd",
-          "underlyingTokens",
-          "apy",
-          "apyBase",
-          "apyReward",
-          "apyPct1D"
-        ],
-        "fetchedAt": "2026-10-12T12:27:16.388Z"
-      },
-      "summary": {
-        "text": null,
-        "source": "keyless — no LLM configured"
-      },
-      "rawFile": "raw-base-stable-2026-10-12T12-27-16.json",
-      "crosscheckEntry": null,
-      "crossRef": {
-        "claims": [
-          {
-            "id": "TVL",
-            "claim": "TVL $1,804,804",
-            "verdict": "UNVERIFIED",
-            "detail": "on-chain cross-check unavailable this run (pool not in this run's checked set)",
-            "via": "awaiting on-chain cross-check",
-            "link": null
-          }
-        ],
-        "sources": [],
-        "checkedAt": "2026-10-12T12:27:16.388Z"
       }
     }
   ]
