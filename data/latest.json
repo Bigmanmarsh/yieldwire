@@ -1,7 +1,7 @@
 {
-  "ts": "2026-11-23T23:17:37.459Z",
+  "ts": "2026-11-23T23:22:40.177Z",
   "run": "509",
-  "cycle": 20,
+  "cycle": 21,
   "thresholds": {
     "chain": "Base",
     "tvlFloor": 500000,
@@ -18,21 +18,23 @@
       "id": "ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e",
       "project": "veranta",
       "symbol": "USDC",
-      "tvl": 9411786,
-      "apy": 30.26908,
-      "apyBase": 30.26908,
+      "tvl": 9411969,
+      "apy": 30.26841,
+      "apyBase": 30.26841,
       "apyReward": null,
-      "apyPct1D": -2.31995,
+      "apyPct1D": -2.32201,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          30.26908
+          30.26908,
+          30.26841
         ],
         "tvl": [
-          9411786
+          9411786,
+          9411969
         ]
       }
     },
@@ -51,9 +53,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          27.54,
           27.54
         ],
         "tvl": [
+          1710252,
           1710252
         ]
       }
@@ -62,21 +66,23 @@
       "id": "d511efb8-f61b-43ce-bb1e-dffc6a57727f",
       "project": "gains-network",
       "symbol": "USDC",
-      "tvl": 584181,
-      "apy": 16.26578,
-      "apyBase": 16.26578,
+      "tvl": 584186,
+      "apy": 16.26471,
+      "apyBase": 16.26471,
       "apyReward": null,
-      "apyPct1D": 5.64838,
+      "apyPct1D": 5.76689,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          16.26578
+          16.26578,
+          16.26471
         ],
         "tvl": [
-          584181
+          584181,
+          584186
         ]
       }
     },
@@ -84,10 +90,10 @@
       "id": "ca125e22-b9c3-5422-b8e2-49e104121f77",
       "project": "morpho-blue",
       "symbol": "RE7VENICEUSDC",
-      "tvl": 2893089,
+      "tvl": 2893148,
       "apy": 13.76722,
-      "apyBase": 3.86234,
-      "apyReward": 9.90489,
+      "apyBase": 4.1765,
+      "apyReward": 9.59072,
       "apyPct1D": -0.77851,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -95,6 +101,7 @@
       "logo": null,
       "hist": {
         "apy": [
+          13.76722,
           13.76722,
           13.76722,
           13.76722,
@@ -114,7 +121,8 @@
           2893089,
           2893089,
           2893089,
-          2893089
+          2893089,
+          2893148
         ]
       }
     },
@@ -122,21 +130,23 @@
       "id": "d9eab20a-2251-4186-a2bb-f1adb8258538",
       "project": "yieldseeker",
       "symbol": "USDC",
-      "tvl": 748599,
-      "apy": 9.76412,
-      "apyBase": 9.76412,
+      "tvl": 748603,
+      "apy": 9.76413,
+      "apyBase": 9.76413,
       "apyReward": null,
-      "apyPct1D": -0.35094,
+      "apyPct1D": -0.35093,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          9.76412
+          9.76412,
+          9.76413
         ],
         "tvl": [
-          748599
+          748599,
+          748603
         ]
       }
     },
@@ -144,10 +154,10 @@
       "id": "89c36167-17ae-571a-8adf-fca819b3a600",
       "project": "morpho-blue",
       "symbol": "NOONECOUSDC",
-      "tvl": 3942972,
+      "tvl": 3959652,
       "apy": 9.53389,
-      "apyBase": 5.2143,
-      "apyReward": 4.31959,
+      "apyBase": 5.20512,
+      "apyReward": 4.32877,
       "apyPct1D": -0.20381,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -155,10 +165,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          9.53389,
           9.53389
         ],
         "tvl": [
-          3942972
+          3942972,
+          3959652
         ]
       }
     },
@@ -166,7 +178,7 @@
       "id": "437a4c66-b5a7-416b-853a-565433679627",
       "project": "zircuit-finance",
       "symbol": "ZVUSDC",
-      "tvl": 1421326,
+      "tvl": 1421331,
       "apy": 9.33616,
       "apyBase": 9.33616,
       "apyReward": null,
@@ -177,10 +189,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          9.33616,
           9.33616
         ],
         "tvl": [
-          1421326
+          1421326,
+          1421331
         ]
       }
     },
@@ -188,7 +202,7 @@
       "id": "79788d49-3f2f-4dd3-ac58-50c191486b6f",
       "project": "zerobase-cedefi",
       "symbol": "USDC",
-      "tvl": 10520731,
+      "tvl": 10520822,
       "apy": 9,
       "apyBase": 7,
       "apyReward": 2,
@@ -199,10 +213,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          9,
           9
         ],
         "tvl": [
-          10520731
+          10520731,
+          10520822
         ]
       }
     },
@@ -221,9 +237,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          8.87873,
           8.87873
         ],
         "tvl": [
+          2845163,
           2845163
         ]
       }
@@ -232,21 +250,23 @@
       "id": "a7e28f73-d613-4ddf-ab90-756018fdf299",
       "project": "superform",
       "symbol": "SUPERUSDC",
-      "tvl": 1266395,
-      "apy": 8.64415,
-      "apyBase": 5.69483,
-      "apyReward": 2.94932,
-      "apyPct1D": -0.21687,
+      "tvl": 1265835,
+      "apy": 8.65105,
+      "apyBase": 5.66286,
+      "apyReward": 2.98819,
+      "apyPct1D": -0.2125,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
       "logo": null,
       "hist": {
         "apy": [
-          8.64415
+          8.64415,
+          8.65105
         ],
         "tvl": [
-          1266395
+          1266395,
+          1265835
         ]
       }
     },
@@ -265,9 +285,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          7.48,
           7.48
         ],
         "tvl": [
+          103284814,
           103284814
         ]
       }
@@ -287,9 +309,11 @@
       "logo": null,
       "hist": {
         "apy": [
+          7.41541,
           7.41541
         ],
         "tvl": [
+          648050,
           648050
         ]
       }
@@ -298,7 +322,7 @@
       "id": "097b18e2-9232-4c44-bd2e-502de4ba889e",
       "project": "morpho-blue",
       "symbol": "CSCBUSDC",
-      "tvl": 25960982,
+      "tvl": 25951682,
       "apy": 6.07399,
       "apyBase": 4.67399,
       "apyReward": 1.4,
@@ -309,10 +333,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          6.07399,
           6.07399
         ],
         "tvl": [
-          25960982
+          25960982,
+          25951682
         ]
       }
     },
@@ -320,21 +346,23 @@
       "id": "fd57ccf3-c573-57a3-9947-bdc05c4d3d1d",
       "project": "aave-v4",
       "symbol": "USDC",
-      "tvl": 1577730,
-      "apy": 5.84782,
-      "apyBase": 2.81419,
-      "apyReward": 3.03363,
-      "apyPct1D": 0.70477,
+      "tvl": 1577704,
+      "apy": 5.83877,
+      "apyBase": 2.8142,
+      "apyReward": 3.02457,
+      "apyPct1D": 0.69558,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          5.84782
+          5.84782,
+          5.83877
         ],
         "tvl": [
-          1577730
+          1577730,
+          1577704
         ]
       }
     },
@@ -342,21 +370,23 @@
       "id": "c043062f-fcd6-47aa-b063-70691dc25c1c",
       "project": "gauntlet",
       "symbol": "GTUSDA",
-      "tvl": 35208988,
-      "apy": 5.51421,
-      "apyBase": 5.51421,
+      "tvl": 35208647,
+      "apy": 5.51311,
+      "apyBase": 5.51311,
       "apyReward": null,
-      "apyPct1D": 0.04856,
+      "apyPct1D": 0.0419,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/102171863/large/gtUSDa.png?1770138785",
       "hist": {
         "apy": [
-          5.51421
+          5.51421,
+          5.51311
         ],
         "tvl": [
-          35208988
+          35208988,
+          35208647
         ]
       }
     },
@@ -364,7 +394,7 @@
       "id": "92a97f48-005e-4819-a838-f442ea92c401",
       "project": "morpho-blue",
       "symbol": "GTUSDCF",
-      "tvl": 4773398,
+      "tvl": 4771042,
       "apy": 5.18057,
       "apyBase": 5.18057,
       "apyReward": 0,
@@ -375,10 +405,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          5.18057,
           5.18057
         ],
         "tvl": [
-          4773398
+          4773398,
+          4771042
         ]
       }
     },
@@ -386,7 +418,7 @@
       "id": "2d3b68a8-33d3-47e0-a4c0-0bafef4b01d5",
       "project": "morpho-blue",
       "symbol": "USDE",
-      "tvl": 62985070,
+      "tvl": 62996355,
       "apy": 5,
       "apyBase": 0,
       "apyReward": 5,
@@ -397,10 +429,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/33613/small/usde.png?1733810059",
       "hist": {
         "apy": [
+          5,
           5
         ],
         "tvl": [
-          62985070
+          62985070,
+          62996355
         ]
       }
     },
@@ -408,21 +442,47 @@
       "id": "ea721c71-9a61-481d-aa52-b0198f325c66",
       "project": "yearn-finance",
       "symbol": "USDC",
-      "tvl": 2117028,
-      "apy": 4.96682,
-      "apyBase": 4.96682,
+      "tvl": 2117263,
+      "apy": 4.97029,
+      "apyBase": 4.97029,
       "apyReward": null,
-      "apyPct1D": -0.11282,
+      "apyPct1D": -0.10671,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          4.96682
+          4.96682,
+          4.97029
         ],
         "tvl": [
-          2117028
+          2117028,
+          2117263
+        ]
+      }
+    },
+    {
+      "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
+      "project": "ipor-fusion",
+      "symbol": "USDC",
+      "tvl": 1281073,
+      "apy": 4.94315,
+      "apyBase": 4.94315,
+      "apyReward": 0,
+      "apyPct1D": -0.26597,
+      "underlyingTokens": [
+        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          4.82548,
+          4.94315
+        ],
+        "tvl": [
+          1281067,
+          1281073
         ]
       }
     },
@@ -430,7 +490,7 @@
       "id": "832c94db-4948-4f14-aa65-af6e737d984e",
       "project": "morpho-blue",
       "symbol": "BBQUSDC",
-      "tvl": 19727078,
+      "tvl": 19723971,
       "apy": 4.85278,
       "apyBase": 4.85278,
       "apyReward": 0,
@@ -441,32 +501,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/102179956/large/false.png?1793467958",
       "hist": {
         "apy": [
+          4.85278,
           4.85278
         ],
         "tvl": [
-          19727078
-        ]
-      }
-    },
-    {
-      "id": "4a2520ad-65ca-57fc-af80-f705c031e523",
-      "project": "ipor-fusion",
-      "symbol": "USDC",
-      "tvl": 1281067,
-      "apy": 4.82548,
-      "apyBase": 4.82548,
-      "apyReward": 0,
-      "apyPct1D": -0.35577,
-      "underlyingTokens": [
-        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          4.82548
-        ],
-        "tvl": [
-          1281067
+          19727078,
+          19723971
         ]
       }
     },
@@ -474,43 +514,23 @@
       "id": "7372edda-f07f-4598-83e5-4edec48c4039",
       "project": "fluid-lending",
       "symbol": "USDC",
-      "tvl": 5865579,
+      "tvl": 5865381,
       "apy": 4.77,
       "apyBase": 4.77,
       "apyReward": null,
-      "apyPct1D": -0.15,
+      "apyPct1D": 0.35,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.77,
           4.77
         ],
         "tvl": [
-          5865579
-        ]
-      }
-    },
-    {
-      "id": "38f24550-a071-447c-8083-d376edaba156",
-      "project": "yearn-finance",
-      "symbol": "USDC",
-      "tvl": 737813,
-      "apy": 4.65616,
-      "apyBase": 4.65616,
-      "apyReward": null,
-      "apyPct1D": -0.11588,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          4.65616
-        ],
-        "tvl": [
-          737813
+          5865579,
+          5865381
         ]
       }
     },
@@ -518,21 +538,47 @@
       "id": "7e0661bf-8cf3-45e6-9424-31916d4c7b84",
       "project": "aave-v3",
       "symbol": "USDC",
-      "tvl": 13431187,
-      "apy": 4.62457,
-      "apyBase": 4.62457,
+      "tvl": 13215126,
+      "apy": 4.75355,
+      "apyBase": 4.75355,
       "apyReward": null,
-      "apyPct1D": -0.39541,
+      "apyPct1D": -0.25034,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          4.62457
+          4.62457,
+          4.75355
         ],
         "tvl": [
-          13431187
+          13431187,
+          13215126
+        ]
+      }
+    },
+    {
+      "id": "38f24550-a071-447c-8083-d376edaba156",
+      "project": "yearn-finance",
+      "symbol": "USDC",
+      "tvl": 737895,
+      "apy": 4.65113,
+      "apyBase": 4.65113,
+      "apyReward": null,
+      "apyPct1D": -0.12089,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          4.65616,
+          4.65113
+        ],
+        "tvl": [
+          737813,
+          737895
         ]
       }
     },
@@ -540,7 +586,7 @@
       "id": "3c9e2fb0-6bf6-53aa-9ff6-d78ff4d044a1",
       "project": "morpho-blue",
       "symbol": "BITUSDCP",
-      "tvl": 2305072,
+      "tvl": 2305125,
       "apy": 4.53855,
       "apyBase": 4.03855,
       "apyReward": 0.5,
@@ -551,10 +597,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          4.53855,
           4.53855
         ],
         "tvl": [
-          2305072
+          2305072,
+          2305125
         ]
       }
     },
@@ -562,21 +610,23 @@
       "id": "8276be38-acc6-4005-ab0d-62680f49f4df",
       "project": "morpho-blue",
       "symbol": "SIRLOINUSDC",
-      "tvl": 440175860,
+      "tvl": 439754708,
       "apy": 4.49211,
       "apyBase": 3.26447,
       "apyReward": 1.22764,
-      "apyPct1D": -0.2016,
+      "apyPct1D": -0.20147,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": null,
       "hist": {
         "apy": [
+          4.49211,
           4.49211
         ],
         "tvl": [
-          440175860
+          440175860,
+          439754708
         ]
       }
     },
@@ -584,7 +634,7 @@
       "id": "a71321b4-7873-4472-8146-13a426d51422",
       "project": "gami-labs",
       "symbol": "USDC",
-      "tvl": 3044268,
+      "tvl": 3044166,
       "apy": 4.45479,
       "apyBase": 4.45479,
       "apyReward": 0,
@@ -595,10 +645,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.45479,
           4.45479
         ],
         "tvl": [
-          3044268
+          3044268,
+          3044166
         ]
       }
     },
@@ -606,7 +658,7 @@
       "id": "d6037d12-ff22-417b-bdd3-e8954bf27e83",
       "project": "spectra-metavaults",
       "symbol": "USDC",
-      "tvl": 3044268,
+      "tvl": 3044166,
       "apy": 4.45479,
       "apyBase": 4.45479,
       "apyReward": 0,
@@ -617,10 +669,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.45479,
           4.45479
         ],
         "tvl": [
-          3044268
+          3044268,
+          3044166
         ]
       }
     },
@@ -639,9 +693,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.45,
           4.45
         ],
         "tvl": [
+          574590,
           574590
         ]
       }
@@ -650,43 +706,23 @@
       "id": "bf346d43-ef94-4277-b159-ebadb93caef1",
       "project": "morpho-blue",
       "symbol": "BBQUSDC",
-      "tvl": 749594,
-      "apy": 4.39848,
-      "apyBase": 4.39848,
+      "tvl": 749612,
+      "apy": 4.43861,
+      "apyBase": 4.43861,
       "apyReward": 0,
-      "apyPct1D": -0.54123,
+      "apyPct1D": -0.45809,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/102179956/large/false.png?1793467958",
       "hist": {
         "apy": [
-          4.39848
+          4.39848,
+          4.43861
         ],
         "tvl": [
-          749594
-        ]
-      }
-    },
-    {
-      "id": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
-      "project": "beefy",
-      "symbol": "USDC",
-      "tvl": 1316884,
-      "apy": 4.32621,
-      "apyBase": null,
-      "apyReward": null,
-      "apyPct1D": -0.05701,
-      "underlyingTokens": [
-        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          4.32621
-        ],
-        "tvl": [
-          1316884
+          749594,
+          749612
         ]
       }
     },
@@ -694,7 +730,7 @@
       "id": "82469f6f-951d-4578-b47e-fb4df326f059",
       "project": "centrifuge-protocol",
       "symbol": "USDC",
-      "tvl": 22871362,
+      "tvl": 22871560,
       "apy": 4.32545,
       "apyBase": 4.32545,
       "apyReward": null,
@@ -705,10 +741,36 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.32545,
           4.32545
         ],
         "tvl": [
-          22871362
+          22871362,
+          22871560
+        ]
+      }
+    },
+    {
+      "id": "2f6ff86c-3d82-4cd9-8e7d-bc3eb3471493",
+      "project": "beefy",
+      "symbol": "USDC",
+      "tvl": 1316884,
+      "apy": 4.31685,
+      "apyBase": null,
+      "apyReward": null,
+      "apyPct1D": -0.06637,
+      "underlyingTokens": [
+        "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          4.32621,
+          4.31685
+        ],
+        "tvl": [
+          1316884,
+          1316884
         ]
       }
     },
@@ -727,9 +789,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          4.31,
           4.31
         ],
         "tvl": [
+          705633,
           705633
         ]
       }
@@ -738,7 +802,7 @@
       "id": "66471469-2dc4-4223-b867-ca780fe7457d",
       "project": "morpho-blue",
       "symbol": "MPUSDC",
-      "tvl": 610660,
+      "tvl": 610674,
       "apy": 4.26567,
       "apyBase": 4.26567,
       "apyReward": 0,
@@ -749,10 +813,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          4.26567,
           4.26567
         ],
         "tvl": [
-          610660
+          610660,
+          610674
         ]
       }
     },
@@ -760,7 +826,7 @@
       "id": "96ef2230-b5fc-47d7-bbb3-847816e1c15b",
       "project": "morpho-blue",
       "symbol": "GUSDCQ",
-      "tvl": 2041896,
+      "tvl": 2041812,
       "apy": 4.2546,
       "apyBase": 4.2546,
       "apyReward": 0,
@@ -771,10 +837,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          4.2546,
           4.2546
         ],
         "tvl": [
-          2041896
+          2041896,
+          2041812
         ]
       }
     },
@@ -782,7 +850,7 @@
       "id": "ba68527f-8ec2-4c55-827a-8f4673ae047c",
       "project": "morpho-blue",
       "symbol": "STEAKUSDC",
-      "tvl": 200508345,
+      "tvl": 200515713,
       "apy": 4.25398,
       "apyBase": 4.25398,
       "apyReward": 0,
@@ -793,10 +861,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
       "hist": {
         "apy": [
+          4.25398,
           4.25398
         ],
         "tvl": [
-          200508345
+          200508345,
+          200515713
         ]
       }
     },
@@ -804,7 +874,7 @@
       "id": "df7ccfd1-2642-4d79-851a-a5b07d9b8a97",
       "project": "morpho-blue",
       "symbol": "GTUSDCP",
-      "tvl": 288963653,
+      "tvl": 288933401,
       "apy": 4.25396,
       "apyBase": 4.25396,
       "apyReward": 0,
@@ -815,10 +885,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
       "hist": {
         "apy": [
+          4.25396,
           4.25396
         ],
         "tvl": [
-          288963653
+          288963653,
+          288933401
         ]
       }
     },
@@ -826,7 +898,7 @@
       "id": "10fadc11-509a-513e-834c-138f893e7f83",
       "project": "morpho-blue",
       "symbol": "SOUSDC",
-      "tvl": 3540142,
+      "tvl": 3540225,
       "apy": 4.25396,
       "apyBase": 4.25396,
       "apyReward": 0,
@@ -837,10 +909,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          4.25396,
           4.25396
         ],
         "tvl": [
-          3540142
+          3540142,
+          3540225
         ]
       }
     },
@@ -848,21 +922,23 @@
       "id": "e0672197-9f3e-4414-bca5-e6b4c90aa469",
       "project": "morpho-blue",
       "symbol": "GTUSDCP",
-      "tvl": 396123651,
-      "apy": 4.24757,
-      "apyBase": 4.24757,
+      "tvl": 396156086,
+      "apy": 4.24131,
+      "apyBase": 4.24131,
       "apyReward": 0,
-      "apyPct1D": -0.04708,
+      "apyPct1D": -0.04345,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/71233/large/gauntlet.png?1766513225",
       "hist": {
         "apy": [
-          4.24757
+          4.24757,
+          4.24131
         ],
         "tvl": [
-          396123651
+          396123651,
+          396156086
         ]
       }
     },
@@ -870,21 +946,47 @@
       "id": "4aa0a5d8-860a-4ca2-af92-69c99c6d98f2",
       "project": "yearn-finance",
       "symbol": "USDC",
-      "tvl": 1298687,
-      "apy": 4.20919,
-      "apyBase": 4.20919,
+      "tvl": 1298831,
+      "apy": 4.20917,
+      "apyBase": 4.20917,
       "apyReward": null,
-      "apyPct1D": -0.07826,
+      "apyPct1D": -0.07827,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          4.20919
+          4.20919,
+          4.20917
         ],
         "tvl": [
-          1298687
+          1298687,
+          1298831
+        ]
+      }
+    },
+    {
+      "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
+      "project": "ipor-fusion",
+      "symbol": "USDC",
+      "tvl": 705824,
+      "apy": 4.04984,
+      "apyBase": 4.04984,
+      "apyReward": 0,
+      "apyPct1D": -0.25796,
+      "underlyingTokens": [
+        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+      ],
+      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
+      "hist": {
+        "apy": [
+          3.95796,
+          4.04984
+        ],
+        "tvl": [
+          705824,
+          705824
         ]
       }
     },
@@ -892,7 +994,7 @@
       "id": "47548a32-63c2-4485-b348-eac2cc3a587f",
       "project": "morpho-blue",
       "symbol": "RE7USDC",
-      "tvl": 1251848,
+      "tvl": 1251877,
       "apy": 4.03715,
       "apyBase": 4.03715,
       "apyReward": 0,
@@ -903,10 +1005,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/51506/large/pngtree-usd-coin-usdc-digital-stablecoin-icon-technology-pay-web-vector-png-image_37843734.png?1731434195",
       "hist": {
         "apy": [
+          4.03715,
           4.03715
         ],
         "tvl": [
-          1251848
+          1251848,
+          1251877
         ]
       }
     },
@@ -914,7 +1018,7 @@
       "id": "15a4bbe2-d1fa-4dce-a780-27faeb859bd7",
       "project": "morpho-blue",
       "symbol": "ARCHGV1USDC",
-      "tvl": 1266089,
+      "tvl": 1266118,
       "apy": 4.0368,
       "apyBase": 4.0368,
       "apyReward": 0,
@@ -925,10 +1029,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          4.0368,
           4.0368
         ],
         "tvl": [
-          1266089
+          1266089,
+          1266118
         ]
       }
     },
@@ -936,21 +1042,23 @@
       "id": "7820bd3c-461a-4811-9f0b-1d39c1503c3f",
       "project": "morpho-blue",
       "symbol": "STEAKUSDC",
-      "tvl": 11515920,
-      "apy": 4.03191,
-      "apyBase": 4.03191,
+      "tvl": 11528263,
+      "apy": 4.02655,
+      "apyBase": 4.02655,
       "apyReward": 0,
-      "apyPct1D": -0.04249,
+      "apyPct1D": -0.04694,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
       "hist": {
         "apy": [
-          4.03191
+          4.03191,
+          4.02655
         ],
         "tvl": [
-          11515920
+          11515920,
+          11528263
         ]
       }
     },
@@ -958,7 +1066,7 @@
       "id": "cca340f1-03e7-5097-8d7c-f07def190cc2",
       "project": "morpho-blue",
       "symbol": "K3USDC",
-      "tvl": 2020998,
+      "tvl": 2021046,
       "apy": 3.97823,
       "apyBase": 3.97823,
       "apyReward": 0,
@@ -969,32 +1077,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          3.97823,
           3.97823
         ],
         "tvl": [
-          2020998
-        ]
-      }
-    },
-    {
-      "id": "724759e3-48d8-4ff6-ba11-505694cc2303",
-      "project": "ipor-fusion",
-      "symbol": "USDC",
-      "tvl": 705824,
-      "apy": 3.95796,
-      "apyBase": 3.95796,
-      "apyReward": 0,
-      "apyPct1D": -0.33528,
-      "underlyingTokens": [
-        "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
-      ],
-      "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
-      "hist": {
-        "apy": [
-          3.95796
-        ],
-        "tvl": [
-          705824
+          2020998,
+          2021046
         ]
       }
     },
@@ -1002,21 +1090,23 @@
       "id": "65653183-7d69-408f-a76c-9dd2914f306f",
       "project": "morpho-blue",
       "symbol": "GTUSDCC",
-      "tvl": 1550936,
-      "apy": 3.95418,
-      "apyBase": 3.95418,
+      "tvl": 1550969,
+      "apy": 3.95278,
+      "apyBase": 3.95278,
       "apyReward": 0,
-      "apyPct1D": -0.02113,
+      "apyPct1D": -0.01272,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": null,
       "hist": {
         "apy": [
-          3.95418
+          3.95418,
+          3.95278
         ],
         "tvl": [
-          1550936
+          1550936,
+          1550969
         ]
       }
     },
@@ -1024,7 +1114,7 @@
       "id": "3e7c5e93-b741-573d-b699-22d823038e61",
       "project": "centrifuge-protocol",
       "symbol": "USDC",
-      "tvl": 4625040,
+      "tvl": 4625080,
       "apy": 3.92951,
       "apyBase": 3.92951,
       "apyReward": null,
@@ -1035,10 +1125,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          3.92951,
           3.92951
         ],
         "tvl": [
-          4625040
+          4625040,
+          4625080
         ]
       }
     },
@@ -1046,21 +1138,23 @@
       "id": "a5fab52f-73fa-4f44-9c09-9af1eb20996c",
       "project": "morpho-blue",
       "symbol": "SPARKUSDC",
-      "tvl": 3574707,
-      "apy": 3.81605,
-      "apyBase": 3.81605,
+      "tvl": 3574488,
+      "apy": 3.8107,
+      "apyBase": 3.8107,
       "apyReward": 0,
-      "apyPct1D": -0.04865,
+      "apyPct1D": -0.04525,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": null,
       "hist": {
         "apy": [
-          3.81605
+          3.81605,
+          3.8107
         ],
         "tvl": [
-          3574707
+          3574707,
+          3574488
         ]
       }
     },
@@ -1068,21 +1162,23 @@
       "id": "c1949c46-0c01-445f-8017-b3192d9913bc",
       "project": "morpho-blue",
       "symbol": "PUSDC",
-      "tvl": 6887491,
-      "apy": 3.81472,
-      "apyBase": 3.81472,
+      "tvl": 6887639,
+      "apy": 3.80911,
+      "apyBase": 3.80911,
       "apyReward": 0,
-      "apyPct1D": -0.04208,
+      "apyPct1D": -0.0469,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": null,
       "hist": {
         "apy": [
-          3.81472
+          3.81472,
+          3.80911
         ],
         "tvl": [
-          6887491
+          6887491,
+          6887639
         ]
       }
     },
@@ -1090,7 +1186,7 @@
       "id": "aa2d08c0-0abd-4dcf-be93-ff8ca89d01cd",
       "project": "spark-savings",
       "symbol": "USDS",
-      "tvl": 12096731,
+      "tvl": 12097181,
       "apy": 3.8,
       "apyBase": 3.8,
       "apyReward": null,
@@ -1101,10 +1197,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/39926/small/usds.webp?1726666683",
       "hist": {
         "apy": [
+          3.8,
           3.8
         ],
         "tvl": [
-          12096731
+          12096731,
+          12097181
         ]
       }
     },
@@ -1112,21 +1210,23 @@
       "id": "b39b492a-0a64-4926-8598-d5acf05d62b5",
       "project": "morpho-blue",
       "symbol": "MWUSDC",
-      "tvl": 2436369,
-      "apy": 3.78569,
-      "apyBase": 3.69317,
-      "apyReward": 0.09252,
-      "apyPct1D": -0.05412,
+      "tvl": 2436426,
+      "apy": 3.77996,
+      "apyBase": 3.68808,
+      "apyReward": 0.09188,
+      "apyPct1D": -0.05064,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/52375/large/usd-coin-usdc-logo.png?1733253278",
       "hist": {
         "apy": [
-          3.78569
+          3.78569,
+          3.77996
         ],
         "tvl": [
-          2436369
+          2436369,
+          2436426
         ]
       }
     },
@@ -1134,21 +1234,23 @@
       "id": "1994cc35-a2b9-434e-b197-df6742fb5d81",
       "project": "yo-protocol",
       "symbol": "USDC",
-      "tvl": 6903930,
+      "tvl": 6903992,
       "apy": 3.7306,
       "apyBase": 3.7306,
       "apyReward": null,
-      "apyPct1D": -0.9357,
+      "apyPct1D": -0.9001,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          3.7306,
           3.7306
         ],
         "tvl": [
-          6903930
+          6903930,
+          6903992
         ]
       }
     },
@@ -1156,7 +1258,7 @@
       "id": "14170877-8941-4c7d-b12c-06517c70f1e7",
       "project": "morpho-blue",
       "symbol": "ETHENAUSDC",
-      "tvl": 4537388,
+      "tvl": 4537491,
       "apy": 3.467,
       "apyBase": 3.467,
       "apyReward": 0,
@@ -1167,10 +1269,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          3.467,
           3.467
         ],
         "tvl": [
-          4537388
+          4537388,
+          4537491
         ]
       }
     },
@@ -1178,7 +1282,7 @@
       "id": "e2bacd3c-8119-48d9-8c40-8b0da25ab10e",
       "project": "mortgagefi",
       "symbol": "USDC",
-      "tvl": 595622,
+      "tvl": 596324,
       "apy": 3.31,
       "apyBase": null,
       "apyReward": null,
@@ -1189,10 +1293,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          3.31,
           3.31
         ],
         "tvl": [
-          595622
+          595622,
+          596324
         ]
       }
     },
@@ -1200,21 +1306,23 @@
       "id": "0c8567f8-ba5b-41ad-80de-00a71895eb19",
       "project": "compound-v3",
       "symbol": "USDC",
-      "tvl": 853918,
-      "apy": 3.18032,
-      "apyBase": 3.18032,
+      "tvl": 788900,
+      "apy": 3.2088,
+      "apyBase": 3.2088,
       "apyReward": 0,
-      "apyPct1D": 0.02754,
+      "apyPct1D": 0.05602,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          3.18032
+          3.18032,
+          3.2088
         ],
         "tvl": [
-          853918
+          853918,
+          788900
         ]
       }
     },
@@ -1222,21 +1330,23 @@
       "id": "81ae8812-f04f-4f6e-9d71-ee5778f3a178",
       "project": "morpho-blue",
       "symbol": "STEAKUSDC",
-      "tvl": 102111085,
-      "apy": 3.16901,
-      "apyBase": 3.16901,
+      "tvl": 102093098,
+      "apy": 3.1652,
+      "apyBase": 3.1652,
       "apyReward": 0,
-      "apyPct1D": -0.03469,
+      "apyPct1D": -0.03776,
       "underlyingTokens": [
         "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/71229/large/steakusdc.png?1766513116",
       "hist": {
         "apy": [
-          3.16901
+          3.16901,
+          3.1652
         ],
         "tvl": [
-          102111085
+          102111085,
+          102093098
         ]
       }
     },
@@ -1244,21 +1354,23 @@
       "id": "18e2bbf0-f05f-4802-8e1e-d0ec4ab9a4d0",
       "project": "fluid-lending",
       "symbol": "EURC",
-      "tvl": 1225528,
+      "tvl": 1225587,
       "apy": 2.84,
       "apyBase": 2.84,
       "apyReward": null,
-      "apyPct1D": -0.41,
+      "apyPct1D": -0.03,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/26045/small/EURC.png?1769615705",
       "hist": {
         "apy": [
+          2.84,
           2.84
         ],
         "tvl": [
-          1225528
+          1225528,
+          1225587
         ]
       }
     },
@@ -1266,21 +1378,23 @@
       "id": "6652ed18-d327-46cd-9bac-08e0e14ea715",
       "project": "aave-v3",
       "symbol": "EURC",
-      "tvl": 4692536,
-      "apy": 2.44353,
-      "apyBase": 2.44353,
+      "tvl": 4722604,
+      "apy": 2.43109,
+      "apyBase": 2.43109,
       "apyReward": null,
-      "apyPct1D": 0.19044,
+      "apyPct1D": 0.17827,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/26045/small/EURC.png?1769615705",
       "hist": {
         "apy": [
-          2.44353
+          2.44353,
+          2.43109
         ],
         "tvl": [
-          4692536
+          4692536,
+          4722604
         ]
       }
     },
@@ -1288,7 +1402,7 @@
       "id": "ae62a2de-6fe7-48cc-9e47-0dd2b28f665e",
       "project": "morpho-blue",
       "symbol": "GTEURCB",
-      "tvl": 2293241,
+      "tvl": 2287116,
       "apy": 2.19712,
       "apyBase": 2.19712,
       "apyReward": 0,
@@ -1299,10 +1413,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          2.19712,
           2.19712
         ],
         "tvl": [
-          2293241
+          2293241,
+          2287116
         ]
       }
     },
@@ -1310,21 +1426,23 @@
       "id": "68ebb322-e83a-45b3-8cea-edd62cd1467b",
       "project": "yo-protocol",
       "symbol": "EURC",
-      "tvl": 548532,
+      "tvl": 548558,
       "apy": 2.1611,
       "apyBase": 2.1611,
       "apyReward": null,
-      "apyPct1D": -0.3948,
+      "apyPct1D": -0.3949,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/26045/small/EURC.png?1769615705",
       "hist": {
         "apy": [
+          2.1611,
           2.1611
         ],
         "tvl": [
-          548532
+          548532,
+          548558
         ]
       }
     },
@@ -1332,43 +1450,23 @@
       "id": "c1aee434-6c8e-4958-a851-eda8ab8bb32d",
       "project": "morpho-blue",
       "symbol": "MWEURC",
-      "tvl": 762193,
-      "apy": 2.10149,
-      "apyBase": 2.00641,
-      "apyReward": 0.09508,
-      "apyPct1D": 0.09968,
+      "tvl": 761425,
+      "apy": 2.09892,
+      "apyBase": 2.00476,
+      "apyReward": 0.09415,
+      "apyPct1D": 0.07816,
       "underlyingTokens": [
         "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
       ],
       "logo": "https://coin-images.coingecko.com/coins/images/52386/large/Untitled_design_%281%29.png?1733265573",
       "hist": {
         "apy": [
-          2.10149
+          2.10149,
+          2.09892
         ],
         "tvl": [
-          762193
-        ]
-      }
-    },
-    {
-      "id": "cd35c563-0b37-47f6-a522-c7e5240b3f65",
-      "project": "morpho-blue",
-      "symbol": "STEAKEURC",
-      "tvl": 1441601,
-      "apy": 2.08545,
-      "apyBase": 2.08545,
-      "apyReward": 0,
-      "apyPct1D": 0.123,
-      "underlyingTokens": [
-        "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
-      ],
-      "logo": null,
-      "hist": {
-        "apy": [
-          2.08545
-        ],
-        "tvl": [
-          1441601
+          762193,
+          761425
         ]
       }
     },
@@ -1376,7 +1474,7 @@
       "id": "e76a40b2-30d5-4b9c-9cf3-41249eeeeb3a",
       "project": "morpho-blue",
       "symbol": "STEAKEURC",
-      "tvl": 2484167,
+      "tvl": 2484610,
       "apy": 2.08427,
       "apyBase": 2.08427,
       "apyReward": 0,
@@ -1387,10 +1485,36 @@
       "logo": null,
       "hist": {
         "apy": [
+          2.08427,
           2.08427
         ],
         "tvl": [
-          2484167
+          2484167,
+          2484610
+        ]
+      }
+    },
+    {
+      "id": "cd35c563-0b37-47f6-a522-c7e5240b3f65",
+      "project": "morpho-blue",
+      "symbol": "STEAKEURC",
+      "tvl": 1409832,
+      "apy": 2.08238,
+      "apyBase": 2.08238,
+      "apyReward": 0,
+      "apyPct1D": 0.10564,
+      "underlyingTokens": [
+        "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42"
+      ],
+      "logo": null,
+      "hist": {
+        "apy": [
+          2.08545,
+          2.08238
+        ],
+        "tvl": [
+          1441601,
+          1409832
         ]
       }
     },
@@ -1398,7 +1522,7 @@
       "id": "0dfc66d9-74eb-41be-a9d1-1d73f452934f",
       "project": "morpho-blue",
       "symbol": "STEAKXSGD",
-      "tvl": 1077905,
+      "tvl": 1078317,
       "apy": 0.28379,
       "apyBase": 0.28379,
       "apyReward": 0,
@@ -1409,10 +1533,12 @@
       "logo": null,
       "hist": {
         "apy": [
+          0.28379,
           0.28379
         ],
         "tvl": [
-          1077905
+          1077905,
+          1078317
         ]
       }
     },
@@ -1420,11 +1546,11 @@
       "id": "fa41acbb-df3a-4abc-8444-7ab982cc6af4",
       "project": "uniswap-v3",
       "symbol": "USDE-USDC",
-      "tvl": 1000980,
-      "apy": 0.2698,
-      "apyBase": 0.2698,
+      "tvl": 1001008,
+      "apy": 0.26979,
+      "apyBase": 0.26979,
       "apyReward": null,
-      "apyPct1D": 0.26912,
+      "apyPct1D": 0.26911,
       "underlyingTokens": [
         "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
@@ -1432,10 +1558,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/33613/small/usde.png?1733810059",
       "hist": {
         "apy": [
-          0.2698
+          0.2698,
+          0.26979
         ],
         "tvl": [
-          1000980
+          1000980,
+          1001008
         ]
       }
     },
@@ -1443,11 +1571,11 @@
       "id": "eeabb1d0-4485-5d60-a639-e83526a780af",
       "project": "uniswap-v3",
       "symbol": "USDM-USDC",
-      "tvl": 758688,
-      "apy": 0.15628,
-      "apyBase": 0.15628,
+      "tvl": 755250,
+      "apy": 0.1625,
+      "apyBase": 0.1625,
       "apyReward": null,
-      "apyPct1D": 0.08435,
+      "apyPct1D": 0.09296,
       "underlyingTokens": [
         "0x30ca9d6be6a5e0a52aa74112e3508feaaba99596",
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
@@ -1613,7 +1741,8 @@
           0.15628,
           0.15628,
           0.15628,
-          0.15628
+          0.15628,
+          0.1625
         ],
         "tvl": [
           836842,
@@ -1774,7 +1903,8 @@
           758688,
           758688,
           758688,
-          758688
+          758688,
+          755250
         ]
       }
     },
@@ -1782,11 +1912,11 @@
       "id": "1782df73-d5b3-539e-811c-f3164868f0be",
       "project": "uniswap-v3",
       "symbol": "USDC-RLUSD",
-      "tvl": 1924809,
-      "apy": 0.11024,
-      "apyBase": 0.11024,
+      "tvl": 1931918,
+      "apy": 0.11913,
+      "apyBase": 0.11913,
       "apyReward": null,
-      "apyPct1D": 0.07229,
+      "apyPct1D": 0.0829,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
         "0x8d58c0c60b8d6b88fa98b291a646db34d0f98258"
@@ -1794,10 +1924,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          0.11024
+          0.11024,
+          0.11913
         ],
         "tvl": [
-          1924809
+          1924809,
+          1931918
         ]
       }
     },
@@ -1805,7 +1937,7 @@
       "id": "1382b89f-180f-40f6-9347-62e5ddc905b2",
       "project": "extra-finance-leverage-farming",
       "symbol": "USDC",
-      "tvl": 1372902,
+      "tvl": 1372876,
       "apy": 0.09121,
       "apyBase": 0.09121,
       "apyReward": null,
@@ -1816,10 +1948,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
+          0.09121,
           0.09121
         ],
         "tvl": [
-          1372902
+          1372902,
+          1372876
         ]
       }
     },
@@ -1827,11 +1961,11 @@
       "id": "cb799bf9-80c7-5e2a-a560-efb5756a82bd",
       "project": "uniswap-v4",
       "symbol": "USDC-OUSD",
-      "tvl": 7077735,
-      "apy": 0.05628,
-      "apyBase": 0.05628,
+      "tvl": 7075686,
+      "apy": 0.0563,
+      "apyBase": 0.0563,
       "apyReward": null,
-      "apyPct1D": -0.06564,
+      "apyPct1D": -0.0656,
       "underlyingTokens": [
         "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
         "0xb2000000000000000000002feb517dfec7415344"
@@ -1839,10 +1973,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/6319/small/USDC.png?1769615602",
       "hist": {
         "apy": [
-          0.05628
+          0.05628,
+          0.0563
         ],
         "tvl": [
-          7077735
+          7077735,
+          7075686
         ]
       }
     },
@@ -1850,7 +1986,7 @@
       "id": "cdd1dd46-9c29-4c91-8f50-1edfdb583a2e",
       "project": "uniswap-v4",
       "symbol": "EUSD-USDC",
-      "tvl": 1000231,
+      "tvl": 1000282,
       "apy": 0.0004,
       "apyBase": 0.0004,
       "apyReward": null,
@@ -1862,10 +1998,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/28445/large/0xa0d69e286b938e21cbf7e51d71f6a4c8918f482f.png?1696527441",
       "hist": {
         "apy": [
+          0.0004,
           0.0004
         ],
         "tvl": [
-          1000231
+          1000231,
+          1000282
         ]
       }
     },
@@ -1873,7 +2011,7 @@
       "id": "cf723543-a6a0-5ebd-82ec-57b0b390f858",
       "project": "uniswap-v4",
       "symbol": "WARS-USDC",
-      "tvl": 843901,
+      "tvl": 843927,
       "apy": 0.00003,
       "apyBase": 0.00003,
       "apyReward": null,
@@ -1885,6 +2023,7 @@
       "logo": "https://coin-images.coingecko.com/coins/images/70846/large/world_logos_wars_logo_3.png?1764176749",
       "hist": {
         "apy": [
+          0.00003,
           0.00003,
           0.00003,
           0.00003,
@@ -1926,7 +2065,8 @@
           843901,
           843901,
           843901,
-          843901
+          843901,
+          843927
         ]
       }
     },
@@ -1934,7 +2074,7 @@
       "id": "c351a834-8b09-5b5a-b898-833a6c4bf7bc",
       "project": "morpho-blue",
       "symbol": "SUSN",
-      "tvl": 5453738,
+      "tvl": 5453929,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -1945,10 +2085,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/54924/large/sUSN_Logo.png?1742538935",
       "hist": {
         "apy": [
+          0,
           0
         ],
         "tvl": [
-          5453738
+          5453738,
+          5453929
         ]
       }
     },
@@ -1967,9 +2109,11 @@
       "logo": "https://coin-images.coingecko.com/coins/images/53558/large/token-savusd.png?1736674786",
       "hist": {
         "apy": [
+          0,
           0
         ],
         "tvl": [
+          4493882,
           4493882
         ]
       }
@@ -1978,7 +2122,7 @@
       "id": "f7faf13e-dd81-4d03-84c7-dff25981774b",
       "project": "pancakeswap-amm-v3",
       "symbol": "USDC-APXUSD",
-      "tvl": 968858,
+      "tvl": 968769,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2006,6 +2150,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2025,7 +2170,8 @@
           968858,
           968858,
           968858,
-          968858
+          968858,
+          968769
         ]
       }
     },
@@ -2033,7 +2179,7 @@
       "id": "ae703e6a-c47e-44bb-bb5d-ba65be18aa7e",
       "project": "compound-v3",
       "symbol": "USDC",
-      "tvl": 925666,
+      "tvl": 925643,
       "apy": 0,
       "apyBase": null,
       "apyReward": null,
@@ -2063,6 +2209,7 @@
           0,
           0,
           0,
+          0,
           0
         ],
         "tvl": [
@@ -2085,7 +2232,8 @@
           925666,
           925666,
           925666,
-          925666
+          925666,
+          925643
         ]
       }
     },
@@ -2093,7 +2241,7 @@
       "id": "7536ed73-da02-409c-bfb9-9ee69de7a426",
       "project": "fluid-lending",
       "symbol": "SUSDAI",
-      "tvl": 659375,
+      "tvl": 659803,
       "apy": 0,
       "apyBase": 0,
       "apyReward": null,
@@ -2104,10 +2252,12 @@
       "logo": "https://coin-images.coingecko.com/coins/images/55861/large/sUSDai_Token_Full_Glyph.png?1755229072",
       "hist": {
         "apy": [
+          0,
           0
         ],
         "tvl": [
-          659375
+          659375,
+          659803
         ]
       }
     }
@@ -2153,49 +2303,49 @@
       "symbol": "USDC",
       "project": "arcadia-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $495,925 < $500,000"
+      "detail": "TVL $495,412 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $459,789 < $500,000"
+      "detail": "TVL $459,816 < $500,000"
     },
     {
       "symbol": "SYRUPUSDC-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $456,089 < $500,000"
+      "detail": "TVL $456,083 < $500,000"
     },
     {
       "symbol": "GHO",
       "project": "fluid-lending",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $427,151 < $500,000"
+      "detail": "TVL $427,170 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $413,706 < $500,000"
+      "detail": "TVL $413,730 < $500,000"
     },
     {
       "symbol": "SJEUR",
       "project": "spectra-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $397,672 < $500,000"
+      "detail": "TVL $397,674 < $500,000"
     },
     {
       "symbol": "SJEUR",
       "project": "spectra-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $397,672 < $500,000"
+      "detail": "TVL $397,674 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "yo-protocol",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $360,285 < $500,000"
+      "detail": "TVL $360,291 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2207,13 +2357,13 @@
       "symbol": "ZCHF",
       "project": "frankencoin",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $346,988 < $500,000"
+      "detail": "TVL $346,913 < $500,000"
     },
     {
       "symbol": "EDGEUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $344,982 < $500,000"
+      "detail": "TVL $345,198 < $500,000"
     },
     {
       "symbol": "YOUSD",
@@ -2231,25 +2381,25 @@
       "symbol": "EUR-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $336,412 < $500,000"
+      "detail": "TVL $331,713 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $316,011 < $500,000"
+      "detail": "TVL $316,017 < $500,000"
     },
     {
       "symbol": "YCSUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $312,727 < $500,000"
+      "detail": "TVL $312,849 < $500,000"
     },
     {
       "symbol": "DOLA-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $308,444 < $500,000"
+      "detail": "TVL $308,445 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2261,7 +2411,7 @@
       "symbol": "USDZ",
       "project": "extra-finance-leverage-farming",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $300,086 < $500,000"
+      "detail": "TVL $300,001 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2273,19 +2423,19 @@
       "symbol": "WMXN-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $293,585 < $500,000"
+      "detail": "TVL $293,584 < $500,000"
     },
     {
       "symbol": "USDC-URM",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $282,022 < $500,000"
+      "detail": "TVL $282,030 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $277,457 < $500,000"
+      "detail": "TVL $277,463 < $500,000"
     },
     {
       "symbol": "USDC-WCOP",
@@ -2297,25 +2447,25 @@
       "symbol": "USDC",
       "project": "kiloex",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $265,013 < $500,000"
+      "detail": "TVL $265,067 < $500,000"
     },
     {
       "symbol": "SUSDAI-USDC",
       "project": "fluid-dex",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $254,970 < $500,000"
+      "detail": "TVL $255,119 < $500,000"
     },
     {
       "symbol": "APVCHF",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $237,696 < $500,000"
+      "detail": "TVL $237,563 < $500,000"
     },
     {
       "symbol": "MSUSD-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $234,271 < $500,000"
+      "detail": "TVL $234,300 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2327,19 +2477,19 @@
       "symbol": "CSUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $229,652 < $500,000"
+      "detail": "TVL $229,657 < $500,000"
     },
     {
       "symbol": "LOOPCUSHY",
       "project": "makina",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $199,985 < $500,000"
+      "detail": "TVL $199,982 < $500,000"
     },
     {
       "symbol": "CSRWAUSDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $194,746 < $500,000"
+      "detail": "TVL $194,751 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2351,7 +2501,7 @@
       "symbol": "USDC",
       "project": "centrifuge-protocol",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $156,731 < $500,000"
+      "detail": "TVL $156,732 < $500,000"
     },
     {
       "symbol": "USDC-AXLUSDC",
@@ -2363,25 +2513,25 @@
       "symbol": "USDC",
       "project": "native-credit-pool",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $149,632 < $500,000"
+      "detail": "TVL $149,633 < $500,000"
     },
     {
       "symbol": "EURC-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $149,260 < $500,000"
+      "detail": "TVL $149,259 < $500,000"
     },
     {
       "symbol": "STEAKUSDCFARCASTER",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $148,861 < $500,000"
+      "detail": "TVL $148,707 < $500,000"
     },
     {
       "symbol": "KRWQ-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $143,371 < $500,000"
+      "detail": "TVL $143,367 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2399,31 +2549,31 @@
       "symbol": "USDC",
       "project": "extra-finance-leverage-farming",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $132,890 < $500,000"
+      "detail": "TVL $132,887 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "ample",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $131,704 < $500,000"
+      "detail": "TVL $131,715 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $126,709 < $500,000"
+      "detail": "TVL $126,711 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "extra-finance-xlend",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $126,264 < $500,000"
+      "detail": "TVL $126,262 < $500,000"
     },
     {
       "symbol": "EURC-USDC",
       "project": "pancakeswap-amm-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $121,123 < $500,000"
+      "detail": "TVL $121,129 < $500,000"
     },
     {
       "symbol": "DTEURC",
@@ -2435,13 +2585,13 @@
       "symbol": "EURC-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $118,256 < $500,000"
+      "detail": "TVL $118,254 < $500,000"
     },
     {
       "symbol": "GHO",
       "project": "aave-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $117,596 < $500,000"
+      "detail": "TVL $117,597 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2453,31 +2603,31 @@
       "symbol": "YUTY",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $114,512 < $500,000"
+      "detail": "TVL $114,516 < $500,000"
     },
     {
       "symbol": "YUTY",
       "project": "pendle-v2",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $114,512 < $500,000"
+      "detail": "TVL $114,516 < $500,000"
     },
     {
       "symbol": "EURC-USDC",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $112,137 < $500,000"
+      "detail": "TVL $112,134 < $500,000"
     },
     {
       "symbol": "EURC-USDC",
       "project": "alien-base-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $111,264 < $500,000"
+      "detail": "TVL $111,254 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "mortgagefi",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $104,506 < $500,000"
+      "detail": "TVL $104,390 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2495,31 +2645,31 @@
       "symbol": "USDC-SBC",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $102,014 < $500,000"
+      "detail": "TVL $102,017 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $98,854 < $500,000"
+      "detail": "TVL $98,853 < $500,000"
     },
     {
       "symbol": "OUSDT-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $95,206 < $500,000"
+      "detail": "TVL $95,217 < $500,000"
     },
     {
       "symbol": "USDZ-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $92,368 < $500,000"
+      "detail": "TVL $92,350 < $500,000"
     },
     {
       "symbol": "HYUSD-EUSD",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $87,589 < $500,000"
+      "detail": "TVL $87,571 < $500,000"
     },
     {
       "symbol": "EURC",
@@ -2531,19 +2681,19 @@
       "symbol": "USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $78,952 < $500,000"
+      "detail": "TVL $78,953 < $500,000"
     },
     {
       "symbol": "ZVUSDT",
       "project": "zircuit-finance",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $74,200 < $500,000"
+      "detail": "TVL $74,202 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "peapods-finance",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $72,288 < $500,000"
+      "detail": "TVL $72,127 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2561,37 +2711,37 @@
       "symbol": "EUSD-USDC",
       "project": "aerodrome-v1",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $67,646 < $500,000"
+      "detail": "TVL $67,641 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "uniswap-v4",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $65,876 < $500,000"
+      "detail": "TVL $65,880 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "morpho-blue",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $63,982 < $500,000"
+      "detail": "TVL $65,696 < $500,000"
     },
     {
       "symbol": "MSUSD-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $61,021 < $500,000"
+      "detail": "TVL $61,031 < $500,000"
     },
     {
       "symbol": "USDC",
       "project": "snowbl-capital",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $59,787 < $500,000"
+      "detail": "TVL $59,788 < $500,000"
     },
     {
       "symbol": "SYRUPUSDC",
       "project": "aave-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $56,440 < $500,000"
+      "detail": "TVL $56,447 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
@@ -2615,13 +2765,13 @@
       "symbol": "GHO-USDC",
       "project": "uniswap-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $54,295 < $500,000"
+      "detail": "TVL $54,296 < $500,000"
     },
     {
       "symbol": "SUSDS",
       "project": "extra-finance-xlend",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $51,533 < $500,000"
+      "detail": "TVL $51,535 < $500,000"
     },
     {
       "symbol": "EURC",
@@ -2639,7 +2789,7 @@
       "symbol": "AAVEUSDC-AAVEGHO",
       "project": "balancer-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $48,656 < $500,000"
+      "detail": "TVL $48,658 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2657,7 +2807,7 @@
       "symbol": "MSUSD-USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $46,327 < $500,000"
+      "detail": "TVL $46,321 < $500,000"
     },
     {
       "symbol": "USDC",
@@ -2699,25 +2849,25 @@
       "symbol": "EURC-USDC",
       "project": "aerodrome-slipstream",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $33,945 < $500,000"
+      "detail": "TVL $33,974 < $500,000"
     },
     {
       "symbol": "AIUSD-USDC",
       "project": "pancakeswap-amm-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $33,621 < $500,000"
+      "detail": "TVL $33,620 < $500,000"
     },
     {
       "symbol": "USDC-USDT",
       "project": "pancakeswap-amm-v3",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $30,818 < $500,000"
+      "detail": "TVL $30,819 < $500,000"
     },
     {
       "symbol": "EURC-USDC",
       "project": "beefy",
       "reason": "BELOW FLOOR",
-      "detail": "TVL $30,524 < $500,000"
+      "detail": "TVL $30,525 < $500,000"
     }
   ],
   "integrity": {
@@ -2728,11 +2878,11 @@
     "id": "ae3397ed-1f0f-4aa4-ab62-44413ea8cd9e",
     "project": "veranta",
     "symbol": "USDC",
-    "tvl": 9411786,
-    "apy": 30.26908,
-    "apyBase": 30.26908,
+    "tvl": 9411969,
+    "apy": 30.26841,
+    "apyBase": 30.26841,
     "apyReward": null,
-    "apyPct1D": -2.31995,
+    "apyPct1D": -2.32201,
     "underlyingTokens": [
       "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
     ]
@@ -2743,7 +2893,7 @@
     "rejected": 0
   },
   "crosscheck": {
-    "checkedAt": "2026-11-23T23:17:38.158Z",
+    "checkedAt": "2026-11-23T23:22:40.936Z",
     "method": "getReserves() read directly from pool contracts via public Base RPC (read-only, no wallet, no funds)",
     "rpc": "mainnet.base.org + public fallbacks",
     "pools": [],
@@ -2753,9 +2903,9 @@
       "pegFlags": 0,
       "skipped": 0
     },
-    "blockNumber": "61427414",
-    "blockTs": "2026-11-23T23:17:38.000Z",
-    "verifyAt": "https://basescan.org/block/61427414"
+    "blockNumber": "61428928",
+    "blockTs": "2026-11-23T23:22:41.000Z",
+    "verifyAt": "https://basescan.org/block/61428928"
   },
   "xrefStats": {
     "events": 1367,
